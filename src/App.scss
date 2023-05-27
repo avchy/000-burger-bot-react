@@ -1,0 +1,40 @@
+$text: #101619;
+$border: #f2f2f2;
+$white: #ffffff;
+$backgroundArrow: #ebebeb;
+$backgroundShadow: #00000059;
+$redSection: #ed1c24;
+$backgroundHeader: #2c2c2c;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+}
+
+body {
+    background-color: rgb(19, 19, 52);
+    color: #fff;
+}
+
+.cards__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cardsOrder__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.heading {
+    text-align: center;
+}
