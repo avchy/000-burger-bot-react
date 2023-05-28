@@ -1,5 +1,6 @@
 import './App.scss'
 // import Form from './components/Form/Form'
+import Header from './components/Header/Header'
 import { Products } from './pages/Products/Products'
 import { Order } from './pages/Order/Order'
 import { Checkout } from './pages/Checkout/Checkout'

@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import './Products.scss'
 
-import Card from '../../components/Card/Card'
+import CardColumn from '../../components/CardColumn/CardColumn'
 import Button from '../../components/Button/Button'
 import { useTelegram } from '../../hooks/useTelegram'
 import { Link, useNavigate } from 'react-router-dom'
@@ -81,7 +81,7 @@ export const Products = () => {
 
             <div className='cards__container'>
                 {foods.map((food) => {
-                    return <Card food={food} key={food.id} onAdd={onAdd} onRemove={onRemove} />
+                    return <CardColumn food={food} key={food.id} onAdd={onAdd} onRemove={onRemove} />
                 })}
             </div>
 

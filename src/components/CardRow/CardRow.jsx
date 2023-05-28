@@ -1,8 +1,8 @@
 // import React, { useState, useCallback } from 'react'
-import './ProductItemRow.scss'
+import './CardRow.scss'
 // import Button from '../Button/Button'
 
-export function ProductItemRow({ food }) {
+export function CardRow({ food }) {
     const { title, Image, price, id, quantity } = food
 
     console.log('food :>> ', food)

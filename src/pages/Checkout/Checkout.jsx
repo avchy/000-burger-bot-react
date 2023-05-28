@@ -3,7 +3,7 @@ import './Checkout.scss'
 import { serverIP, port } from '../../constants/api.js'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button/Button'
-import { ProductItemRow } from '../../components/ProductItemRow/ProductItemRow'
+import { CardRow } from '../../components/CardRow/CardRow'
 import { getTotalPrice } from '../../utils/utils'
 import { useTelegram } from '../../hooks/useTelegram'
 
@@ -40,6 +40,8 @@ export function Checkout() {
         // navigate('/form', { state: data })
     }, [cartItems])
 
+    const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
+
     return (
         <>
             <>
@@ -47,8 +49,9 @@ export function Checkout() {
 
                 <div className='cardsOrder__container'>
                     {cartItems.map((food) => {
-                        return <ProductItemRow food={food} key={food.id} />
+                        return <CardRow food={food} key={food.id} />
                     })}
+                    <br /> <span className=''>Total Price: ${totalPrice.toFixed(2)}</span>
                 </div>
 
                 {/* <Link to='/form' state={{ cartItems }} className='nav-link'> */}
