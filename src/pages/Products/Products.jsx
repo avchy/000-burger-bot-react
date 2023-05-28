@@ -1,13 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react'
-import './ProductList.scss'
+import { useState, useCallback, useEffect } from 'react'
+import './Products.scss'
 
-
-import Card from '../Card/Card'
-import Button from '../Button/Button'
+import Card from '../../components/Card/Card'
+import Button from '../../components/Button/Button'
 import { useTelegram } from '../../hooks/useTelegram'
-import { useNavigate } from 'react-router-dom'
-import { serverIP, port } from '../../constants/api.js'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+// import { serverIP, port } from '../../constants/api.js'
 // import Cart from '../Cart/Cart'
 
 const { getData } = require('../../db/db')
@@ -16,7 +14,7 @@ const tele = window.Telegram.WebApp
 
 tele.MainButton.text = 'VIEW ORDER'
 
-const ProductList = () => {
+export const Products = () => {
     const { tg, queryId } = useTelegram()
 
     const [cartItems, setCartItems] = useState([])
@@ -25,12 +23,6 @@ const ProductList = () => {
     useEffect(() => {
         tele.ready()
     })
-
-    const getTotalPrice = (items = []) => {
-        return items.reduce((acc, item) => {
-            return (acc += item.price)
-        }, 0)
-    }
 
     const onAdd = (food) => {
         if (food.length === 0) {
@@ -71,37 +63,18 @@ const ProductList = () => {
         }
     }
 
-    const onCheckout = useCallback(() => {
-        console.log('onCheckout = useCallback :>> ')
-        // const onSendData = useCallback(() => {
-        const data = {
-            products: cartItems,
-            totalPrice: getTotalPrice(cartItems),
-            queryId,
-        }
-        console.log('data :>> ', data)
-        // fetch('http://85.119.146.179:8000/web-data', {
-
-        let shopDataRoute = `${serverIP}:${port}/web-data`
-        console.log('shopDataRoute :>> ', shopDataRoute)
-
-        fetch(shopDataRoute, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        // navigate('/order', { state: data })
-        navigate('/order', { state: cartItems })
+    const onSubmit = useCallback(() => {
+        console.log('onSubmit = useCallback :>> ')
+        console.log('cartItems111111 :>> ', cartItems)
+        navigate('/order', { state: { cartItems } })
     }, [cartItems])
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onCheckout)
+        tg.onEvent('mainButtonClicked', onSubmit)
         return () => {
-            tg.offEvent('mainButtonClicked', onCheckout)
+            tg.offEvent('mainButtonClicked', onSubmit)
         }
-    }, [onCheckout])
+    }, [onSubmit])
     return (
         <>
             <h1 className='heading'>Burger Shop !!!</h1>
@@ -112,22 +85,21 @@ const ProductList = () => {
                 })}
             </div>
 
-            {/* <Cart cartItems={cartItems} onCheckout={onCheckout} /> */}
+            {/* <Cart cartItems={cartItems} onSubmit={onSubmit} /> */}
 
             {cartItems.length !== 0 && (
-                <Link to='/order' state={{ cartItems }} className='nav-link'>
-                    <Button
-                        title={`${cartItems.length === 0 ? 'Order !' : 'Checkout'} `}
-                        type={'checkout'}
-                        disable={cartItems.length === 0 ? true : false}
-                        onClick={onCheckout}
-                    />
-                </Link>
+                // <Link to='/order' state={{ cartItems }} className='nav-link'>
+                <Button
+                    // title={`${cartItems.length === 0 ? 'Order !' : 'Checkout'} `}
+                    title={`Order ! `}
+                    type={'order'}
+                    disable={cartItems.length === 0 ? true : false}
+                    onClick={onSubmit}
+                />
+                // </Link>
             )}
 
             {/* navigate('/order', { state: cartItems }) */}
         </>
     )
 }
-
-export default ProductList

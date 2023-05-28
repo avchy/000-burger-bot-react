@@ -1,26 +1,24 @@
 import './App.scss'
-// eslint-disable-next-line import/no-unresolved
-import Form from './components/Form/Form'
-import ProductList from './components/ProductList/ProductList'
-import OrderPage from './components/OrderPage/OrderPage'
+// import Form from './components/Form/Form'
+import { Products } from './pages/Products/Products'
+import { Order } from './pages/Order/Order'
+import { Checkout } from './pages/Checkout/Checkout'
 import { Routes, Route } from 'react-router-dom'
 
-const { getData } = require('./db/db')
-const foods = getData()
+// const { getData } = require('./db/db')
+// const foods = getData()
 
-function App() {
+export function App() {
     return (
         <>
             <div className='App'>
                 {/* <Header /> */}
                 <Routes>
-                    <Route index element={<ProductList />} />
-                    <Route path={'form'} element={<Form />} />
-                    <Route path={'order'} element={<OrderPage />} />
+                    <Route index element={<Products />} />
+                    <Route path={'checkout'} element={<Checkout />} />
+                    <Route path={'order'} element={<Order />} />
                 </Routes>
             </div>
         </>
     )
 }
-
-export default App

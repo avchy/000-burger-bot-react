@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './Form.scss'
 
-
 import { useTelegram } from '../../hooks/useTelegram'
-import OrderPage from '../OrderPage/OrderPage'
+import Order from '../Order/Order'
 
 const Form = () => {
     const [country, setCountry] = useState('')
@@ -55,7 +54,7 @@ const Form = () => {
 
     return (
         <>
-            <OrderPage />
+            <Order />
 
             <div className={'form'}>
                 <h3>Enter your information</h3>
