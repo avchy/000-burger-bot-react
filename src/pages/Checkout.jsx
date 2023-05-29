@@ -45,25 +45,21 @@ export function Checkout() {
 
     return (
         <>
-            <>
-                <h1 className='heading'>Your Order </h1>
+            <h1 className='heading'>Checkout </h1>
 
-                <div className='cardsOrder__container'>
-                    {cartItems.map((food) => {
-                        return <CardRow food={food} key={food.id} />
-                    })}
-                    <br /> <span className=''>Total Price: ${totalPrice.toFixed(2)}</span>
-                </div>
+            <div className='cardsOrder__container'>
+                {cartItems.map((food) => {
+                    return <CardRow food={food} key={food.id} />
+                })}
+                <br /> <span className='totalPrice'>Total Price: ${totalPrice.toFixed(2)}</span>
+            </div>
 
-                {/* <Link to='/form' state={{ cartItems }} className='nav-link'> */}
-                <Button
-                    title={`${cartItems.length === 0 ? 'Order !' : 'Checkout'} `}
-                    type={'checkout'}
-                    disable={cartItems.length === 0 ? true : false}
-                    onClick={onSubmit}
-                />
-                {/* </Link> */}
-            </>
+            <Button
+                title={`${cartItems.length === 0 ? 'Order' : 'Checkout'} `}
+                type={'checkout'}
+                disable={cartItems.length === 0 ? true : false}
+                onClick={onSubmit}
+            />
         </>
     )
 }

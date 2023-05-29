@@ -5,16 +5,14 @@ import '../App.scss'
 export function CardRow({ food }) {
     const { title, Image, price, id, quantity } = food
 
-    console.log('food :>> ', food)
-
     return (
-        <div className='Checkout'>
+        <div className='CardRow'>
             {/* <div className='card'> */}
             {/* <span className={`${quantity !== 0 ? 'card__badge' : 'card__badge--hidden'}`}>
                 {quantity}
             </span> */}
 
-            <div className='image__container_Checkout'>
+            <div className='image__container'>
                 <img src={Image} alt={title} />
             </div>
 
@@ -22,7 +20,7 @@ export function CardRow({ food }) {
                 {title} {quantity !== 1 ? quantity + 'x' : ''}
             </span>
 
-            <span className='card__price_Checkout'>$ {price * quantity}</span>
+            <span className='card__price'>$ {price * quantity}</span>
 
             {/* <h4 className='card__title'>
                 {title} . <span className='card__price'>$ {price}</span>

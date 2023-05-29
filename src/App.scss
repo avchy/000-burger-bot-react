@@ -1,10 +1,15 @@
-$text: #101619;
-$border: #f2f2f2;
-$white: #ffffff;
-$backgroundArrow: #ebebeb;
-$backgroundShadow: #00000059;
-$redSection: #ed1c24;
-$backgroundHeader: #2c2c2c;
+:root {
+    --primary-color: #e0c521;
+
+    // $text: #101619;
+
+    // $border: #f2f2f2;
+}
+
+$green: #ffffff;
+
+$backgroundAll: #131415;
+$backgroundFragments: #1a222c;
 
 * {
     margin: 0;
@@ -13,13 +18,8 @@ $backgroundHeader: #2c2c2c;
 }
 
 body {
-    background: var(--tg-theme-bg-color);
-    color: var(--tg-theme-text-color);
-}
-
-body {
-    background-color: rgb(19, 19, 52);
-    color: #fff;
+    background-color: $backgroundAll;
+    color: var(--primary-color);
 }
 
 .cards__container {
@@ -37,13 +37,19 @@ body {
 
 .heading {
     text-align: center;
+    margin-top: 50px;
 }
 
-:root {
-    --primary-color: #e0c521;
+.navLinkEdit {
+    text-align: right;
+    font-size: 1.2rem;
+    color: green;
+    font-weight: 600;
 }
 
 .btn {
+    margin: 20px;
+
     padding: 0.6rem 0.8rem;
     font-size: 1.2rem;
     text-align: center;
@@ -51,9 +57,7 @@ body {
     outline: none;
     border-radius: 10px;
     width: 120px;
-    margin-left: 10px;
     box-shadow: 1px -3px 52px -5px rgba(0, 0, 0, 0.77);
-    cursor: pointer;
 }
 
 .btn.add {
@@ -75,33 +79,19 @@ body {
     transform: scale(0.98);
 }
 
-.btn.add:hover {
-    background-color: #cab320;
-}
-
 .btn.add:active {
     background-color: #ad9a1c;
 }
 
-.btn.remove:hover {
-    background-color: rgb(209, 83, 61);
-}
 .btn.remove:active {
     background-color: rgb(185, 73, 54);
 }
 
-.btn.checkout:hover {
-    background-color: rgb(41, 141, 41);
-}
 .btn.checkout:active {
     background-color: rgb(30, 93, 41);
 }
 
-:root {
-    --primary-color: #e0c521;
-}
-
-.card {
+.CardColumn {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -161,17 +151,8 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        /* transition: all 0.3s ease; */
-        /* animation: scaleanimation 1s ease infinite; */
-        /* opacity: 0.8; */
-        opacity: 1;
-    }
 
-    @keyframes scaleanimation {
-        to {
-            transform: translate(20px, -20px) scale(1.05);
-            opacity: 1;
-        }
+        opacity: 1;
     }
 
     .card__badge--hidden {
@@ -179,12 +160,12 @@ body {
     }
 }
 
-.Checkout {
+.CardRow {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     /* width: 250px; */
-    height: 100px;
+    // height: 100px;
     padding: 0.5rem 0.3rem;
     margin: 13px 10px;
     position: relative;
@@ -199,28 +180,21 @@ body {
         font-weight: bold;
     }
 
-    .image__container_Checkout {
+    .image__container {
         width: 50px;
         height: 50px;
         margin: 0 30px 0 0;
     }
 
-    .image__container_Checkout img {
+    .image__container img {
         width: 100%;
         object-fit: cover;
     }
 
-    .card__price_Checkout {
+    .card__price {
         text-align: center;
         display: inline-block;
         margin: 0 0 0 auto;
-    }
-}
-
-@keyframes scaleanimation {
-    to {
-        transform: translate(20px, -20px) scale(1.05);
-        opacity: 1;
     }
 }
 
@@ -229,17 +203,17 @@ body {
     flex-direction: column;
     width: 100%;
     padding: 20px;
-}
 
-.input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-}
+    .input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+    }
 
-.select {
-    padding: 10px;
-    margin-top: 15px;
+    .select {
+        padding: 10px;
+        margin-top: 15px;
+    }
 }
 
 .header {
@@ -248,19 +222,18 @@ body {
     display: flex;
     align-items: center;
     padding: 0 20px;
+
+    .username {
+        margin-left: auto;
+    }
 }
 
-.username {
-    margin-left: auto;
+.totalPrice {
+    margin-left: 20px;
 }
 
-.list {
+.orderHeaderEdit {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.item {
-    margin-right: 10px;
-    margin-bottom: 10px;
+    flex-direction: column;
+    justify-content: space-between;
 }

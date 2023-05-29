@@ -16,16 +16,15 @@ export function CardColumn({ food, onAdd, onRemove }) {
     }
 
     return (
-        <div className='card'>
+        <div className='CardColumn'>
             <span className={`${count !== 0 ? 'card__badge' : 'card__badge--hidden'}`}>
                 {count}
             </span>
             <div className='image__container'>
                 <img src={Image} alt={title} />
             </div>
-            <h4 className='card__title'>
-                {title} . <span className='card__price'>$ {price}</span>
-            </h4>
+            <h4 className='card__title'>{title}</h4>
+            <p className='card__price'>$ {price}</p>
 
             <div className='btn-container'>
                 <Button title={'+'} type={'add'} onClick={handleIncrement} />

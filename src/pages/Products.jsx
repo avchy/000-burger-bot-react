@@ -4,14 +4,14 @@ import { CardColumn } from '../components/CardColumn'
 import { Button } from '../components/Button'
 import { useTelegram } from '../hooks/useTelegram'
 import { Link, useNavigate } from 'react-router-dom'
-  
+
 const { getData } = require('../db/db')
 const foods = getData()
 const tele = window.Telegram.WebApp
 
 console.log('window.Telegram :>> ', window.Telegram)
 console.log('window.Telegram.WebApp :>> ', window.Telegram.WebApp)
-console.log('tele.MainButton :>> ', tele.MainButton);
+console.log('tele.MainButton :>> ', tele.MainButton)
 tele.MainButton.text = 'VIEW ORDER'
 
 export const Products = () => {
@@ -87,21 +87,14 @@ export const Products = () => {
                 })}
             </div>
 
-            {/* <Cart cartItems={cartItems} onSubmit={onSubmit} /> */}
-
             {cartItems.length !== 0 && (
-                // <Link to='/order' state={{ cartItems }} className='nav-link'>
                 <Button
-                    // title={`${cartItems.length === 0 ? 'Order !' : 'Checkout'} `}
                     title={`Order ! `}
                     type={'order'}
                     disable={cartItems.length === 0 ? true : false}
                     onClick={onSubmit}
                 />
-                // </Link>
             )}
-
-            {/* navigate('/order', { state: cartItems }) */}
         </>
     )
 }

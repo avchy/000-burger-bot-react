@@ -12,15 +12,13 @@ export const Order = () => {
 
     // tele.MainButton.text = 'VIEW ORDER'
     const location = useLocation()
-     const cartItems = location.state.cartItems
+    const cartItems = location.state.cartItems
 
- 
     useEffect(() => {
         tele.ready()
     })
 
     const onSubmit = useCallback(() => {
- 
         navigate('/checkout', { state: { cartItems } })
     }, [cartItems])
 
@@ -40,20 +38,20 @@ export const Order = () => {
 
     return (
         <>
-            <Link to='/' title='Edit' className='nav-link'>
-                Edit
-            </Link>
-
             {/* <Button title={`edit`} type={'back'} onClick={onBack} /> */}
+            <div className='orderHeaderEdit'>
+                <h1 className='heading'>Your Order </h1>
+                <Link to='/' title='Edit' className='navLinkEdit'>
+                    Edit
+                </Link>
+            </div>
 
-            <h1 className='heading'>Your Order </h1>
             <div className='cardsOrder__container'>
                 {cartItems.map((food) => {
                     return <CardRow food={food} key={food.id} />
                 })}
             </div>
             {/* <Cart cartItems={cartItems} onSubmit={onSubmit} /> */}
-            {/* <br /> <span className=''>Total Price: ${totalPrice.toFixed(2)}</span> */}
             <Button
                 title={`${cartItems.length !== 0 ? `Buy ${totalPrice.toFixed(2)} $` : ''} `}
                 type={'checkout'}
