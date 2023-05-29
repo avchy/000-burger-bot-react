@@ -1,24 +1,21 @@
 import { useState, useCallback, useEffect } from 'react'
 import '../App.scss'
-
 import { CardColumn } from '../components/CardColumn'
 import { Button } from '../components/Button'
 import { useTelegram } from '../hooks/useTelegram'
 import { Link, useNavigate } from 'react-router-dom'
-// import { serverIP, port } from '../../constants/api.js'
-// import Cart from '../Cart'
-
+  
 const { getData } = require('../db/db')
 const foods = getData()
 const tele = window.Telegram.WebApp
 
 console.log('window.Telegram :>> ', window.Telegram)
 console.log('window.Telegram.WebApp :>> ', window.Telegram.WebApp)
-
+console.log('tele.MainButton :>> ', tele.MainButton);
 tele.MainButton.text = 'VIEW ORDER'
 
 export const Products = () => {
-    const { tele, queryId } = useTelegram()
+    const { tele } = useTelegram()
 
     const [cartItems, setCartItems] = useState([])
     const navigate = useNavigate()
