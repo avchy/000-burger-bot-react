@@ -1,9 +1,9 @@
 import './App.scss'
-// import Form from './components/Form/Form'
-import Header from './components/Header/Header'
-import { Products } from './pages/Products/Products'
-import { Order } from './pages/Order/Order'
-import { Checkout } from './pages/Checkout/Checkout'
+// import Form from './components/Form'
+// import { Header } from './components/Header'
+import { Products } from './pages/Products'
+import { Order } from './pages/Order'
+import { Checkout } from './pages/Checkout'
 import { Routes, Route } from 'react-router-dom'
 
 // const { getData } = require('./db/db')

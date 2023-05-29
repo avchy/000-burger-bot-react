@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
-import './Form.scss'
+import '../App.scss'
 
-import { useTelegram } from '../../hooks/useTelegram'
-import Order from '../Order/Order'
+import { useTelegram } from '../hooks/useTelegram'
+import {Order} from '../pages/Order'
 
 const Form = () => {
     const [country, setCountry] = useState('')

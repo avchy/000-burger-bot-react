@@ -1,6 +1,6 @@
 // import React, { useState, useCallback } from 'react'
-import './CardRow.scss'
-// import Button from '../Button/Button'
+import '../App.scss'
+// import Button from '../Button'
 
 export function CardRow({ food }) {
     const { title, Image, price, id, quantity } = food

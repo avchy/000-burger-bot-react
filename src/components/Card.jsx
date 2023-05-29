@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import './CardColumn.scss'
-import Button from '../Button/Button'
+import '../App.scss'
+import Button from './Button'
 
-function CardColumn({ food, onAdd, onRemove }) {
+function ProductItemColumn({ food, onAdd, onRemove }) {
     const [count, setCount] = useState(0)
     const { title, Image, price, id } = food
 
@@ -39,4 +39,4 @@ function CardColumn({ food, onAdd, onRemove }) {
     )
 }
 
-export default CardColumn
+export default ProductItemColumn

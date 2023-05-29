@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react'
-import './Checkout.scss'
-import { serverIP, port } from '../../constants/api.js'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import Button from '../../components/Button/Button'
-import { CardRow } from '../../components/CardRow/CardRow'
-import { getTotalPrice } from '../../utils/utils'
-import { useTelegram } from '../../hooks/useTelegram'
+
+import '../App.scss'
+import { serverIP, port } from '../constants/api.js'
+import { Button } from '../components/Button'
+import { CardRow } from '../components/CardRow'
+import { getTotalPrice } from '../utils/utils'
+import { useTelegram } from '../hooks/useTelegram'
 
 export function Checkout() {
     // const navigate = useNavigate()

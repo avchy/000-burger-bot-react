@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react'
-import './Order.scss'
-import Button from '../../components/Button/Button'
-import { CardRow } from '../../components/CardRow/CardRow'
-import { useTelegram } from '../../hooks/useTelegram'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+
+import '../App.scss'
+import { Button } from '../components/Button'
+import { CardRow } from '../components/CardRow'
+import { useTelegram } from '../hooks/useTelegram'
 
 export const Order = () => {
     const tele = window.Telegram.WebApp
@@ -45,7 +45,9 @@ export const Order = () => {
 
     return (
         <>
-<Link to="/" title="Edit" className="nav-link">Edit</Link>
+            <Link to='/' title='Edit' className='nav-link'>
+                Edit
+            </Link>
 
             {/* <Button title={`edit`} type={'back'} onClick={onBack} /> */}
 
