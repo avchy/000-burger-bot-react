@@ -7,8 +7,7 @@ import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
 
 export const Order = () => {
-    const tele = window.Telegram.WebApp
-    const { tg } = useTelegram()
+    const { tele } = useTelegram()
     const navigate = useNavigate()
 
     // tele.MainButton.text = 'VIEW ORDER'
@@ -35,9 +34,9 @@ export const Order = () => {
     }, [cartItems])
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSubmit)
+        tele.onEvent('mainButtonClicked', onSubmit)
         return () => {
-            tg.offEvent('mainButtonClicked', onSubmit)
+            tele.offEvent('mainButtonClicked', onSubmit)
         }
     }, [onSubmit])
 

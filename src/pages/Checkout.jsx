@@ -10,7 +10,7 @@ import { useTelegram } from '../hooks/useTelegram'
 
 export function Checkout() {
     // const navigate = useNavigate()
-    const { tg, queryId } = useTelegram()
+    const { tele, queryId } = useTelegram()
 
     const location = useLocation()
     const cartItems = location.state.cartItems

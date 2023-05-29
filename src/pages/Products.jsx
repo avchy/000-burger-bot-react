@@ -12,10 +12,13 @@ const { getData } = require('../db/db')
 const foods = getData()
 const tele = window.Telegram.WebApp
 
+console.log('window.Telegram :>> ', window.Telegram)
+console.log('window.Telegram.WebApp :>> ', window.Telegram.WebApp)
+
 tele.MainButton.text = 'VIEW ORDER'
 
 export const Products = () => {
-    const { tg, queryId } = useTelegram()
+    const { tele, queryId } = useTelegram()
 
     const [cartItems, setCartItems] = useState([])
     const navigate = useNavigate()
@@ -26,9 +29,9 @@ export const Products = () => {
 
     const onAdd = (food) => {
         if (food.length === 0) {
-            tg.MainButton.hide()
+            tele.MainButton.hide()
         } else {
-            tg.MainButton.show()
+            tele.MainButton.show()
         }
 
         const exist = cartItems.find((x) => x.id === food.id)
@@ -46,9 +49,9 @@ export const Products = () => {
 
     const onRemove = (food) => {
         if (food.length === 0) {
-            tg.MainButton.hide()
+            tele.MainButton.hide()
         } else {
-            tg.MainButton.show()
+            tele.MainButton.show()
         }
 
         const exist = cartItems.find((x) => x.id === food.id)
@@ -70,9 +73,9 @@ export const Products = () => {
     }, [cartItems])
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSubmit)
+        tele.onEvent('mainButtonClicked', onSubmit)
         return () => {
-            tg.offEvent('mainButtonClicked', onSubmit)
+            tele.offEvent('mainButtonClicked', onSubmit)
         }
     }, [onSubmit])
     return (
