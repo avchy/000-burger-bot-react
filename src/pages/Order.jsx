@@ -37,8 +37,7 @@ export const Order = () => {
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
     return (
-        <>
-            {/* <Button title={`edit`} type={'back'} onClick={onBack} /> */}
+        <div className='orderPage'>
             <div className='orderHeaderEdit'>
                 <h1 className='heading'>Your Order </h1>
                 <Link to='/' title='Edit' className='navLinkEdit'>
@@ -46,18 +45,17 @@ export const Order = () => {
                 </Link>
             </div>
 
-            <div className='cardsOrder__container'>
+            <div className='cardsContainer'>
                 {cartItems.map((food) => {
                     return <CardRow food={food} key={food.id} />
                 })}
             </div>
-            {/* <Cart cartItems={cartItems} onSubmit={onSubmit} /> */}
             <Button
                 title={`${cartItems.length !== 0 ? `Buy ${totalPrice.toFixed(2)} $` : ''} `}
                 type={'checkout'}
                 disable={cartItems.length === 0 ? true : false}
                 onClick={onSubmit}
             />
-        </>
+        </div>
     )
 }

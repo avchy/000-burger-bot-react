@@ -76,7 +76,7 @@ export const Products = () => {
         }
     }, [onSubmit])
     return (
-        <>
+        <div className='productsPage'>
             <h1 className='heading'>Burger Shop !!!</h1>
 
             <div className='cards__container'>
@@ -95,6 +95,6 @@ export const Products = () => {
                     onClick={onSubmit}
                 />
             )}
-        </>
+        </div>
     )
 }

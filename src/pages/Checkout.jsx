@@ -44,10 +44,10 @@ export function Checkout() {
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
     return (
-        <>
+        <div className='checkoutPage'>
             <h1 className='heading'>Checkout </h1>
 
-            <div className='cardsOrder__container'>
+            <div className='cardsContainer'>
                 {cartItems.map((food) => {
                     return <CardRow food={food} key={food.id} />
                 })}
@@ -55,11 +55,11 @@ export function Checkout() {
             </div>
 
             <Button
-                title={`${cartItems.length === 0 ? 'Order' : 'Checkout'} `}
+                title={`${'Checkout'} `}
                 type={'checkout'}
                 disable={cartItems.length === 0 ? true : false}
                 onClick={onSubmit}
             />
-        </>
+        </div>
     )
 }

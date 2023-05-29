@@ -1,15 +1,10 @@
-:root {
-    --primary-color: #e0c521;
-
-    // $text: #101619;
-
-    // $border: #f2f2f2;
-}
-
-$green: #ffffff;
+$text: #f4f5f5;
 
 $backgroundAll: #131415;
-$backgroundFragments: #1a222c;
+$backgroundElements: #1a222c;
+
+$primaryColor: #e0c521;
+$green: #5cb254;
 
 * {
     margin: 0;
@@ -19,77 +14,64 @@ $backgroundFragments: #1a222c;
 
 body {
     background-color: $backgroundAll;
-    color: var(--primary-color);
+    color: $text;
+}
+//   ====================================================================
+
+.productsPage {
+    .cards__container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .heading {
+        text-align: center;
+        margin-top: 50px;
+    }
+}
+//   ====================================================================
+
+.orderPage {
+    background-color: $backgroundElements;
+
+    .orderHeaderEdit {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .cardsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .heading {
+        text-align: center;
+        margin-top: 50px;
+    }
+}
+//   ====================================================================
+
+.checkoutPage {
+    background-color: $backgroundElements;
+
+    .heading {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .cardsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+    }
 }
 
-.cards__container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.cardsOrder__container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.heading {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.navLinkEdit {
-    text-align: right;
-    font-size: 1.2rem;
-    color: green;
-    font-weight: 600;
-}
-
-.btn {
-    margin: 20px;
-
-    padding: 0.6rem 0.8rem;
-    font-size: 1.2rem;
-    text-align: center;
-    border: 0;
-    outline: none;
-    border-radius: 10px;
-    width: 120px;
-    box-shadow: 1px -3px 52px -5px rgba(0, 0, 0, 0.77);
-}
-
-.btn.add {
-    background-color: var(--primary-color);
-}
-
-.btn.remove {
-    background-color: tomato;
-}
-
-.btn.checkout {
-    background-color: rgb(38, 121, 38);
-    width: 150px;
-    color: #fff;
-    font-size: 14px;
-}
-
-.btn:active {
-    transform: scale(0.98);
-}
-
-.btn.add:active {
-    background-color: #ad9a1c;
-}
-
-.btn.remove:active {
-    background-color: rgb(185, 73, 54);
-}
-
-.btn.checkout:active {
-    background-color: rgb(30, 93, 41);
-}
+//   ====================================================================
 
 .CardColumn {
     display: flex;
@@ -97,7 +79,7 @@ body {
     justify-content: space-between;
     width: 150px;
     height: 250px;
-    border: 2px solid var(--primary-color);
+    border: 2px solid $primaryColor;
     padding: 0.5rem 0.3rem;
     margin: 13px 10px;
     position: relative;
@@ -159,6 +141,7 @@ body {
         display: none;
     }
 }
+//   ====================================================================
 
 .CardRow {
     display: flex;
@@ -197,6 +180,7 @@ body {
         margin: 0 0 0 auto;
     }
 }
+//   ====================================================================
 
 .form {
     display: flex;
@@ -216,6 +200,8 @@ body {
     }
 }
 
+//   ====================================================================
+
 .header {
     width: 100%;
     height: 50px;
@@ -228,12 +214,62 @@ body {
     }
 }
 
-.totalPrice {
-    margin-left: 20px;
+// Buttons ====================================================================
+
+.btn {
+    margin: 20px;
+
+    padding: 0.6rem 0.8rem;
+    font-size: 1.2rem;
+    text-align: center;
+    border: 0;
+    outline: none;
+    border-radius: 10px;
+    width: 120px;
+    box-shadow: 1px -3px 52px -5px rgba(0, 0, 0, 0.77);
 }
 
-.orderHeaderEdit {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.btn.add {
+    background-color: $primaryColor;
+}
+
+.btn.remove {
+    background-color: tomato;
+}
+
+.btn.checkout {
+    background-color: $green;
+    width: 150px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn.add:active {
+    background-color: #ad9a1c;
+}
+
+.btn.remove:active {
+    background-color: rgb(185, 73, 54);
+}
+
+.btn.checkout:active {
+    background-color: rgb(30, 93, 41);
+}
+
+// ====================================================================
+
+.navLinkEdit {
+    text-align: right;
+    font-size: 1.2rem;
+    color: $green;
+    font-weight: 600;
+    margin-right: 20px;
+}
+
+.totalPrice {
+    margin-left: 20px;
 }
