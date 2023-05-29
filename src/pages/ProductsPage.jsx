@@ -14,7 +14,7 @@ console.log('window.Telegram.WebApp :>> ', window.Telegram.WebApp)
 console.log('tele.MainButton :>> ', tele.MainButton)
 tele.MainButton.text = 'VIEW ORDER'
 
-export const Products = () => {
+export const ProductsPage = () => {
     const { tele } = useTelegram()
 
     const [cartItems, setCartItems] = useState([])
@@ -77,7 +77,7 @@ export const Products = () => {
     }, [onSubmit])
     return (
         <div className='productsPage'>
-            <h1 className='heading'>Burger Shop !!!</h1>
+            <h1 className='title'>Burger Shop !!!</h1>
 
             <div className='cards__container'>
                 {foods.map((food) => {
@@ -89,7 +89,7 @@ export const Products = () => {
 
             {cartItems.length !== 0 && (
                 <Button
-                    title={`Order ! `}
+                    title={`OrderPage ! `}
                     type={'order'}
                     disable={cartItems.length === 0 ? true : false}
                     onClick={onSubmit}

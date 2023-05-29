@@ -6,7 +6,7 @@ import { Button } from '../components/Button'
 import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
 
-export const Order = () => {
+export const OrderPage = () => {
     const { tele } = useTelegram()
     const navigate = useNavigate()
 
@@ -39,7 +39,7 @@ export const Order = () => {
     return (
         <div className='orderPage'>
             <div className='orderHeaderEdit'>
-                <h1 className='heading'>Your Order </h1>
+                <h1 className='title'>Your OrderPage </h1>
                 <Link to='/' title='Edit' className='navLinkEdit'>
                     Edit
                 </Link>

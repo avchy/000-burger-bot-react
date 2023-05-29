@@ -4,11 +4,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import '../App.scss'
 import { serverIP, port } from '../constants/api.js'
 import { Button } from '../components/Button'
-import { CardRow } from '../components/CardRow'
+import { CardRowSmall } from '../components/CardRowSmall'
 import { getTotalPrice } from '../utils/utils'
 import { useTelegram } from '../hooks/useTelegram'
+import burgerImg from '../images/burger.png'
 
-export function Checkout() {
+export function CheckoutPage() {
     // const navigate = useNavigate()
     const { tele, queryId } = useTelegram()
 
@@ -17,11 +18,6 @@ export function Checkout() {
     console.log('cartItems333 :>> ', cartItems)
 
     const onSubmit = useCallback(() => {
-        console.log('onSubmit = useCallback :>> ')
-        // const onSendData = useCallback(() => {
-
-        // fetch('http://85.119.146.179:8000/web-data', {
-
         const shopDataRoute = `${serverIP}:${port}/web-data`
         console.log('shopDataRoute :>> ', shopDataRoute)
 
@@ -38,22 +34,29 @@ export function Checkout() {
             },
             body: JSON.stringify(data),
         })
-        // navigate('/form', { state: data })
     }, [cartItems])
 
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
     return (
         <div className='checkoutPage'>
-            <h1 className='heading'>Checkout </h1>
+            <h1 className='title'>Checkout</h1>
+            <div className='orderContainer'>
+                <div className='imageContainer'>
+                    <img src={burgerImg} alt={'burgerImg'} />
+                </div>
 
+                <div className='textContainer'>
+                    <div className='text1'>text1text1text1text1text1text1</div>
+                    <div className='text2'>text2text2text2text2text2text2</div>
+                </div>
+            </div>
             <div className='cardsContainer'>
                 {cartItems.map((food) => {
-                    return <CardRow food={food} key={food.id} />
+                    return <CardRowSmall food={food} key={food.id} />
                 })}
-                <br /> <span className='totalPrice'>Total Price: ${totalPrice.toFixed(2)}</span>
             </div>
-
+            <br /> <span className='totalPrice'>Total Price: ${totalPrice.toFixed(2)}</span>
             <Button
                 title={`${'Checkout'} `}
                 type={'checkout'}

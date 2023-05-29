@@ -1,10 +1,10 @@
 import '../App.scss'
 
-export function CardRow({ food }) {
+export function CardRowSmall({ food }) {
     const { title, Image, price, id, quantity } = food
 
     return (
-        <div className='CardRow'>
+        <div className='CardRowSmall'>
             <div className='image__container'>
                 <img src={Image} alt={title} />
             </div>
