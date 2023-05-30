@@ -8,10 +8,12 @@ import { CardRowSmall } from '../components/CardRowSmall'
 import { getTotalPrice } from '../utils/utils'
 import { useTelegram } from '../hooks/useTelegram'
 import burgerImg from '../images/burger.png'
+import { useNavigator } from '../hooks/useNavigator'
 
 export function CheckoutPage() {
     // const navigate = useNavigate()
     const { tele, queryId } = useTelegram()
+    const { env } = useNavigator()
 
     const location = useLocation()
     const cartItems = location.state.cartItems
@@ -57,12 +59,14 @@ export function CheckoutPage() {
                 })}
             </div>
             <br /> <span className='totalPrice'>Total Price: ${totalPrice.toFixed(2)}</span>
-            <Button
-                title={`${'Checkout'} `}
-                type={'checkout'}
-                disable={cartItems.length === 0 ? true : false}
-                onClick={onSubmit}
-            />
+            {env == 'brow' && (
+                <Button
+                    title={`${'Checkout'} `}
+                    type={'checkout'}
+                    disable={cartItems.length === 0 ? true : false}
+                    onClick={onSubmit}
+                />
+            )}
         </div>
     )
 }

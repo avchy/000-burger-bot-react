@@ -5,10 +5,12 @@ import '../App.scss'
 import { Button } from '../components/Button'
 import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
+import { useNavigator } from '../hooks/useNavigator'
 
 export const OrderPage = () => {
     const { tele } = useTelegram()
     const navigate = useNavigate()
+    const { env } = useNavigator()
 
     // tele.MainButton.text = 'VIEW ORDER'
     const location = useLocation()
@@ -39,7 +41,7 @@ export const OrderPage = () => {
     return (
         <div className='orderPage'>
             <div className='orderHeaderEdit'>
-                <h1 className='title'>Your OrderPage </h1>
+                <h1 className='title'>Your Order </h1>
                 <Link to='/' title='Edit' className='navLinkEdit'>
                     Edit
                 </Link>
@@ -50,12 +52,14 @@ export const OrderPage = () => {
                     return <CardRow food={food} key={food.id} />
                 })}
             </div>
-            <Button
-                title={`${cartItems.length !== 0 ? `Buy ${totalPrice.toFixed(2)} $` : ''} `}
-                type={'checkout'}
-                disable={cartItems.length === 0 ? true : false}
-                onClick={onSubmit}
-            />
+            {env == 'brow' && (
+                <Button
+                    title={`${cartItems.length !== 0 ? `Buy ${totalPrice.toFixed(2)} $` : ''} `}
+                    type={'checkout'}
+                    disable={cartItems.length === 0 ? true : false}
+                    onClick={onSubmit}
+                />
+            )}
         </div>
     )
 }
