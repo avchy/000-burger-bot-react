@@ -14,6 +14,7 @@ export function CheckoutPage() {
     // const navigate = useNavigate()
     const { tele, queryId } = useTelegram()
     const { env } = useNavigator()
+    tele.MainButton.text = 'PAY'
 
     const location = useLocation()
     const cartItems = location.state.cartItems

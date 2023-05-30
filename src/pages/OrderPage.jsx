@@ -12,7 +12,7 @@ export const OrderPage = () => {
     const navigate = useNavigate()
     const { env } = useNavigator()
 
-    // tele.MainButton.text = 'VIEW ORDER'
+    tele.MainButton.text = 'CHECKOUT'
     const location = useLocation()
     const cartItems = location.state.cartItems
 
