@@ -5,7 +5,7 @@ export function CardRowSmall({ food }) {
 
     return (
         <div className='CardRowSmall'>
-            <div className='image__container'>
+            <div className='image_container'>
                 <img src={Image} alt={title} />
             </div>
 
@@ -13,7 +13,7 @@ export function CardRowSmall({ food }) {
                 {title} {quantity !== 1 ? quantity + 'x' : ''}
             </span>
 
-            <span className='card__price'>$ {price * quantity}</span>
+            <span className='card_price'>$ {price * quantity}</span>
         </div>
     )
 }

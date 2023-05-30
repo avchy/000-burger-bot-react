@@ -17,14 +17,14 @@ export function CardColumn({ food, onAdd, onRemove }) {
 
     return (
         <div className='CardColumn'>
-            <span className={`${count !== 0 ? 'card__badge' : 'card__badge--hidden'}`}>
+            <span className={`${count !== 0 ? 'card_badge' : 'card_badge--hidden'}`}>
                 {count}
             </span>
-            <div className='image__container'>
+            <div className='image_container'>
                 <img src={Image} alt={title} />
             </div>
-            <h4 className='card__title'>{title}</h4>
-            <p className='card__price'>$ {price}</p>
+            <h4 className='card_title'>{title}</h4>
+            <p className='card_price'>$ {price}</p>
 
             <div className='btn-container'>
                 <Button title={'+'} type={'add'} onClick={handleIncrement} />

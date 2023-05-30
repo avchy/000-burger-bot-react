@@ -97,7 +97,7 @@ export const ProductsPage = () => {
             <h1 className='title'> {env}</h1>
             <p>{navigator.userAgent}</p>
 
-            <div className='cards__container'>
+            <div className='cards_container'>
                 {foods.map((food) => {
                     return (
                         <CardColumn food={food} key={food.id} onAdd={onAdd} onRemove={onRemove} />

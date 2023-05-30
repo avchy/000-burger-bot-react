@@ -22,7 +22,7 @@ body {
 //   ====================================================================
 
 .productsPage {
-    .cards__container {
+    .cards_container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -112,7 +112,7 @@ body {
     }
 
     .cardsContainer {
-        width: 80%;
+        // width: 80%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -139,22 +139,27 @@ body {
     margin: 13px 10px;
     position: relative;
 
-    .card__title {
+    .card_title {
         font-weight: 400;
         text-align: center;
     }
 
-    .card__title .card__price {
+    .card_title .card_price {
         font-weight: bold;
     }
 
-    .image__container {
+    .card_price {
+        text-align: center;
+        display: inline-block;
+    }
+
+    .image_container {
         width: 100px;
         height: 100px;
         margin: 0 auto;
     }
 
-    .image__container img {
+    .image_container img {
         width: 100%;
         object-fit: cover;
     }
@@ -165,12 +170,7 @@ body {
         justify-content: center;
     }
 
-    .card__price {
-        text-align: center;
-        display: inline-block;
-    }
-
-    .card__badge {
+    .card_badge {
         position: absolute;
         top: 0;
         right: 0;
@@ -191,7 +191,7 @@ body {
         opacity: 1;
     }
 
-    .card__badge--hidden {
+    .card_badge--hidden {
         display: none;
     }
 }
@@ -206,18 +206,18 @@ body {
     position: relative;
     /* border-radius: 5px; */
 
-    .image__container {
+    .image_container {
         width: 50px;
         height: 50px;
         margin: 0 30px 0 0;
     }
 
-    .image__container img {
+    .image_container img {
         width: 100%;
         object-fit: cover;
     }
 
-    .card__price {
+    .card_price {
         text-align: center;
         display: inline-block;
         margin: 0 0 0 auto;
@@ -233,18 +233,18 @@ body {
     position: relative;
     /* border-radius: 5px; */
 
-    .image__container {
+    .image_container {
         width: 30px;
         height: 30px;
         margin: 0 20px 0 0;
     }
 
-    .image__container img {
+    .image_container img {
         width: 100%;
         object-fit: cover;
     }
 
-    .card__price {
+    .card_price {
         text-align: center;
         display: inline-block;
         margin: 0 0 0 auto;
