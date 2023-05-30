@@ -15,20 +15,28 @@ console.log('tele.MainButton :>> ', tele.MainButton)
 tele.MainButton.text = 'VIEW ORDER'
 
 export const ProductsPage = () => {
-    // let env = 'init'
     const [env, setEnv] = useState('init')
     useEffect(() => {
-        if (navigator && navigator.userAgent.includes('TelegramBot')) {
-            // Ваше приложение открыто внутри Telegram
-            console.log('Ваше приложение открыто внутри Telegram :>> ')
-            // let env = 'tele'
-            setEnv('tele')
-        } else {
-            // Ваше приложение открыто в браузере
-            console.log('Ваше приложение открыто в браузере :>> ')
-            // let env = 'brow'
-            setEnv('brow')
-        }
+        navigator.sayswho = (function () {
+            const ua = navigator.userAgent
+            let tem
+            let M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+            if (/trident/i.test(M[1])) {
+                tem = /\brv[ :]+(\d+)/g.exec(ua) || []
+                return 'IE ' + (tem[1] || '')
+            }
+            if (M[1] === 'Chrome') {
+                tem = ua.match(/\b(OPR|Edge)\/(\d+)/)
+                if (tem != null) return tem.slice(1).join(' ').replace('OPR', 'Opera')
+            }
+            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?']
+            if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1])
+            return M.join(' ')
+        })()
+
+        console.log('navigator.sayswho', navigator.sayswho)
+
+        setEnv(navigator.sayswho)
     }, [])
 
     const { tele } = useTelegram()
@@ -95,7 +103,6 @@ export const ProductsPage = () => {
         <div className='productsPage'>
             <h1 className='title'>Burger Shop !!!</h1>
             <h1 className='title'> {env}</h1>
-            <p>{navigator.userAgent}</p>
 
             <div className='cards_container'>
                 {foods.map((food) => {
