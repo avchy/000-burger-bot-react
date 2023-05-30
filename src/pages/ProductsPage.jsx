@@ -107,7 +107,8 @@ export const ProductsPage = () => {
     return (
         <div className='productsPage'>
             <h1 className='title'>Burger Shop !!!</h1>
-            <h1 className='title'> {env}</h1>
+            <h1 className='title'> navigator.sayswho = {navigator.sayswho}</h1>
+            <h1 className='title'>env = {env}</h1>
 
             <div className='cards_container'>
                 {foods.map((food) => {
