@@ -129,8 +129,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 150px;
-    height: 250px;
+    // width: 150px;
+    // height: 250px;
 
     border: 2px solid $primaryColor;
     border-radius: 5px;
@@ -188,7 +188,7 @@ body {
         justify-content: center;
         align-items: center;
 
-        opacity: 1;
+        // opacity: 1;
     }
 
     .card_badge--hidden {
