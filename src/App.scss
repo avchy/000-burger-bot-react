@@ -144,13 +144,21 @@ body {
         text-align: center;
     }
 
-    .card_title .card_price {
-        font-weight: bold;
+    // .card_title .card_price {
+    //     font-weight: bold;
+    //     margin: 10px 0 0 0;
+    // }
+
+    .card_title {
+        text-align: center;
+        display: inline-block;
+        margin: 10px 0 0 0;
     }
 
     .card_price {
         text-align: center;
         display: inline-block;
+        margin: 10px 0 0 0;
     }
 
     .image_container {
