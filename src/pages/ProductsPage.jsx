@@ -95,6 +95,7 @@ export const ProductsPage = () => {
         <div className='productsPage'>
             <h1 className='title'>Burger Shop !!!</h1>
             <h1 className='title'> {env}</h1>
+            <p>{navigator.userAgent}</p>
 
             <div className='cards__container'>
                 {foods.map((food) => {
