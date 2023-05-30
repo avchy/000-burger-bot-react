@@ -15,6 +15,22 @@ console.log('tele.MainButton :>> ', tele.MainButton)
 tele.MainButton.text = 'VIEW ORDER'
 
 export const ProductsPage = () => {
+    // let env = 'init'
+    const [env, setEnv] = useState('init')
+    useEffect(() => {
+        if (navigator && navigator.userAgent.includes('TelegramBot')) {
+            // Ваше приложение открыто внутри Telegram
+            console.log('Ваше приложение открыто внутри Telegram :>> ')
+            // let env = 'tele'
+            setEnv('tele')
+        } else {
+            // Ваше приложение открыто в браузере
+            console.log('Ваше приложение открыто в браузере :>> ')
+            // let env = 'brow'
+            setEnv('brow')
+        }
+    }, [])
+
     const { tele } = useTelegram()
 
     const [cartItems, setCartItems] = useState([])
@@ -78,6 +94,7 @@ export const ProductsPage = () => {
     return (
         <div className='productsPage'>
             <h1 className='title'>Burger Shop !!!</h1>
+            <h1 className='title'> {env}</h1>
 
             <div className='cards__container'>
                 {foods.map((food) => {
