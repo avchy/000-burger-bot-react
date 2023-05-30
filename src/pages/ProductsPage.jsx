@@ -35,8 +35,8 @@ export const ProductsPage = () => {
                     return tem.slice(1).join(' ').replace('OPR', 'Opera')
                 }
             }
-            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?']
             M[2] ? setEnv('brow') : setEnv('tele')
+            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?']
             if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1])
             return M.join(' ')
         })()
@@ -106,7 +106,7 @@ export const ProductsPage = () => {
     }, [onSubmit])
     return (
         <div className='productsPage'>
-            <h1 className='title'>Burger Shop !!!</h1>
+            <h1 className='title'>Burger Shop</h1>
             <h1 className='title'> navigator.sayswho = {navigator.sayswho}</h1>
             <h1 className='title'>env = {env}</h1>
 
