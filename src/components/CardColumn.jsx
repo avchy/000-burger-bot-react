@@ -10,6 +10,7 @@ export function CardColumn({ food, onAdd, onRemove }) {
         setCount(count + 1)
         onAdd(food)
     }
+    
     const handleDecrement = () => {
         setCount(count - 1)
         onRemove(food)

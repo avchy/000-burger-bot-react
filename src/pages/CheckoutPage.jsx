@@ -50,8 +50,9 @@ export function CheckoutPage() {
                 </div>
 
                 <div className='textContainer'>
-                    <div className='text1'>text1text1text1text1text1text1</div>
-                    <div className='text2'>text2text2text2text2text2text2</div>
+                    <div className='text1'> Order #462417901</div>
+                    <div className='text1'> Perfect lunch from Burger Bot.</div>
+                    <div className='text_small'>Burger Bot.</div>
                 </div>
             </div>
             <div className='cardsContainer'>

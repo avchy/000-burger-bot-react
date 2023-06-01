@@ -3,8 +3,8 @@ $primaryColor: #e0c521;
     --primary-color: #e0c521;
 }
 
-$text: #f4f5f5;
-$textSmall: #b1bfcf;
+$white: #f4f5f5;
+$light_grey: #b1bfcf;
 $green: #5cb254;
 
 $backgroundAll: #131415;
@@ -12,6 +12,21 @@ $backgroundElements: #1a222c;
 
 $borderColor: #e0c521;
 
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  
 // * {
 //     margin: 0;
 //     padding: 0;
@@ -20,7 +35,7 @@ $borderColor: #e0c521;
 
 body {
     background-color: $backgroundAll;
-    color: $text;
+    color: $white;
 }
 //   ====================================================================
 
@@ -75,6 +90,7 @@ body {
     /* border-radius: 5px; */
 
     .orderContainer {
+        height: 30%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -86,28 +102,36 @@ body {
         border-radius: 5px;
 
         .imageContainer {
-            width: 100px;
-            height: 100px;
+            // width: 45%;
+
+            // width: 100px;
+            height: 100%;
             margin: 0 20px 0 0;
         }
 
         .imageContainer img {
             // width: 100%;
-            width: 100px;
-            height: 100px;
+            height: 20vw;
+
+            // height: 100px;
             object-fit: cover;
         }
 
         .textContainer {
+            // width: 45%;
+            word-break: break-all;  
+
             text-align: center;
             display: inline-block;
             margin: 0 0 0 auto;
 
             .text1 {
-                color: $text;
+                color: $white;
             }
-            .text2 {
-                color: $textSmall;
+            
+           
+            .text_small {
+                color: $light_grey;
             }
         }
     }
