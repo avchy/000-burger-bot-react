@@ -379,3 +379,37 @@ body {
 .totalPrice {
     margin-left: 20px;
 }
+
+
+.cafe-text-field-wrap {
+    margin-top: 14px;
+    }
+    
+    .cafe-text-field {
+        font-family: var(--default-font);
+        font-size: 17px;
+        line-height: 21px;
+        -webkit-font-smoothing: antialiased;
+        padding: 12px 20px 13px;
+        box-sizing: border-box;
+        display: block;
+        outline: none;
+        border: none;
+        border-radius: 0;
+        resize: none;
+        color: var(--text-color);
+        -webkit-user-select: auto;
+        user-select: auto;
+        cursor: auto;
+        width: 100%;
+        }
+        
+        .cafe-text-field-hint {
+            font-family: var(--default-font);
+            font-size: 14px;
+            line-height: 18px;
+            -webkit-font-smoothing: antialiased;
+            padding: 10px 20px 24px;
+            color: var(--hint-color);
+            }
+ 

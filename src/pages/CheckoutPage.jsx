@@ -15,6 +15,7 @@ export function CheckoutPage() {
     const { tele, queryId } = useTelegram()
     const { env } = useNavigator()
     tele.MainButton.text = 'PAY'
+    tele.BackButtonю.show()
 
     const location = useLocation()
     const cartItems = location.state.cartItems
@@ -39,6 +40,8 @@ export function CheckoutPage() {
         })
     }, [cartItems])
 
+    const openForm = () => {}
+
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
     return (
@@ -60,7 +63,20 @@ export function CheckoutPage() {
                     return <CardRowSmall food={food} key={food.id} />
                 })}
             </div>
-            <br /> <span className='totalPrice'>Total Price: ${totalPrice.toFixed(2)}</span>
+
+            <CardRowSmall food={{ id: 1, title: 'Free delivery', price: 0.0 }} key={0} />
+            <CardRowSmall
+                food={{ id: 1, title: 'Total Price:', price: totalPrice.toFixed(2) }}
+                key={0}
+            />
+
+            <Button
+                title={`Order`}
+                type={'order'}
+                disable={cartItems.length === 0 ? true : false}
+                onClick={openForm}
+            />
+
             {env == 'brow' && (
                 <Button
                     title={`${'Checkout'} `}
