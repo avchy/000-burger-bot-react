@@ -17,9 +17,7 @@ export function CardColumn({ food, onAdd, onRemove }) {
 
     return (
         <div className='CardColumn'>
-            <span className={`${count !== 0 ? 'card_badge' : 'card_badge--hidden'}`}>
-                {count}
-            </span>
+            <span className={`${count !== 0 ? 'card_badge' : 'card_badge--hidden'}`}>{count}</span>
             <div className='image_container'>
                 <img src={Image} alt={title} />
             </div>

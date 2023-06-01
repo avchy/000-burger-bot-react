@@ -1,4 +1,7 @@
 $primaryColor: #e0c521;
+:root {
+    --primary-color: #e0c521;
+}
 
 $text: #f4f5f5;
 $textSmall: #b1bfcf;
@@ -74,7 +77,7 @@ body {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 0.5rem 5.3rem;
+        padding: 0.5rem 0.5rem;
         margin: 10px 0px;
         position: relative;
 
@@ -131,15 +134,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // width: 150px;
-    // height: 250px;
-
-    border: 2px solid $primaryColor;
-    border-radius: 5px;
-
+    width: 150px;
+    height: 250px;
+    border: 2px solid var(--primary-color);
     padding: 0.5rem 0.3rem;
     margin: 13px 10px;
     position: relative;
+    border-radius: 5px;
 
     .card_title {
         font-weight: 400;
@@ -154,7 +155,7 @@ body {
     .card_title {
         text-align: center;
         display: inline-block;
-        margin: 10px 0 0 0;
+        // margin: 10px 0 0 0;
     }
 
     .card_price {
@@ -297,8 +298,6 @@ body {
 // Buttons ====================================================================
 
 .btn {
-    margin: 20px;
-
     padding: 0.6rem 0.8rem;
     font-size: 1.2rem;
     text-align: center;
@@ -306,7 +305,9 @@ body {
     outline: none;
     border-radius: 10px;
     width: 120px;
+    margin-left: 10px;
     box-shadow: 1px -3px 52px -5px rgba(0, 0, 0, 0.77);
+    cursor: pointer;
 }
 
 .btn.add {

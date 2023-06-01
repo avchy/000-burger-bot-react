@@ -7,7 +7,7 @@ import { Button } from '../components/Button'
 import { CardRowSmall } from '../components/CardRowSmall'
 import { getTotalPrice } from '../utils/utils'
 import { useTelegram } from '../hooks/useTelegram'
-import burgerImg from '../images/burger.png'
+import orderImg from '../images/orderImg.png'
 import { useNavigator } from '../hooks/useNavigator'
 
 export function CheckoutPage() {
@@ -46,7 +46,7 @@ export function CheckoutPage() {
             <h1 className='title'>Checkout</h1>
             <div className='orderContainer'>
                 <div className='imageContainer'>
-                    <img src={burgerImg} alt={'burgerImg'} />
+                    <img src={orderImg} alt={'orderImg'} />
                 </div>
 
                 <div className='textContainer'>
