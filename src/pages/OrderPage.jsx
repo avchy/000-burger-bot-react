@@ -18,9 +18,6 @@ export const OrderPage = () => {
 
     const [value, setValue] = useState('')
 
-
-        
-        
     useEffect(() => {
         tele.ready()
     })
@@ -29,7 +26,7 @@ export const OrderPage = () => {
     }
 
     const onSubmit = useCallback(() => {
-        navigate('/checkout', { state: { cartItems } })
+        navigate('/checkout', { state: { cartItems, value } })
     }, [cartItems])
 
     const onBackButtonClicked = useCallback(() => {
@@ -40,43 +37,32 @@ export const OrderPage = () => {
     useEffect(() => {
         tele.onEvent('mainButtonClicked', onSubmit)
         tele.onEvent('backButtonClicked', onBackButtonClicked)
- 
+
         return () => {
             tele.offEvent('mainButtonClicked', onSubmit)
         }
     }, [onSubmit])
 
-
-    
-    
     const styles = {
         overflow: 'hidden',
         overflowWrap: 'break-word',
         height: '46px',
     }
-    
- 
-    
-        
+
     // function getMeNumber(value, count) {
     //     var pow = Math.pow(10, count);
     //     return (value * pow >> 0) / pow;}
-        
+
     //     getMeNumber(55.55555555, 2); // = 55.55
 
-        
     //     var noZeroes = parseFloat(n); // "0.02"
     //     .toString()
 
-    
-       
-    
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toString()
     //    totalPrice.toFixed(2)
-    
-    const isEmptyCart = cartItems.length === 0 
-    
-    
+
+    const isEmptyCart = cartItems.length === 0
+
     return (
         <div className='orderPage'>
             <div className='orderHeaderEdit'>
@@ -107,8 +93,6 @@ export const OrderPage = () => {
                     Any special requests, details, final wishes etc.
                 </div>
             </div>
-            
-            
 
             {env == 'brow' && (
                 <BigButton

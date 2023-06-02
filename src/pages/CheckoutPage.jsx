@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import '../App.scss'
@@ -17,28 +17,19 @@ export function CheckoutPage() {
     const { env } = useNavigator()
     tele.BackButton.show()
 
-    
-    tele.expand(); //расширяем на все окно  
-    // tele.MainButton.text = "Changed Text"; //изменяем текст кнопки 
+    tele.expand() //расширяем на все окно
+    // tele.MainButton.text = "Changed Text"; //изменяем текст кнопки
     tele.MainButton.text = 'PAY1'
 
-    tele.MainButton.setParams({"color": "#143F6B" , "text" : "PAY"}); //так изменяются все параметры 
+    tele.MainButton.setParams({ color: '#143F6B', text: 'PAY' }) //так изменяются все параметры
 
-    
-    
     const location = useLocation()
-    const cartItems = location.state.cartItems
+     const cartItems = location.state.cartItems
     console.log('cartItems333 :>> ', cartItems)
 
-
-    
     const onSendData = useCallback(() => {
-        
-             tele.sendData("some string that we need to send"); 
-        
-        
-             
-        
+        tele.sendData('some string that we need to send')
+
         // const shopDataRoute = `${serverIP}:${port}/web-data`
         // console.log('shopDataRoute :>> ', shopDataRoute)
 
@@ -55,9 +46,8 @@ export function CheckoutPage() {
         //     },
         //     body: JSON.stringify(data),
         // })
-        
     }, [cartItems])
-    
+
     useEffect(() => {
         tele.onEvent('mainButtonClicked', onSendData)
         return () => {
@@ -71,45 +61,38 @@ export function CheckoutPage() {
 
     return (
         <>
-        
-        <div className='checkoutPage'>
-            <h1 className='title'>Checkout</h1>
-            <div className='orderContainer'>
-                <div className='imageContainer'>
-                    <img src={orderImg} alt={'orderImg'} />
+            <div className='checkoutPage'>
+                <h1 className='title'>Checkout</h1>
+                <div className='orderContainer'>
+                    <div className='imageContainer'>
+                        <img src={orderImg} alt={'orderImg'} />
+                    </div>
+
+                    <div className='textContainer'>
+                        <div className='text1'> Order #462417901</div>
+                        <div className='text1'> Perfect lunch from Burger Bot.</div>
+                        <div className='text_small'>Burger Bot.</div>
+                    </div>
+                </div>
+                <div className='cardsContainer'>
+                    {cartItems.map((food) => {
+                        return <CardRowSmall food={food} key={food.id} />
+                    })}
                 </div>
 
-                <div className='textContainer'>
-                    <div className='text1'> Order #462417901</div>
-                    <div className='text1'> Perfect lunch from Burger Bot.</div>
-                    <div className='text_small'>Burger Bot.</div>
-                </div>
-            </div>
-            <div className='cardsContainer'>
-                {cartItems.map((food) => {
-                    return <CardRowSmall food={food} key={food.id} />
-                })}
+                <CardRowSmall food={{ id: 9999, title: 'Free delivery' }} key={9999} />
+                {/* <CardRowSmall food={{ id: 9998, title: 'comment:', comment   }} key={9998} /> */}
+                <CardRowSmall
+                    food={{ id: 1, title: 'Total Price:', price: totalPrice.toFixed(2) }}
+                    key={0}
+                />
             </div>
 
-            <CardRowSmall food={{ id: 1, title: 'Free delivery', price: 0.0 }} key={0} />
-            <CardRowSmall
-                food={{ id: 1, title: 'Total Price:', price: totalPrice.toFixed(2) }}
-                key={0}
-            />
+            {/* isSentToAdress  */}
 
-          
+            <Form />
 
-
-            
-            
-        </div>
-        
-                    {/* isSentToAdress  */}
-
-        <Form/>
-
-
-        {env == 'brow' && (
+            {env == 'brow' && (
                 <BigButton
                     title={`${'Checkout'} `}
                     type={'checkout'}
@@ -118,13 +101,5 @@ export function CheckoutPage() {
                 />
             )}
         </>
-        
-        
-        
-    
     )
 }
-
-
-
-
