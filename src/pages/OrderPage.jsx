@@ -74,9 +74,10 @@ export const OrderPage = () => {
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toString()
     //    totalPrice.toFixed(2)
     
-    const isEmptyCart = cartItems.length === 0 ? 
+    const isEmptyCart = cartItems.length === 0 
     
-     return (
+    
+    return (
         <div className='orderPage'>
             <div className='orderHeaderEdit'>
                 <h1 className='title'>Your Order </h1>
