@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import '../App.scss'
-import { Button } from '../components/Button'
+import { BigButton } from '../components/BigButton'
 import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
 import { useNavigator } from '../hooks/useNavigator'
@@ -18,6 +18,9 @@ export const OrderPage = () => {
 
     const [value, setValue] = useState('')
 
+
+        
+        
     useEffect(() => {
         tele.ready()
     })
@@ -43,17 +46,37 @@ export const OrderPage = () => {
         }
     }, [onSubmit])
 
-    const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
+    
+    
     const styles = {
         overflow: 'hidden',
         overflowWrap: 'break-word',
         height: '46px',
     }
     
+ 
     
+        
+    // function getMeNumber(value, count) {
+    //     var pow = Math.pow(10, count);
+    //     return (value * pow >> 0) / pow;}
+        
+    //     getMeNumber(55.55555555, 2); // = 55.55
 
-    return (
+        
+    //     var noZeroes = parseFloat(n); // "0.02"
+    //     .toString()
+
+    
+       
+    
+    const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toString()
+    //    totalPrice.toFixed(2)
+    
+    const isEmptyCart = cartItems.length === 0 ? 
+    
+     return (
         <div className='orderPage'>
             <div className='orderHeaderEdit'>
                 <h1 className='title'>Your Order </h1>
@@ -83,12 +106,13 @@ export const OrderPage = () => {
                     Any special requests, details, final wishes etc.
                 </div>
             </div>
+            
+            
 
             {env == 'brow' && (
-                <Button
-                    title={`${cartItems.length !== 0 ? `Buy ${totalPrice.toFixed(2)} $` : ''} `}
-                    type={'checkout'}
-                    disable={cartItems.length === 0 ? true : false}
+                <BigButton
+                    title={`${!isEmptyCart ? `Buy ${totalPrice} $` : ''} `}
+                    disable={isEmptyCart ? true : false}
                     onClick={onSubmit}
                 />
             )}
