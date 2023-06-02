@@ -4,6 +4,7 @@ export function CardRowSmall({ food }) {
     const { title, Image, price, quantity } = food
 
     const priceAllItems = (price * (quantity || 1)).toFixed(2)
+    
     return (
         <div className='CardRowSmall'>
             {Image && (
@@ -14,7 +15,7 @@ export function CardRowSmall({ food }) {
 
             <span>{title}</span>
          
-            <span className='card_price'> {priceAllItems} $</span>
+          {   <span className='card_price'> {price ? priceAllItems: "0.00"} $</span> } 
         </div>
     )
 }

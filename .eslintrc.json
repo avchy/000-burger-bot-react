@@ -14,8 +14,7 @@
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:import/recommended"
-
-     ],
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -29,6 +28,7 @@
         "import/named": "off",
         "import/no-unresolved": "off",
         "react/prop-types": "off",
+        "react-hooks/exhaustive-deps": "off",
 
         "no-var": "error",
 
@@ -36,7 +36,7 @@
 
         "semi": "off",
         "no-multiple-empty-lines": "off",
-        
+
         "prefer-const": "warn",
         "no-use-before-define": "error",
         "no-extra-boolean-cast": 1,

@@ -5,27 +5,27 @@ import '../App.scss'
 // import { serverIP, port } from '../constants/api.js'
 import { BigButton } from '../components/BigButton'
 import { CardRowSmall } from '../components/CardRowSmall'
-import { Form } from '../components/Form'
-// import { getTotalPrice } from '../utils/utils'
+ // import { getTotalPrice } from '../utils/utils'
 import { useTelegram } from '../hooks/useTelegram'
 import orderImg from '../images/orderImg.png'
 import { useNavigator } from '../hooks/useNavigator'
 
 export function CheckoutPage() {
-    // const navigate = useNavigate()
     const { tele, queryId } = useTelegram()
     const { env } = useNavigator()
     tele.BackButton.show()
 
+      const [address, setAddress] = useState('')
+     const [optionDelivery, setOptionDelivery] = useState('on_site')
+
     tele.expand() //расширяем на все окно
-    // tele.MainButton.text = "Changed Text"; //изменяем текст кнопки
-    tele.MainButton.text = 'PAY1'
+     tele.MainButton.text = 'PAY1'
 
     tele.MainButton.setParams({ color: '#143F6B', text: 'PAY' }) //так изменяются все параметры
 
     const location = useLocation()
-     const cartItems = location.state.cartItems
-    console.log('cartItems333 :>> ', cartItems)
+    const cartItems = location.state.cartItems
+    const comment = location.state.value
 
     const onSendData = useCallback(() => {
         tele.sendData('some string that we need to send')
@@ -55,9 +55,38 @@ export function CheckoutPage() {
         }
     }, [onSendData])
 
-    const openForm = () => {}
-
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
+
+ 
+
+    useEffect(() => {
+        tele.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            tele.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData])
+
+    useEffect(() => {
+        tele.MainButton.setParams({
+            text: 'Send Data',
+        })
+    }, [])
+
+    useEffect(() => {
+        if (!address) {
+            tele.MainButton.hide()
+        } else {
+            tele.MainButton.show()
+        }
+    }, [address])
+
+    const onChangeAddress = (e) => {
+        setAddress(e.target.value)
+    }
+
+    const onChangeOption = (e) => {
+        setOptionDelivery(e.target.value)
+    }
 
     return (
         <>
@@ -81,16 +110,33 @@ export function CheckoutPage() {
                 </div>
 
                 <CardRowSmall food={{ id: 9999, title: 'Free delivery' }} key={9999} />
-                {/* <CardRowSmall food={{ id: 9998, title: 'comment:', comment   }} key={9998} /> */}
-                <CardRowSmall
+                 <CardRowSmall
                     food={{ id: 1, title: 'Total Price:', price: totalPrice.toFixed(2) }}
                     key={0}
                 />
             </div>
 
-            {/* isSentToAdress  */}
+            {comment && <div className='cafe-text-field-hint'>{comment}</div>}
 
-            <Form />
+            <div className={'form'}>
+                <div className={'title_mini'}>Choose where you eat</div>
+
+                <select value={optionDelivery} onChange={onChangeOption} className={'select'}>
+                    <option className={'selectField'} value={'on_site'}>on_site</option>
+                    <option className={'selectField'} value={'take_away'}>take_away</option>
+                </select>
+
+                {optionDelivery == 'take_away' && (
+                    <input
+                        className={'input'}
+                        type='text'
+                        placeholder={'Address'}
+                        value={address}
+                        onChange={onChangeAddress}
+                    />
+                )}
+            </div>
+ 
 
             {env == 'brow' && (
                 <BigButton
@@ -103,3 +149,4 @@ export function CheckoutPage() {
         </>
     )
 }
+ 

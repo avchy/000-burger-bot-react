@@ -37,6 +37,23 @@ body {
     background-color: $backgroundAll;
     color: $white;
 }
+
+
+//   ====================================================================
+
+
+.title {
+    text-align: center;
+    margin-top: 50px;
+}
+.title_mini {
+    // text-align: center;
+    margin: 10px 0  20px 0;
+    font-size: 24;
+    font-weight: 600;
+    color: white;
+}
+
 //   ====================================================================
 
 .productsPage {
@@ -46,10 +63,7 @@ body {
         justify-content: center;
     }
 
-    .title {
-        text-align: center;
-        margin-top: 50px;
-    }
+ 
 }
 
 //   ====================================================================
@@ -69,11 +83,7 @@ body {
         justify-content: center;
         flex-direction: column;
     }
-
-    .title {
-        text-align: center;
-        margin-top: 50px;
-    }
+ 
 }
 //   ====================================================================
 
@@ -135,10 +145,7 @@ body {
         }
     }
 
-    .title {
-        text-align: center;
-        margin-top: 50px;
-    }
+
 
     .cardsContainer {
         // width: 80%;
@@ -267,6 +274,9 @@ body {
     margin: 13px 10px;
     position: relative;
     /* border-radius: 5px; */
+    overflow: hidden; /* Скрыть содержимое, которое не помещается в блок */
+    // white-space: nowrap; /* Запретить перенос текста на новую строку */
+    text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
 
     .image_container {
         width: 30px;
@@ -291,7 +301,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 20px;
+    padding:10px 20px;
 
     .input {
         width: 85%;
@@ -300,6 +310,8 @@ body {
     }
 
     .select {
+        width: 40%;
+
         padding: 10px;
         margin-top: 15px;
     }
@@ -425,4 +437,7 @@ body {
     -webkit-font-smoothing: antialiased;
     padding: 10px 20px 24px;
     color: var(--hint-color);
+}
+.selectField {
+width: 50%;
 }
