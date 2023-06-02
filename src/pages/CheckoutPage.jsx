@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState,useEffect, useCallback } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import '../App.scss'
@@ -14,31 +14,55 @@ export function CheckoutPage() {
     // const navigate = useNavigate()
     const { tele, queryId } = useTelegram()
     const { env } = useNavigator()
-    tele.MainButton.text = 'PAY'
-    tele.BackButtonю.show()
+    tele.BackButton.show()
 
+    
+    tele.expand(); //расширяем на все окно  
+    // tele.MainButton.text = "Changed Text"; //изменяем текст кнопки 
+    tele.MainButton.text = 'PAY1'
+
+    tele.MainButton.setParams({"color": "#143F6B" , "text" : "PAY"}); //так изменяются все параметры 
+
+    
+    
     const location = useLocation()
     const cartItems = location.state.cartItems
     console.log('cartItems333 :>> ', cartItems)
 
-    const onSubmit = useCallback(() => {
-        const shopDataRoute = `${serverIP}:${port}/web-data`
-        console.log('shopDataRoute :>> ', shopDataRoute)
 
-        const data = {
-            products: cartItems,
-            totalPrice: getTotalPrice(cartItems),
-            queryId,
-        }
+    
+    const onSendData = useCallback(() => {
+        
+             tele.sendData("some string that we need to send"); 
+        
+        
+             
+        
+        // const shopDataRoute = `${serverIP}:${port}/web-data`
+        // console.log('shopDataRoute :>> ', shopDataRoute)
 
-        fetch(shopDataRoute, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
+        // const data = {
+        //     products: cartItems,
+        //     totalPrice: getTotalPrice(cartItems),
+        //     queryId,
+        // }
+
+        // fetch(shopDataRoute, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data),
+        // })
+        
     }, [cartItems])
+    
+    useEffect(() => {
+        tele.onEvent('mainButtonClicked', onSendData)
+        return () => {
+            tele.offEvent('mainButtonClicked', onSendData)
+        }
+    }, [onSendData])
 
     const openForm = () => {}
 
@@ -82,7 +106,7 @@ export function CheckoutPage() {
                     title={`${'Checkout'} `}
                     type={'checkout'}
                     disable={cartItems.length === 0 ? true : false}
-                    onClick={onSubmit}
+                    onClick={onSendData}
                 />
             )}
         </div>
