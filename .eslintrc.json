@@ -35,7 +35,8 @@
         "no-mixed-spaces-and-tabs": "off",
 
         "semi": "off",
-        "no-multiple-empty-lines": "warn",
+        "no-multiple-empty-lines": "off",
+        
         "prefer-const": "warn",
         "no-use-before-define": "error",
         "no-extra-boolean-cast": 1,
