@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import '../App.scss'
 import { CardColumn } from '../components/CardColumn'
-import { Button } from '../components/Button'
+import { BigButton } from '../components/BigButton'
 import { useTelegram } from '../hooks/useTelegram'
 import { useNavigator } from '../hooks/useNavigator'
 import { Link, useNavigate } from 'react-router-dom'
@@ -80,8 +80,7 @@ export const ProductsPage = () => {
     return (
         <div className='productsPage'>
             <h1 className='title'>Burger Shop</h1>
-            {/* <h1 className='title'> navigator.sayswho = {navigator.sayswho}</h1> */}
-            <h1 className='title'>env222 = {env}</h1>
+             {/* <h1 className='title'>env222 = {env}</h1> */}
 
             <div className='cards_container'>
                 {foods.map((food) => {
@@ -94,9 +93,8 @@ export const ProductsPage = () => {
 
  
             {cartItems.length !== 0 && env == "brow" && (
-                <Button
+                <BigButton
                     title={`Order`}
-                    type={'order'}
                     disable={cartItems.length === 0 ? true : false}
                     onClick={onSubmit}
                 />

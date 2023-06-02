@@ -2,10 +2,11 @@ import React, { useState,useEffect, useCallback } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import '../App.scss'
-import { serverIP, port } from '../constants/api.js'
-import { Button } from '../components/Button'
+// import { serverIP, port } from '../constants/api.js'
+import { BigButton } from '../components/BigButton'
 import { CardRowSmall } from '../components/CardRowSmall'
-import { getTotalPrice } from '../utils/utils'
+import { Form } from '../components/Form'
+// import { getTotalPrice } from '../utils/utils'
 import { useTelegram } from '../hooks/useTelegram'
 import orderImg from '../images/orderImg.png'
 import { useNavigator } from '../hooks/useNavigator'
@@ -69,6 +70,8 @@ export function CheckoutPage() {
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
     return (
+        <>
+        
         <div className='checkoutPage'>
             <h1 className='title'>Checkout</h1>
             <div className='orderContainer'>
@@ -94,21 +97,34 @@ export function CheckoutPage() {
                 key={0}
             />
 
-            <Button
-                title={`Order`}
-                type={'order'}
-                disable={cartItems.length === 0 ? true : false}
-                onClick={openForm}
-            />
+          
 
-            {env == 'brow' && (
-                <Button
+
+            
+            
+        </div>
+        
+                    {/* isSentToAdress  */}
+
+        <Form/>
+
+
+        {env == 'brow' && (
+                <BigButton
                     title={`${'Checkout'} `}
                     type={'checkout'}
                     disable={cartItems.length === 0 ? true : false}
                     onClick={onSendData}
                 />
             )}
-        </div>
+        </>
+        
+        
+        
+    
     )
 }
+
+
+
+
