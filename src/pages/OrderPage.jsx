@@ -7,14 +7,12 @@ import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
 import { useNavigator } from '../hooks/useNavigator'
 
- 
-
 export const OrderPage = () => {
     const { tele } = useTelegram()
     const navigate = useNavigate()
     const { env } = useNavigator()
-    
-    tele.enableClosingConfirmation() 
+
+    tele.enableClosingConfirmation()
 
     tele.MainButton.text = 'CHECKOUT'
     const location = useLocation()
@@ -31,7 +29,7 @@ export const OrderPage = () => {
 
     const onSubmit = useCallback(() => {
         navigate('/checkout', { state: { cartItems, value } })
-    }, [cartItems,value])
+    }, [cartItems, value])
 
     const onBackButtonClicked = useCallback(() => {
         // navigate(-1)
@@ -52,15 +50,6 @@ export const OrderPage = () => {
         overflowWrap: 'break-word',
         height: '46px',
     }
-
-    // function getMeNumber(value, count) {
-    //     var pow = Math.pow(10, count);
-    //     return (value * pow >> 0) / pow;}
-
-    //     getMeNumber(55.55555555, 2); // = 55.55
-
-    //     var noZeroes = parseFloat(n); // "0.02"
-    //     .toString()
 
     const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toString()
     //    totalPrice.toFixed(2)

@@ -12,6 +12,7 @@ import { useNavigator } from '../hooks/useNavigator'
 
 export function CheckoutPage() {
     const { tele, queryId } = useTelegram()
+    // console.log('queryId :>> ', queryId);
     const { env } = useNavigator()
     tele.BackButton.show()
     tele.enableClosingConfirmation() 
@@ -20,9 +21,9 @@ export function CheckoutPage() {
     const [optionDelivery, setOptionDelivery] = useState('on_site')
 
     tele.expand() //расширяем на все окно
-    tele.MainButton.text = 'PAY1'
+    tele.MainButton.text = 'PAY'
 
-    tele.MainButton.setParams({ color: '#143F6B', text: 'PAY' }) //так изменяются все параметры
+    // tele.MainButton.setParams({ color: '#143F6B', text: 'PAY' }) //так изменяются все параметры
 
     const location = useLocation()
     const cartItems = location.state.cartItems
@@ -97,9 +98,9 @@ export function CheckoutPage() {
                     </div>
 
                     <div className='textContainer'>
-                        <div className='text1'> Order № {queryId||123123}</div>
-                        {/* <div className='text1'> Order #462417901</div> */}
-                        <div className='text1'> Perfect lunch from Burger Bot.</div>
+                        <div className='text1'> Order № 770770</div>
+                        {/* <div className='text1'> Order № {queryId||123123}</div> */}
+                         <div className='text1'> Perfect lunch from Burger Bot.</div>
                         <div className='text_small'>Burger Bot.</div>
                     </div>
                 </div>
