@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import '../App.scss'
- // import { serverIP, port } from '../constants/api.js'
+// import { serverIP, port } from '../constants/api.js'
 import { BigButton } from '../components/BigButton'
 import { CardRowSmall } from '../components/CardRowSmall'
 // import { getTotalPrice } from '../utils/utils'
@@ -15,7 +15,7 @@ export function CheckoutPage() {
     // console.log('queryId :>> ', queryId);
     const { env } = useNavigator()
     tele.BackButton.show()
-    tele.enableClosingConfirmation() 
+    tele.enableClosingConfirmation()
 
     const [address, setAddress] = useState('')
     const [optionDelivery, setOptionDelivery] = useState('on_site')
@@ -73,7 +73,7 @@ export function CheckoutPage() {
     }, [])
 
     useEffect(() => {
-        if (!address) {
+        if (optionDelivery == 'take_away' && !address) {
             tele.MainButton.hide()
         } else {
             tele.MainButton.show()
@@ -100,7 +100,7 @@ export function CheckoutPage() {
                     <div className='textContainer'>
                         <div className='text1'> Order № 770770</div>
                         {/* <div className='text1'> Order № {queryId||123123}</div> */}
-                         <div className='text1'> Perfect lunch from Burger Bot.</div>
+                        <div className='text1'> Perfect lunch from Burger Bot.</div>
                         <div className='text_small'>Burger Bot.</div>
                     </div>
                 </div>
@@ -147,14 +147,19 @@ export function CheckoutPage() {
                 )}
             </div>
 
-            {env == 'brow' && (
-                <BigButton
-                    title={`${'Checkout'} `}
-                    type={'checkout'}
-                    disable={cartItems.length === 0 ? true : false}
-                    onClick={onSendData}
-                />
-            )}
+            {console.log('env ,   , !  :>> ', env)}
+            {console.log('  , optionDelivery , !  :>> ', optionDelivery)}
+            {console.log('  ,   , !address :>> ', !address)}
+
+            {env === 'brow' &&
+                (optionDelivery === 'on_site' || (optionDelivery === 'take_away' && address)) && (
+                    <BigButton
+                        title={`${'Checkout'} `}
+                        type={'checkout'}
+                        disable={cartItems.length === 0 ? true : false}
+                        onClick={onSendData}
+                    />
+                )}
         </>
     )
 }
