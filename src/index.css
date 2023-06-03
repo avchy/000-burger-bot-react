@@ -1,17 +1,13 @@
 :root {
     --primary-color: #e0c521;
     --text-color: black;
- }
+}
 
- 
- 
- /* * {
-     margin: 0;
-     padding: 0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-} */
-
-
+}
 
 body {
     margin: 0;
