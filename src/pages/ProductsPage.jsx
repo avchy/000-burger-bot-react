@@ -14,6 +14,7 @@ console.log('window.Telegram :>> ', window.Telegram)
 console.log('window.Telegram.WebApp :>> ', window.Telegram.WebApp)
 console.log('tele.MainButton :>> ', tele.MainButton)
 tele.MainButton.text = 'VIEW ORDER'
+tele.enableClosingConfirmation() 
 
 export const ProductsPage = () => {
     const { tele } = useTelegram()

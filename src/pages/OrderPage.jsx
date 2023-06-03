@@ -7,10 +7,14 @@ import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
 import { useNavigator } from '../hooks/useNavigator'
 
+ 
+
 export const OrderPage = () => {
     const { tele } = useTelegram()
     const navigate = useNavigate()
     const { env } = useNavigator()
+    
+    tele.enableClosingConfirmation() 
 
     tele.MainButton.text = 'CHECKOUT'
     const location = useLocation()
@@ -27,7 +31,7 @@ export const OrderPage = () => {
 
     const onSubmit = useCallback(() => {
         navigate('/checkout', { state: { cartItems, value } })
-    }, [cartItems])
+    }, [cartItems,value])
 
     const onBackButtonClicked = useCallback(() => {
         // navigate(-1)
