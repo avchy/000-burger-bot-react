@@ -6,9 +6,10 @@ import { BigButton } from '../components/BigButton'
 import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
 import { useNavigator } from '../hooks/useNavigator'
+const tele = window.Telegram.WebApp
 
 export const OrderPage = () => {
-    const { tele } = useTelegram()
+    // const { tele } = useTelegram()
     const navigate = useNavigate()
     const { env } = useNavigator()
 

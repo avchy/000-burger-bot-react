@@ -10,10 +10,10 @@ import { useTelegram } from "../hooks/useTelegram"
 import orderImg from "../images/orderImg.png"
 import { useNavigator } from "../hooks/useNavigator"
 
-// const tele = window.Telegram.WebApp
+const tele = window.Telegram.WebApp
 
 export function CheckoutPage() {
-  const { tele, queryId } = useTelegram()
+  const { queryId } = useTelegram()
   // console.log('queryId :>> ', queryId);
   const { env } = useNavigator()
 
@@ -149,9 +149,9 @@ export function CheckoutPage() {
         )}
       </div>
 
-      {console.log("env ,   , !  :>> ", env)}
-      {console.log("  , optionDelivery , !  :>> ", optionDelivery)}
-      {console.log("  ,   , !address :>> ", !address)}
+      {console.log("env  :>> ", env)}
+      {/* {console.log("  optionDelivery  :>> ", optionDelivery)}
+      {console.log(" address :>> ", !address)} */}
 
       {env === "brow" &&
         (optionDelivery === "on_site" ||
