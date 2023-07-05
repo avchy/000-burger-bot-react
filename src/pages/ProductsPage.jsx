@@ -16,11 +16,9 @@ tele.MainButton.text = "VIEW ORDER"
 tele.enableClosingConfirmation()
 
 import generatedGitInfo from "../helpers/generatedGitInfo.json"
-console.log("generatedGitInfo", generatedGitInfo)
-const { version, branch, commitHash, commitDate } = generatedGitInfo
+ const { gitCommitHash } = generatedGitInfo
 
 export const ProductsPage = () => {
-  // const { tele } = useTelegram()
   const { env } = useNavigator()
 
   const [cartItems, setCartItems] = useState([])

@@ -1,7 +1,7 @@
 import './App.scss'
 import { Routes, Route } from 'react-router-dom'
 
-// import { Header } from './components/Header'
+import { Header } from './components/Header'
 import { ProductsPage } from './pages/ProductsPage'
 import { OrderPage } from './pages/OrderPage'
 import { CheckoutPage } from './pages/CheckoutPage'
@@ -14,7 +14,7 @@ export function App() {
     return (
         <>
             <div className='App'>
-                {/* <Header /> */}
+                <Header />
                 <Routes>
                     <Route index element={<ProductsPage />} />
                     <Route path={'checkout'} element={<CheckoutPage />} />
