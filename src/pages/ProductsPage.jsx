@@ -97,7 +97,7 @@ export const ProductsPage = () => {
         })}
       </div>
 
-      {cartItems.length !== 0 && env == "brow" && (
+      {cartItems.length !== 0 && env == "browser" && (
         <BigButton
           title={`Order`}
           disable={cartItems.length === 0 ? true : false}

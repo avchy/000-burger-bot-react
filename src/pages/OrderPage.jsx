@@ -88,7 +88,7 @@ export const OrderPage = () => {
                 </div>
             </div>
 
-            {env == 'brow' && (
+            {env == 'browser' && (
                 <BigButton
                     title={`${!isEmptyCart ? `Buy ${totalPrice} $` : ''} `}
                     disable={isEmptyCart ? true : false}

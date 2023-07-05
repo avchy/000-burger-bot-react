@@ -153,7 +153,7 @@ export function CheckoutPage() {
       {/* {console.log("  optionDelivery  :>> ", optionDelivery)}
       {console.log(" address :>> ", !address)} */}
 
-      {env === "brow" &&
+      {env === "browser" &&
         (optionDelivery === "on_site" ||
           (optionDelivery === "take_away" && address)) && (
           <BigButton
