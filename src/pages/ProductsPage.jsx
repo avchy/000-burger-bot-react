@@ -26,22 +26,10 @@ export const ProductsPage = () => {
   const [cartItems, setCartItems] = useState([])
   const navigate = useNavigate()
 
-<<<<<<< HEAD
   useEffect(() => {
     tele.ready()
   })
 
-=======
-
-
-  useEffect(() => {
-    tele.ready()
-    tele.MainButton.text = "VIEW ORDER"
-    tele.enableClosingConfirmation()
-    tele.expand()
-  })
-
->>>>>>> refs/remotes/origin/master
   const onAdd = (food) => {
     if (food.length === 0) {
       tele.MainButton.hide()
