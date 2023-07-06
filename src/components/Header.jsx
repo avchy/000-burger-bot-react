@@ -15,7 +15,6 @@ export const Header = () => {
     <div className={"header"}>
       <p className={"title"}> {`gitCommitHash - ${gitCommitHash}`} </p>
       <p className={"title"}> {`query_id - ${query_id}`} </p>
-      <p className={"title"}> {`window.Telegram - ${window.Telegram}`} </p>
  
       {/* <BigButton onClick={onClose}>Close</BigButton> */}
       {/* <span className={"username"}>{user?.username}</span> */}
