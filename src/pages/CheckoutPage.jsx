@@ -35,8 +35,8 @@ export function CheckoutPage() {
   const query_id = window.Telegram.WebApp.initDataUnsafe.query_id
 
   const location = useLocation()
-  const cartItems = location.state.cartItems
-  const comment = location.state.value
+  const cartItems = location?.state?.cartItems || []
+  const comment = location?.state?.value
 
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
@@ -169,11 +169,14 @@ export function CheckoutPage() {
             <div className="text_small">Burger Bot.</div>
           </div>
         </div>
+        
+       {cartItems && cartItems.length > 0 &&
         <div className="cardsContainer">
           {cartItems.map((food) => {
             return <CardRowSmall food={food} key={food.id} />
           })}
         </div>
+}
 
         <CardRowSmall food={{ id: 9999, title: "Free delivery" }} key={9999} />
         <CardRowSmall
