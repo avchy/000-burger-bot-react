@@ -33,7 +33,7 @@ export function CheckoutPage() {
 
   // tele.MainButton.onClick(() => alert("submitted111"))
 
-  const query_id = window.Telegram.WebApp.initDataUnsafe.query_id
+  const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
 
   const location = useLocation()
   const cartItems = location?.state?.cartItems || []

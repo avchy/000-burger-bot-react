@@ -9,7 +9,7 @@ const { gitCommitHash, gitTimestampDate, gitTimestamp } = generatedGitInfo
 export const Header = () => {
   const { user, onClose } = useTelegram()
 
-  const query_id = window.Telegram.WebApp.initDataUnsafe.query_id
+  const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
 
   return (
     <div className={"header"}>
