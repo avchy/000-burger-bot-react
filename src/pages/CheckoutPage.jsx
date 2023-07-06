@@ -119,6 +119,8 @@ export function CheckoutPage() {
 
             return response.json()
           } else {
+            setTempError("Ошибка HTTP: " + response.status)
+
             throw new Error("Ошибка HTTP: " + response.status)
           }
         })
@@ -131,13 +133,19 @@ export function CheckoutPage() {
         .catch((error) => {
           // Обработка ошибок
 
-          setTempError(JSON.stringify(error, null, 2))
+          setTempError(
+            "Обработка ошибок при выполнении fetch ---" +
+              JSON.stringify(error, null, 2)
+          )
 
           console.error("Произошла ошибка:", error)
         })
     } catch (error) {
       // Обработка ошибок при выполнении fetch
-      setTempError(JSON.stringify(error, null, 2))
+      setTempError(
+        "Обработка ошибок при выполнении fetch ---" +
+          JSON.stringify(error, null, 2)
+      )
 
       console.error("Произошла ошибка при выполнении fetch:", error)
     }
