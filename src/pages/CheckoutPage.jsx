@@ -81,10 +81,11 @@ export function CheckoutPage() {
 
       console.log("data11", data)
       
-alert(data)
+alert(queryId)
+alert(cartItems)
+alert(totalPrice)
 
-alert(shopDataRoute)
-
+ 
       axios
         .post(shopDataRoute, data, {
           headers: {
