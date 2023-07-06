@@ -25,18 +25,14 @@ export function CheckoutPage() {
 
   tele.expand() //расширяем на все окно
 
-  tele.MainButton.setParams({ text: "Send Data" })
-  tele.MainButton.setText("Submit2222")
-  tele.MainButton.text = "PAY"
+  tele.MainButton.setParams({ text: "PAY" })
+  // tele.MainButton.setText("PAY")
+  // tele.MainButton.text = "PAY"
 
   tele.MainButton.onClick(() => alert("submitted111"))
 
-  
-  const query_id = window.Telegram.WebApp.initDataUnsafe.query_id;
+  const query_id = window.Telegram.WebApp.initDataUnsafe.query_id
 
-  console.log("query_id :>> ", query_id);
-  
-  
   const location = useLocation()
   const cartItems = location.state.cartItems
   const comment = location.state.value
@@ -49,54 +45,65 @@ export function CheckoutPage() {
     navigate(-1)
   }, [cartItems])
 
-  const onSendData = useCallback(() => {
-    console.log("onSendData")
+  const onSendData =
+    (() => {
+      console.log("onSendData")
 
-    console.log("tele", tele)
-    console.log("tele.initDataUnsafe?.query_id", tele.initDataUnsafe?.query_id)
-    console.log("tele.initData", tele.initData)
-    console.log("tele.initDataUnsafe", tele.initDataUnsafe)
+      // console.log("tele", tele)
+      // console.log("tele.initDataUnsafe?.query_id", tele.initDataUnsafe?.query_id)
+      // console.log("tele.initData", tele.initData)
+      // console.log("tele.initDataUnsafe", tele.initDataUnsafe)
 
-    tele.sendData("some string that we need to send")
-    window.Telegram.WebView.postEvent("web_app_data_send", false, {
-      data: "some string that we need to send2222",
-    })
+      // tele.sendData("some string that we need to send")
+      // window.Telegram.WebView.postEvent("web_app_data_send", false, {
+      //   data: "some string that we need to send2222",
+      // })
 
-    // const shopDataRoute = `${serverIP}:${port}/web-data`
-    const shopDataRoute = `http://94.198.216.20:8000/web-data`
-    // const shopDataRoute = `http://54.86.166.140:8000/web-data`
-    // const shopDataRoute = `localhost:8000/web-data`
+      // const shopDataRoute = `${serverIP}:${port}/web-data`
+      const shopDataRoute = `http://94.198.216.20:8000/web-data`
+      // const shopDataRoute = `http://54.86.166.140:8000/web-data`
+      // const shopDataRoute = `localhost:8000/web-data`
 
-    console.log("shopDataRoute :>> ", shopDataRoute)
+      console.log("shopDataRoute :>> ", shopDataRoute)
 
-    const data = {
-      queryId,
-      products: cartItems,
-      // totalPrice: totalPrice,
-      totalPrice: getTotalPrice(cartItems),
-    }
+      const data = {
+        queryId,
+        products: cartItems,
+        // totalPrice: totalPrice,
+        totalPrice: getTotalPrice(cartItems),
+      }
 
-    console.log("data11", data)
+      //   {
+      //     "queryId": "AAHqIAUXAAAAAOogBRcbo4rw",
+      //     "products": [],
+      //     "totalPrice": 123123
+      // }
 
-    axios
-      .post(shopDataRoute, data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("response.data", response.data)
-        } else {
-          // Обработка ошибок
-          throw new Error("Ошибка при выполнении запроса: " + response.status)
-        }
-      })
-      .catch((error) => {
-        // Обработка ошибок сети или других ошибок
-        console.error("Произошла ошибка:", error)
-      })
-  }, [cartItems])
+      console.log("data11", data)
+
+      axios
+        .post(shopDataRoute, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            console.log("response.data", response.data)
+            alert("status200")
+          } else {
+            // Обработка ошибок
+            alert("status not 200")
+            throw new Error("Ошибка при выполнении запроса: " + response.status)
+          }
+        })
+        .catch((error) => {
+          // Обработка ошибок сети или других ошибок
+          console.error("Произошла ошибка:", error)
+          alert("Произошла ошибка:", error)
+        })
+    },
+    [cartItems])
 
   //   const onSendData = useCallback(() => {
   //     const data = {
@@ -141,7 +148,6 @@ export function CheckoutPage() {
 
   return (
     <>
-    
       <div className="checkoutPage">
         <h1 className="title">Checkout</h1>
         <div className="orderContainer">
