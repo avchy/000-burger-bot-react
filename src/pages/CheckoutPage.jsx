@@ -19,7 +19,7 @@ export function CheckoutPage() {
 
   const [address, setAddress] = useState("")
   const [tempError, setTempError] = useState("---")
-  const [data, setData] = useState({})
+  const [tempData, setTempData] = useState({})
   const [optionDelivery, setOptionDelivery] = useState("on_site")
 
   tele.BackButton.show()
@@ -49,22 +49,29 @@ export function CheckoutPage() {
 
   const onSendData = useCallback(() => {
     // console.log("onSendData")
-    alert("onSendData")
+    // alert("onSendData")
 
     const shopDataRoute = `${serverIP}:${port}/web-data`
     // const shopDataRoute = `http://94.198.216.20:8000/web-data`
 
     console.log("shopDataRoute :>> ", shopDataRoute)
 
-    const data = {
-      queryId,
-      products: cartItems,
-      // totalPrice: totalPrice,
-      totalPrice: getTotalPrice(cartItems),
-    }
-    setData(data)
+    // const data = {
+    //   queryId,
+    //   products: cartItems,
+    //   // totalPrice: totalPrice,
+    //   totalPrice: getTotalPrice(cartItems),
+    // }
     
-    console.log("data11", data)
+    const data =   {
+      "queryId": queryId,
+      "products": [],
+      "totalPrice": 123123
+  }
+  
+  setTempData(data)
+    
+    // console.log("data11", data)
 
     axios
       .post(shopDataRoute, data, {
@@ -114,9 +121,9 @@ export function CheckoutPage() {
   return (
     <>
       <div className="testWindow">
-        {/* <p className="testText">{data}</p> */}
-        <p className="testText">{tempError}</p>
-      </div>
+        <p className="testText">{`tempData ${tempData}`}</p>
+        <p className="testText">{`tempError ${tempError}`}</p>
+       </div>
       
       <div className="checkoutPage">
         <h1 className="title">Checkout</h1>
