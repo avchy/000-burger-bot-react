@@ -16,8 +16,8 @@ const main = () => {
   const gitTimestamp000 = execSyncWrapper("git log -1 --format=%ct")
   const timestampSeconds = parseInt(gitTimestamp000.trim())
 
-  const date = new Date(timestampSeconds * 1000)
-  const hours1 = (date.getHours() + 4).toString().padStart(2, "0")
+  const date = new Date((timestampSeconds+ 3 * 60 * 60) * 1000)
+  const hours1 = (date.getHours() ).toString().padStart(2, "0")
   const minutes1 = date.getMinutes().toString().padStart(2, "0")
   const seconds1 = date.getSeconds().toString().padStart(2, "0")
   
@@ -26,7 +26,7 @@ const main = () => {
   //=======================
   
   const currentTimestamp = Math.floor(Date.now() / 1000)
-  const gitTimestampDate1 = new Date((currentTimestamp + 4 * 60 * 60) * 1000)
+  const gitTimestampDate1 = new Date((currentTimestamp + 3 * 60 * 60) * 1000)
   
   const hours = gitTimestampDate1.getHours().toString().padStart(2, "0")
   const minutes = gitTimestampDate1.getMinutes().toString().padStart(2, "0")
