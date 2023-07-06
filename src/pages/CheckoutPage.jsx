@@ -105,42 +105,32 @@ export function CheckoutPage() {
     // }
 
     let data = JSON.stringify({
-      "queryId": "AAHqIAUXAAAAAOogBReP7Lu0",
-      
-      
-      "products": [
-        {
-          "title": "Burger",
-          "price": 15,
-          "Image": "/static/media/burger.cb91a41266710be009e6.png",
-          "id": 2,
-          "quantity": 2
-        }
-      ],
-      "totalPrice": 15
-    });
-    
+      queryId: queryId,
+      products: cartItems,
+      totalPrice: 15,
+    })
+
     setTempData(data)
 
-    
     let config = {
-      method: 'post',
+      method: "post",
       maxBodyLength: Infinity,
-      url: 'http://94.198.216.20:8000/web-data',
-      headers: { 
-        'Content-Type': 'application/json'
+      url: "http://94.198.216.20:8000/web-data",
+      headers: {
+        "Content-Type": "application/json",
       },
-      data : data
-    };
-    
-    axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    
+      data: data,
+    }
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
     // try {
     //   fetch(shopDataRoute, {
     //     method: "POST",
