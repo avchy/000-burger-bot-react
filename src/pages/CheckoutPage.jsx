@@ -47,11 +47,11 @@ export function CheckoutPage() {
   }, [cartItems])
 
   const onSendData = useCallback(() => {
-    console.log("onSendData")
+    // console.log("onSendData")
     alert("onSendData")
 
-    // const shopDataRoute = `${serverIP}:${port}/web-data`
-    const shopDataRoute = `http://94.198.216.20:8000/web-data`
+    const shopDataRoute = `${serverIP}:${port}/web-data`
+    // const shopDataRoute = `http://94.198.216.20:8000/web-data`
 
     console.log("shopDataRoute :>> ", shopDataRoute)
 
