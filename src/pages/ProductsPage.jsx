@@ -13,17 +13,15 @@ const tele = window.Telegram.WebApp
 console.log("window.Telegram :>> ", window.Telegram)
 console.log("tele.MainButton :>> ", tele.MainButton)
 
-
 console.log("tele.initDataUnsafe?.query_id111", tele.initDataUnsafe?.query_id)
 console.log("tele.initData111", tele.initData)
 console.log("tele.initDataUnsafe111", tele.initDataUnsafe)
-
 
 tele.MainButton.text = "VIEW ORDER"
 tele.enableClosingConfirmation()
 
 import generatedGitInfo from "../helpers/generatedGitInfo.json"
- const { gitCommitHash } = generatedGitInfo
+const { gitCommitHash } = generatedGitInfo
 
 export const ProductsPage = () => {
   const { env } = useNavigator()
@@ -80,12 +78,24 @@ export const ProductsPage = () => {
     navigate("/order", { state: { cartItems } })
   }, [cartItems])
 
+  const onBackButtonClicked = useCallback(() => {
+    navigate("/", { state: { cartItems } })
+  }, [cartItems])
+
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSubmit)
+    tele.onEvent("backButtonClicked", onBackButtonClicked)
+
     return () => {
       tele.offEvent("mainButtonClicked", onSubmit)
+      tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
+
+  useEffect(() => {
+    tele.BackButton.hide()
+  }, [])
+
   return (
     <div className="productsPage">
       <h1 className="title">Burger Shop</h1>

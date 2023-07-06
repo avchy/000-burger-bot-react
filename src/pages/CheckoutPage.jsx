@@ -121,7 +121,7 @@ export function CheckoutPage() {
   return (
     <>
       <div className="testWindow">
-        <p className="testText">{`tempData ${tempData}`}</p>
+        <p className="testText">{`tempData ${JSON.stringify(tempData,null,2)  }`}</p>
         <p className="testText">{`tempError ${tempError}`}</p>
        </div>
       
