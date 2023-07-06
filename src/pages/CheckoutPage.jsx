@@ -48,7 +48,7 @@ export function CheckoutPage() {
   const onSendData =
     (() => {
       console.log("onSendData")
-
+      alert("onSendData")
       // console.log("tele", tele)
       // console.log("tele.initDataUnsafe?.query_id", tele.initDataUnsafe?.query_id)
       // console.log("tele.initData", tele.initData)
