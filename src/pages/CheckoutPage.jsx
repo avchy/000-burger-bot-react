@@ -126,9 +126,16 @@ export function CheckoutPage() {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data))
+        
+        setTempData(JSON.stringify(response.data))
+
       })
       .catch((error) => {
         console.log(error)
+              setTempError(
+        "Обработка ошибок при выполнении fetch ---" +
+          JSON.stringify(error, null, 2)
+      )
       })
 
     // try {
