@@ -29,7 +29,7 @@ export function CheckoutPage() {
   // tele.MainButton.setText("PAY")
   // tele.MainButton.text = "PAY"
 
-  tele.MainButton.onClick(() => alert("submitted111"))
+  // tele.MainButton.onClick(() => alert("submitted111"))
 
   const query_id = window.Telegram.WebApp.initDataUnsafe.query_id
 
@@ -80,6 +80,10 @@ export function CheckoutPage() {
       // }
 
       console.log("data11", data)
+      
+alert(data)
+
+alert(shopDataRoute)
 
       axios
         .post(shopDataRoute, data, {
