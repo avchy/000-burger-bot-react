@@ -98,57 +98,93 @@ export function CheckoutPage() {
     const shopDataRoute = `${serverIP}:${port}/web-data`
     console.log("shopDataRoute :>> ", shopDataRoute)
 
-    const data = {
-      products: cartItems,
-      totalPrice: getTotalPrice(cartItems),
-      queryId,
-    }
+    // const data = {
+    //   products: cartItems,
+    //   totalPrice: getTotalPrice(cartItems),
+    //   queryId,
+    // }
+
+    let data = JSON.stringify({
+      "queryId": "AAHqIAUXAAAAAOogBReP7Lu0",
+      
+      
+      "products": [
+        {
+          "title": "Burger",
+          "price": 15,
+          "Image": "/static/media/burger.cb91a41266710be009e6.png",
+          "id": 2,
+          "quantity": 2
+        }
+      ],
+      "totalPrice": 15
+    });
+    
     setTempData(data)
 
-    try {
-      fetch(shopDataRoute, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => {
-          // Обработка успешного ответа сервера
-          if (response.ok) {
-            setTempData("200-good")
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://94.198.216.20:8000/web-data',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
+    // try {
+    //   fetch(shopDataRoute, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   })
+    //     .then((response) => {
+    //       // Обработка успешного ответа сервера
+    //       if (response.ok) {
+    //         setTempData("200-good")
 
-            return response.json()
-          } else {
-            setTempError("Ошибка HTTP: " + response.status)
+    //         return response.json()
+    //       } else {
+    //         setTempError("Ошибка HTTP: " + response.status)
 
-            throw new Error("Ошибка HTTP: " + response.status)
-          }
-        })
-        .then((responseData) => {
-          setTempData("201111-good")
+    //         throw new Error("Ошибка HTTP: " + response.status)
+    //       }
+    //     })
+    //     .then((responseData) => {
+    //       setTempData("201111-good")
 
-          // Обработка данных ответа сервера
-          console.log(responseData)
-        })
-        .catch((error) => {
-          // Обработка ошибок
+    //       // Обработка данных ответа сервера
+    //       console.log(responseData)
+    //     })
+    //     .catch((error) => {
+    //       // Обработка ошибок
 
-          setTempError(
-               JSON.stringify(error, null, 2)
-          )
+    //       setTempError(
+    //            JSON.stringify(error, null, 2)
+    //       )
 
-          console.error("Произошла ошибка:", error)
-        })
-    } catch (error) {
-      // Обработка ошибок при выполнении fetch
-      setTempError(
-        "Обработка ошибок при выполнении fetch ---" +
-          JSON.stringify(error, null, 2)
-      )
+    //       console.error("Произошла ошибка:", error)
+    //     })
+    // } catch (error) {
+    //   // Обработка ошибок при выполнении fetch
+    //   setTempError(
+    //     "Обработка ошибок при выполнении fetch ---" +
+    //       JSON.stringify(error, null, 2)
+    //   )
 
-      console.error("Произошла ошибка при выполнении fetch:", error)
-    }
+    //   console.error("Произошла ошибка при выполнении fetch:", error)
+    // }
   }, [cartItems])
 
   useEffect(() => {
