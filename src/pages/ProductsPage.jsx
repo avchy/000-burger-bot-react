@@ -12,6 +12,13 @@ const foods = getData()
 const tele = window.Telegram.WebApp
 console.log("window.Telegram :>> ", window.Telegram)
 console.log("tele.MainButton :>> ", tele.MainButton)
+
+
+console.log("tele.initDataUnsafe?.query_id111", tele.initDataUnsafe?.query_id)
+console.log("tele.initData111", tele.initData)
+console.log("tele.initDataUnsafe111", tele.initDataUnsafe)
+
+
 tele.MainButton.text = "VIEW ORDER"
 tele.enableClosingConfirmation()
 

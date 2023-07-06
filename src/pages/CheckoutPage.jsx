@@ -31,6 +31,12 @@ export function CheckoutPage() {
 
   tele.MainButton.onClick(() => alert("submitted111"))
 
+  
+  const query_id = window.Telegram.WebApp.initDataUnsafe.query_id;
+
+  console.log("query_id :>> ", query_id);
+  
+  
   const location = useLocation()
   const cartItems = location.state.cartItems
   const comment = location.state.value
@@ -57,7 +63,9 @@ export function CheckoutPage() {
     })
 
     // const shopDataRoute = `${serverIP}:${port}/web-data`
-    const shopDataRoute = `localhost:8000/web-data`
+    const shopDataRoute = `http://94.198.216.20:8000/web-data`
+    // const shopDataRoute = `http://54.86.166.140:8000/web-data`
+    // const shopDataRoute = `localhost:8000/web-data`
 
     console.log("shopDataRoute :>> ", shopDataRoute)
 
@@ -133,6 +141,7 @@ export function CheckoutPage() {
 
   return (
     <>
+    
       <div className="checkoutPage">
         <h1 className="title">Checkout</h1>
         <div className="orderContainer">
