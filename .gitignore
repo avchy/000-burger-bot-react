@@ -14,7 +14,10 @@ node_modules
 backup
 .env
 .eslintcache
-
+0-backup
+000-backup
+ generatedGitInfo.json
+ 
 # classic ignoring files===============
 
 # next.js
