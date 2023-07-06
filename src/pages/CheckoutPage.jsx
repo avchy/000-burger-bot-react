@@ -21,7 +21,7 @@ export function CheckoutPage() {
   const [tempError, setTempError] = useState("---")
   const [optionDelivery, setOptionDelivery] = useState("on_site")
 
-  // tele.BackButton.show()
+  tele.BackButton.show()
   tele.enableClosingConfirmation()
 
   tele.expand() //расширяем на все окно
@@ -49,20 +49,9 @@ export function CheckoutPage() {
   const onSendData = useCallback(() => {
     console.log("onSendData")
     alert("onSendData")
-    // console.log("tele", tele)
-    // console.log("tele.initDataUnsafe?.query_id", tele.initDataUnsafe?.query_id)
-    // console.log("tele.initData", tele.initData)
-    // console.log("tele.initDataUnsafe", tele.initDataUnsafe)
-
-    // tele.sendData("some string that we need to send")
-    // window.Telegram.WebView.postEvent("web_app_data_send", false, {
-    //   data: "some string that we need to send2222",
-    // })
 
     // const shopDataRoute = `${serverIP}:${port}/web-data`
     const shopDataRoute = `http://94.198.216.20:8000/web-data`
-    // const shopDataRoute = `http://54.86.166.140:8000/web-data`
-    // const shopDataRoute = `localhost:8000/web-data`
 
     console.log("shopDataRoute :>> ", shopDataRoute)
 
@@ -73,17 +62,7 @@ export function CheckoutPage() {
       totalPrice: getTotalPrice(cartItems),
     }
 
-    //   {
-    //     "queryId": "AAHqIAUXAAAAAOogBRcbo4rw",
-    //     "products": [],
-    //     "totalPrice": 123123
-    // }
-
     console.log("data11", data)
-
-    // alert(queryId)
-    // alert(cartItems)
-    // alert(totalPrice)
 
     axios
       .post(shopDataRoute, data, {
@@ -95,34 +74,14 @@ export function CheckoutPage() {
         if (response.status === 200) {
           console.log("response.data", response.data)
           alert("status 200")
-        } else {
-          // Обработка ошибок
-          alert("status not 200")
-          throw new Error("Ошибка при выполнении запроса: " + response.status)
-        }
+        }  
       })
       .catch((error) => {
-        // Обработка ошибок сети или других ошибок
-        setTempError(JSON.stringify(error, null, 2))
+         setTempError(JSON.stringify(error, null, 2))
         console.error("Произошла ошибка:", error)
         alert("Произошла ошибка:", error)
       })
   }, [cartItems])
-
-  //   const onSendData = useCallback(() => {
-  //     const data = {
-  //         products: addedItems,
-  //         totalPrice: getTotalPrice(addedItems),
-  //         queryId,
-  //     }
-  //     fetch('http://85.119.146.179:8000/web-data', {
-  //         method: 'POST',
-  //         headers: {
-  //             'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(data)
-  //     })
-  // }, [addedItems])
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSendData)
@@ -152,9 +111,10 @@ export function CheckoutPage() {
 
   return (
     <>
-      <div>
+      <div className="testWindow">
         <p>{tempError}</p>
       </div>
+      
       <div className="checkoutPage">
         <h1 className="title">Checkout</h1>
         <div className="orderContainer">
@@ -169,14 +129,14 @@ export function CheckoutPage() {
             <div className="text_small">Burger Bot.</div>
           </div>
         </div>
-        
-       {cartItems && cartItems.length > 0 &&
-        <div className="cardsContainer">
-          {cartItems.map((food) => {
-            return <CardRowSmall food={food} key={food.id} />
-          })}
-        </div>
-}
+
+        {cartItems && cartItems.length > 0 && (
+          <div className="cardsContainer">
+            {cartItems.map((food) => {
+              return <CardRowSmall food={food} key={food.id} />
+            })}
+          </div>
+        )}
 
         <CardRowSmall food={{ id: 9999, title: "Free delivery" }} key={9999} />
         <CardRowSmall

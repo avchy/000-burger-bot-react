@@ -7,6 +7,7 @@ import { CardRow } from '../components/CardRow'
 import { useTelegram } from '../hooks/useTelegram'
 import { useNavigator } from '../hooks/useNavigator'
 const tele = window.Telegram.WebApp
+tele.BackButton.show()
 
 export const OrderPage = () => {
     // const { tele } = useTelegram()
@@ -15,6 +16,9 @@ export const OrderPage = () => {
 
     tele.enableClosingConfirmation()
 
+    
+   
+      
     tele.MainButton.text = 'CHECKOUT'
     const location = useLocation()
     const cartItems = location.state.cartItems
@@ -34,7 +38,6 @@ export const OrderPage = () => {
 
     const onBackButtonClicked = useCallback(() => {
         navigate(-1)
-        // navigate('/')
     }, [cartItems])
 
     useEffect(() => {
@@ -43,6 +46,8 @@ export const OrderPage = () => {
 
         return () => {
             tele.offEvent('mainButtonClicked', onSubmit)
+            tele.offEvent('backButtonClicked', onBackButtonClicked)
+
         }
     }, [onSubmit])
 
