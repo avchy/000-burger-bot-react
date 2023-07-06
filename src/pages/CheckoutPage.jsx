@@ -19,6 +19,7 @@ export function CheckoutPage() {
 
   const [address, setAddress] = useState("")
   const [tempError, setTempError] = useState("---")
+  const [data, setData] = useState({})
   const [optionDelivery, setOptionDelivery] = useState("on_site")
 
   tele.BackButton.show()
@@ -61,7 +62,8 @@ export function CheckoutPage() {
       // totalPrice: totalPrice,
       totalPrice: getTotalPrice(cartItems),
     }
-
+    setData(data)
+    
     console.log("data11", data)
 
     axios
@@ -112,6 +114,7 @@ export function CheckoutPage() {
   return (
     <>
       <div className="testWindow">
+        <p className="testText">{data}</p>
         <p>{tempError}</p>
       </div>
       
