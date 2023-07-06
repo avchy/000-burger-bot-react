@@ -13,11 +13,26 @@ const execSyncWrapper = (command) => {
 }
 
 const main = () => {
+  const gitTimestamp = execSyncWrapper("git log -1 --format=%ct")
+
+  //=======================
+  
+  const currentTimestamp = Math.floor(Date.now() / 1000);
+const gitTimestampDate1 = new Date(currentTimestamp * 1000);
+
+  
+ const hours = gitTimestampDate1.getHours().toString().padStart(2, '0');
+const minutes = gitTimestampDate1.getMinutes().toString().padStart(2, '0');
+const seconds = gitTimestampDate1.getSeconds().toString().padStart(2, '0');
+
+const gitTimestampDate = `${hours}:${minutes}:${seconds}`;
+ 
+
+
   const gitBranch = execSyncWrapper("git rev-parse --abbrev-ref HEAD")
   const gitCommitHash = execSyncWrapper("git rev-parse --short=7 HEAD")
-  const gitTimestamp = execSyncWrapper("git log -1 --format=%ct")
-  const gitTimestampDate = new Date(gitTimestamp * 1000)
-  const obj = {
+  
+   const obj = {
     gitBranch,
     gitCommitHash,
     gitTimestamp,
