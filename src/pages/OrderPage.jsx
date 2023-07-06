@@ -33,8 +33,8 @@ export const OrderPage = () => {
     }, [cartItems, value])
 
     const onBackButtonClicked = useCallback(() => {
-        // navigate(-1)
-        navigate('/')
+        navigate(-1)
+        // navigate('/')
     }, [cartItems])
 
     useEffect(() => {

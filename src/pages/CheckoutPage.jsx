@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import "../App.scss"
-// import { serverIP, port } from '../constants/api.js'
+import { serverIP, port } from "../constants/api.js"
 import { BigButton } from "../components/BigButton"
 import { CardRowSmall } from "../components/CardRowSmall"
-// import { getTotalPrice } from '../utils/utils'
+import { getTotalPrice } from "../utils/utils"
 import { useTelegram } from "../hooks/useTelegram"
 import orderImg from "../images/orderImg.png"
 import { useNavigator } from "../hooks/useNavigator"
-
+import axios from "axios"
 const tele = window.Telegram.WebApp
 
 export function CheckoutPage() {
@@ -20,7 +20,7 @@ export function CheckoutPage() {
   const [address, setAddress] = useState("")
   const [optionDelivery, setOptionDelivery] = useState("on_site")
 
-  tele.BackButton.show()
+  // tele.BackButton.show()
   tele.enableClosingConfirmation()
 
   tele.expand() //расширяем на все окно
@@ -37,8 +37,19 @@ export function CheckoutPage() {
 
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
+  const navigate = useNavigate()
+
+  const onBackButtonClicked = useCallback(() => {
+    navigate(-1)
+  }, [cartItems])
+
   const onSendData = useCallback(() => {
     console.log("onSendData")
+
+    console.log("tele", tele)
+    console.log("tele.initDataUnsafe?.query_id", tele.initDataUnsafe?.query_id)
+    console.log("tele.initData", tele.initData)
+    console.log("tele.initDataUnsafe", tele.initDataUnsafe)
 
     tele.sendData("some string that we need to send")
     window.Telegram.WebView.postEvent("web_app_data_send", false, {
@@ -46,27 +57,61 @@ export function CheckoutPage() {
     })
 
     // const shopDataRoute = `${serverIP}:${port}/web-data`
-    // console.log('shopDataRoute :>> ', shopDataRoute)
+    const shopDataRoute = `localhost:8000/web-data`
 
-    // const data = {
-    //     products: cartItems,
-    //     totalPrice: getTotalPrice(cartItems),
-    //     queryId,
-    // }
+    console.log("shopDataRoute :>> ", shopDataRoute)
 
-    // fetch(shopDataRoute, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    // })
+    const data = {
+      queryId,
+      products: cartItems,
+      // totalPrice: totalPrice,
+      totalPrice: getTotalPrice(cartItems),
+    }
+
+    console.log("data11", data)
+
+    axios
+      .post(shopDataRoute, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("response.data", response.data)
+        } else {
+          // Обработка ошибок
+          throw new Error("Ошибка при выполнении запроса: " + response.status)
+        }
+      })
+      .catch((error) => {
+        // Обработка ошибок сети или других ошибок
+        console.error("Произошла ошибка:", error)
+      })
   }, [cartItems])
+
+  //   const onSendData = useCallback(() => {
+  //     const data = {
+  //         products: addedItems,
+  //         totalPrice: getTotalPrice(addedItems),
+  //         queryId,
+  //     }
+  //     fetch('http://85.119.146.179:8000/web-data', {
+  //         method: 'POST',
+  //         headers: {
+  //             'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify(data)
+  //     })
+  // }, [addedItems])
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSendData)
+    tele.onEvent("backButtonClicked", onBackButtonClicked)
+
     return () => {
       tele.offEvent("mainButtonClicked", onSendData)
+      tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSendData])
 
