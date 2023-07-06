@@ -56,18 +56,18 @@ export function CheckoutPage() {
 
     console.log("shopDataRoute :>> ", shopDataRoute)
 
-    // const data = {
-    //   queryId,
-    //   products: cartItems,
-    //   // totalPrice: totalPrice,
-    //   totalPrice: getTotalPrice(cartItems),
-    // }
+    const data = {
+      queryId,
+      products: cartItems,
+      // totalPrice: totalPrice,
+      totalPrice: getTotalPrice(cartItems),
+    }
     
-    const data =   {
-      "queryId": queryId,
-      "products": [],
-      "totalPrice": 123123
-  }
+  //   const data =   {
+  //     "queryId": queryId,
+  //     "products": [],
+  //     "totalPrice": 123123
+  // }
   
   setTempData(data)
     
