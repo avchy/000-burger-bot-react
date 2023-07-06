@@ -47,50 +47,75 @@ export function CheckoutPage() {
     navigate(-1)
   }, [cartItems])
 
+  // const onSendData = useCallback(() => {
+  //   // console.log("onSendData")
+  //   // alert("onSendData")
+
+  //   const shopDataRoute = `${serverIP}:${port}/web-data`
+  //   // const shopDataRoute = `http://94.198.216.20:8000/web-data`
+
+  //   console.log("shopDataRoute :>> ", shopDataRoute)
+
+  //   const data = {
+  //     queryId,
+  //     products: cartItems,
+  //     // totalPrice: totalPrice,
+  //     totalPrice: getTotalPrice(cartItems),
+  //   }
+    
+  // //   const data =   {
+  // //     "queryId": queryId,
+  // //     "products": [],
+  // //     "totalPrice": 123123
+  // // }
+  
+  // setTempData(data)
+    
+  //   // console.log("data11", data)
+
+  //   axios
+  //     .post(shopDataRoute, data, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         console.log("response.data", response.data)
+  //         alert("status 200")
+  //       }  
+  //     })
+  //     .catch((error) => {
+  //        setTempError(JSON.stringify(error, null, 2))
+  //       console.error("Произошла ошибка:", error)
+  //       alert("Произошла ошибка:", error)
+  //     })
+  // }, [cartItems])
+  
+  
+  
   const onSendData = useCallback(() => {
-    // console.log("onSendData")
-    // alert("onSendData")
+    tele.sendData('some string that we need to send')
 
     const shopDataRoute = `${serverIP}:${port}/web-data`
-    // const shopDataRoute = `http://94.198.216.20:8000/web-data`
-
-    console.log("shopDataRoute :>> ", shopDataRoute)
+    console.log('shopDataRoute :>> ', shopDataRoute)
 
     const data = {
-      queryId,
-      products: cartItems,
-      // totalPrice: totalPrice,
-      totalPrice: getTotalPrice(cartItems),
+        products: cartItems,
+        totalPrice: getTotalPrice(cartItems),
+        queryId,
     }
-    
-  //   const data =   {
-  //     "queryId": queryId,
-  //     "products": [],
-  //     "totalPrice": 123123
-  // }
-  
-  setTempData(data)
-    
-    // console.log("data11", data)
 
-    axios
-      .post(shopDataRoute, data, {
+    fetch(shopDataRoute, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+            'Content-Type': 'application/json',
         },
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("response.data", response.data)
-          alert("status 200")
-        }  
-      })
-      .catch((error) => {
-         setTempError(JSON.stringify(error, null, 2))
-        console.error("Произошла ошибка:", error)
-        alert("Произошла ошибка:", error)
-      })
-  }, [cartItems])
+        body: JSON.stringify(data),
+    })
+}, [cartItems])
+
+
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSendData)
