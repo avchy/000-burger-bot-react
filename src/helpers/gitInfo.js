@@ -13,7 +13,18 @@ const execSyncWrapper = (command) => {
 }
 
 const main = () => {
-  const gitTimestamp = execSyncWrapper("git log -1 --format=%ct")
+ 
+  
+  const gitTimestamp000 = execSyncWrapper("git log -1 --format=%ct");
+const timestampSeconds = parseInt(gitTimestamp000.trim());
+
+const date = new Date(timestampSeconds * 1000);
+const hours1 = date.getHours().toString().padStart(2, "0");
+const minutes1 = date.getMinutes().toString().padStart(2, "0");
+const seconds1 = date.getSeconds().toString().padStart(2, "0");
+
+const gitTimestamp = `${hours1}:${minutes1}:${seconds1}`;
+
 
   //=======================
   
