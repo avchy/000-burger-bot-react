@@ -103,6 +103,7 @@ export function CheckoutPage() {
       totalPrice: getTotalPrice(cartItems),
       queryId,
     }
+    setTempData(data)
 
     try {
       fetch(shopDataRoute, {
