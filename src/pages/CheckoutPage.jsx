@@ -110,7 +110,10 @@ export function CheckoutPage() {
       "products": [ { "title": "Burger", "price": 15, "Image": "/static/media/burger.cb91a41266710be009e6.png", "id": 2, "quantity": 2 } ], "totalPrice": 15
     })
 
-    setTempData(data)
+    setTempData( {
+      queryId,
+      "products": [ { "title": "Burger", "price": 15, "Image": "/static/media/burger.cb91a41266710be009e6.png", "id": 2, "quantity": 2 } ], "totalPrice": 15
+    } )
 
     const config = {
       method: "post",
