@@ -134,8 +134,7 @@ export function CheckoutPage() {
           // Обработка ошибок
 
           setTempError(
-            "Обработка ошибок при выполнении fetch ---" +
-              JSON.stringify(error, null, 2)
+               JSON.stringify(error, null, 2)
           )
 
           console.error("Произошла ошибка:", error)
