@@ -119,6 +119,9 @@ export function CheckoutPage() {
       headers: {
         "Content-Type": "application/json",
       },
+      
+      credentials: 'include',
+      
       data: data,
     }
 
