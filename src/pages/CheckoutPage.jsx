@@ -114,8 +114,8 @@ export function CheckoutPage() {
   return (
     <>
       <div className="testWindow">
-        <p className="testText">{data}</p>
-        <p>{tempError}</p>
+        {/* <p className="testText">{data}</p> */}
+        <p className="testText">{tempError}</p>
       </div>
       
       <div className="checkoutPage">
