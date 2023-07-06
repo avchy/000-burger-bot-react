@@ -62,15 +62,15 @@ export function CheckoutPage() {
   //     // totalPrice: totalPrice,
   //     totalPrice: getTotalPrice(cartItems),
   //   }
-    
+
   // //   const data =   {
   // //     "queryId": queryId,
   // //     "products": [],
   // //     "totalPrice": 123123
   // // }
-  
+
   // setTempData(data)
-    
+
   //   // console.log("data11", data)
 
   //   axios
@@ -83,7 +83,7 @@ export function CheckoutPage() {
   //       if (response.status === 200) {
   //         console.log("response.data", response.data)
   //         alert("status 200")
-  //       }  
+  //       }
   //     })
   //     .catch((error) => {
   //        setTempError(JSON.stringify(error, null, 2))
@@ -91,31 +91,57 @@ export function CheckoutPage() {
   //       alert("Произошла ошибка:", error)
   //     })
   // }, [cartItems])
-  
-  
-  
+
   const onSendData = useCallback(() => {
-    tele.sendData('some string that we need to send')
+    tele.sendData("some string that we need to send")
 
     const shopDataRoute = `${serverIP}:${port}/web-data`
-    console.log('shopDataRoute :>> ', shopDataRoute)
+    console.log("shopDataRoute :>> ", shopDataRoute)
 
     const data = {
-        products: cartItems,
-        totalPrice: getTotalPrice(cartItems),
-        queryId,
+      products: cartItems,
+      totalPrice: getTotalPrice(cartItems),
+      queryId,
     }
 
-    fetch(shopDataRoute, {
-        method: 'POST',
+    try {
+      fetch(shopDataRoute, {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-    })
-}, [cartItems])
+      })
+        .then((response) => {
+          // Обработка успешного ответа сервера
+          if (response.ok) {
+            setTempData("200-good")
 
+            return response.json()
+          } else {
+            throw new Error("Ошибка HTTP: " + response.status)
+          }
+        })
+        .then((responseData) => {
+          setTempData("201111-good")
 
+          // Обработка данных ответа сервера
+          console.log(responseData)
+        })
+        .catch((error) => {
+          // Обработка ошибок
+
+          setTempError(JSON.stringify(error, null, 2))
+
+          console.error("Произошла ошибка:", error)
+        })
+    } catch (error) {
+      // Обработка ошибок при выполнении fetch
+      setTempError(JSON.stringify(error, null, 2))
+
+      console.error("Произошла ошибка при выполнении fetch:", error)
+    }
+  }, [cartItems])
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSendData)
@@ -146,10 +172,14 @@ export function CheckoutPage() {
   return (
     <>
       <div className="testWindow">
-        <p className="testText">{`tempData ${JSON.stringify(tempData,null,2)  }`}</p>
+        <p className="testText">{`tempData ${JSON.stringify(
+          tempData,
+          null,
+          2
+        )}`}</p>
         <p className="testText">{`tempError ${tempError}`}</p>
-       </div>
-      
+      </div>
+
       <div className="checkoutPage">
         <h1 className="title">Checkout</h1>
         <div className="orderContainer">
