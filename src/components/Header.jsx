@@ -13,8 +13,9 @@ export const Header = () => {
 
   return (
     <div className={"header"}>
+            <p className={"testText"}> {`   gitTimestamp - ${gitTimestamp}`} </p>
+
       <p className={"testText"}> {`   gitTimestampDate - ${gitTimestampDate}`} </p>
-      <p className={"testText"}> {`   gitTimestamp - ${gitTimestamp}`} </p>
       <p className={"testText"}> {`   gitCommitHash - ${gitCommitHash}`} </p>
       <p className={"testText"}> {`   query_id - ${query_id}`} </p>
 
