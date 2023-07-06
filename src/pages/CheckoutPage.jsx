@@ -92,8 +92,9 @@ export function CheckoutPage() {
   //     })
   // }, [cartItems])
 
-  const onSendData = useCallback(() => {
-    tele.sendData("some string that we need to send")
+  const onSendData =  () => {
+  // const onSendData = useCallback(() => {
+    // tele.sendData("some string that we need to send")
 
     const shopDataRoute = `${serverIP}:${port}/web-data`
     console.log("shopDataRoute :>> ", shopDataRoute)
@@ -181,7 +182,7 @@ export function CheckoutPage() {
 
     //   console.error("Произошла ошибка при выполнении fetch:", error)
     // }
-  }, [cartItems])
+  }
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSendData)
