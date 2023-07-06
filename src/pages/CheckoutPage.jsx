@@ -45,8 +45,8 @@ export function CheckoutPage() {
     navigate(-1)
   }, [cartItems])
 
-  const onSendData =
-    (() => {
+  const onSendData = useCallback(() => {
+
       console.log("onSendData")
       alert("onSendData")
       // console.log("tele", tele)
