@@ -104,7 +104,7 @@ export function CheckoutPage() {
     //   queryId,
     // }
 
-    let data = JSON.stringify({
+    const data = JSON.stringify({
       queryId: queryId,
       products: cartItems,
       totalPrice: 15,
@@ -112,7 +112,7 @@ export function CheckoutPage() {
 
     setTempData(data)
 
-    let config = {
+    const config = {
       method: "post",
       maxBodyLength: Infinity,
       url: "http://94.198.216.20:8000/web-data",
