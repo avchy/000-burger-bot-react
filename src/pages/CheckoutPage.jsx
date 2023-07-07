@@ -216,7 +216,6 @@ export function CheckoutPage() {
     setOptionDelivery(e.target.value)
   }
 
-  const fullURL = window.location.href;
 
   return (
     <>
@@ -227,7 +226,6 @@ export function CheckoutPage() {
           2
         )}`}</p>
         <p className="testText">{`tempError ${tempError}`}</p>
-        <p className="testText">{`fullURL ${fullURL}`}</p>
  
       </div>
 

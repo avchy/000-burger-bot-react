@@ -10,6 +10,7 @@ export const Header = () => {
   const { user, onClose } = useTelegram()
 
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
+  const fullURL = window.location.href;
 
   return (
     <div className={"header"}>
@@ -18,6 +19,7 @@ export const Header = () => {
       <p className={"testText"}> {`   gitTimestampDate - ${gitTimestampDate}`} </p>
       <p className={"testText"}> {`   gitCommitHash - ${gitCommitHash}`} </p>
       <p className={"testText"}> {`   query_id - ${query_id}`} </p>
+      <p className="testText">{`fullURL ${fullURL}`}</p>
 
       {/* <BigButton onClick={onClose}>Close</BigButton> */}
       {/* <span className={"username"}>{user?.username}</span> */}
