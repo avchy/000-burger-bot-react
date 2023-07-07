@@ -20,8 +20,9 @@ export const Header = () => {
       <p className={"testText"}> {` query_id - ${query_id}`} </p>
       <p className="testText">{`fullURL ${fullURL}`}</p>
 
+      <p className="testText">{`user?.username ${user?.username}`}</p>
+
       {/* <BigButton onClick={onClose}>Close</BigButton> */}
-      {/* <span className={"username"}>{user?.username}</span> */}
-    </div>
+     </div>
   )
 }
