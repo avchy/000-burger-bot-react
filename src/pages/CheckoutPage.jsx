@@ -129,7 +129,14 @@ export function CheckoutPage() {
       data: data,
     }
 
-    axios
+    const jsonData = JSON.parse(config.data);
+
+    
+    try {
+      const jsonData = JSON.parse(config.data);
+      console.log('Формат файла корректный');
+      
+      axios
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data))
@@ -144,6 +151,12 @@ export function CheckoutPage() {
           JSON.stringify(error, null, 2)
       )
       })
+      
+    } catch (error) {
+      console.error('Ошибка при парсинге файла:', error);
+    }
+    
+
 
     // try {
     //   fetch(shopDataRoute, {
