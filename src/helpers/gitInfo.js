@@ -41,7 +41,7 @@ const main = () => {
   const obj = {
     gitBranch,
     gitCommitHash,
-    gitTimestamp,
+    // gitTimestamp,
     gitTimestampDate,
   }
 
