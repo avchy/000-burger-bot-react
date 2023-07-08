@@ -142,16 +142,19 @@ export function CheckoutPage() {
           setTempData(JSON.stringify(response.data))
         })
         .catch((error) => {
-          console.log("error.response.data", error.response.data)
+          if (error.response) {
+            console.log("error.response.data", error.response?.data)
+
+            setTempError(
+              "Обработка ошибок при выполнении axios.post ---" +
+                JSON.stringify(error.response?.data, null, 2)
+            )
+          }
 
           setTempError(
             "Обработка ошибок при выполнении axios.post ---" +
-              JSON.stringify(error.response.data, null, 2)
+              JSON.stringify(error, null, 2)
           )
-          // setTempError(
-          //   "Обработка ошибок при выполнении axios.post ---" +
-          //     JSON.stringify(error, null, 2)
-          // )
         })
     } catch (error) {
       console.error("Ошибка при парсинге файла:", error)
