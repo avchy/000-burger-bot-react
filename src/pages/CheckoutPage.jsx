@@ -23,15 +23,8 @@ export function CheckoutPage() {
   const [optionDelivery, setOptionDelivery] = useState("on_site")
 
   tele.BackButton.show()
-  tele.enableClosingConfirmation()
 
-  tele.expand() //расширяем на все окно
-
-  tele.MainButton.setParams({ text: "PAY" })
-  // tele.MainButton.setText("PAY")
-  // tele.MainButton.text = "PAY"
-
-  // tele.MainButton.onClick(() => alert("submitted111"))
+  tele.MainButton.setParams({ text: "PAY" }) 
 
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
 
@@ -46,6 +39,7 @@ export function CheckoutPage() {
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
   }, [cartItems])
+  tele.BackButton.onClick(onBackButtonClicked)
 
   // const onSendData = useCallback(() => {
   //   // console.log("onSendData")
@@ -223,12 +217,10 @@ export function CheckoutPage() {
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSendData)
-    tele.onEvent("backButtonClicked", onBackButtonClicked)
-
+ 
     return () => {
       tele.offEvent("mainButtonClicked", onSendData)
-      tele.offEvent("backButtonClicked", onBackButtonClicked)
-    }
+     }
   }, [onSendData])
 
   useEffect(() => {

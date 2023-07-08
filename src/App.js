@@ -10,15 +10,23 @@ import { Form } from './components/Form'
 // const { getData } = require('./db/db')
 // const foods = getData()
 
+const tele = window.Telegram.WebApp
+tele.isClosingConfirmationEnabled(true)
+tele.expand() //расширяем на все окно
+
 export function App() {
     return (
         <>
             <div className='App'>
                 <Header />
                 <Routes>
+                    
+                    
                     <Route index element={<ProductsPage />} />
-                    <Route path={'checkout'} element={<CheckoutPage />} />
                     <Route path={'order'} element={<OrderPage />} />
+                    <Route path={'checkout'} element={<CheckoutPage />} />
+                    
+                    
                     <Route path={'form'} element={<Form />} />
                 </Routes>
             </div>
