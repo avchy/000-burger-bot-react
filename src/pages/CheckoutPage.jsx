@@ -130,8 +130,8 @@ export function CheckoutPage() {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      // url: "http://94.198.216.20:8000/web-data",
-      url: "http://94.198.216.20:8000/test",
+      url: "http://94.198.216.20:8000/web-data",
+      // url: "http://94.198.216.20:8000/test",
       headers: {
         "Content-Type": "application/json",
       },
