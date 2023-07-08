@@ -98,7 +98,8 @@ export function CheckoutPage() {
       products: cartItems,
       totalPrice: getTotalPrice(cartItems),
     }
-
+    setTempData(data)
+    
     // const data = {
     //   queryId,
     //   products: [
@@ -113,21 +114,7 @@ export function CheckoutPage() {
     //   totalPrice: 15,
     // }
 
-    setTempData(
-      JSON.stringify({
-        queryId,
-        products: [
-          {
-            title: "Burger",
-            price: 15,
-            Image: "/static/media/burger.cb91a41266710be009e6.png",
-            id: 2,
-            quantity: 2,
-          },
-        ],
-        totalPrice: 15,
-      })
-    )
+  
 
     const config = {
       method: "post",
