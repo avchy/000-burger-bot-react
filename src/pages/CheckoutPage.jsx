@@ -99,7 +99,7 @@ export function CheckoutPage() {
       totalPrice: getTotalPrice(cartItems),
     }
     setTempData(data)
-    
+
     // const data = {
     //   queryId,
     //   products: [
@@ -113,8 +113,6 @@ export function CheckoutPage() {
     //   ],
     //   totalPrice: 15,
     // }
-
-  
 
     const config = {
       method: "post",
@@ -144,11 +142,16 @@ export function CheckoutPage() {
           setTempData(JSON.stringify(response.data))
         })
         .catch((error) => {
-          console.log(error)
+          console.log("error.response.data", error.response.data)
+
           setTempError(
             "Обработка ошибок при выполнении axios.post ---" +
-              JSON.stringify(error, null, 2)
+              JSON.stringify(error.response.data, null, 2)
           )
+          // setTempError(
+          //   "Обработка ошибок при выполнении axios.post ---" +
+          //     JSON.stringify(error, null, 2)
+          // )
         })
     } catch (error) {
       console.error("Ошибка при парсинге файла:", error)
