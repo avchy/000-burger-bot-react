@@ -173,8 +173,8 @@ export function CheckoutPage() {
     //   console.error('Ошибка при парсинге файла:', error);
     // }
 
-    // const url = "http://94.198.216.20:8000/test"
-    const  url= "https://94.198.216.20:8000/web-data"
+    const url = "http://94.198.216.20:8000/test"
+    // const  url= "http://94.198.216.20:8000/web-data"
 
     try {
       fetch(url, {
