@@ -99,7 +99,7 @@ export function CheckoutPage() {
     //   queryId,
     // }
 
-    const data = JSON.stringify({
+    const data = {
       queryId,
       products: [
         {
@@ -111,9 +111,9 @@ export function CheckoutPage() {
         },
       ],
       totalPrice: 15,
-    })
+    }
 
-    setTempData({
+    setTempData(JSON.stringify({
       queryId,
       products: [
         {
@@ -125,7 +125,7 @@ export function CheckoutPage() {
         },
       ],
       totalPrice: 15,
-    })
+    }))
 
     // const config = {
     //   method: "post",
