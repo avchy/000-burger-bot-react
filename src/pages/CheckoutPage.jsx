@@ -90,8 +90,8 @@ export function CheckoutPage() {
     // const onSendData = useCallback(() => {
     // tele.sendData("some string that we need to send")
 
-    const shopDataRoute = `${serverIP}:${port}/web-data`
-    console.log("shopDataRoute :>> ", shopDataRoute)
+    // const shopDataRoute = `${serverIP}:${port}/web-data`
+    // console.log("shopDataRoute :>> ", shopDataRoute)
 
     // const data = {
     //   products: cartItems,
@@ -127,19 +127,19 @@ export function CheckoutPage() {
       totalPrice: 15,
     })
 
-    const config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "http://94.198.216.20:8000/web-data",
-      // url: "http://94.198.216.20:8000/test",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    // const config = {
+    //   method: "post",
+    //   maxBodyLength: Infinity,
+    //   url: "http://94.198.216.20:8000/web-data",
+    //   // url: "http://94.198.216.20:8000/test",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
 
-      credentials: "include",
+    //   credentials: "include",
 
-      data: data,
-    }
+    //   data: data,
+    // }
 
     // const jsonData = JSON.parse(config.data);
 
@@ -167,8 +167,8 @@ export function CheckoutPage() {
     //   console.error('Ошибка при парсинге файла:', error);
     // }
 
-    const url = "http://94.198.216.20:8000/test"
-    // const  url= "http://94.198.216.20:8000/web-data"
+    // const url = "http://94.198.216.20:8000/test"
+    const  url= "http://94.198.216.20:8000/web-data"
 
     try {
       fetch(url, {
