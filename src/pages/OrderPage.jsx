@@ -15,10 +15,7 @@ export const OrderPage = () => {
     const { env } = useNavigator()
 
     tele.enableClosingConfirmation()
-
     
-   
-      
     tele.MainButton.text = 'CHECKOUT'
     const location = useLocation()
     const cartItems = location.state.cartItems
