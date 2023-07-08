@@ -129,79 +129,79 @@ export function CheckoutPage() {
       data: data,
     }
 
-    const jsonData = JSON.parse(config.data);
+    // const jsonData = JSON.parse(config.data);
 
     
-    try {
-      const jsonData = JSON.parse(config.data);
-      console.log('Формат файла корректный');
-      
-      axios
-      .request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data))
-        
-        setTempData(JSON.stringify(response.data))
-
-      })
-      .catch((error) => {
-        console.log(error)
-              setTempError(
-        "Обработка ошибок при выполнении axios.post ---" +
-          JSON.stringify(error, null, 2)
-      )
-      })
-      
-    } catch (error) {
-      console.error('Ошибка при парсинге файла:', error);
-    }
-    
-
-
     // try {
-    //   fetch(shopDataRoute, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(data),
+    //   const jsonData = JSON.parse(config.data);
+    //   console.log('Формат файла корректный');
+      
+    //   axios
+    //   .request(config)
+    //   .then((response) => {
+    //     console.log(JSON.stringify(response.data))
+        
+    //     setTempData(JSON.stringify(response.data))
+
     //   })
-    //     .then((response) => {
-    //       // Обработка успешного ответа сервера
-    //       if (response.ok) {
-    //         setTempData("200-good")
-
-    //         return response.json()
-    //       } else {
-    //         setTempError("Ошибка HTTP: " + response.status)
-
-    //         throw new Error("Ошибка HTTP: " + response.status)
-    //       }
-    //     })
-    //     .then((responseData) => {
-    //       setTempData("201111-good")
-
-    //       // Обработка данных ответа сервера
-    //       console.log(responseData)
-    //     })
-    //     .catch((error) => {
-    //       // Обработка ошибок
-
-    //       setTempError(
-    //            JSON.stringify(error, null, 2)
-    //       )
-
-    //       console.error("Произошла ошибка:", error)
-    //     })
-    // } catch (error) {
-    //   // Обработка ошибок при выполнении fetch
-    //   setTempError(
-    //     "Обработка ошибок при выполнении fetch ---" +
+    //   .catch((error) => {
+    //     console.log(error)
+    //           setTempError(
+    //     "Обработка ошибок при выполнении axios.post ---" +
     //       JSON.stringify(error, null, 2)
     //   )
-
-    //   console.error("Произошла ошибка при выполнении fetch:", error)
+    //   })
+      
+    // } catch (error) {
+    //   console.error('Ошибка при парсинге файла:', error);
     // }
+    
+
+
+    try {
+      fetch(shopDataRoute, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          // Обработка успешного ответа сервера
+          if (response.ok) {
+            setTempData("200-good")
+
+            return response.json()
+          } else {
+            setTempError("Ошибка HTTP: " + response.status)
+
+            throw new Error("Ошибка HTTP: " + response.status)
+          }
+        })
+        .then((responseData) => {
+          setTempData("201111-good")
+
+          // Обработка данных ответа сервера
+          console.log(responseData)
+        })
+        .catch((error) => {
+          // Обработка ошибок
+
+          setTempError(
+               JSON.stringify(error, null, 2)
+          )
+
+          console.error("Произошла ошибка:", error)
+        })
+    } catch (error) {
+      // Обработка ошибок при выполнении fetch
+      setTempError(
+        "Обработка ошибок при выполнении fetch ---" +
+          JSON.stringify(error, null, 2)
+      )
+
+      console.error("Произошла ошибка при выполнении fetch:", error)
+    }
   }
 
   useEffect(() => {
