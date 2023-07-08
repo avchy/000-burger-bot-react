@@ -92,8 +92,8 @@ export function CheckoutPage() {
   //     })
   // }, [cartItems])
 
-  const onSendData =  () => {
-  // const onSendData = useCallback(() => {
+  const onSendData = () => {
+    // const onSendData = useCallback(() => {
     // tele.sendData("some string that we need to send")
 
     const shopDataRoute = `${serverIP}:${port}/web-data`
@@ -107,13 +107,31 @@ export function CheckoutPage() {
 
     const data = JSON.stringify({
       queryId,
-      "products": [ { "title": "Burger", "price": 15, "Image": "/static/media/burger.cb91a41266710be009e6.png", "id": 2, "quantity": 2 } ], "totalPrice": 15
+      products: [
+        {
+          title: "Burger",
+          price: 15,
+          Image: "/static/media/burger.cb91a41266710be009e6.png",
+          id: 2,
+          quantity: 2,
+        },
+      ],
+      totalPrice: 15,
     })
 
-    setTempData( {
+    setTempData({
       queryId,
-      "products": [ { "title": "Burger", "price": 15, "Image": "/static/media/burger.cb91a41266710be009e6.png", "id": 2, "quantity": 2 } ], "totalPrice": 15
-    } )
+      products: [
+        {
+          title: "Burger",
+          price: 15,
+          Image: "/static/media/burger.cb91a41266710be009e6.png",
+          id: 2,
+          quantity: 2,
+        },
+      ],
+      totalPrice: 15,
+    })
 
     const config = {
       method: "post",
@@ -123,24 +141,23 @@ export function CheckoutPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      
-      credentials: 'include',
-      
+
+      credentials: "include",
+
       data: data,
     }
 
     // const jsonData = JSON.parse(config.data);
 
-    
     // try {
     //   const jsonData = JSON.parse(config.data);
     //   console.log('Формат файла корректный');
-      
+
     //   axios
     //   .request(config)
     //   .then((response) => {
     //     console.log(JSON.stringify(response.data))
-        
+
     //     setTempData(JSON.stringify(response.data))
 
     //   })
@@ -151,15 +168,17 @@ export function CheckoutPage() {
     //       JSON.stringify(error, null, 2)
     //   )
     //   })
-      
+
     // } catch (error) {
     //   console.error('Ошибка при парсинге файла:', error);
     // }
-    
 
+    // const url = "http://94.198.216.20:8000/test"
+    const  url= "https://94.198.216.20:8000/web-data"
 
     try {
-      fetch(shopDataRoute, {
+      fetch(url, {
+        // fetch(shopDataRoute, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -187,9 +206,7 @@ export function CheckoutPage() {
         .catch((error) => {
           // Обработка ошибок
 
-          setTempError(
-               JSON.stringify(error, null, 2)
-          )
+          setTempError(JSON.stringify(error, null, 2))
 
           console.error("Произошла ошибка:", error)
         })
@@ -230,7 +247,6 @@ export function CheckoutPage() {
     setOptionDelivery(e.target.value)
   }
 
-
   return (
     <>
       <div className="testWindow">
@@ -240,7 +256,6 @@ export function CheckoutPage() {
           2
         )}`}</p>
         <p className="testText">{`tempError ${tempError}`}</p>
- 
       </div>
 
       <div className="checkoutPage">
