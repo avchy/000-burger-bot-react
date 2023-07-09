@@ -31,8 +31,10 @@ export function CheckoutPage() {
   const location = useLocation()
   const cartItems = location?.state?.cartItems || []
   const comment = location?.state?.value
+  console.log("location?.state?", location?.state)
 
-  const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
+  const totalPrice = location?.state?.totalPrice
+  // const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
 
   const navigate = useNavigate()
 
@@ -101,11 +103,11 @@ export function CheckoutPage() {
     const data = {
       queryId,
       products: cartItems,
-      totalPrice: getTotalPrice(cartItems),
+      totalPrice: totalPrice,
     }
 
     tele.sendData(JSON.stringify(data))
- 
+
     setTempData(data)
     const config = {
       method: "post",
@@ -256,7 +258,7 @@ export function CheckoutPage() {
 
         <CardRowSmall food={{ id: 9999, title: "Free delivery" }} key={9999} />
         <CardRowSmall
-          food={{ id: 1, title: "Total Price:", price: totalPrice.toFixed(2) }}
+          food={{ id: 1, title: "Total Price:", price: totalPrice }}
           key={0}
         />
       </div>

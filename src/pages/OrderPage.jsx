@@ -1,102 +1,103 @@
-import { useState, useCallback, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useState, useCallback, useEffect } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
-import '../App.scss'
-import { BigButton } from '../components/BigButton'
-import { CardRow } from '../components/CardRow'
-import { useTelegram } from '../hooks/useTelegram'
-import { useNavigator } from '../hooks/useNavigator'
+import "../App.scss"
+import { BigButton } from "../components/BigButton"
+import { CardRow } from "../components/CardRow"
+import { useTelegram } from "../hooks/useTelegram"
+import { useNavigator } from "../hooks/useNavigator"
 const tele = window.Telegram.WebApp
 tele.BackButton.show()
 
 export const OrderPage = () => {
-    // const { tele } = useTelegram()
-    const navigate = useNavigate()
-    const { env } = useNavigator()
+  // const { tele } = useTelegram()
+  const navigate = useNavigate()
+  const { env } = useNavigator()
 
-    tele.enableClosingConfirmation()
-    
-    tele.MainButton.text = 'CHECKOUT'
-    const location = useLocation()
-    const cartItems = location.state.cartItems
+  tele.enableClosingConfirmation()
 
-    const [value, setValue] = useState('')
+  tele.MainButton.text = "CHECKOUT"
+  const location = useLocation()
+  const cartItems = location.state.cartItems
 
-    useEffect(() => {
-        tele.ready()
-    })
-    const handleChange = (event) => {
-        setValue(event.target.value)
+  const [comment, setComment] = useState("")
+
+  useEffect(() => {
+    tele.ready()
+  })
+  const handleChange = (event) => {
+    setComment(event.target.comment)
+  }
+
+  const totalPrice = cartItems
+    .reduce((a, c) => a + c.price * c.quantity, 0)
+    .toFixed(2)
+    .toString()
+
+  const onSubmit = useCallback(() => {
+    navigate("/checkout", { state: { cartItems, comment, totalPrice } })
+  }, [cartItems, comment])
+
+  const onBackButtonClicked = useCallback(() => {
+    navigate(-1)
+  }, [cartItems])
+
+  useEffect(() => {
+    tele.onEvent("mainButtonClicked", onSubmit)
+    tele.onEvent("backButtonClicked", onBackButtonClicked)
+
+    return () => {
+      tele.offEvent("mainButtonClicked", onSubmit)
+      tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
+  }, [onSubmit])
 
-    const onSubmit = useCallback(() => {
-        navigate('/checkout', { state: { cartItems, value } })
-    }, [cartItems, value])
+  const styles = {
+    overflow: "hidden",
+    overflowWrap: "break-word",
+    height: "46px",
+  }
 
-    const onBackButtonClicked = useCallback(() => {
-        navigate(-1)
-    }, [cartItems])
+  const isEmptyCart = cartItems.length === 0
 
-    useEffect(() => {
-        tele.onEvent('mainButtonClicked', onSubmit)
-        tele.onEvent('backButtonClicked', onBackButtonClicked)
+  return (
+    <div className="orderPage">
+      <div className="orderHeaderEdit">
+        <h1 className="title">Your Order </h1>
+        <Link to="/" title="Edit" className="navLinkEdit">
+          Edit
+        </Link>
+      </div>
 
-        return () => {
-            tele.offEvent('mainButtonClicked', onSubmit)
-            tele.offEvent('backButtonClicked', onBackButtonClicked)
+      <div className="cardsContainer">
+        {cartItems.map((food) => {
+          return <CardRow food={food} key={food.id} />
+        })}
+      </div>
 
-        }
-    }, [onSubmit])
+      <div className="cafe-text-field-wrap">
+        <input
+          className="cafe-text-field js-order-comment-field cafe-block"
+          rows="1"
+          placeholder="Add comment…"
+          style={styles}
+          type="text"
+          value={comment}
+          onChange={handleChange}
+        />
 
-    const styles = {
-        overflow: 'hidden',
-        overflowWrap: 'break-word',
-        height: '46px',
-    }
-
-    const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toString()
-    //    totalPrice.toFixed(2)
-
-    const isEmptyCart = cartItems.length === 0
-
-    return (
-        <div className='orderPage'>
-            <div className='orderHeaderEdit'>
-                <h1 className='title'>Your Order </h1>
-                <Link to='/' title='Edit' className='navLinkEdit'>
-                    Edit
-                </Link>
-            </div>
-
-            <div className='cardsContainer'>
-                {cartItems.map((food) => {
-                    return <CardRow food={food} key={food.id} />
-                })}
-            </div>
-
-            <div className='cafe-text-field-wrap'>
-                <input
-                    className='cafe-text-field js-order-comment-field cafe-block'
-                    rows='1'
-                    placeholder='Add comment…'
-                    style={styles}
-                    type='text'
-                    value={value}
-                    onChange={handleChange}
-                />
-
-                <div className='cafe-text-field-hint'>
-                    Any special requests, details, final wishes etc.
-                </div>
-            </div>
-
-            {env == 'browser' && (
-                <BigButton
-                    title={`${!isEmptyCart ? `Buy ${totalPrice} $` : ''} `}
-                    disable={isEmptyCart ? true : false}
-                    onClick={onSubmit}
-                />
-            )}
+        <div className="cafe-text-field-hint">
+          Any special requests, details, final wishes etc.
         </div>
-    )
+      </div>
+
+      {env == "browser" && (
+        <BigButton
+          title={`${!isEmptyCart ? `Buy ${totalPrice} $` : ""} `}
+          disable={isEmptyCart ? true : false}
+          onClick={onSubmit}
+        />
+      )}
+    </div>
+  )
 }
