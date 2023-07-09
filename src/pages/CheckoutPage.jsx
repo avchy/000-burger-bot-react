@@ -88,22 +88,24 @@ export function CheckoutPage() {
 
   const onSendData = () => {
     // const onSendData = useCallback(() => {
-    tele.sendData("some string that we need to send")
 
     // const shopDataRoute = `${serverIP}:${port}/web-data`
     // console.log("shopDataRoute :>> ", shopDataRoute)
 
-        // const data = {
+    // const data = {
     //   queryId:"AAHqIAUXAAAAAOogBRex84jA",
     //   products: cartItems,
     //   totalPrice: getTotalPrice(cartItems),
     // }
-    
+
     const data = {
       queryId,
       products: cartItems,
       totalPrice: getTotalPrice(cartItems),
     }
+
+    tele.sendData(data)
+
     setTempData(data)
     const config = {
       method: "post",
@@ -117,7 +119,7 @@ export function CheckoutPage() {
     }
 
     try {
-       const jsonData = JSON.parse(config.data)
+      const jsonData = JSON.parse(config.data)
       axios
         .request(config)
         .then((response) => {
