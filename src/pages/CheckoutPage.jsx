@@ -30,7 +30,7 @@ export function CheckoutPage() {
 
   const location = useLocation()
   const cartItems = location?.state?.cartItems || []
-  const comment = location?.state?.value
+  const comment = location?.state?.comment
   console.log("location?.state?", location?.state)
 
   const totalPrice = location?.state?.totalPrice
@@ -104,6 +104,7 @@ export function CheckoutPage() {
       queryId,
       products: cartItems,
       totalPrice: totalPrice,
+      comment: comment,
     }
 
     tele.sendData(JSON.stringify(data))

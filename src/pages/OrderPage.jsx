@@ -26,7 +26,7 @@ export const OrderPage = () => {
     tele.ready()
   })
   const handleChange = (event) => {
-    setComment(event.target.comment)
+     setComment(event.target.value)
   }
 
   const totalPrice = cartItems
