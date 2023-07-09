@@ -88,49 +88,40 @@ export function CheckoutPage() {
 
   const onSendData = () => {
     // const onSendData = useCallback(() => {
-    // tele.sendData("some string that we need to send")
+    tele.sendData("some string that we need to send")
 
     // const shopDataRoute = `${serverIP}:${port}/web-data`
     // console.log("shopDataRoute :>> ", shopDataRoute)
 
+        // const data = {
+    //   queryId:"AAHqIAUXAAAAAOogBRex84jA",
+    //   products: cartItems,
+    //   totalPrice: getTotalPrice(cartItems),
+    // }
+    
     const data = {
       queryId,
       products: cartItems,
       totalPrice: getTotalPrice(cartItems),
     }
     setTempData(data)
-
-    // const data = {
-    //   queryId:"AAHqIAUXAAAAAOogBRex84jA",
-    //   products: cartItems,
-    //   totalPrice: getTotalPrice(cartItems),
-    // }
-
     const config = {
       method: "post",
       maxBodyLength: Infinity,
       url: "http://94.198.216.20:8000/web-data",
-      // url: "http://94.198.216.20:8000/test",
       headers: {
         "Content-Type": "application/json",
       },
-
       credentials: "include",
-
-      // data: data,
       data: JSON.stringify(data),
     }
 
     try {
-      console.log("Формат файла testttttt")
-      const jsonData = JSON.parse(config.data)
-      console.log("Формат файла корректный")
-
+       const jsonData = JSON.parse(config.data)
       axios
         .request(config)
         .then((response) => {
           console.log(JSON.stringify(response.data))
-
           setTempData(JSON.stringify(response.data))
         })
         .catch((error) => {
@@ -149,7 +140,7 @@ export function CheckoutPage() {
           )
         })
     } catch (error) {
-      console.error("Ошибка при парсинге файла:", error)
+      console.error("Ошибка при парсинге файла(проверь формат файла):", error)
     }
 
     //============================================================
