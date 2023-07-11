@@ -102,7 +102,6 @@ export function CheckoutPage() {
 
     const data = {
       queryId,
-      optionDelivery: optionDelivery,
       address: address,
       comment: comment,
       products: cartItems,
