@@ -100,6 +100,10 @@ export function CheckoutPage() {
     //   totalPrice: getTotalPrice(cartItems),
     // }
 
+    for (let i = 0; i < cartItems.length; i++) {
+      delete cartItems[i].Image
+    }
+
     const data = {
       queryId,
       address: address,
