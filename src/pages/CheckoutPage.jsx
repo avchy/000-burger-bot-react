@@ -102,14 +102,17 @@ export function CheckoutPage() {
 
     const data = {
       queryId,
+      optionDelivery: optionDelivery,
+      address: address,
+      comment: comment,
       products: cartItems,
       totalPrice: totalPrice,
-      comment: comment,
     }
 
     tele.sendData(JSON.stringify(data))
 
     setTempData(data)
+
     const config = {
       method: "post",
       maxBodyLength: Infinity,
