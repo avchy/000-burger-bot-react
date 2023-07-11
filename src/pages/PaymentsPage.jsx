@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Payments() {
+function PaymentsPage() {
   const classes = useStyles();
   const [paymentMethod, setPaymentMethod] = useState('');
 
@@ -35,4 +35,4 @@ function Payments() {
   );
 }
 
-export default Payments;
+export default PaymentsPage;
