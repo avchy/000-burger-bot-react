@@ -88,6 +88,23 @@ export function CheckoutPage() {
   //     })
   // }, [cartItems])
 
+  const onSubmit = useCallback(() => {
+    navigate("/payments", { state: { cartItems, comment, totalPrice } })
+  }, [cartItems, comment])
+  
+  
+  useEffect(() => {
+    tele.onEvent("mainButtonClicked", onSubmit)
+    tele.onEvent("backButtonClicked", onBackButtonClicked)
+
+    return () => {
+      tele.offEvent("mainButtonClicked", onSubmit)
+      tele.offEvent("backButtonClicked", onBackButtonClicked)
+    }
+  }, [onSubmit])
+  
+  
+  
   const onSendData = () => {
     // const onSendData = useCallback(() => {
 
@@ -318,6 +335,15 @@ export function CheckoutPage() {
             onClick={onSendData}
           />
         )}
+        
+        
+        {env == "browser" && (
+        <BigButton
+        title={`${"Payments"} `}
+        // disable={isEmptyCart ? true : false}
+          onClick={onSubmit}
+        />
+      )}
     </>
   )
 }
