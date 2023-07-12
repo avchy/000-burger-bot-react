@@ -128,7 +128,7 @@ export const PaymentCreditCard = () => {
         helperText={errors.cardNumber?.message}
         sx={{ width: "100%", mb: 2 }}
       />
-      <div style={{ display: "flex", gap: "16px" }}>
+      <Box sx={{ display: "flex", gap: "16px",pb:2 }}>
         <TextField
           {...register("expiryDate", { required: "Expiry date is required" })}
           label="Expiry Date"
@@ -143,7 +143,7 @@ export const PaymentCreditCard = () => {
           helperText={errors.cvv?.message}
           sx={{ flex: 1 }}
         />
-      </div>
+      </Box>
       <TextField
         {...register("email", { required: "Email is required" })}
         label="Email"
