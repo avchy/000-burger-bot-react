@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
-import "../App.scss"
-import { BigButton } from "../components/BigButton"
-import { CardRow } from "../components/CardRow"
-import { useTelegram } from "../hooks/useTelegram"
-import { useNavigator } from "../hooks/useNavigator"
+import "../../App.scss"
+import { BigButton } from "components/BigButton"
+import { CardRow } from "components/CardRow"
+import { useTelegram } from "hooks/useTelegram"
+import { useNavigator } from "hooks/useNavigator"
 const tele = window.Telegram.WebApp
 tele.BackButton.show()
 

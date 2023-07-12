@@ -51,7 +51,4 @@ const main = () => {
   console.log(`Wrote the following contents to ${filePath}\n${fileContents}`)
 }
 
-
-
-
 main()

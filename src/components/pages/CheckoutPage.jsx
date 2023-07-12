@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
-import "../App.scss"
-import { serverIP, port } from "../constants/api.js"
-import { BigButton } from "../components/BigButton"
-import { CardRowSmall } from "../components/CardRowSmall"
+import "../../App.scss"
+import { serverIP, port } from "constants/api.js"
+import { BigButton } from "components/BigButton"
+import { CardRowSmall } from "components/CardRowSmall"
 // import { getTotalPrice } from "../utils/utils"
-import { useTelegram } from "../hooks/useTelegram"
-import orderImg from "../images/orderImg.png"
-import { useNavigator } from "../hooks/useNavigator"
+import { useTelegram } from "hooks/useTelegram"
+import orderImg from "../../images/orderImg.png"
+import { useNavigator } from "hooks/useNavigator"
 import axios from "axios"
 const tele = window.Telegram.WebApp
 

@@ -1,13 +1,13 @@
 import "./App.scss"
 import { Routes, Route } from "react-router-dom"
 
-import { Header } from "./components/Header"
-import { ProductsPage } from "./pages/ProductsPage"
-import { OrderPage } from "./pages/OrderPage"
-import { CheckoutPage } from "./pages/CheckoutPage"
-import { PaymentCreditCard } from "./pages/PaymentCreditCard"
-import { Payments } from "./pages/Payments"
-import { Form } from "./components/Form"
+import { Header } from "components/Header"
+import { ProductsPage } from "components/pages/ProductsPage"
+import { OrderPage } from "components/pages/OrderPage"
+import { CheckoutPage } from "components/pages/CheckoutPage"
+import { PaymentCreditCard } from "components/pages/PaymentCreditCard"
+import { Payments } from "components/pages/Payments"
+import { Form } from "components/Form"
 
 // const { getData } = require('./db/db')
 // const foods = getData()

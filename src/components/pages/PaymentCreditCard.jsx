@@ -1,7 +1,7 @@
 import React,{useState} from "react"
 import { useForm } from "react-hook-form"
 import { TextField, Button } from "@mui/material"
-import { serverIP } from "../constants/api"
+import { serverIP } from "constants/api"
 import axios from "axios";
 import {Box} from "@mui/system";
 
@@ -40,14 +40,15 @@ export const PaymentCreditCard = () => {
   }
   const sendDataToServer =async (cardData) => {
    
-  try {
-    const response = await axios.post(serverIP + '/api/v1/auth/', cardData)
+  // try {
+  //   const response = await axios.post(serverIP + '/api/v1/auth/', cardData)
  
-  } catch (error) {
-    console.log('error', error)
-  }
+  // } catch (error) {
+  //   console.log('error', error)
+  // }
     
-    
+  console.log('success')
+
       
   }
   
@@ -108,10 +109,10 @@ export const PaymentCreditCard = () => {
         <Button type="submit">Отправить</Button>
       </form>
 
-      {errors.name && <p>{errors.name}</p>}
+      {/* {errors.name && <p>{errors.name}</p>}
       {errors.cardNumber && <p>{errors.cardNumber}</p>}
       {errors.expiryDate && <p>{errors.expiryDate}</p>}
-      {errors.cvv && <p>{errors.cvv}</p>}
+      {errors.cvv && <p>{errors.cvv}</p>} */}
     </Box>
   )
 }

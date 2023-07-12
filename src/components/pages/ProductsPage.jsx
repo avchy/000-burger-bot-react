@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from "react"
-import "../App.scss"
-import { CardColumn } from "../components/CardColumn"
-import { BigButton } from "../components/BigButton"
-import { useTelegram } from "../hooks/useTelegram"
-import { useNavigator } from "../hooks/useNavigator"
+import "../../App.scss"
+import { CardColumn } from "components/CardColumn"
+import { BigButton } from "components/BigButton"
+import { useTelegram } from "hooks/useTelegram"
+import { useNavigator } from "hooks/useNavigator"
 import { Link, useNavigate } from "react-router-dom"
 
-const { getData } = require("../db/db")
+const { getData } = require("db/db")
 const foods = getData()
 
 const tele = window.Telegram.WebApp
@@ -20,7 +20,7 @@ console.log("tele.initDataUnsafe111", tele.initDataUnsafe)
 tele.MainButton.text = "VIEW ORDER"
 tele.enableClosingConfirmation()
 
-import generatedGitInfo from "../helpers/generatedGitInfo.json"
+import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash } = generatedGitInfo
 
 export const ProductsPage = () => {

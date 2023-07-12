@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import '../App.scss'
 
-import { useTelegram } from '../hooks/useTelegram'
+import { useTelegram } from 'hooks/useTelegram'
 
 export const Form = () => {
     const [country, setCountry] = useState('')
