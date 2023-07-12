@@ -31,6 +31,7 @@ export function Payments() {
   const data = { cartItems, comment, totalPrice }
 
   const onCreditCard = useCallback(() => {
+    console.log('data333', data)
     navigate("/creditCard", { state: data })
   }, [state])
 
