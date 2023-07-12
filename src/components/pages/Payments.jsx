@@ -12,7 +12,8 @@ import { FlexColumnContainer } from "components/AllHelpComponents"
 import { StyledButton } from "components/StyledButton"
 import { Link } from "react-router-dom"
 import { ReactSVG } from "react-svg"
-// import { appleLogoPath } from "../images/apple_black.svg"
+import applePay from "../../images/icons/applePay.png"
+import googlePay from "../../images/icons/googlePay.png"
 
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")
@@ -25,44 +26,47 @@ export function Payments() {
 
   return (
     <>
-      <FlexColumnContainer>
-        
-        {/* <BigButton
-          title={`${"CreditCard"} `}
-          // disable={isEmptyCart ? true : false}
-          onClick={onCreditCard}
-        /> */}
-
+      <FlexColumnContainer
+        sx={{ pt: "20px", backgroundColor: "#404040", gap: 2 }}
+      >
         <Link to={"/creditCard"}>
-          {/* <Link href='/'> */}
           <StyledButton
             //  onClick={onCreditCard}
             variant="contained"
-            sx={{
-              // fontFamily: 'Rubik',
-              fontSize: "20px",
-              textAlign: "center",
-            }}
           >
-            CreditCard
+            Credit Card
           </StyledButton>
         </Link>
 
-        {/* <ReactSVG src={appleLogoPath} /> */}
+        <Link to={"/applePay"}>
+          <StyledButton
+            //  onClick={onCreditCard}
+            variant="contained"
+          >
+            Buy with <img src={applePay} alt="applePay" /> Pay
+          </StyledButton>
+        </Link>
 
-        {/* <StyledButton
-          title={`${"ApplePay"} `}
-          // disable={isEmptyCart ? true : false}
-          onClick={onApplePay}
-        />
-        <StyledButton
-          title={`${"GooglePay"} `}
-          // disable={isEmptyCart ? true : false}
-          onClick={onGooglePay}
-        /> */}
-        
-        
+        <Link to={"/googlePay"}>
+          <StyledButton
+            //  onClick={onCreditCard}
+            variant="contained"
+          >
+            Buy with <img src={googlePay} alt="googlePay" /> Pay
+          </StyledButton>
+        </Link>
       </FlexColumnContainer>
     </>
   )
+}
+
+{
+  /* <ReactSVG
+              beforeInjection={(svg) => {
+                svg.classList.add("svg-class-name")
+                svg.setAttribute("style", "width: 20px", "height: 20px")
+              }}
+              className="wrapper-class-name"
+              src={applePayLogoPath}
+            /> */
 }
