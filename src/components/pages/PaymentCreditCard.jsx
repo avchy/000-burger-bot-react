@@ -7,10 +7,16 @@ import { Box } from "@mui/system"
 import { StyledButton } from "components/StyledButton"
 import { FlexColumnContainer } from "components/AllHelpComponents"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+const tele = window.Telegram.WebApp
 
 export const PaymentCreditCard = () => {
   const [tempErrors, setTempErrors] = useState({})
 
+  const location = useLocation()
+  const state = location?.state
+  const { cartItems, comment, totalPrice } = state
+  const data = { cartItems, comment, totalPrice }
+  
   const {
     register,
     handleSubmit,
@@ -20,12 +26,12 @@ export const PaymentCreditCard = () => {
     setValue,
   } = useForm()
 
-  const [cardData, setCardData] = useState({
-    name: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-  })
+  // const [cardData, setCardData] = useState({
+  //   cardNumber: "",
+  //   expiryDate: "",
+  //   cvv: "",
+  //   email: "",
+  // })
 
   const validateFields = (data) => {
     const errors = {}
@@ -83,7 +89,9 @@ export const PaymentCreditCard = () => {
     if (Object.keys(validationErrors).length === 0) {
       // if (Object.keys(validationErrors).length === 0) {
       // Отправка данных на сервер
-      sendDataToServer(data)
+      // sendDataToServer(data)
+      tele.sendData(JSON.stringify(state))
+
       // Сброс формы после отправки
       reset()
     } else {
@@ -92,13 +100,13 @@ export const PaymentCreditCard = () => {
     }
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setCardData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
-  }
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target
+  //   setCardData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }))
+  // }
 
   const creditCardData = {
     cardNumber: "1234567890123456",
