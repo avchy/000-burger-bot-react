@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import  { useState, useEffect, useCallback } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import "../../App.scss"
@@ -51,7 +51,6 @@ export function CheckoutPage() {
     }
 
     const data = {
-      queryId,
       address: address,
       comment: comment,
       products: cartItems,

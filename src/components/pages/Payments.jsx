@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+
 import {
   Radio,
   RadioGroup,
@@ -10,51 +12,47 @@ import {
 import { BigButton } from "components/BigButton"
 import { FlexColumnContainer } from "components/AllHelpComponents"
 import { StyledButton } from "components/StyledButton"
-import { Link } from "react-router-dom"
 import { ReactSVG } from "react-svg"
 import applePay from "../../images/icons/applePay.png"
 import googlePay from "../../images/icons/googlePay.png"
+const tele = window.Telegram.WebApp
 
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")
+  const navigate = useNavigate()
 
-  const onCreditCard = () => {}
+  const location = useLocation()
+  const state = location?.state
+  const { cartItems, comment, totalPrice } = state
+  const data = { cartItems, comment, totalPrice }
 
-  const onApplePay = () => {}
+  const onCreditCard = useCallback(() => {
+    navigate("/creditCard", { state: data })
+  }, [state])
 
-  const onGooglePay = () => {}
+  const onApplePay = () => {
+    tele.sendData(JSON.stringify(data))
+  }
+  const onGooglePay = () => {
+    tele.sendData(JSON.stringify(data))
+  }
 
   return (
     <>
       <FlexColumnContainer
         sx={{ pt: "20px", backgroundColor: "#404040", gap: 2 }}
       >
-        <Link to={"/creditCard"}>
-          <StyledButton
-            //  onClick={onCreditCard}
-            variant="contained"
-          >
-            Credit Card
-          </StyledButton>
-        </Link>
+        <StyledButton onClick={onCreditCard} variant="contained">
+          Credit Card
+        </StyledButton>
 
-        <Link to={"/applePay"}>
-          <StyledButton
-            //  onClick={onCreditCard}
-            variant="contained"
-          >
-            Buy with <img src={applePay} alt="applePay" /> Pay
-          </StyledButton>
-        </Link>
+        <StyledButton onClick={onApplePay} variant="contained">
+          Buy with <img src={applePay} alt="applePay" /> Pay
+        </StyledButton>
 
-        <Link to={"/googlePay"}>
-          <StyledButton
-            //  onClick={onCreditCard}
-            variant="contained"
-          >
-            Buy with <img src={googlePay} alt="googlePay" /> Pay
-          </StyledButton>
-        </Link>
+        <StyledButton onClick={onGooglePay} variant="contained">
+          Buy with <img src={googlePay} alt="googlePay" /> Pay
+        </StyledButton>
       </FlexColumnContainer>
     </>
   )
