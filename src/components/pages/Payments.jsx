@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-
 import {
   Radio,
   RadioGroup,
@@ -9,8 +8,10 @@ import {
   FormLabel,
   Button,
 } from "@mui/material"
+import { FlexColumnContainer,Layout } from "components/AllHelpComponents"
+
+
 import { BigButton } from "components/BigButton"
-import { FlexColumnContainer } from "components/AllHelpComponents"
 import { StyledButton } from "components/StyledButton"
 import { ReactSVG } from "react-svg"
 import applePay from "../../images/icons/applePay.png"
@@ -20,6 +21,9 @@ const tele = window.Telegram.WebApp
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")
   const navigate = useNavigate()
+  
+ 
+
 
   const location = useLocation()
   const state = location?.state
@@ -30,6 +34,14 @@ export function Payments() {
     navigate("/creditCard", { state: data })
   }, [state])
 
+  
+  const onBackButtonClicked = useCallback(() => {
+    navigate(-1)
+  }, [cartItems])
+  
+  tele.BackButton.onClick(onBackButtonClicked)
+  
+  
   const onApplePay = () => {
     tele.sendData(JSON.stringify(data))
   }
@@ -39,6 +51,7 @@ export function Payments() {
 
   return (
     <>
+      
       <FlexColumnContainer
         sx={{ pt: "20px", backgroundColor: "#404040", gap: 2 }}
       >

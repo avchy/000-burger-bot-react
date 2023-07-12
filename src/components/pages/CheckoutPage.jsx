@@ -43,6 +43,7 @@ export function CheckoutPage() {
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
   }, [cartItems])
+  
   tele.BackButton.onClick(onBackButtonClicked)
 
   const onSubmit = useCallback(() => {

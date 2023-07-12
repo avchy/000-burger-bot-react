@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect,useCallback } from "react"
 import { useForm } from "react-hook-form"
 import { TextField, Button } from "@mui/material"
 import { serverIP } from "constants/api"
@@ -13,9 +13,16 @@ export const PaymentCreditCard = () => {
   const [tempErrors, setTempErrors] = useState({})
 
   const location = useLocation()
+  const navigate = useNavigate()
   const state = location?.state
   const { cartItems, comment, totalPrice } = state
   const data = { cartItems, comment, totalPrice }
+  
+  const onBackButtonClicked = useCallback(() => {
+    navigate(-1)
+  }, [cartItems])
+  
+  tele.BackButton.onClick(onBackButtonClicked)
   
   const {
     register,
@@ -25,13 +32,7 @@ export const PaymentCreditCard = () => {
     setError,
     setValue,
   } = useForm()
-
-  // const [cardData, setCardData] = useState({
-  //   cardNumber: "",
-  //   expiryDate: "",
-  //   cvv: "",
-  //   email: "",
-  // })
+ 
 
   const validateFields = (data) => {
     const errors = {}

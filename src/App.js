@@ -8,6 +8,7 @@ import { CheckoutPage } from "components/pages/CheckoutPage"
 import { PaymentCreditCard } from "components/pages/PaymentCreditCard"
 import { Payments } from "components/pages/Payments"
 import { Form } from "components/Form"
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 // const { getData } = require('./db/db')
 // const foods = getData()
@@ -17,11 +18,23 @@ tele.isClosingConfirmationEnabled = "false"
 
 tele.expand() //расширяем на все окно
 
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Rubik, Arial, sans-serif',
+  },
+  backgroundAll: '#131415',
+  backgroundElements: '#1a222c',
+})
+
+
+
 export function App() {
   return (
-    <>
-      <div className="App">
+    <ThemeProvider theme={theme}>
+       <div className="App">
         {/* <Header /> */}
+      
         <Routes>
           <Route index element={<ProductsPage />} />
           <Route path={"order"} element={<OrderPage />} />
@@ -32,6 +45,6 @@ export function App() {
           <Route path={"form"} element={<Form />} />
         </Routes>
       </div>
-    </>
+    </ThemeProvider>
   )
 }
