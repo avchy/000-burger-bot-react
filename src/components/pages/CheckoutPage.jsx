@@ -1,5 +1,13 @@
-import  { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  makeStyles,
+} from "@mui/material"
 
 import "../../App.scss"
 import { serverIP, port } from "constants/api.js"
@@ -14,6 +22,7 @@ import { StyledButton } from "components/StyledButton"
 
 const tele = window.Telegram.WebApp
 
+ 
 export function CheckoutPage() {
   const { queryId } = useTelegram()
   // console.log('queryId :>> ', queryId);
@@ -43,7 +52,7 @@ export function CheckoutPage() {
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
   }, [cartItems])
-  
+
   tele.BackButton.onClick(onBackButtonClicked)
 
   const onSubmit = useCallback(() => {
@@ -162,6 +171,31 @@ export function CheckoutPage() {
     setOptionDelivery(e.target.value)
   }
 
+  // const CssTextField = makeStyles({
+  //   root: {
+  //     "& label.Mui-focused": {
+  //       color: "white",
+  //     },
+  //     "& .MuiInput-underline:after": {
+  //       borderBottomColor: "yellow",
+  //     },
+  //     "& .MuiOutlinedInput-root": {
+  //       "& fieldset": {
+  //         borderColor: "white",
+  //       },
+  //       "&:hover fieldset": {
+  //         borderColor: "white",
+  //       },
+  //       "&.Mui-focused fieldset": {
+  //         borderColor: "yellow",
+  //       },
+  //     },
+  //   },
+  // })(TextField)
+  
+  
+ 
+  
   return (
     <>
       {/* <div className="testWindow">
@@ -210,7 +244,7 @@ export function CheckoutPage() {
         </div>
       )}
 
-      <div className={"form"}>
+      {/* <div className={"form"}>
         <div className={"title_mini"}>Choose where you eat</div>
 
         <select
@@ -234,6 +268,112 @@ export function CheckoutPage() {
             value={address}
             onChange={onChangeAddress}
           />
+        )}
+      </div> */}
+
+      {/* <div className="form">
+      <div className="title_mini">Choose where you eat</div>
+
+      <FormControl className="select">
+        <InputLabel>Select Delivery Option</InputLabel>
+        <Select value={optionDelivery} onChange={onChangeOption}>
+          <MenuItem value="on_site">On Site</MenuItem>
+          <MenuItem value="take_away">Take Away</MenuItem>
+        </Select>
+      </FormControl>
+
+      {optionDelivery === 'take_away' && (
+        <TextField
+          className="input"
+          type="text"
+          label="Address"
+          value={address}
+          onChange={onChangeAddress}
+          placeholder="Enter address"
+        />
+      )}
+    </div> */}
+
+      <div className="form">
+        <div className="title_mini" style={{ color: "white" }}>
+          Choose where you eat
+        </div>
+
+        <FormControl className="select" style={{ borderColor: "white" , color: "white" }}>
+          <InputLabel style={{ borderColor: "white" ,color: "white" }}>
+            Select Delivery Option
+          </InputLabel>
+          <Select
+            value={optionDelivery}
+            onChange={onChangeOption}
+           
+               //  IconComponent={() => <ArrowDropDownIcon style={{marginRight:10,pointerEvents:'none'}}/>}
+          labelStyle={{ color: '#ff5c5c' }}
+          sx={{
+            color: "white",
+            '.MuiOutlinedInput-notchedOutline': {
+              borderColor: 'rgb(255, 255, 255)',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'rgb(255, 255, 255)',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'rgb(255, 255, 255)',
+            },
+            '.MuiSvgIcon-root ': {
+              fill: "white !important",
+            }
+          }}
+          labelId="select-filter-by-field-labe;"
+          id="select-filter-by-field"
+           >
+            <MenuItem value="on_site">On Site</MenuItem>
+            <MenuItem value="take_away">Take Away</MenuItem>
+          </Select>
+          
+        
+
+        </FormControl>
+
+        {optionDelivery === "take_away" && (
+          <TextField
+          
+          sx={{
+            "& label.Mui-focused": {
+              color: "white",
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: "yellow",
+            },
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "white",
+              },
+              "&:hover fieldset": {
+                borderColor: "white",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "yellow",
+              },
+            },
+          }}
+            className="input"
+            type="text"
+            label="Address"
+            value={address}
+            onChange={onChangeAddress}
+            placeholder="Enter address"
+            InputLabelProps={{
+              style: { color: 'white' },
+            }}
+            InputProps={{
+              style: { color: 'white', borderColor: 'white' },
+            }}
+            inputProps={{ style: {  color: "white" } }}
+
+          />
+
+     
         )}
       </div>
 

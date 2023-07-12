@@ -9,7 +9,7 @@ import {
   Button,
   CircularProgress,
   Typography,
-  TableCell,
+  TableCell,TextField
 } from "@mui/material"
 
 
@@ -34,15 +34,12 @@ export const CenterBox = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
 }))
+ 
+export const StyledTextField = styled(TextField)(({ theme }) => ({
+ color: "white",
 
-export const Layout = styled(Box)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  background-color: theme.backgroundElements;
-  border-radius: 5px;
-`
+}))
+ 
 
 export const Container = styled(Box)`
   display: flex;

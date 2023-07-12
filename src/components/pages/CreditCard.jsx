@@ -1,15 +1,20 @@
-import React, { useState, useEffect,useCallback } from "react"
+import React, { useState, useEffect, useCallback } from "react"
+import {
+  FlexColumnContainer,
+  StyledTextField,
+} from "components/AllHelpComponents"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Button ,Typography} from "@mui/material"
+
 import { useForm } from "react-hook-form"
-import { TextField, Button } from "@mui/material"
 import { serverIP } from "constants/api"
 import axios from "axios"
 import { Box } from "@mui/system"
 import { StyledButton } from "components/StyledButton"
-import { FlexColumnContainer } from "components/AllHelpComponents"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+
 const tele = window.Telegram.WebApp
 
-export const PaymentCreditCard = () => {
+export const CreditCard = () => {
   const [tempErrors, setTempErrors] = useState({})
 
   const location = useLocation()
@@ -17,13 +22,13 @@ export const PaymentCreditCard = () => {
   const state = location?.state
   const { cartItems, comment, totalPrice } = state
   const data = { cartItems, comment, totalPrice }
-  
+
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
   }, [cartItems])
-  
+
   tele.BackButton.onClick(onBackButtonClicked)
-  
+
   const {
     register,
     handleSubmit,
@@ -32,7 +37,6 @@ export const PaymentCreditCard = () => {
     setError,
     setValue,
   } = useForm()
- 
 
   const validateFields = (data) => {
     const errors = {}
@@ -128,41 +132,46 @@ export const PaymentCreditCard = () => {
   }, [errors])
 
   return (
-    <FlexColumnContainer sx={{ pt: "20px", backgroundColor: "#404040", gap: 2 }}>
-    <h1>Card Payment</h1>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <TextField
-        {...register("cardNumber", { required: "Card number is required" })}
-        label="Card Number"
-        error={!!errors.cardNumber}
-        helperText={errors.cardNumber?.message}
-        sx={{ width: "100%", mb: 2 }}
-      />
-      <Box sx={{ display: "flex", gap: "16px",pb:2 }}>
-        <TextField
-          {...register("expiryDate", { required: "Expiry date is required" })}
-          label="Expiry Date"
-          error={!!errors.expiryDate}
-          helperText={errors.expiryDate?.message}
-          sx={{ flex: 1, mr: 2 }}
+    <FlexColumnContainer
+      sx={{ pt: "20px", backgroundColor: "white", gap: 2, color: "black" }}
+      // sx={{ pt: "20px", backgroundTextFieldColor: "#1a222c", gap: 2, color: "white" }}
+    >
+      {/* <Typography>Card Payment</Typography> */}
+      <h1 className="title">Card Payment </h1>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <StyledTextField
+          {...register("cardNumber", { required: "Card number is required" })}
+          label="Card Number"
+          error={!!errors.cardNumber}
+          helperText={errors.cardNumber?.message}
+          sx={{ width: "100%", mb: 2 }}
         />
-        <TextField
-          {...register("cvv", { required: "CVV code is required" })}
-          label="CVV Code"
-          error={!!errors.cvv}
-          helperText={errors.cvv?.message}
-          sx={{ flex: 1 }}
+        <Box sx={{ display: "flex", gap: "16px", pb: 2 }}>
+          <StyledTextField
+            {...register("expiryDate", { required: "Expiry date is required" })}
+            label="Expiry Date"
+            error={!!errors.expiryDate}
+            helperText={errors.expiryDate?.message}
+            sx={{ flex: 1, mr: 2 }}
+          />
+          <StyledTextField
+            {...register("cvv", { required: "CVV code is required" })}
+            label="CVV Code"
+            error={!!errors.cvv}
+            helperText={errors.cvv?.message}
+            sx={{ flex: 1 }}
+          />
+        </Box>
+        <StyledTextField
+          {...register("email", { required: "Email is required" })}
+          label="Email"
+          error={!!errors.email}
+          helperText={errors.email?.message}
+          sx={{ width: "100%", mb: 2 }}
         />
-      </Box>
-      <TextField
-        {...register("email", { required: "Email is required" })}
-        label="Email"
-        error={!!errors.email}
-        helperText={errors.email?.message}
-        sx={{ width: "100%", mb: 2 }}
-      />
-      <StyledButton type="submit">Submit</StyledButton>
-    </form>
-  </FlexColumnContainer>
+        <StyledButton type="submit">Submit</StyledButton>
+      </form>
+    </FlexColumnContainer>
   )
 }
