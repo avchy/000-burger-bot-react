@@ -10,6 +10,8 @@ import { useTelegram } from "hooks/useTelegram"
 import orderImg from "../../images/orderImg.png"
 import { useNavigator } from "hooks/useNavigator"
 import axios from "axios"
+import { StyledButton } from "components/StyledButton"
+
 const tele = window.Telegram.WebApp
 
 export function CheckoutPage() {
@@ -43,56 +45,22 @@ export function CheckoutPage() {
   }, [cartItems])
   tele.BackButton.onClick(onBackButtonClicked)
 
-  // const onSendData = useCallback(() => {
-  //   // console.log("onSendData")
-  //   // alert("onSendData")
-
-  //   const shopDataRoute = `${serverIP}:${port}/web-data`
-  //   // const shopDataRoute = `http://94.198.216.20:8000/web-data`
-
-  //   console.log("shopDataRoute :>> ", shopDataRoute)
-
-  //   const data = {
-  //     queryId,
-  //     products: cartItems,
-  //     // totalPrice: totalPrice,
-  //     totalPrice: getTotalPrice(cartItems),
-  //   }
-
-  // //   const data =   {
-  // //     "queryId": queryId,
-  // //     "products": [],
-  // //     "totalPrice": 123123
-  // // }
-
-  // setTempData(data)
-
-  //   // console.log("data11", data)
-
-  //   axios
-  //     .post(shopDataRoute, data, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         console.log("response.data", response.data)
-  //         alert("status 200")
-  //       }
-  //     })
-  //     .catch((error) => {
-  //        setTempError(JSON.stringify(error, null, 2))
-  //       console.error("Произошла ошибка:", error)
-  //       alert("Произошла ошибка:", error)
-  //     })
-  // }, [cartItems])
-
   const onSubmit = useCallback(() => {
-    navigate("/payments", { state: { cartItems, comment, totalPrice } })
+    for (let i = 0; i < cartItems.length; i++) {
+      delete cartItems[i].Image
+    }
+
+    const data = {
+      queryId,
+      address: address,
+      comment: comment,
+      products: cartItems,
+      totalPrice: totalPrice,
+    }
+
+    navigate("/payments", { state: data })
   }, [cartItems, comment])
-  
-  
+
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSubmit)
     tele.onEvent("backButtonClicked", onBackButtonClicked)
@@ -102,14 +70,11 @@ export function CheckoutPage() {
       tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
-  
-  
-  
+
   const onSendData = () => {
     // const onSendData = useCallback(() => {
 
     // const shopDataRoute = `${serverIP}:${port}/web-data`
-    // console.log("shopDataRoute :>> ", shopDataRoute)
 
     // const data = {
     //   queryId:"AAHqIAUXAAAAAOogBRex84jA",
@@ -131,7 +96,7 @@ export function CheckoutPage() {
 
     tele.sendData(JSON.stringify(data))
 
-    setTempData(data)
+    // setTempData(data)
 
     const config = {
       method: "post",
@@ -145,7 +110,6 @@ export function CheckoutPage() {
     }
 
     try {
-      const jsonData = JSON.parse(config.data)
       axios
         .request(config)
         .then((response) => {
@@ -168,65 +132,17 @@ export function CheckoutPage() {
           )
         })
     } catch (error) {
-      console.error("Ошибка при парсинге файла(проверь формат файла):", error)
+      console.error("error:", error)
     }
-
-    //============================================================
-
-    // const url = "http://94.198.216.20:8000/test"
-    // const url = "http://94.198.216.20:8000/web-data"
-
-    // try {
-    //   fetch(url, {
-    //     // fetch(shopDataRoute, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(data),
-    //   })
-    //     .then((response) => {
-    //       // Обработка успешного ответа сервера
-    //       if (response.ok) {
-    //         setTempData("200-good")
-
-    //         return response.json()
-    //       } else {
-    //         setTempError("Ошибка HTTP: " + response.status)
-
-    //         throw new Error("Ошибка HTTP: " + response.status)
-    //       }
-    //     })
-    //     .then((responseData) => {
-    //       setTempData("201111-good")
-
-    //       // Обработка данных ответа сервера
-    //       console.log(responseData)
-    //     })
-    //     .catch((error) => {
-    //       // Обработка ошибок
-    //       typeof error == "object"
-    //         ? setTempError(JSON.stringify(error, null, 2))
-    //         : setTempError(error)
-
-    //       console.error("Произошла ошибка:", error)
-    //     })
-    // } catch (error) {
-    //   // Обработка ошибок при выполнении fetch
-    //   setTempError(
-    //     "Обработка ошибок при выполнении fetch ---" +
-    //       JSON.stringify(error, null, 2)
-    //   )
-
-    //   console.error("Произошла ошибка при выполнении fetch:", error)
-    // }
   }
 
   useEffect(() => {
-    tele.onEvent("mainButtonClicked", onSendData)
+    // tele.onEvent("mainButtonClicked", onSendData)
+    tele.onEvent("mainButtonClicked", onSubmit)
 
     return () => {
-      tele.offEvent("mainButtonClicked", onSendData)
+      // tele.offEvent("mainButtonClicked", onSendData)
+      tele.offEvent("mainButtonClicked", onSubmit)
     }
   }, [onSendData])
 
@@ -322,28 +238,17 @@ export function CheckoutPage() {
       </div>
 
       {console.log("env  :>> ", env)}
-      {/* {console.log("  optionDelivery  :>> ", optionDelivery)}
-      {console.log(" address :>> ", !address)} */}
 
       {env === "browser" &&
         (optionDelivery === "on_site" ||
           (optionDelivery === "take_away" && address)) && (
           <BigButton
-            title={`${"Checkout"} `}
-            type={"checkout"}
+            title={`${"Payments"} `}
+            type={"payments"}
             disable={cartItems.length === 0 ? true : false}
-            onClick={onSendData}
+            onClick={onSubmit}
           />
         )}
-        
-        
-        {env == "browser" && (
-        <BigButton
-        title={`${"Payments"} `}
-        // disable={isEmptyCart ? true : false}
-          onClick={onSubmit}
-        />
-      )}
     </>
   )
 }
