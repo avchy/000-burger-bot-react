@@ -27,27 +27,28 @@ export function Payments() {
 
   const location = useLocation()
   const state = location?.state
-  const { cartItems, comment, totalPrice } = state
-  const data = { cartItems, comment, totalPrice }
+  console.log('state_in_payments', state)
+  // const { cartItems, comment, totalPrice } = state
+  // const data = { cartItems, comment, totalPrice }
 
   const onCreditCard = useCallback(() => {
-    console.log('data333', data)
-    navigate("/creditCard", { state: data })
+    console.log('data333', state)
+    navigate("/creditCard", { state: state })
   }, [state])
 
   
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
-  }, [cartItems])
+  }, [state])
   
   tele.BackButton.onClick(onBackButtonClicked)
   
   
   const onApplePay = () => {
-    tele.sendData(JSON.stringify(data))
+    tele.sendData(JSON.stringify(state))
   }
   const onGooglePay = () => {
-    tele.sendData(JSON.stringify(data))
+    tele.sendData(JSON.stringify(state))
   }
 
   return (
