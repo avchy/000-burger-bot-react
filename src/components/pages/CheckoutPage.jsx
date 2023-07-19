@@ -22,7 +22,6 @@ import { StyledButton } from "components/StyledButton"
 
 const tele = window.Telegram.WebApp
 
- 
 export function CheckoutPage() {
   const { queryId } = useTelegram()
   // console.log('queryId :>> ', queryId);
@@ -110,7 +109,8 @@ export function CheckoutPage() {
     const config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://94.198.216.20:8000/web-data",
+      url: "https://burgerim.ru/web-data",
+      // url: "http://94.198.216.20:8000/web-data",
       headers: {
         "Content-Type": "application/json",
       },
@@ -192,10 +192,7 @@ export function CheckoutPage() {
   //     },
   //   },
   // })(TextField)
-  
-  
- 
-  
+
   return (
     <>
       {/* <div className="testWindow">
@@ -299,64 +296,62 @@ export function CheckoutPage() {
           Choose where you eat
         </div>
 
-        <FormControl className="select" style={{ borderColor: "white" , color: "white" }}>
-          <InputLabel style={{ borderColor: "white" ,color: "white" }}>
+        <FormControl
+          className="select"
+          style={{ borderColor: "white", color: "white" }}
+        >
+          <InputLabel style={{ borderColor: "white", color: "white" }}>
             Select Delivery Option
           </InputLabel>
           <Select
             value={optionDelivery}
             onChange={onChangeOption}
-           
-               //  IconComponent={() => <ArrowDropDownIcon style={{marginRight:10,pointerEvents:'none'}}/>}
-          labelStyle={{ color: '#ff5c5c' }}
-          sx={{
-            color: "white",
-            '.MuiOutlinedInput-notchedOutline': {
-              borderColor: 'rgb(255, 255, 255)',
-            },
-            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'rgb(255, 255, 255)',
-            },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'rgb(255, 255, 255)',
-            },
-            '.MuiSvgIcon-root ': {
-              fill: "white !important",
-            }
-          }}
-          labelId="select-filter-by-field-labe;"
-          id="select-filter-by-field"
-           >
+            //  IconComponent={() => <ArrowDropDownIcon style={{marginRight:10,pointerEvents:'none'}}/>}
+            labelStyle={{ color: "#ff5c5c" }}
+            sx={{
+              color: "white",
+              ".MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgb(255, 255, 255)",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgb(255, 255, 255)",
+              },
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgb(255, 255, 255)",
+              },
+              ".MuiSvgIcon-root ": {
+                fill: "white !important",
+              },
+            }}
+            labelId="select-filter-by-field-labe;"
+            id="select-filter-by-field"
+          >
             <MenuItem value="on_site">On Site</MenuItem>
             <MenuItem value="take_away">Take Away</MenuItem>
           </Select>
-          
-        
-
         </FormControl>
 
         {optionDelivery === "take_away" && (
           <TextField
-          
-          sx={{
-            "& label.Mui-focused": {
-              color: "white",
-            },
-            "& .MuiInput-underline:after": {
-              borderBottomColor: "yellow",
-            },
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "white",
+            sx={{
+              "& label.Mui-focused": {
+                color: "white",
               },
-              "&:hover fieldset": {
-                borderColor: "white",
+              "& .MuiInput-underline:after": {
+                borderBottomColor: "yellow",
               },
-              "&.Mui-focused fieldset": {
-                borderColor: "yellow",
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "white",
+                },
+                "&:hover fieldset": {
+                  borderColor: "white",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "yellow",
+                },
               },
-            },
-          }}
+            }}
             className="input"
             type="text"
             label="Address"
@@ -364,16 +359,13 @@ export function CheckoutPage() {
             onChange={onChangeAddress}
             placeholder="Enter address"
             InputLabelProps={{
-              style: { color: 'white' },
+              style: { color: "white" },
             }}
             InputProps={{
-              style: { color: 'white', borderColor: 'white' },
+              style: { color: "white", borderColor: "white" },
             }}
-            inputProps={{ style: {  color: "white" } }}
-
+            inputProps={{ style: { color: "white" } }}
           />
-
-     
         )}
       </div>
 
