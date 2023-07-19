@@ -102,9 +102,7 @@ export function CheckoutPage() {
       totalPrice: totalPrice,
     }
 
-    tele.sendData(JSON.stringify(data))
-
-    // setTempData(data)
+    // tele.sendData(JSON.stringify(data))
 
     const config = {
       method: "post",
