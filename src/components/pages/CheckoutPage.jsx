@@ -169,6 +169,14 @@ export function CheckoutPage() {
     setOptionDelivery(e.target.value)
   }
 
+  useEffect(() => {
+    // Прокрутка до конца страницы
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    })
+  }, [optionDelivery]) // Зависимость от optionDelivery, чтобы прокрутка происходила после каждого изменения значения
+
   // const CssTextField = makeStyles({
   //   root: {
   //     "& label.Mui-focused": {

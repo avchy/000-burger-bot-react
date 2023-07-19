@@ -277,7 +277,7 @@ body {
 .form {
   background-color: $backgroundElements;
 
-  padding: 0.5rem;
+  // padding: 0.5rem;
   margin: 10px;
   border-radius: 5px;
   // padding: 10px 20px;
@@ -287,17 +287,15 @@ body {
   // width: 100%;
 
   .input {
-    width: 85%;
+    width: 80%;
     padding: 10px;
-    margin-top: 15px;
+    margin: 10px;
   }
 
   .select {
-    width: 40%;
-
+    width: 80%;
     padding: 10px;
-    // margin-top: 15px;
-    margin: 15px;
+    margin: 10px;
   }
 }
 
@@ -308,8 +306,8 @@ body {
   // height: 50px;
   display: flex;
   flex-wrap: wrap;
-  
-   align-items: center;
+
+  align-items: center;
   padding: 0 20px;
 
   .username {
@@ -445,8 +443,6 @@ body {
 .testWindow {
   padding-top: 30px;
   margin-top: 30px;
-
-
 }
 
 .testText {
