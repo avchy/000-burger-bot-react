@@ -4,7 +4,7 @@ import {
   StyledTextField,
 } from "components/AllHelpComponents"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { Button ,Typography} from "@mui/material"
+import { Button, Typography } from "@mui/material"
 
 import { useForm } from "react-hook-form"
 import { serverIP } from "constants/api"
@@ -133,8 +133,17 @@ export const CreditCard = () => {
 
   return (
     <FlexColumnContainer
-      sx={{ pt: "20px", backgroundColor: "white", gap: 2, color: "black" }}
-      // sx={{ pt: "20px", backgroundTextFieldColor: "#1a222c", gap: 2, color: "white" }}
+      sx={{
+        pt: "20px",
+        backgroundColor: "white",
+        gap: 2,
+        color: "black",
+        height:
+          "100vh" /* Set the container's height to 100% of the viewport height */,
+        padding: "20px",
+        justifyContent: "center" /* Vertically center the content */,
+        alignItems: "center" /* Horizontally center the content */,
+      }}
     >
       {/* <Typography>Card Payment</Typography> */}
       <h1 className="title">Card Payment </h1>
