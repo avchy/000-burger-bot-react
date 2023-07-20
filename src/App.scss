@@ -162,10 +162,19 @@ body {
     text-align: center;
     display: inline-block;
     // margin: 10px 0 0 0;
+    // .left {
+    //   text-align: left;
+    // }
   }
 
+  // .left {
+  //   text-align: left;
+  // }
+  
   .cart_text_center {
-    text-align: center;
+    // text-align: center;
+    text-align: left;
+
     display: inline-block;
     margin: 10px 0 0 0;
   }
@@ -236,10 +245,12 @@ body {
   }
 
   .cart_text_center {
-    text-align: center;
+    // text-align: center;
+    text-align: left;
+
     display: flex;
     align-items: center;
-    margin: 0 0 0 auto;
+    // margin: 0 0 0 auto;
   }
 }
 
@@ -247,7 +258,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0.5rem;
+  // padding: 0.5rem;
 
   margin: 13px 10px;
   position: relative;
@@ -268,10 +279,11 @@ body {
   }
 
   .cart_text_center {
-    text-align: center;
+    text-align: left;
+    // text-align: center;
     display: flex;
     align-items: center;
-    margin: 0 0 0 auto;
+    // margin: 0 0 0 auto;
   }
 }
 //   ====================================================================
