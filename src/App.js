@@ -33,7 +33,7 @@ export function App() {
   return (
     <ThemeProvider theme={theme}>
        <div className="App">
-        {/* <Header /> */}
+        <Header />
       
         <Routes>
           <Route index element={<ProductsPage />} />

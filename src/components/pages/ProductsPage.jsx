@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+
 import "../../App.scss"
 import { CardColumn } from "components/CardColumn"
 import { BigButton } from "components/BigButton"
 import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
-import { Link, useNavigate } from "react-router-dom"
 
 const { getData } = require("db/db")
 const foods = getData()
@@ -22,12 +23,17 @@ tele.enableClosingConfirmation()
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash } = generatedGitInfo
 
+
+
+
 export const ProductsPage = () => {
   const { env } = useNavigator()
+  const location = useLocation()
 
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
 
+ 
   useEffect(() => {
     tele.ready()
   })
