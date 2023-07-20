@@ -23,7 +23,7 @@ export function CardColumn({ food, onAdd, onRemove,quantity }) {
                 <img src={Image} alt={title} />
             </div>
             <h4 className='card_title'>{title}</h4>
-            <p className='cart_text_center'>$ {price}</p>
+            <p className='cart_text_center'>₪{price}</p>
 
             <div className='btn-container'>
                 <Button title={'+'} type={'add'} onClick={handleIncrement} />

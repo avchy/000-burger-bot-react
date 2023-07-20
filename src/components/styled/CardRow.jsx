@@ -19,7 +19,7 @@ export function CardRow({ food }) {
       <span className="cart_text_center">
         {" "}
         {quantity !== 1 ? `x ${quantity} = ` : ""}
-        {priceAllItems} $
+        {priceAllItems} ₪
       </span>
     </div>
   )

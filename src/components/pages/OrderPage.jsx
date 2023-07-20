@@ -105,7 +105,7 @@ export const OrderPage = () => {
 
       {env == "browser" && (
         <BigButton
-          title={`${!isEmptyCart ? `Buy ${totalPrice} $` : ""} `}
+          title={`${!isEmptyCart ? `Buy ${totalPrice}₪` : ""} `}
           disable={isEmptyCart ? true : false}
           onClick={onSubmit}
         />
