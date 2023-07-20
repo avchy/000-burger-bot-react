@@ -13,12 +13,12 @@ import "../../App.scss"
 import { serverIP, port } from "constants/api.js"
 import { BigButton } from "components/styled/BigButton"
 import { CardRowSmall } from "components/styled/CardRowSmall"
-// import { getTotalPrice } from "../utils/utils"
 import { useTelegram } from "hooks/useTelegram"
 import orderImg from "../../images/orderImg.png"
 import { useNavigator } from "hooks/useNavigator"
 import axios from "axios"
 import { StyledButton } from "components/styled/StyledButton"
+import { discount } from "constants/constants"
 
 const tele = window.Telegram.WebApp
 
@@ -44,7 +44,7 @@ export function CheckoutPage() {
   console.log("location?.state?", location?.state)
 
   const totalPrice = location?.state?.totalPrice
-  // const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
+  const totalPriceWithDiscount = totalPrice * (100 - discount)
 
   const navigate = useNavigate()
 
@@ -63,7 +63,7 @@ export function CheckoutPage() {
       address: address,
       comment: comment,
       products: cartItems,
-      totalPrice: totalPrice,
+      totalPrice: totalPriceWithDiscount,
     }
 
     navigate("/payments", { state: data })
@@ -78,6 +78,7 @@ export function CheckoutPage() {
       tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
+  
 
   const onSendData = () => {
     // const onSendData = useCallback(() => {
@@ -93,13 +94,14 @@ export function CheckoutPage() {
     for (let i = 0; i < cartItems.length; i++) {
       delete cartItems[i].Image
     }
+    
 
     const data = {
       queryId,
       address: address,
       comment: comment,
       products: cartItems,
-      totalPrice: totalPrice,
+      totalPrice: totalPriceWithDiscount,
     }
 
     // tele.sendData(JSON.stringify(data))
@@ -170,12 +172,12 @@ export function CheckoutPage() {
   }
 
   useEffect(() => {
-     window.scrollTo({
+    window.scrollTo({
       top: document.body.scrollHeight,
       behavior: "smooth",
     })
-  }, [optionDelivery]) 
- 
+  }, [optionDelivery])
+
   // const CssTextField = makeStyles({
   //   root: {
   //     "& label.Mui-focused": {
@@ -197,7 +199,6 @@ export function CheckoutPage() {
   //     },
   //   },
   // })(TextField)
-
   return (
     <>
       {/* <div className="testWindow">
@@ -220,7 +221,7 @@ export function CheckoutPage() {
             <div className="text1"> Order № 770770</div>
             {/* <div className='text1'> Order № {queryId||123123}</div> */}
             <div className="text1"> Perfect lunch from Burger Bot.</div>
-            <div className="text_small">Burger Bot.</div>
+            <div className="text_small">{discount}% discount</div>
           </div>
         </div>
 
@@ -232,9 +233,25 @@ export function CheckoutPage() {
           </div>
         )}
 
-        <CardRowSmall food={{ id: 9999, title: "Free delivery" }} key={9999} />
         <CardRowSmall
-          food={{ id: 1, title: "Total Price:", price: totalPrice }}
+          food={{ id: 9999, title: "Free delivery", textColor: "#4AF2A1" }}
+          key={9999}
+        />
+        <CardRowSmall
+          food={{
+            id: 9998,
+            title: "Discount",
+            price: totalPrice * discount,
+            textColor: "#4AF2A1",
+          }}
+          key={9998}
+        />
+        <CardRowSmall
+          food={{
+            id: 1,
+            title: "Total Price:",
+            price: totalPriceWithDiscount,
+          }}
           key={0}
         />
       </div>
@@ -311,7 +328,7 @@ export function CheckoutPage() {
           <Select
             value={optionDelivery}
             onChange={onChangeOption}
-             sx={{
+            sx={{
               color: "white",
               ".MuiOutlinedInput-notchedOutline": {
                 borderColor: "rgb(255, 255, 255)",
