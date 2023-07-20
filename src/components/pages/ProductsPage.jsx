@@ -11,11 +11,10 @@ const { getData } = require("db/db")
 const foods = getData()
 
 const tele = window.Telegram.WebApp
- 
+
 console.log("tele.initData111", tele.initData)
 console.log("tele.initDataUnsafe111", tele.initDataUnsafe)
 console.log("tele.initDataUnsafe?.query_id111", tele.initDataUnsafe?.query_id)
-
 
 tele.MainButton.text = "VIEW ORDER"
 tele.enableClosingConfirmation()
@@ -23,17 +22,13 @@ tele.enableClosingConfirmation()
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash } = generatedGitInfo
 
-
-
-
 export const ProductsPage = () => {
   const { env } = useNavigator()
   const location = useLocation()
-
+  console.log("location?.state", location?.state)
   const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
 
- 
   useEffect(() => {
     tele.ready()
   })
@@ -108,12 +103,20 @@ export const ProductsPage = () => {
 
       <div className="cards_container">
         {foods.map((food) => {
+          const cartItemWithQuantity = cartItems.find(
+            (item) => item.id === food.id
+          )
+          const quantity = cartItemWithQuantity
+            ? cartItemWithQuantity.quantity
+            : 0
+
           return (
             <CardColumn
               food={food}
               key={food.id}
               onAdd={onAdd}
               onRemove={onRemove}
+              quantity={quantity}
             />
           )
         })}

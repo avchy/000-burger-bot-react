@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import "../../App.scss"
 import { Button } from './Button'
 
-export function CardColumn({ food, onAdd, onRemove }) {
-    const [count, setCount] = useState(0)
+export function CardColumn({ food, onAdd, onRemove,quantity }) {
+    const [count, setCount] = useState(quantity || 0)
     const { title, Image, price, id } = food
 
     const handleIncrement = () => {
@@ -23,7 +23,7 @@ export function CardColumn({ food, onAdd, onRemove }) {
                 <img src={Image} alt={title} />
             </div>
             <h4 className='card_title'>{title}</h4>
-            <p className='card_price'>$ {price}</p>
+            <p className='cart_text_center'>$ {price}</p>
 
             <div className='btn-container'>
                 <Button title={'+'} type={'add'} onClick={handleIncrement} />

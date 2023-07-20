@@ -153,7 +153,7 @@ body {
     text-align: center;
   }
 
-  // .card_title .card_price {
+  // .card_title .cart_text_center {
   //     font-weight: bold;
   //     margin: 10px 0 0 0;
   // }
@@ -164,7 +164,7 @@ body {
     // margin: 10px 0 0 0;
   }
 
-  .card_price {
+  .cart_text_center {
     text-align: center;
     display: inline-block;
     margin: 10px 0 0 0;
@@ -235,9 +235,10 @@ body {
     object-fit: cover;
   }
 
-  .card_price {
+  .cart_text_center {
     text-align: center;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     margin: 0 0 0 auto;
   }
 }
@@ -266,9 +267,10 @@ body {
     object-fit: cover;
   }
 
-  .card_price {
+  .cart_text_center {
     text-align: center;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     margin: 0 0 0 auto;
   }
 }

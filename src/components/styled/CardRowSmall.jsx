@@ -13,9 +13,9 @@ export function CardRowSmall({ food }) {
                 </div>
             )}
 
-            <span>{title}</span>
+            <span className='cart_text_center'>{title}</span>
          
-          {   <span className='card_price'> {price ? priceAllItems: "0.00"} $</span> } 
+          {   <span className='cart_text_center'> {price ? priceAllItems: "0.00"} $</span> } 
         </div>
     )
 }

@@ -18,6 +18,7 @@ export const OrderPage = () => {
 
   tele.MainButton.text = "CHECKOUT"
   const location = useLocation()
+  console.log("location.state111", location.state)
   const cartItems = location.state.cartItems
 
   const [comment, setComment] = useState("")
@@ -26,7 +27,7 @@ export const OrderPage = () => {
     tele.ready()
   })
   const handleChange = (event) => {
-     setComment(event.target.value)
+    setComment(event.target.value)
   }
 
   const totalPrice = cartItems
@@ -39,7 +40,8 @@ export const OrderPage = () => {
   }, [cartItems, comment])
 
   const onBackButtonClicked = useCallback(() => {
-    navigate(-1)
+    // navigate(-1)
+    navigate("/", { state: { cartItems, comment, totalPrice } })
   }, [cartItems])
 
   useEffect(() => {
@@ -64,7 +66,17 @@ export const OrderPage = () => {
     <div className="orderPage">
       <div className="orderHeaderEdit">
         <h1 className="title">Your Order </h1>
-        <Link to="/" title="Edit" className="navLinkEdit">
+        <Link
+          // to="/"
+          onClick={(e) => {
+            e.preventDefault()
+            // navigate("/")
+            navigate("/", { state: { cartItems, comment, totalPrice } })
+          }}
+          Ï
+          title="Edit"
+          className="navLinkEdit"
+        >
           Edit
         </Link>
       </div>
