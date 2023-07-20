@@ -27,6 +27,10 @@ export function Payments() {
   // const { cartItems, comment, totalPrice } = state
   // const data = { cartItems, comment, totalPrice }
 
+  tele.MainButton.hide()
+  tele.BackButton.show()
+ 
+  
   const onCreditCard = useCallback(() => {
     console.log("data333", state)
     navigate("/creditCard", { state: state })

@@ -11,21 +11,24 @@ import { serverIP } from "constants/api"
 import axios from "axios"
 import { Box } from "@mui/system"
 import { StyledButton } from "components/StyledButton"
+import { useNavigator } from "hooks/useNavigator"
 
 const tele = window.Telegram.WebApp
 
 export const CreditCard = () => {
   const [tempErrors, setTempErrors] = useState({})
+  const { env } = useNavigator()
 
   const location = useLocation()
   const navigate = useNavigate()
   const state = location?.state
-  const { cartItems, comment, totalPrice } = state
-  const data = { cartItems, comment, totalPrice }
+  console.log("state111", state)
+  const { products, comment, totalPrice } = state
+  // const data = { cartItems, comment, totalPrice }
 
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
-  }, [cartItems])
+  }, [products])
 
   tele.BackButton.onClick(onBackButtonClicked)
 
@@ -75,15 +78,20 @@ export const CreditCard = () => {
     return errors
   }
 
-  const sendDataToServer = async (cardData) => {
-    // try {
-    //   const response = await axios.post(serverIP + '/api/v1/auth/', cardData)
+  const sendDataToServer = async (dataCard) => {
+    try {
+      const dataPay = {
+        queryId: tele.initDataUnsafe?.query_id,
+        products: products,
+        totalPrice: totalPrice,
+      }
+      console.log("dataPay", dataPay)
 
-    // } catch (error) {
-    //   console.log('error', error)
-    // }
-
-    console.log("success")
+      const response = await axios.post(serverIP + "/web-data", dataPay)
+      console.log("success")
+    } catch (error) {
+      console.log("error", error)
+    }
   }
 
   const onSubmit = (data) => {
@@ -93,9 +101,10 @@ export const CreditCard = () => {
     // if (errors === {}) {
     if (Object.keys(validationErrors).length === 0) {
       // if (Object.keys(validationErrors).length === 0) {
+
       // Отправка данных на сервер
-      // sendDataToServer(data)
-      tele.sendData(JSON.stringify(state))
+      sendDataToServer(data)
+      // tele.sendData(JSON.stringify(state))
 
       // Сброс формы после отправки
       reset()
@@ -179,7 +188,8 @@ export const CreditCard = () => {
           helperText={errors.email?.message}
           sx={{ width: "100%", mb: 2 }}
         />
-        <StyledButton type="submit">Submit</StyledButton>
+           {env == "browser" && 
+   <StyledButton type="submit">Submit</StyledButton>}
       </form>
     </FlexColumnContainer>
   )
