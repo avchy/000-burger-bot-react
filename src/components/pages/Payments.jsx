@@ -8,14 +8,16 @@ import {
   FormLabel,
   Button,
 } from "@mui/material"
-import { FlexColumnContainer, Layout } from "components/AllHelpComponents"
+import { FlexColumnContainer, Layout } from "components/styled/AllHelpComponents"
 
-import { BigButton } from "components/BigButton"
-import { StyledButton } from "components/StyledButton"
+import { BigButton } from "components/styled/BigButton"
+import { StyledButton } from "components/styled/StyledButton"
 import { ReactSVG } from "react-svg"
 import applePay from "../../images/icons/applePay.png"
 import googlePay from "../../images/icons/googlePay.png"
 const tele = window.Telegram.WebApp
+import { serverIP } from "constants/api"
+import axios from "axios"
 
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")
@@ -24,13 +26,14 @@ export function Payments() {
   const location = useLocation()
   const state = location?.state
   console.log("state_in_payments", state)
+  const { products, comment, totalPrice } = state
+
   // const { cartItems, comment, totalPrice } = state
   // const data = { cartItems, comment, totalPrice }
 
   tele.MainButton.hide()
   tele.BackButton.show()
- 
-  
+
   const onCreditCard = useCallback(() => {
     console.log("data333", state)
     navigate("/creditCard", { state: state })
@@ -42,11 +45,37 @@ export function Payments() {
 
   tele.BackButton.onClick(onBackButtonClicked)
 
-  const onApplePay = () => {
-    tele.sendData(JSON.stringify(state))
+  const onApplePay = async () => {
+    // tele.sendData(JSON.stringify(state))
+    try {
+      const dataPay = {
+        queryId: tele.initDataUnsafe?.query_id,
+        products: products,
+        totalPrice: totalPrice,
+      }
+      console.log("dataPay", dataPay)
+
+      const response = await axios.post(serverIP + "/web-data", dataPay)
+      console.log("success")
+    } catch (error) {
+      console.log("error", error)
+    }
   }
-  const onGooglePay = () => {
-    tele.sendData(JSON.stringify(state))
+  const onGooglePay = async () => {
+    // tele.sendData(JSON.stringify(state))
+    try {
+      const dataPay = {
+        queryId: tele.initDataUnsafe?.query_id,
+        products: products,
+        totalPrice: totalPrice,
+      }
+      console.log("dataPay", dataPay)
+
+      const response = await axios.post(serverIP + "/web-data", dataPay)
+      console.log("success")
+    } catch (error) {
+      console.log("error", error)
+    }
   }
 
   return (

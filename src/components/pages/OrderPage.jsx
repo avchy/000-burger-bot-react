@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import "../../App.scss"
-import { BigButton } from "components/BigButton"
-import { CardRow } from "components/CardRow"
+import { BigButton } from "components/styled/BigButton"
+import { CardRow } from "components/styled/CardRow"
 import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
 const tele = window.Telegram.WebApp

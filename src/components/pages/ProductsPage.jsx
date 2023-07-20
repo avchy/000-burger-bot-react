@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import "../../App.scss"
-import { CardColumn } from "components/CardColumn"
-import { BigButton } from "components/BigButton"
+import { CardColumn } from "components/styled/CardColumn"
+import { BigButton } from "components/styled/BigButton"
 import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
 

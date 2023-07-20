@@ -1,4 +1,4 @@
-import '../App.scss'
+import '../../App.scss'
 
 export function CardRowSmall({ food }) {
     const { title, Image, price, quantity } = food

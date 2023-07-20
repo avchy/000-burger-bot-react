@@ -11,14 +11,14 @@ import {
 
 import "../../App.scss"
 import { serverIP, port } from "constants/api.js"
-import { BigButton } from "components/BigButton"
-import { CardRowSmall } from "components/CardRowSmall"
+import { BigButton } from "components/styled/BigButton"
+import { CardRowSmall } from "components/styled/CardRowSmall"
 // import { getTotalPrice } from "../utils/utils"
 import { useTelegram } from "hooks/useTelegram"
 import orderImg from "../../images/orderImg.png"
 import { useNavigator } from "hooks/useNavigator"
 import axios from "axios"
-import { StyledButton } from "components/StyledButton"
+import { StyledButton } from "components/styled/StyledButton"
 
 const tele = window.Telegram.WebApp
 
@@ -311,9 +311,7 @@ export function CheckoutPage() {
           <Select
             value={optionDelivery}
             onChange={onChangeOption}
-            //  IconComponent={() => <ArrowDropDownIcon style={{marginRight:10,pointerEvents:'none'}}/>}
-            labelStyle={{ color: "#ff5c5c" }}
-            sx={{
+             sx={{
               color: "white",
               ".MuiOutlinedInput-notchedOutline": {
                 borderColor: "rgb(255, 255, 255)",

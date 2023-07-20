@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../App.scss'
+import "../../App.scss"
 import { Button } from './Button'
 
 export function CardColumn({ food, onAdd, onRemove }) {

@@ -1,13 +1,13 @@
 import "./App.scss"
 import { Routes, Route } from "react-router-dom"
 
-import { Header } from "components/Header"
+import { Header } from "components/styled/Header"
 import { ProductsPage } from "components/pages/ProductsPage"
 import { OrderPage } from "components/pages/OrderPage"
 import { CheckoutPage } from "components/pages/CheckoutPage"
 import { CreditCard } from "components/pages/CreditCard"
 import { Payments } from "components/pages/Payments"
-import { Form } from "components/Form"
+import { Form } from "components/styled/Form"
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 // const { getData } = require('./db/db')

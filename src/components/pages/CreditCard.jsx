@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react"
+import axios from "axios"
 import {
   FlexColumnContainer,
   StyledTextField,
-} from "components/AllHelpComponents"
+} from "components/styled/AllHelpComponents"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button, Typography } from "@mui/material"
-
 import { useForm } from "react-hook-form"
 import { serverIP } from "constants/api"
-import axios from "axios"
 import { Box } from "@mui/system"
-import { StyledButton } from "components/StyledButton"
+import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
 
 const tele = window.Telegram.WebApp

@@ -1,7 +1,7 @@
 import React from "react"
 import BigButton from "./BigButton"
 import { useTelegram } from "hooks/useTelegram"
-import "../App.scss"
+import "../../App.scss"
 
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash, gitTimestampDate, gitTimestamp } = generatedGitInfo
