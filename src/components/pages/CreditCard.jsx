@@ -13,6 +13,7 @@ import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
 
 const tele = window.Telegram.WebApp
+tele.MainButton.setParams({ text: "PAY" })
 
 export const CreditCard = () => {
   const [tempErrors, setTempErrors] = useState({})
