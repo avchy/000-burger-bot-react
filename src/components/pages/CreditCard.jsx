@@ -135,6 +135,18 @@ export const CreditCard = () => {
     setValue("email", creditCardData.email)
   }, [setValue])
 
+  
+  useEffect(() => {
+    tele.onEvent("mainButtonClicked", onSubmit)
+    tele.onEvent("backButtonClicked", onBackButtonClicked)
+
+    return () => {
+      tele.offEvent("mainButtonClicked", onSubmit)
+      tele.offEvent("backButtonClicked", onBackButtonClicked)
+    }
+  }, [onSubmit])
+  
+  
   useEffect(() => {
     console.log("errors", errors)
   }, [errors])
@@ -187,8 +199,7 @@ export const CreditCard = () => {
           helperText={errors.email?.message}
           sx={{ width: "100%", mb: 2 }}
         />
-           {env == "browser" && 
-   <StyledButton type="submit">Submit</StyledButton>}
+        {env == "browser" && <StyledButton type="submit">Submit</StyledButton>}
       </form>
     </FlexColumnContainer>
   )
