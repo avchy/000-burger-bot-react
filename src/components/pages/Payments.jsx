@@ -8,7 +8,10 @@ import {
   FormLabel,
   Button,
 } from "@mui/material"
-import { FlexColumnContainer, Layout } from "components/styled/AllHelpComponents"
+import {
+  FlexColumnContainer,
+  Layout,
+} from "components/styled/AllHelpComponents"
 
 import { BigButton } from "components/styled/BigButton"
 import { StyledButton } from "components/styled/StyledButton"
@@ -18,6 +21,8 @@ import googlePay from "../../images/icons/googlePay.png"
 const tele = window.Telegram.WebApp
 import { serverIP } from "constants/api"
 import axios from "axios"
+
+tele.MainButton.hide()
 
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")

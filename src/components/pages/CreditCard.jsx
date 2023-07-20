@@ -13,6 +13,8 @@ import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
 
 const tele = window.Telegram.WebApp
+
+tele.MainButton.show()
 tele.MainButton.setParams({ text: "PAY" })
 
 export const CreditCard = () => {
