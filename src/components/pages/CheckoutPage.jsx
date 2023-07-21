@@ -32,10 +32,6 @@ export function CheckoutPage() {
   const [tempData, setTempData] = useState({})
   const [optionDelivery, setOptionDelivery] = useState("on_site")
 
-  tele.BackButton.show()
-
-  tele.MainButton.setParams({ text: "PAY" })
-
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
 
   const location = useLocation()
@@ -174,6 +170,11 @@ export function CheckoutPage() {
       behavior: "smooth",
     })
   }, [optionDelivery])
+
+  useEffect(() => {
+    tele.BackButton.show()
+    tele.MainButton.setParams({ text: "PAY" })
+  }, [])
 
   // const CssTextField = makeStyles({
   //   root: {
