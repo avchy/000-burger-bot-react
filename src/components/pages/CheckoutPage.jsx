@@ -44,7 +44,7 @@ export function CheckoutPage() {
   console.log("location?.state?", location?.state)
 
   const totalPrice = location?.state?.totalPrice
-  const totalPriceWithDiscount = totalPrice * (100 - discount)
+  const totalPriceWithDiscount = totalPrice * (1 - discount)
 
   const navigate = useNavigate()
 
