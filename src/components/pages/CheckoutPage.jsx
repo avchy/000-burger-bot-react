@@ -139,11 +139,8 @@ export function CheckoutPage() {
   }
 
   useEffect(() => {
-    // tele.onEvent("mainButtonClicked", onSendData)
     tele.onEvent("mainButtonClicked", onSubmit)
-
     return () => {
-      // tele.offEvent("mainButtonClicked", onSendData)
       tele.offEvent("mainButtonClicked", onSubmit)
     }
   }, [onSendData])
