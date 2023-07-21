@@ -102,9 +102,16 @@ export const CreditCard = () => {
         totalPrice: totalPrice,
       }
 
-      setDialogText(JSON.stringify(dataPay, null, 2))
+      setDialogText(
+        `
+        serverIP =  ${serverIP}  
+
+        dataPay =  ${JSON.stringify(dataPay, null, 2)}
+      
+      `
+      )
+
       setDialogOpen(true)
-      setTimeout(() => {}, 5000)
 
       const response = await axios.post(serverIP + "/web-data", dataPay)
 
