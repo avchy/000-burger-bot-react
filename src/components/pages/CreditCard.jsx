@@ -85,10 +85,13 @@ export const CreditCard = () => {
         totalPrice: totalPrice,
       }
       console.log("dataPay", dataPay)
-
       const response = await axios.post(serverIP + "/web-data", dataPay)
+      alert(dataPay)
+
       console.log("success")
     } catch (error) {
+      alert("error_in_response")
+
       console.log("error", error)
     }
   }
@@ -99,8 +102,7 @@ export const CreditCard = () => {
 
     // if (errors === {}) {
     if (Object.keys(validationErrors).length === 0) {
- 
-       sendDataToServer(data)
+      sendDataToServer(data)
       // tele.sendData(JSON.stringify(state))
 
       // Сброс формы после отправки
