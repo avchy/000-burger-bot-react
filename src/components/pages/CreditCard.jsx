@@ -18,7 +18,7 @@ import CircularProgress from "@mui/material/CircularProgress"
 const tele = window.Telegram.WebApp
 
 export const CreditCard = () => {
-   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [dialogOpen, setDialogOpen] = useState(false)
 
@@ -92,33 +92,6 @@ export const CreditCard = () => {
     return errors
   }
 
-  // const sendDataToServer = async (dataCard) => {
-  //   try {
-  //     const dataPay = {
-  //       queryId: tele.initDataUnsafe?.query_id,
-  //       products: products,
-  //       totalPrice: totalPrice,
-  //     }
-  //     console.log("dataPay", dataPay)
-  //     setDialogText(JSON.stringify(state, null, 2))
-
-  //     const response = await axios.post(serverIP + "/web-data", dataPay)
-
-  //     setDialogText("response_success")
-  //     setDialogOpen(true)
-
-  //     // console.log("success")
-  //   } catch (error) {
-  //     setDialogText("error_in_response")
-  //     setDialogOpen(true)
-
-  //     // AlertDialog("error_in_response")
-  //     // alert("error_in_response")
-
-  //     console.log("error", error)
-  //   }
-  // }
-
   const onSubmit = async (cardData) => {
     try {
       setIsSubmitting(true)
@@ -138,8 +111,10 @@ export const CreditCard = () => {
       setDialogText("success")
       setDialogOpen(true)
     } catch (error) {
-      setDialogText("error")
-      setDialogOpen(true)
+      setDialogText(JSON.stringify(error, null, 2))
+
+      // setDialogText("error")
+      // setDialogOpen(true)
       console.log("error333", error)
     } finally {
       setIsSubmitting(false)
@@ -237,7 +212,6 @@ export const CreditCard = () => {
         <h1 className="title">Card Payment </h1>
 
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        
           <StyledTextField
             {...register("cardNumber", {
               required: "Card number is required",
@@ -277,16 +251,15 @@ export const CreditCard = () => {
           {env == "browser" && (
             <StyledButton type="submit">Submit</StyledButton>
           )}
-       
         </Box>
 
-           <AlertDialog
-            text={dialogText}
-            buttonRight={"ok"}
-            open={dialogOpen}
-            onClose={handleCloseDialog}
-          />
- 
+        <AlertDialog
+          text={dialogText}
+          buttonRight={"ok"}
+          open={dialogOpen}
+          onClose={handleCloseDialog}
+        />
+
         {isSubmitting ? (
           <CircularProgress
             size={16}
