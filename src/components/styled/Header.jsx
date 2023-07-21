@@ -25,7 +25,7 @@ export const Header = () => {
       <p className={"testText"}> {` query_id - ${query_id}`} </p>
       <p className="testText">{`fullURL ${fullURL}`}</p>
       <p className="testText">{`user?.username ${user?.username}`}</p>
-      <p className={"testText"}> {` state - ${state}`} </p>Ï
+      <p className={"testText"}> {` state - ${state}`} </p>
       {/* <BigButton onClick={onClose}>Close</BigButton> */}
     </div>
   )
