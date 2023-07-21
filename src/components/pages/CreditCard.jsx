@@ -85,7 +85,8 @@ export const CreditCard = () => {
         totalPrice: totalPrice,
       }
       console.log("dataPay", dataPay)
-      const response = await axios.post(serverIP + "/web-data", dataPay)
+      // const response = await axios.post(serverIP + "/web-data", dataPay)
+      const response = await axios.post("https://burgerim.ru/web-data", dataPay)
       alert(dataPay)
 
       console.log("success")
