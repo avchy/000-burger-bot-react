@@ -264,8 +264,8 @@ body {
   margin: 13px 10px;
   position: relative;
   /* border-radius: 5px; */
-  overflow: hidden; /* Скрыть содержимое, которое не помещается в блок */
-  // white-space: nowrap; /* Запретить перенос текста на новую строку */
+  overflow: hidden;  
+  white-space: pre-wrap; 
   text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
 
   .image_container {

@@ -44,7 +44,7 @@ export function CheckoutPage() {
   console.log("location?.state?", location?.state)
 
   const totalPrice = location?.state?.totalPrice
-  const totalPriceWithDiscount = totalPrice * (1 - discount)
+  const totalPriceWithDiscount = (totalPrice * (1 - discount)).toFixed(1)
 
   const navigate = useNavigate()
 
@@ -78,7 +78,6 @@ export function CheckoutPage() {
       tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
-  
 
   const onSendData = () => {
     // const onSendData = useCallback(() => {
@@ -94,7 +93,6 @@ export function CheckoutPage() {
     for (let i = 0; i < cartItems.length; i++) {
       delete cartItems[i].Image
     }
-    
 
     const data = {
       queryId,
@@ -130,14 +128,13 @@ export function CheckoutPage() {
             console.log("error.response.data", error.response?.data)
 
             setTempError(
-              "Обработка ошибок при выполнении axios.post ---" +
+              "error.response?.data in  axios.post ---" +
                 JSON.stringify(error.response?.data, null, 2)
             )
           }
 
           setTempError(
-            "Обработка ошибок при выполнении axios.post ---" +
-              JSON.stringify(error, null, 2)
+            "error in  axios.post ---" + JSON.stringify(error, null, 2)
           )
         })
     } catch (error) {
@@ -241,7 +238,7 @@ export function CheckoutPage() {
           food={{
             id: 9998,
             title: "Discount",
-            price: totalPrice * discount,
+            price: (totalPrice * discount).toFixed(2),
             textColor: "#4AF2A1",
           }}
           key={9998}
