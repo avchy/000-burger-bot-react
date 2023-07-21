@@ -12,21 +12,27 @@ import { Box } from "@mui/system"
 import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
 import AlertDialog from "components/styled/AlertDialog"
-
+import { DialogComponent } from "components/styled/DialogComponent"
 
 const tele = window.Telegram.WebApp
 
 export const CreditCard = () => {
-  
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState(false)
 
   const handleShowDialog = () => {
     // Некоторая логика для определения, нужно ли отображать диалог
     // Например, если условие выполнено, устанавливаем showDialog в true
-    setShowDialog(true);
-  };
-  
+    setShowDialog(true)
+  }
+
+  const [dialogOpen, setDialogOpen] = useState(false)
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false)
+  }
+
   const [tempErrors, setTempErrors] = useState({})
+  const [dialogText, setDialogText] = useState("")
   const { env } = useNavigator()
 
   const location = useLocation()
@@ -96,13 +102,21 @@ export const CreditCard = () => {
         totalPrice: totalPrice,
       }
       console.log("dataPay", dataPay)
-      // alert(dataPay)
-      AlertDialog("dataPay")
+      setDialogText(JSON.stringify(state, null, 2))
+
+  
+
       const response = await axios.post(serverIP + "/web-data", dataPay)
 
-      console.log("success")
+      setDialogText("response_success")
+      setShowDialog(true)
+
+      // console.log("success")
     } catch (error) {
-      AlertDialog("error_in_response")
+      setDialogText("error_in_response")
+      setShowDialog(true)
+
+      // AlertDialog("error_in_response")
       // alert("error_in_response")
 
       console.log("error", error)
@@ -110,13 +124,17 @@ export const CreditCard = () => {
   }
 
   const onSubmit = (data) => {
+    setDialogOpen(true)
+
     const validationErrors = validateFields(data)
     console.log("validationErrors", validationErrors)
+
+    // setDialogText(Object.keys(validationErrors).length === 0)
+    // setShowDialog(true);
 
     // if (errors === {}) {
     if (Object.keys(validationErrors).length === 0) {
       sendDataToServer(data)
-      // tele.sendData(JSON.stringify(state))
 
       // Сброс формы после отправки
       reset()
@@ -168,29 +186,25 @@ export const CreditCard = () => {
   }, [])
 
   return (
-    
     <>
-     
+      <FlexColumnContainer
+        sx={{
+          pt: "20px",
+          backgroundColor: "white",
+          gap: 2,
+          color: "black",
+          height:
+            "100vh" /* Set the container's height to 100% of the viewport height */,
+          padding: "20px",
+          justifyContent: "center" /* Vertically center the content */,
+          alignItems: "center" /* Horizontally center the content */,
+        }}
+      >
+        {/* <Typography>Card Payment</Typography> */}
+        <h1 className="title">Card Payment </h1>
 
-    
-    <FlexColumnContainer
-      sx={{
-        pt: "20px",
-        backgroundColor: "white",
-        gap: 2,
-        color: "black",
-        height:
-          "100vh" /* Set the container's height to 100% of the viewport height */,
-        padding: "20px",
-        justifyContent: "center" /* Vertically center the content */,
-        alignItems: "center" /* Horizontally center the content */,
-      }}
-    >
-      {/* <Typography>Card Payment</Typography> */}
-      <h1 className="title">Card Payment </h1>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <StyledTextField
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* <StyledTextField
           {...register("cardNumber", { required: "Card number is required" })}
           label="Card Number"
           error={!!errors.cardNumber}
@@ -198,50 +212,54 @@ export const CreditCard = () => {
           sx={{ width: "100%", mb: 2 }}
         /> */}
 
-        <StyledTextField
-          {...register("cardNumber", { required: "Card number is required" })}
-          label="Card Number"
-          defaultValue={creditCardData.cardNumber}
-          error={!!errors.cardNumber}
-          helperText={errors.cardNumber?.message}
-          sx={{ width: "100%", mb: 2 }}
-        />
+          <StyledTextField
+            {...register("cardNumber", { required: "Card number is required" })}
+            label="Card Number"
+            defaultValue={creditCardData.cardNumber}
+            error={!!errors.cardNumber}
+            helperText={errors.cardNumber?.message}
+            sx={{ width: "100%", mb: 2 }}
+          />
 
-        <Box sx={{ display: "flex", gap: "16px", pb: 2 }}>
+          <Box sx={{ display: "flex", gap: "16px", pb: 2 }}>
+            <StyledTextField
+              {...register("expiryDate", {
+                required: "Expiry date is required",
+              })}
+              label="Expiry Date"
+              error={!!errors.expiryDate}
+              helperText={errors.expiryDate?.message}
+              sx={{ flex: 1, mr: 2 }}
+            />
+            <StyledTextField
+              {...register("cvv", { required: "CVV code is required" })}
+              label="CVV Code"
+              error={!!errors.cvv}
+              helperText={errors.cvv?.message}
+              sx={{ flex: 1 }}
+            />
+          </Box>
           <StyledTextField
-            {...register("expiryDate", { required: "Expiry date is required" })}
-            label="Expiry Date"
-            error={!!errors.expiryDate}
-            helperText={errors.expiryDate?.message}
-            sx={{ flex: 1, mr: 2 }}
+            {...register("email", { required: "Email is required" })}
+            label="Email"
+            error={!!errors.email}
+            helperText={errors.email?.message}
+            sx={{ width: "100%", mb: 2 }}
           />
-          <StyledTextField
-            {...register("cvv", { required: "CVV code is required" })}
-            label="CVV Code"
-            error={!!errors.cvv}
-            helperText={errors.cvv?.message}
-            sx={{ flex: 1 }}
+          {env == "browser" && (
+            <StyledButton type="submit">Submit</StyledButton>
+          )}
+        </form>
+
+         {showDialog && (
+          <AlertDialog
+            text={dialogText}
+            buttonRight={"ok"}
+            open={dialogOpen}
+            onClose={handleCloseDialog}
           />
-        </Box>
-        <StyledTextField
-          {...register("email", { required: "Email is required" })}
-          label="Email"
-          error={!!errors.email}
-          helperText={errors.email?.message}
-          sx={{ width: "100%", mb: 2 }}
-        />
-        {env == "browser" && <StyledButton type="submit">Submit</StyledButton>}
-      </form>
-    </FlexColumnContainer>
-    
-    
-    
-    <div>
-       {/* <button onClick={handleShowDialog}>Show Dialog</button> */}
-      {showDialog && <AlertDialog />}
-    </div>
+        )}
+      </FlexColumnContainer>
     </>
-
-    
   )
 }

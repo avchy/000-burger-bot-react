@@ -66,8 +66,7 @@ export function Payments() {
   }
   
   const onGooglePay = async () => {
-    // tele.sendData(JSON.stringify(state))
-    try {
+     try {
       const dataPay = {
         queryId: tele.initDataUnsafe?.query_id,
         products: products,
