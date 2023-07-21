@@ -14,9 +14,6 @@ import { useNavigator } from "hooks/useNavigator"
 
 const tele = window.Telegram.WebApp
 
-tele.MainButton.show()
-tele.MainButton.setParams({ text: "PAY" })
-
 export const CreditCard = () => {
   const [tempErrors, setTempErrors] = useState({})
   const { env } = useNavigator()
@@ -102,10 +99,8 @@ export const CreditCard = () => {
 
     // if (errors === {}) {
     if (Object.keys(validationErrors).length === 0) {
-      // if (Object.keys(validationErrors).length === 0) {
-
-      // Отправка данных на сервер
-      sendDataToServer(data)
+ 
+       sendDataToServer(data)
       // tele.sendData(JSON.stringify(state))
 
       // Сброс формы после отправки
@@ -138,7 +133,6 @@ export const CreditCard = () => {
     setValue("email", creditCardData.email)
   }, [setValue])
 
-  
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSubmit)
     tele.onEvent("backButtonClicked", onBackButtonClicked)
@@ -148,11 +142,15 @@ export const CreditCard = () => {
       tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
-  
-  
+
   useEffect(() => {
     console.log("errors", errors)
   }, [errors])
+
+  useEffect(() => {
+    tele.MainButton.show()
+    tele.MainButton.setParams({ text: "PAY" })
+  }, [])
 
   return (
     <FlexColumnContainer

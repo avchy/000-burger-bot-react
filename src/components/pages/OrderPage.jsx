@@ -7,7 +7,6 @@ import { CardRow } from "components/styled/CardRow"
 import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
 const tele = window.Telegram.WebApp
-tele.BackButton.show()
 
 export const OrderPage = () => {
   // const { tele } = useTelegram()

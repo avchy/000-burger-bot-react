@@ -22,8 +22,6 @@ const tele = window.Telegram.WebApp
 import { serverIP } from "constants/api"
 import axios from "axios"
 
-tele.MainButton.hide()
-
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")
   const navigate = useNavigate()
@@ -82,6 +80,10 @@ export function Payments() {
       console.log("error", error)
     }
   }
+
+  useEffect(() => {
+    tele.MainButton.hide()
+  }, [])
 
   return (
     <>

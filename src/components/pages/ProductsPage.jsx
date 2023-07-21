@@ -16,9 +16,6 @@ console.log("tele.initData111", tele.initData)
 console.log("tele.initDataUnsafe111", tele.initDataUnsafe)
 console.log("tele.initDataUnsafe?.query_id111", tele.initDataUnsafe?.query_id)
 
-tele.MainButton.text = "VIEW ORDER"
-tele.enableClosingConfirmation()
-
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash } = generatedGitInfo
 
@@ -94,6 +91,8 @@ export const ProductsPage = () => {
 
   useEffect(() => {
     tele.BackButton.hide()
+    tele.MainButton.text = "VIEW ORDER"
+    tele.enableClosingConfirmation()
   }, [])
 
   return (
