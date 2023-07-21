@@ -11,7 +11,7 @@ import { serverIP } from "constants/api"
 import { Box } from "@mui/system"
 import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
-import { ResponsiveDialog } from "components/styled/ResponsiveDialog"
+import ResponsiveDialog from "components/styled/ResponsiveDialog"
 
 const tele = window.Telegram.WebApp
 
@@ -92,7 +92,6 @@ export const CreditCard = () => {
 
       console.log("success")
     } catch (error) {
-      
       ResponsiveDialog("error_in_response")
       // alert("error_in_response")
 
@@ -176,8 +175,6 @@ export const CreditCard = () => {
       <h1 className="title">Card Payment </h1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        
-        
         {/* <StyledTextField
           {...register("cardNumber", { required: "Card number is required" })}
           label="Card Number"
@@ -185,29 +182,16 @@ export const CreditCard = () => {
           helperText={errors.cardNumber?.message}
           sx={{ width: "100%", mb: 2 }}
         /> */}
-        
-        
-        
- 
 
+        <StyledTextField
+          {...register("cardNumber", { required: "Card number is required" })}
+          label="Card Number"
+          defaultValue={creditCardData.cardNumber}
+          error={!!errors.cardNumber}
+          helperText={errors.cardNumber?.message}
+          sx={{ width: "100%", mb: 2 }}
+        />
 
-<StyledTextField
-  {...register("cardNumber", { required: "Card number is required" })}
-  label="Card Number"
-  defaultValue={creditCardData.cardNumber}
-  error={!!errors.cardNumber}
-  helperText={errors.cardNumber?.message}
-  sx={{ width: "100%", mb: 2 }}
-/>
-
-        
-        
-        
-        
-        
-        
-        
-        
         <Box sx={{ display: "flex", gap: "16px", pb: 2 }}>
           <StyledTextField
             {...register("expiryDate", { required: "Expiry date is required" })}
