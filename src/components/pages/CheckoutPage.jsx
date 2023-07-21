@@ -23,7 +23,6 @@ import { discount } from "constants/constants"
 const tele = window.Telegram.WebApp
 
 export function CheckoutPage() {
- 
   const { env } = useNavigator()
 
   const [address, setAddress] = useState("")
@@ -71,14 +70,6 @@ export function CheckoutPage() {
     return () => {
       tele.offEvent("mainButtonClicked", onSubmit)
       tele.offEvent("backButtonClicked", onBackButtonClicked)
-    }
-  }, [onSubmit])
- 
-
-  useEffect(() => {
-    tele.onEvent("mainButtonClicked", onSubmit)
-    return () => {
-      tele.offEvent("mainButtonClicked", onSubmit)
     }
   }, [onSubmit])
 
@@ -151,7 +142,7 @@ export function CheckoutPage() {
 
           <div className="textContainer">
             <div className="text1"> Order № 770770</div>
-             <div className="text1"> Perfect lunch from Burger Bot.</div>
+            <div className="text1"> Perfect lunch from Burger Bot.</div>
             <div className="text_small">{discount}% discount</div>
           </div>
         </div>
