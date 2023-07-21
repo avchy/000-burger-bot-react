@@ -25,7 +25,9 @@ export const Header = () => {
       <p className={"testText"}> {` query_id - ${query_id}`} </p>
       <p className="testText">{`fullURL ${fullURL}`}</p>
       <p className="testText">{`user?.username ${user?.username}`}</p>
-      <p className={"testText"}> {` state - ${state}`} </p>
+      
+      
+      <p className={"testText"}> {` state - ${JSON.stringify(state, null, 2)}`} </p>
       {/* <BigButton onClick={onClose}>Close</BigButton> */}
     </div>
   )
