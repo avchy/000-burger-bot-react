@@ -17,7 +17,7 @@ export const OrderPage = () => {
 
   tele.MainButton.text = "CHECKOUT"
   const location = useLocation()
-  console.log("location.state111", location.state)
+  console.log("location.state_OrderPage", location.state)
   const cartItems = location.state.cartItems
 
   const [comment, setComment] = useState("")
@@ -72,7 +72,6 @@ export const OrderPage = () => {
             // navigate("/")
             navigate("/", { state: { cartItems, comment, totalPrice } })
           }}
-          Ï
           title="Edit"
           className="navLinkEdit"
         >

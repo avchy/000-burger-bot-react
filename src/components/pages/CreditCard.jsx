@@ -21,7 +21,7 @@ export const CreditCard = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const state = location?.state
-  console.log("state111", state)
+  console.log("state_CreditCard", state)
   const { products, comment, totalPrice } = state
   // const data = { cartItems, comment, totalPrice }
 
@@ -85,9 +85,9 @@ export const CreditCard = () => {
         totalPrice: totalPrice,
       }
       console.log("dataPay", dataPay)
-      // const response = await axios.post(serverIP + "/web-data", dataPay)
-      const response = await axios.post("https://burgerim.ru/web-data", dataPay)
       alert(dataPay)
+
+      const response = await axios.post(serverIP + "/web-data", dataPay)
 
       console.log("success")
     } catch (error) {

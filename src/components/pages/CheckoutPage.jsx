@@ -23,8 +23,7 @@ import { discount } from "constants/constants"
 const tele = window.Telegram.WebApp
 
 export function CheckoutPage() {
-  const { queryId } = useTelegram()
-  // console.log('queryId :>> ', queryId);
+ 
   const { env } = useNavigator()
 
   const [address, setAddress] = useState("")
@@ -40,7 +39,7 @@ export function CheckoutPage() {
   console.log("location?.state?", location?.state)
 
   const totalPrice = location?.state?.totalPrice
-  const totalPriceWithDiscount = (totalPrice * (1 - discount)).toFixed(1)
+  const totalPriceWithDiscount = (totalPrice * (1 - discount)).toFixed(2)
 
   const navigate = useNavigate()
 
@@ -56,9 +55,9 @@ export function CheckoutPage() {
     }
 
     const data = {
-      address: address,
-      comment: comment,
       products: cartItems,
+      comment: comment,
+      address: address,
       totalPrice: totalPriceWithDiscount,
     }
 
@@ -74,76 +73,14 @@ export function CheckoutPage() {
       tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
-
-  const onSendData = () => {
-    // const onSendData = useCallback(() => {
-
-    // const shopDataRoute = `${serverIP}:${port}/web-data`
-
-    // const data = {
-    //   queryId:"AAHqIAUXAAAAAOogBRex84jA",
-    //   products: cartItems,
-    //   totalPrice: getTotalPrice(cartItems),
-    // }
-
-    for (let i = 0; i < cartItems.length; i++) {
-      delete cartItems[i].Image
-    }
-
-    const data = {
-      queryId,
-      address: address,
-      comment: comment,
-      products: cartItems,
-      totalPrice: totalPriceWithDiscount,
-    }
-
-    // tele.sendData(JSON.stringify(data))
-
-    const config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "https://burgerim.ru/web-data",
-      // url: "http://94.198.216.20:8000/web-data",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      data: JSON.stringify(data),
-    }
-
-    try {
-      axios
-        .request(config)
-        .then((response) => {
-          console.log(JSON.stringify(response.data))
-          setTempData(JSON.stringify(response.data))
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.log("error.response.data", error.response?.data)
-
-            setTempError(
-              "error.response?.data in  axios.post ---" +
-                JSON.stringify(error.response?.data, null, 2)
-            )
-          }
-
-          setTempError(
-            "error in  axios.post ---" + JSON.stringify(error, null, 2)
-          )
-        })
-    } catch (error) {
-      console.error("error:", error)
-    }
-  }
+ 
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSubmit)
     return () => {
       tele.offEvent("mainButtonClicked", onSubmit)
     }
-  }, [onSendData])
+  }, [onSubmit])
 
   useEffect(() => {
     if (optionDelivery == "take_away" && !address) {
@@ -214,8 +151,7 @@ export function CheckoutPage() {
 
           <div className="textContainer">
             <div className="text1"> Order № 770770</div>
-            {/* <div className='text1'> Order № {queryId||123123}</div> */}
-            <div className="text1"> Perfect lunch from Burger Bot.</div>
+             <div className="text1"> Perfect lunch from Burger Bot.</div>
             <div className="text_small">{discount}% discount</div>
           </div>
         </div>

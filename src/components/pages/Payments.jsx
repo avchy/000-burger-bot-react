@@ -64,6 +64,7 @@ export function Payments() {
       console.log("error", error)
     }
   }
+  
   const onGooglePay = async () => {
     // tele.sendData(JSON.stringify(state))
     try {
