@@ -11,11 +11,21 @@ import { serverIP } from "constants/api"
 import { Box } from "@mui/system"
 import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
-import ResponsiveDialog from "components/styled/ResponsiveDialog"
+import AlertDialog from "components/styled/AlertDialog"
+
 
 const tele = window.Telegram.WebApp
 
 export const CreditCard = () => {
+  
+  const [showDialog, setShowDialog] = useState(false);
+
+  const handleShowDialog = () => {
+    // Некоторая логика для определения, нужно ли отображать диалог
+    // Например, если условие выполнено, устанавливаем showDialog в true
+    setShowDialog(true);
+  };
+  
   const [tempErrors, setTempErrors] = useState({})
   const { env } = useNavigator()
 
@@ -87,12 +97,12 @@ export const CreditCard = () => {
       }
       console.log("dataPay", dataPay)
       // alert(dataPay)
-      ResponsiveDialog("dataPay")
+      AlertDialog("dataPay")
       const response = await axios.post(serverIP + "/web-data", dataPay)
 
       console.log("success")
     } catch (error) {
-      ResponsiveDialog("error_in_response")
+      AlertDialog("error_in_response")
       // alert("error_in_response")
 
       console.log("error", error)
@@ -158,6 +168,11 @@ export const CreditCard = () => {
   }, [])
 
   return (
+    
+    <>
+     
+
+    
     <FlexColumnContainer
       sx={{
         pt: "20px",
@@ -218,5 +233,15 @@ export const CreditCard = () => {
         {env == "browser" && <StyledButton type="submit">Submit</StyledButton>}
       </form>
     </FlexColumnContainer>
+    
+    
+    
+    <div>
+       {/* <button onClick={handleShowDialog}>Show Dialog</button> */}
+      {showDialog && <AlertDialog />}
+    </div>
+    </>
+
+    
   )
 }

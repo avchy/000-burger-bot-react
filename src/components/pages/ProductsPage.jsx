@@ -92,7 +92,7 @@ export const ProductsPage = () => {
   useEffect(() => {
     tele.BackButton.hide()
     tele.MainButton.text = "VIEW ORDER"
-    tele.enableClosingConfirmation()
+    // tele.enableClosingConfirmation()
   }, [])
 
   return (

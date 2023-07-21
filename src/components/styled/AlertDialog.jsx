@@ -5,13 +5,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
-export default function ResponsiveDialog() {
+export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,27 +20,25 @@ export default function ResponsiveDialog() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open responsive dialog
+        Open alert dialog
       </Button>
       <Dialog
-        fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="responsive-dialog-title">
+        <DialogTitle id="alert-dialog-title">
           {"Use Google's location service?"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText id="alert-dialog-description">
             Let Google help apps determine location. This means sending anonymous
             location data to Google, even when no apps are running.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button   onClick={handleClose}>
-            Disagree
-          </Button>
+          <Button onClick={handleClose}>Disagree</Button>
           <Button onClick={handleClose}  >
             Agree
           </Button>

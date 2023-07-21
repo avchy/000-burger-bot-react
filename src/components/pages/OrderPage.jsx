@@ -13,9 +13,6 @@ export const OrderPage = () => {
   const navigate = useNavigate()
   const { env } = useNavigator()
 
-  tele.enableClosingConfirmation()
-
-  tele.MainButton.text = "CHECKOUT"
   const location = useLocation()
   console.log("location.state_OrderPage", location.state)
   const cartItems = location.state.cartItems
@@ -25,6 +22,11 @@ export const OrderPage = () => {
   useEffect(() => {
     tele.ready()
   })
+
+  useEffect(() => {
+    tele.MainButton.text = "CHECKOUT"
+  }, [])
+
   const handleChange = (event) => {
     setComment(event.target.value)
   }
