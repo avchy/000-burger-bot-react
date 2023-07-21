@@ -21,7 +21,7 @@ const main = () => {
   const minutes1 = date.getMinutes().toString().padStart(2, "0")
   const seconds1 = date.getSeconds().toString().padStart(2, "0")
 
-  const gitTimestamp = `${hours1}:${minutes1}:${seconds1}`
+  const timeCommitPushed = `${hours1}:${minutes1}:${seconds1}`
 
   //=======================
 
@@ -32,7 +32,7 @@ const main = () => {
   const minutes = gitTimestampDate1.getMinutes().toString().padStart(2, "0")
   const seconds = gitTimestampDate1.getSeconds().toString().padStart(2, "0")
 
-  const gitTimestampDate = `${hours}:${minutes}:${seconds}`
+  const timeUploadingToNetlify = `${hours}:${minutes}:${seconds}`
 
   const gitBranch = execSyncWrapper("git rev-parse --abbrev-ref HEAD")
   const gitCommitHash = execSyncWrapper("git rev-parse --short=7 HEAD")
@@ -40,8 +40,8 @@ const main = () => {
   const obj = {
     gitBranch,
     gitCommitHash,
-    gitTimestamp,
-    gitTimestampDate,
+    timeCommitPushed,
+    timeUploadingToNetlify,
   }
 
   const filePath = path.resolve("src/helpers", "generatedGitInfo.json")

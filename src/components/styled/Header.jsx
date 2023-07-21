@@ -4,7 +4,8 @@ import { useTelegram } from "hooks/useTelegram"
 import "../../App.scss"
 
 import generatedGitInfo from "helpers/generatedGitInfo.json"
-const { gitCommitHash, gitTimestampDate, gitTimestamp } = generatedGitInfo
+const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
+  generatedGitInfo
 
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
@@ -19,8 +20,12 @@ export const Header = () => {
 
   return (
     <div className={"header"}>
-      <p className={"testText"}> {` gitTimestamp - ${gitTimestamp}`} </p>
-      <p className={"testText"}>{` gitTimestampDate - ${gitTimestampDate}`} </p>
+      <p className={"testText"}>{` timeCommitPushed - ${timeCommitPushed}`} </p>
+      <p className={"testText"}>
+        {" "}
+        {` timeUploadingToNetlify - ${timeUploadingToNetlify}`}{" "}
+      </p>
+
       <p className={"testText"}> {` gitCommitHash - ${gitCommitHash}`} </p>
       <p className={"testText"}> {` query_id - ${query_id}`} </p>
       <p className="testText">{`fullURL ${fullURL}`}</p>
