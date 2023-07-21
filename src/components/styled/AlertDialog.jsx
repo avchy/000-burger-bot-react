@@ -37,12 +37,10 @@ export default function AlertDialog({ text, buttonRight, open, onClose }) {
         <DialogTitle id="alert-dialog-title">{"DialogTitle"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {/* {"DialogContentText"} */}
             {text}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {/* <Button onClick={handleClose}>Disagree</Button> */}
           <Button onClick={handleCloseDialog}>{buttonRight}</Button>
         </DialogActions>
       </Dialog>

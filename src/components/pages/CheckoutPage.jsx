@@ -185,55 +185,7 @@ export function CheckoutPage() {
         </div>
       )}
 
-      {/* <div className={"form"}>
-        <div className={"title_mini"}>Choose where you eat</div>
-
-        <select
-          value={optionDelivery}
-          onChange={onChangeOption}
-          className={"select"}
-        >
-          <option className={"selectField"} value={"on_site"}>
-            On Site
-          </option>
-          <option className={"selectField"} value={"take_away"}>
-            Take Away
-          </option>
-        </select>
-
-        {optionDelivery == "take_away" && (
-          <input
-            className={"input"}
-            type="text"
-            placeholder={"Address"}
-            value={address}
-            onChange={onChangeAddress}
-          />
-        )}
-      </div> */}
-
-      {/* <div className="form">
-      <div className="title_mini">Choose where you eat</div>
-
-      <FormControl className="select">
-        <InputLabel>Select Delivery Option</InputLabel>
-        <Select value={optionDelivery} onChange={onChangeOption}>
-          <MenuItem value="on_site">On Site</MenuItem>
-          <MenuItem value="take_away">Take Away</MenuItem>
-        </Select>
-      </FormControl>
-
-      {optionDelivery === 'take_away' && (
-        <TextField
-          className="input"
-          type="text"
-          label="Address"
-          value={address}
-          onChange={onChangeAddress}
-          placeholder="Enter address"
-        />
-      )}
-    </div> */}
+ 
 
       <div className="form">
         <div className="title_mini" style={{ color: "white" }}>
