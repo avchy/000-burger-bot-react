@@ -19,8 +19,7 @@ export const ProductsPage = () => {
 
   const { env } = useNavigator()
   const location = useLocation()
-  console.log("location?.state", location?.state)
-  const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
+   const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
 
   useEffect(() => {

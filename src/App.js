@@ -33,29 +33,13 @@ const theme = createTheme({
 export function App() {
   const { t } = useTranslation()
   const [language, setLanguage] = useLocalStorage("language", "ru")
-
-  // const handleLenguageChange = () => {
-  //   if (language === "en") {
-  //     i18n.changeLanguage("ru")
-  //     setLanguage("ru")
-  //   } else if (language === "ru") {
-  //     i18n.changeLanguage("en")
-  //     setLanguage("en")
-  //   }
-  // }
+ 
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
          <br />
-         
-        {/* <button onClick={handleLenguageChange}>
-          {t("change to")} {language === "ru" ? t("english") : t("russian")}
-        </button> */}
         
-        {/* <button className="reload" onClick={() => window.location.reload()}>
-          {t("refresh page")}
-        </button> */}
         
         <Header />
 

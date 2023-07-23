@@ -58,12 +58,12 @@ export const Header = () => {
         HE
       </Button>
       
-      
+{/*       
       <p className={"testText"}>
         {` webAppUser - ${JSON.stringify(webAppUser, null, 2)}`}{" "}
       </p>
       <p className={"testText"}>{` userLang - ${userLang}`} </p>
-      <p className={"testText"}>{` username - ${username}`} </p>
+      <p className={"testText"}>{` username - ${username}`} </p> */}
       <p className="testText">{`user?.username ${user?.username}`}</p>
 
       <p className={"testText"}>{` timeCommitPushed - ${timeCommitPushed}`} </p>
