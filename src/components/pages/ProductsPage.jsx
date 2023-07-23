@@ -12,14 +12,27 @@ const foods = getData()
 
 const tele = window.Telegram.WebApp
 
-console.log("tele.initData111", tele.initData)
-console.log("tele.initDataUnsafe111", tele.initDataUnsafe)
-console.log("tele.initDataUnsafe?.query_id111", tele.initDataUnsafe?.query_id)
-
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash } = generatedGitInfo
 
+import { useTranslation } from "react-i18next"
+import useLocalStorage from "../../hooks/use-localstorage"
+import i18n from "../../helpers/i18n"
+
 export const ProductsPage = () => {
+  const { t } = useTranslation()
+  const [language, setLanguage] = useLocalStorage("language", "ru")
+
+  const handleLenguageChange = () => {
+    if (language === "en") {
+      i18n.changeLanguage("ru")
+      setLanguage("ru")
+    } else if (language === "ru") {
+      i18n.changeLanguage("en")
+      setLanguage("en")
+    }
+  }
+
   const { env } = useNavigator()
   const location = useLocation()
   console.log("location?.state", location?.state)
@@ -96,38 +109,48 @@ export const ProductsPage = () => {
   }, [])
 
   return (
-    <div className="productsPage">
-      <h1 className="title">Burger Shop</h1>
-      {/* <h1 className='title'>env222 = {env}</h1> */}
-
-      <div className="cards_container">
-        {foods.map((food) => {
-          const cartItemWithQuantity = cartItems.find(
-            (item) => item.id === food.id
-          )
-          const quantity = cartItemWithQuantity
-            ? cartItemWithQuantity.quantity
-            : 0
-
-          return (
-            <CardColumn
-              food={food}
-              key={food.id}
-              onAdd={onAdd}
-              onRemove={onRemove}
-              quantity={quantity}
-            />
-          )
-        })}
+    <>
+      <div className="App">
+        <h2>{t("Welcome to React")}</h2>
+        <br />
+        <button onClick={handleLenguageChange}>
+          {t("change to")} {language === "ru" ? t("english") : t("russian")}
+        </button>
+        <button className="reload" onClick={() => window.location.reload()}>
+          {t("refresh page")}
+        </button>
       </div>
 
-      {cartItems.length !== 0 && env == "browser" && (
-        <BigButton
-          title={`Order`}
-          disable={cartItems.length === 0 ? true : false}
-          onClick={onSubmit}
-        />
-      )}
-    </div>
+      <div className="productsPage">
+        <h1 className="title">Burger Shop</h1>
+        {/* <h1 className='title'>env222 = {env}</h1> */}
+        <div className="cards_container">
+          {foods.map((food) => {
+            const cartItemWithQuantity = cartItems.find(
+              (item) => item.id === food.id
+            )
+            const quantity = cartItemWithQuantity
+              ? cartItemWithQuantity.quantity
+              : 0
+            return (
+              <CardColumn
+                food={food}
+                key={food.id}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                quantity={quantity}
+              />
+            )
+          })}
+        </div>
+        {cartItems.length !== 0 && env == "browser" && (
+          <BigButton
+            title={`Order`}
+            disable={cartItems.length === 0 ? true : false}
+            onClick={onSubmit}
+          />
+        )}
+      </div>
+    </>
   )
 }

@@ -17,21 +17,19 @@ import CircularProgress from "@mui/material/CircularProgress"
 
 const tele = window.Telegram.WebApp
 
+
+
+
 export const CreditCard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-
   const [dialogOpen, setDialogOpen] = useState(false)
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false)
-  }
-
   const [tempErrors, setTempErrors] = useState({})
   const [dialogText, setDialogText] = useState("")
-  const { env } = useNavigator()
 
+  const { env } = useNavigator()
   const location = useLocation()
   const navigate = useNavigate()
+
   const state = location?.state
   console.log("state_CreditCard", state)
 
@@ -44,6 +42,10 @@ export const CreditCard = () => {
     address,
     discount,
   } = state
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false)
+  }
 
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
