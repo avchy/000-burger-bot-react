@@ -1,7 +1,4 @@
 import React, { useState } from "react"
-// import BigButton from "./BigButton"
-// import { StyledButton } from "components/styled/StyledButton"
-
 import { Button } from "@mui/material"
 import { useTelegram } from "hooks/useTelegram"
 import "../../App.scss"
@@ -20,12 +17,12 @@ export const Header = () => {
   const location = useLocation()
   const state = location?.state || []
 
+  
+  const WebApp = window.Telegram.WebApp
+  const initDataUnsafe = window.Telegram.WebApp?.initDataUnsafe
+  
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
   const fullURL = window.location.href
-
-  const webAppUser = window.Telegram.WebAppUser
-  const userLang = webAppUser?.language_code
-  const username = webAppUser?.username
 
   const { t, i18n } = useTranslation()
 
@@ -57,13 +54,14 @@ export const Header = () => {
       >
         HE
       </Button>
-      
-{/*       
+å
       <p className={"testText"}>
-        {` webAppUser - ${JSON.stringify(webAppUser, null, 2)}`}{" "}
+        {` initDataUnsafe - ${JSON.stringify(initDataUnsafe, null, 2)}`}{" "}
       </p>
-      <p className={"testText"}>{` userLang - ${userLang}`} </p>
-      <p className={"testText"}>{` username - ${username}`} </p> */}
+      <p className={"testText"}>
+        {` WebApp - ${JSON.stringify(WebApp, null, 2)}`}{" "}
+      </p>
+
       <p className="testText">{`user?.username ${user?.username}`}</p>
 
       <p className={"testText"}>{` timeCommitPushed - ${timeCommitPushed}`} </p>
