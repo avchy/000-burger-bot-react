@@ -19,11 +19,13 @@ export const Header = () => {
   const fullURL = window.location.href
 
   const webAppUser = window.Telegram.WebAppUser
-  const userLang = window.Telegram.WebAppUser.language_code
-  const username = window.Telegram.WebAppUser.username
+  const userLang =  webAppUser?.language_code
+  const username =  webAppUser?.username
 
   return (
     <div className={"header"}>
+      
+      <p className={"testText"}>{` webAppUser - ${JSON.stringify(webAppUser, null, 2)}`} </p>
       <p className={"testText"}>{` userLang - ${userLang}`} </p>
       <p className={"testText"}>{` username - ${username}`} </p>
 
