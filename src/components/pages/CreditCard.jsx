@@ -35,7 +35,15 @@ export const CreditCard = () => {
   const state = location?.state
   console.log("state_CreditCard", state)
 
-  const { queryId, products, totalPrice, comment, address, discount } = state
+  const {
+    queryId,
+    products,
+    totalPrice: totalPrice,
+    totalPriceWithDiscount: totalPriceWithDiscount,
+    comment,
+    address,
+    discount,
+  } = state
 
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
@@ -97,11 +105,7 @@ export const CreditCard = () => {
       setIsSubmitting(true)
 
       const dataPay = {
-        queryId,
-        products,
-        totalPrice,
-        comment,
-        address,
+        ...state,
         paymentMethod: "card",
       }
 

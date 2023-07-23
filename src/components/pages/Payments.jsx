@@ -29,7 +29,15 @@ export function Payments() {
   const location = useLocation()
   const state = location?.state
   console.log("state_in_payments", state)
-  const { products, comment, totalPrice, address, discount } = state
+  // const {
+  //   queryId,
+  //   products,
+  //   comment,
+  //   totalPrice,
+  //   address,
+  //   discount,
+  //   totalPriceWithDiscount,
+  // } = state
 
   // const { cartItems, comment, totalPrice } = state
   // const data = { cartItems, comment, totalPrice }
@@ -37,18 +45,21 @@ export function Payments() {
   tele.MainButton.hide()
   tele.BackButton.show()
 
-  const dataPay = {
-    queryId: tele.initDataUnsafe?.query_id,
-    products: products,
-    totalPrice: totalPrice,
-    comment: comment,
-    address: address,
-    discount: discount,
-  }
-  console.log("dataPay", dataPay)
+  // const dataPay = {
+  //   queryId: queryId,
+  //   products: products,
+  //   totalPrice: totalPrice,
+  //   totalPriceWithDiscount: totalPriceWithDiscount,
+  //   comment: comment,
+  //   address: address,
+  //   discount: discount,
+  // }
+
+  // console.log("dataPay", dataPay)
+  console.log("state", state)
 
   const onCreditCard = useCallback(() => {
-    navigate("/creditCard", { state: { ...dataPay, paymentMethod: "card" } })
+    navigate("/creditCard", { state: { ...state, paymentMethod: "card" } })
   }, [state])
 
   const onBackButtonClicked = useCallback(() => {
@@ -60,7 +71,7 @@ export function Payments() {
   const onApplePay = async () => {
     try {
       const response = await axios.post(serverIP + "/web-data", {
-        ...dataPay,
+        ...state,
         paymentMethod: "applePay",
       })
       console.log("onApplePay_success")
@@ -72,7 +83,7 @@ export function Payments() {
   const onGooglePay = async () => {
     try {
       const response = await axios.post(serverIP + "/web-data", {
-        ...dataPay,
+        ...state,
         paymentMethod: "googlePay",
       })
       console.log("googlePay_success")

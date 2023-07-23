@@ -54,11 +54,13 @@ export function CheckoutPage() {
     }
 
     const data = {
+      queryId: query_id,
       products: cartItems,
       comment: comment,
       address: address,
-      totalPrice: totalPriceWithDiscount,
       discount: discount,
+      totalPrice: totalPrice,
+      totalPriceWithDiscount: totalPriceWithDiscount,
     }
 
     navigate("/payments", { state: data })
