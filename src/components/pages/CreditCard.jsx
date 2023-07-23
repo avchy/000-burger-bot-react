@@ -34,8 +34,8 @@ export const CreditCard = () => {
   const navigate = useNavigate()
   const state = location?.state
   console.log("state_CreditCard", state)
-  const { products, comment, totalPrice } = state
-  // const data = { cartItems, comment, totalPrice }
+
+  const { queryId, products, totalPrice, comment, address } = state
 
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
@@ -97,14 +97,18 @@ export const CreditCard = () => {
       setIsSubmitting(true)
 
       const dataPay = {
-        queryId: tele.initDataUnsafe?.query_id,
-        products: products,
-        totalPrice: totalPrice,
+        queryId,
+        products,
+        totalPrice,
+        comment,
+        address,
+        paymentMethod: "card",
       }
 
       setDialogText(
         `
         serverIP =  ${serverIP}  
+______________________________________________________
 
         dataPay =  ${JSON.stringify(dataPay, null, 2)}
       
@@ -128,7 +132,7 @@ export const CreditCard = () => {
     }
   }
 
-  const creditCardData = {
+  const creditCardInitialData = {
     cardNumber: "1234567890123456",
     expiryDate: "12/23",
     cvv: "123",
@@ -136,10 +140,10 @@ export const CreditCard = () => {
   }
 
   useEffect(() => {
-    setValue("cardNumber", creditCardData.cardNumber)
-    setValue("expiryDate", creditCardData.expiryDate)
-    setValue("cvv", creditCardData.cvv)
-    setValue("email", creditCardData.email)
+    setValue("cardNumber", creditCardInitialData.cardNumber)
+    setValue("expiryDate", creditCardInitialData.expiryDate)
+    setValue("cvv", creditCardInitialData.cvv)
+    setValue("email", creditCardInitialData.email)
   }, [setValue])
 
   useEffect(() => {
@@ -224,7 +228,7 @@ export const CreditCard = () => {
               required: "Card number is required",
             })}
             label="Card Number"
-            defaultValue={creditCardData.cardNumber}
+            // defaultValue={creditCardInitialData.cardNumber}
             error={!!errors.cardNumber}
             helperText={errors.cardNumber?.message}
             sx={{ width: "100%", mb: 2 }}

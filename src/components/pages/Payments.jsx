@@ -29,7 +29,7 @@ export function Payments() {
   const location = useLocation()
   const state = location?.state
   console.log("state_in_payments", state)
-  const { products, comment, totalPrice } = state
+  const { products, comment, totalPrice, address } = state
 
   // const { cartItems, comment, totalPrice } = state
   // const data = { cartItems, comment, totalPrice }
@@ -37,9 +37,17 @@ export function Payments() {
   tele.MainButton.hide()
   tele.BackButton.show()
 
+  const dataPay = {
+    queryId: tele.initDataUnsafe?.query_id,
+    products: products,
+    totalPrice: totalPrice,
+    comment: comment,
+    address: address,
+  }
+  console.log("dataPay", dataPay)
+
   const onCreditCard = useCallback(() => {
-    console.log("data333", state)
-    navigate("/creditCard", { state: state })
+    navigate("/creditCard", { state: { ...dataPay, paymentMethod: "card" } })
   }, [state])
 
   const onBackButtonClicked = useCallback(() => {
@@ -49,35 +57,26 @@ export function Payments() {
   tele.BackButton.onClick(onBackButtonClicked)
 
   const onApplePay = async () => {
-    // tele.sendData(JSON.stringify(state))
     try {
-      const dataPay = {
-        queryId: tele.initDataUnsafe?.query_id,
-        products: products,
-        totalPrice: totalPrice,
-      }
-      console.log("dataPay", dataPay)
-
-      const response = await axios.post(serverIP + "/web-data", dataPay)
-      console.log("success")
+      const response = await axios.post(serverIP + "/web-data", {
+        ...dataPay,
+        paymentMethod: "applePay",
+      })
+      console.log("onApplePay_success")
     } catch (error) {
-      console.log("error", error)
+      console.log("applePay_error", error)
     }
   }
-  
-  const onGooglePay = async () => {
-     try {
-      const dataPay = {
-        queryId: tele.initDataUnsafe?.query_id,
-        products: products,
-        totalPrice: totalPrice,
-      }
-      console.log("dataPay", dataPay)
 
-      const response = await axios.post(serverIP + "/web-data", dataPay)
-      console.log("success")
+  const onGooglePay = async () => {
+    try {
+      const response = await axios.post(serverIP + "/web-data", {
+        ...dataPay,
+        paymentMethod: "googlePay",
+      })
+      console.log("googlePay_success")
     } catch (error) {
-      console.log("error", error)
+      console.log("googlePay_error", error)
     }
   }
 

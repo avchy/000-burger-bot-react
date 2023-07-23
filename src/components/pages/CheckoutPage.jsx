@@ -156,25 +156,25 @@ export function CheckoutPage() {
         )}
 
         <CardRowSmall
-          food={{ id: 9999, title: "Free delivery", textColor: "#4AF2A1" }}
           key={9999}
+          food={{ id: 9999, title: "Free delivery", textColor: "#4AF2A1" }}
         />
         <CardRowSmall
+          key={9998}
           food={{
             id: 9998,
             title: "Discount",
             price: (totalPrice * discount).toFixed(2),
             textColor: "#4AF2A1",
           }}
-          key={9998}
         />
         <CardRowSmall
+          key={9997}
           food={{
-            id: 1,
+            id: 9997,
             title: "Total Price:",
             price: totalPriceWithDiscount,
           }}
-          key={0}
         />
       </div>
 
@@ -184,8 +184,6 @@ export function CheckoutPage() {
           <div className="text_small">{comment}</div>
         </div>
       )}
-
- 
 
       <div className="form">
         <div className="title_mini" style={{ color: "white" }}>
