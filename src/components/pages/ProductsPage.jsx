@@ -1,32 +1,21 @@
 import { useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-
-
-
 import "../../App.scss"
 import { CardColumn } from "components/styled/CardColumn"
 import { BigButton } from "components/styled/BigButton"
-import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
+import { useTranslation } from "react-i18next"
 
 const { getData } = require("db/db")
 const foods = getData()
-
 const tele = window.Telegram.WebApp
-
-import generatedGitInfo from "helpers/generatedGitInfo.json"
-const { gitCommitHash } = generatedGitInfo
-
-import { useTranslation } from "react-i18next"
-import useLocalStorage from "../../hooks/use-localstorage"
-// import i18n from '../../helpers/i18n';
 
 export const ProductsPage = () => {
   const { t, i18n } = useTranslation()
 
-  const changeLanguage = (language) => {
-    i18n.changeLanguage(language)
-  }
+  // const changeLanguage = (language) => {
+  //   i18n.changeLanguage(language)
+  // }
 
   const { env } = useNavigator()
   const location = useLocation()
@@ -105,15 +94,8 @@ export const ProductsPage = () => {
 
   return (
     <>
-    <h2>testttt_prod</h2>
-    <h2>{t("Welcome to React")}</h2>
-
-
-
-      <button onClick={() => changeLanguage("en")}>EN</button>
-      <button onClick={() => changeLanguage("ru")}>RU</button>
-      <div>{t("text")}</div>
-      <div>{t("hello")}</div>
+      <h1>1111prodddd</h1>
+      <h2>{t("Welcome to React")}</h2>
 
       <div className="productsPage">
         <h1 className="title">Burger Shop</h1>
