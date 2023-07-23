@@ -18,8 +18,15 @@ export const Header = () => {
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
   const fullURL = window.location.href
 
+  const webAppUser = window.Telegram.WebAppUser
+  const userLang = window.Telegram.WebAppUser.language_code
+  const username = window.Telegram.WebAppUser.username
+
   return (
     <div className={"header"}>
+      <p className={"testText"}>{` userLang - ${userLang}`} </p>
+      <p className={"testText"}>{` username - ${username}`} </p>
+
       <p className={"testText"}>{` timeCommitPushed - ${timeCommitPushed}`} </p>
       <p className={"testText"}>
         {" "}
