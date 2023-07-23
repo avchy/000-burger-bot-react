@@ -1,6 +1,8 @@
 import { useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
+
+
 import "../../App.scss"
 import { CardColumn } from "components/styled/CardColumn"
 import { BigButton } from "components/styled/BigButton"
@@ -17,20 +19,13 @@ const { gitCommitHash } = generatedGitInfo
 
 import { useTranslation } from "react-i18next"
 import useLocalStorage from "../../hooks/use-localstorage"
-import i18n from "../../helpers/i18n"
+// import i18n from '../../helpers/i18n';
 
 export const ProductsPage = () => {
-  const { t } = useTranslation()
-  const [language, setLanguage] = useLocalStorage("language", "ru")
+  const { t, i18n } = useTranslation()
 
-  const handleLenguageChange = () => {
-    if (language === "en") {
-      i18n.changeLanguage("ru")
-      setLanguage("ru")
-    } else if (language === "ru") {
-      i18n.changeLanguage("en")
-      setLanguage("en")
-    }
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language)
   }
 
   const { env } = useNavigator()
@@ -110,16 +105,15 @@ export const ProductsPage = () => {
 
   return (
     <>
-      <div className="App">
-        <h2>{t("Welcome to React")}</h2>
-        <br />
-        <button onClick={handleLenguageChange}>
-          {t("change to")} {language === "ru" ? t("english") : t("russian")}
-        </button>
-        <button className="reload" onClick={() => window.location.reload()}>
-          {t("refresh page")}
-        </button>
-      </div>
+    <h2>testttt_prod</h2>
+    <h2>{t("Welcome to React")}</h2>
+
+
+
+      <button onClick={() => changeLanguage("en")}>EN</button>
+      <button onClick={() => changeLanguage("ru")}>RU</button>
+      <div>{t("text")}</div>
+      <div>{t("hello")}</div>
 
       <div className="productsPage">
         <h1 className="title">Burger Shop</h1>
