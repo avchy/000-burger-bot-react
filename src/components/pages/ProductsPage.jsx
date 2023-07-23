@@ -94,11 +94,9 @@ export const ProductsPage = () => {
 
   return (
     <>
-      <h1>1111prodddd</h1>
-      <h2>{t("Welcome to React")}</h2>
-
+ 
       <div className="productsPage">
-        <h1 className="title">Burger Shop</h1>
+        <h1 className="title">{t("Burger Shop")}</h1>
         {/* <h1 className='title'>env222 = {env}</h1> */}
         <div className="cards_container">
           {foods.map((food) => {
