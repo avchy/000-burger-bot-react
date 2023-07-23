@@ -29,7 +29,7 @@ export function Payments() {
   const location = useLocation()
   const state = location?.state
   console.log("state_in_payments", state)
-  const { products, comment, totalPrice, address } = state
+  const { products, comment, totalPrice, address, discount } = state
 
   // const { cartItems, comment, totalPrice } = state
   // const data = { cartItems, comment, totalPrice }
@@ -43,6 +43,7 @@ export function Payments() {
     totalPrice: totalPrice,
     comment: comment,
     address: address,
+    discount: discount,
   }
   console.log("dataPay", dataPay)
 

@@ -58,6 +58,7 @@ export function CheckoutPage() {
       comment: comment,
       address: address,
       totalPrice: totalPriceWithDiscount,
+      discount: discount,
     }
 
     navigate("/payments", { state: data })

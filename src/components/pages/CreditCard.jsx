@@ -35,7 +35,7 @@ export const CreditCard = () => {
   const state = location?.state
   console.log("state_CreditCard", state)
 
-  const { queryId, products, totalPrice, comment, address } = state
+  const { queryId, products, totalPrice, comment, address, discount } = state
 
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
