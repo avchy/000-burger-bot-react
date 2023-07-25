@@ -21,10 +21,12 @@ import googlePay from "../../images/icons/googlePay.png"
 const tele = window.Telegram.WebApp
 import { serverIP } from "constants/api"
 import axios from "axios"
+import { useTranslation } from "react-i18next"
 
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
 
   const location = useLocation()
   const state = location?.state
@@ -110,15 +112,16 @@ export function Payments() {
         }}
       >
         <StyledButton onClick={onCreditCard} variant="contained">
-          Credit Card
+          {t("Credit Card")}
         </StyledButton>
 
         <StyledButton onClick={onApplePay} variant="contained">
-          Buy with <img src={applePay} alt="applePay" /> Pay
+          {t("Buy with")}
+          <img src={applePay} alt="applePay" /> Pay
         </StyledButton>
 
         <StyledButton onClick={onGooglePay} variant="contained">
-          Buy with <img src={googlePay} alt="googlePay" /> Pay
+          {t("Buy with")} <img src={googlePay} alt="googlePay" /> Pay
         </StyledButton>
       </FlexColumnContainer>
     </>

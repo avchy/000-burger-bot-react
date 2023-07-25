@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react"
 import axios from "axios"
-import { FlexColumnContainer, StyledTextField } from "components/styled/AllHelpComponents"
+import {
+  FlexColumnContainer,
+  StyledTextField,
+} from "components/styled/AllHelpComponents"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button, Typography, Grid } from "@mui/material"
 import { useForm } from "react-hook-form"
@@ -271,8 +274,20 @@ ______________________________________________________
           onClose={handleCloseDialog}
         />
 
-        {isSubmitting ? (
+        {/* {isSubmitting ? (
           <CircularProgress size={16} color="primary" sx={{ marginRight: "1rem" }} />
+        ) : null} */}
+        {isSubmitting ? (
+          <div id="fullscreen-overlay">
+            <FlexColumnContainer>
+              <Box sx={{ fontSize: 3 }}>Sending...</Box>
+              <CircularProgress
+                size={32}
+                color="primary"
+                sx={{ marginRight: "1rem" }}
+              />
+            </FlexColumnContainer>
+          </div>
         ) : null}
       </FlexColumnContainer>
     </>

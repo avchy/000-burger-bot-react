@@ -95,8 +95,7 @@ export const ProductsPage = () => {
     <>
  
       <div className="productsPage">
-        {/* <h1 className="title">{t("Burger Shop")}</h1> */}
-        {/* <h1 className='title'>env222 = {env}</h1> */}
+        <h1 className="title">{t("Burger Shop")}</h1>
         <div className="cards_container">
           {foods.map((food) => {
             const cartItemWithQuantity = cartItems.find(

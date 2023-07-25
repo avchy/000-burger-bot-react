@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle"
 import { useState, useCallback } from "react"
 
 export default function DialogComponent({ text, buttonRight, open, onClose }) {
-  console.log("{text, buttonRight}", { text, buttonRight })
+  // console.log("{text, buttonRight}", { text, buttonRight })
 
   const [dialogOpen, setDialogOpen] = useState(open)
 

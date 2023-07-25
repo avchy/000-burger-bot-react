@@ -1,6 +1,7 @@
 import en from "../trans/en.json"
 import ru from "../trans/ru.json"
 import he from "../trans/he.json"
+import fr from "../trans/fr.json"
 
 import { initReactI18next } from "react-i18next"
 import i18n from "i18next"
@@ -14,6 +15,9 @@ const resources = {
   },
   he: {
     translation: he,
+  },
+  fr: {
+    translation: fr,
   },
 }
 

@@ -70,7 +70,7 @@ export const OrderPage = () => {
   return (
     <div className="orderPage">
       <div className="orderHeaderEdit">
-        <h1 className="title">Your Order </h1>
+        <h1 className="title">{t("Your Order")}</h1>
         <Link
           // to="/"
           onClick={(e) => {
@@ -81,7 +81,7 @@ export const OrderPage = () => {
           title="Edit"
           className="navLinkEdit"
         >
-           {t("Edit")}
+          {t("Edit")}
         </Link>
       </div>
 
@@ -95,7 +95,7 @@ export const OrderPage = () => {
         <input
           className="cafe-text-field js-order-comment-field cafe-block"
           rows="1"
-          placeholder={t('Add comment')}
+          placeholder={t("Add comment")}
           // placeholder="Add comment"
           style={styles}
           type="text"
@@ -104,7 +104,7 @@ export const OrderPage = () => {
         />
 
         <div className="cafe-text-field-hint">
-           {t('Any special requests, details, final wishes etc.')}
+          {t("Any special requests, details, final wishes etc.")}
         </div>
       </div>
 

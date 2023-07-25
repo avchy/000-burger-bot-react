@@ -51,6 +51,9 @@
     "expiryDate is required": "נדרש תאריך תפוגה",
     "cvvCode is required": "נדרש קוד CVV",
     "email is required": "נדרש כתובת דואר אלקטרוני",
-    "ok": "אישור"
+    "ok": "אישור",
+    
+     "Credit Card": "Credit Card",
+    "Buy with": "Buy with"
     
 }

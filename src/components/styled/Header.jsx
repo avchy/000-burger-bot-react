@@ -2,24 +2,28 @@ import React, { useState } from "react"
 import { Button } from "@mui/material"
 import { useTelegram } from "hooks/useTelegram"
 import "../../App.scss"
- import { US, IL, RU } from "country-flag-icons/react/3x2"
-
+import { US, IL, RU, FR } from "country-flag-icons/react/3x2"
+import { FlexRowContainer } from "components/styled/AllHelpComponents"
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
   generatedGitInfo
-
+import { Box } from "@mui/system"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
 export const Header = () => {
   const { user, onClose } = useTelegram()
 
-  const [currentLanguage, setCurrentLanguage] = useState("en")
+  const initDataUnsafe = window.Telegram.WebApp?.initDataUnsafe || {}
+
+  const [currentLanguage, setCurrentLanguage] = useState(
+    initDataUnsafe.language_code || "en"
+  )
+
   const location = useLocation()
   const state = location?.state || []
 
   const WebApp = window.Telegram.WebApp
-  const initDataUnsafe = window.Telegram.WebApp?.initDataUnsafe
 
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
   const fullURL = window.location.href
@@ -32,33 +36,46 @@ export const Header = () => {
   }
 
   return (
-    <div className={"header"}>
-      <Button
-        sx={{ mr: 1 }}
-        variant={currentLanguage === "en" ? "contained" : "outlined"}
-        onClick={() => changeLanguage("en")}
-      >
-        <US title="United States" className="countryFlag" />
-        EN
-      </Button>
-      <Button
-        sx={{ mr: 1 }}
-        variant={currentLanguage === "ru" ? "contained" : "outlined"}
-        onClick={() => changeLanguage("ru")}
-      >
-        <RU title="Russian" className="countryFlag" />
-        RU
-      </Button>
-
-      <Button
-        sx={{ mr: 1 }}
-        variant={currentLanguage === "he" ? "contained" : "outlined"}
-        onClick={() => changeLanguage("he")}
-      >
-        <IL title="Israel" className="countryFlag" />
-        HE
-      </Button>
-
+    <>
+      <FlexRowContainer
+        sx={{
+          // alignContent: "center",
+          // display: "flex",
+          // flexDirection: "row",
+          // alignItems: "center",
+          justifyContent: "space-around",
+         }}
+       >
+        <Button
+           variant={currentLanguage === "en" ? "contained" : "outlined"}
+          onClick={() => changeLanguage("en")}
+        >
+          <US title="United States" className="countryFlag" />
+          EN
+        </Button>
+        <Button
+           variant={currentLanguage === "ru" ? "contained" : "outlined"}
+          onClick={() => changeLanguage("ru")}
+        >
+          <RU title="Russian" className="countryFlag" />
+          RU
+        </Button>
+        <Button
+           variant={currentLanguage === "he" ? "contained" : "outlined"}
+          onClick={() => changeLanguage("he")}
+        >
+          <IL title="Israel" className="countryFlag" />
+          HE
+        </Button>
+        <Button
+           variant={currentLanguage === "fr" ? "contained" : "outlined"}
+          onClick={() => changeLanguage("fr")}
+        >
+          <FR title="France" className="countryFlag" />
+          FR
+        </Button>
+      </FlexRowContainer>
+      {/* 
       <p className={"testText"}>
         {` initDataUnsafe - ${JSON.stringify(initDataUnsafe, null, 2)}`}{" "}
       </p>
@@ -81,8 +98,9 @@ export const Header = () => {
       <p className={"testText"}>
         {" "}
         {` state - ${JSON.stringify(state, null, 2)}`}{" "}
-      </p>
+      </p> */}
+
       {/* <BigButton onClick={onClose}>Close</BigButton> */}
-    </div>
+    </>
   )
 }

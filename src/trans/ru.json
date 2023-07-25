@@ -51,6 +51,10 @@
     "expiryDate is required": "требуется срок действия",
     "cvvCode is required": "требуется CVV-код",
     "email is required": "требуется электронная почта",
-    "ok": "ок"
+     
+    
+    "ok": "ok",
+    "Credit Card": "Кредитная карта",
+    "Buy with": "Купить с "
     
 }

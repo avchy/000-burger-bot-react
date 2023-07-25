@@ -51,5 +51,13 @@
     "expiryDate is required": " expiry Date is required",
     "cvvCode is required": " cvv Code is required",
     "email is required": " email is required",
-    "ok": "ok"
+    "ok": "ok",
+    "Credit Card": "Credit Card",
+    "Buy with": "Buy with"
+     
+  
+      
+      
+      
+
 }
