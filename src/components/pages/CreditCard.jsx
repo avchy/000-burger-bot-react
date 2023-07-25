@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react"
 import axios from "axios"
-import {
-  FlexColumnContainer,
-  StyledTextField,
-} from "components/styled/AllHelpComponents"
+import { FlexColumnContainer, StyledTextField } from "components/styled/AllHelpComponents"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button, Typography, Grid } from "@mui/material"
 import { useForm } from "react-hook-form"
@@ -11,16 +8,16 @@ import { serverIP } from "constants/api"
 import { Box } from "@mui/system"
 import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
-import AlertDialog from "components/styled/AlertDialog"
-import { DialogComponent } from "components/styled/DialogComponent"
+import DialogComponent from "components/styled/DialogComponent"
 import CircularProgress from "@mui/material/CircularProgress"
 
 const tele = window.Telegram.WebApp
 
-
-
+import { useTranslation } from "react-i18next"
 
 export const CreditCard = () => {
+  const { t, i18n } = useTranslation()
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [tempErrors, setTempErrors] = useState({})
@@ -71,33 +68,33 @@ export const CreditCard = () => {
     if (!data.cardNumber || !/^\d{16}$/.test(data.cardNumber)) {
       setError("cardNumber", {
         type: "manual",
-        message: "The card number is not correct",
+        message: t("incorrectCardNumber"),
       })
-      errors.cardNumber = "The card number is not correct"
+      errors.cardNumber = t("incorrectCardNumber")
     }
 
     if (!data.expiryDate || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(data.expiryDate)) {
       setError("expiryDate", {
         type: "manual",
-        message: "Expiration date is not correct",
+        message: t("incorrectExpiryDate"),
       })
-      errors.expiryDate = "Expiration date is not correct"
+      errors.expiryDate = t("incorrectExpiryDate")
     }
 
     if (!data.cvv || !/^\d{3,4}$/.test(data.cvv)) {
       setError("cvv", {
         type: "manual",
-        message: "CVV code is not correct",
+        message: t("incorrectCvvCode"),
       })
-      errors.cvv = "CVV code is not correct"
+      errors.cvv = t("incorrectCvvCode")
     }
 
     if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       setError("email", {
         type: "manual",
-        message: "Incorrect e-mail address",
+        message: t("incorrectEmail"),
       })
-      errors.email = "Incorrect e-mail address"
+      errors.email = t("incorrectEmail")
     }
     return errors
   }
@@ -125,12 +122,12 @@ ______________________________________________________
 
       const response = await axios.post(serverIP + "/web-data", dataPay)
 
-      setDialogText("success")
+      setDialogText(t("success"))
       setDialogOpen(true)
     } catch (error) {
       setDialogText(JSON.stringify(error, null, 2))
 
-      // setDialogText("error")
+      // setDialogText(t("error"))
       // setDialogOpen(true)
       console.log("error333", error)
     } finally {
@@ -168,7 +165,7 @@ ______________________________________________________
 
   useEffect(() => {
     tele.MainButton.show()
-    tele.MainButton.setParams({ text: "PAY" })
+    tele.MainButton.setParams({ text: t("submitButton") })
   }, [])
 
   // const validationSchema = Yup.object().shape({
@@ -218,23 +215,20 @@ ______________________________________________________
           backgroundColor: "white",
           gap: 2,
           color: "black",
-          height:
-            "100vh" /* Set the container's height to 100% of the viewport height */,
+          height: "100vh",
           padding: "20px",
-          justifyContent: "center" /* Vertically center the content */,
-          alignItems: "center" /* Horizontally center the content */,
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {/* <Typography>Card Payment</Typography> */}
-        <h1 className="title">Card Payment </h1>
+        <h1 className="title">{t("paymentHeading")}</h1>
 
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <StyledTextField
             {...register("cardNumber", {
-              required: "Card number is required",
+              required: t("cardNumber is required"),
             })}
-            label="Card Number"
-            // defaultValue={creditCardInitialData.cardNumber}
+            label={t("cardNumberLabel")}
             error={!!errors.cardNumber}
             helperText={errors.cardNumber?.message}
             sx={{ width: "100%", mb: 2 }}
@@ -243,46 +237,42 @@ ______________________________________________________
           <Box sx={{ display: "flex", gap: "16px", pb: 2 }}>
             <StyledTextField
               {...register("expiryDate", {
-                required: "Expiry date is required",
+                required: t("expiryDate is required"),
               })}
-              label="Expiry Date"
+              label={t("expiryDateLabel")}
               error={!!errors.expiryDate}
               helperText={errors.expiryDate?.message}
               sx={{ flex: 1, mr: 2 }}
             />
             <StyledTextField
-              {...register("cvv", { required: "CVV code is required" })}
-              label="CVV Code"
+              {...register("cvv", { required: t("cvvCode is required") })}
+              label={t("cvvCodeLabel")}
               error={!!errors.cvv}
               helperText={errors.cvv?.message}
               sx={{ flex: 1 }}
             />
           </Box>
           <StyledTextField
-            {...register("email", { required: "Email is required" })}
-            label="Email"
+            {...register("email", { required: t("email is required") })}
+            label={t("emailLabel")}
             error={!!errors.email}
             helperText={errors.email?.message}
             sx={{ width: "100%", mb: 2 }}
           />
-          {env == "browser" && (
-            <StyledButton type="submit">Submit</StyledButton>
+          {env === "browser" && (
+            <StyledButton type="submit">{t("submitButton")}</StyledButton>
           )}
         </Box>
 
-        <AlertDialog
+        <DialogComponent
           text={dialogText}
-          buttonRight={"ok"}
+          buttonRight={t("ok")}
           open={dialogOpen}
           onClose={handleCloseDialog}
         />
 
         {isSubmitting ? (
-          <CircularProgress
-            size={16}
-            color="primary"
-            sx={{ marginRight: "1rem" }}
-          />
+          <CircularProgress size={16} color="primary" sx={{ marginRight: "1rem" }} />
         ) : null}
       </FlexColumnContainer>
     </>

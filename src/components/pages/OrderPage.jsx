@@ -8,7 +8,11 @@ import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
 const tele = window.Telegram.WebApp
 
+import { useTranslation } from "react-i18next"
+
 export const OrderPage = () => {
+  const { t, i18n } = useTranslation()
+
   // const { tele } = useTelegram()
   const navigate = useNavigate()
   const { env } = useNavigator()
@@ -77,7 +81,7 @@ export const OrderPage = () => {
           title="Edit"
           className="navLinkEdit"
         >
-          Edit
+           {t("Edit")}
         </Link>
       </div>
 
@@ -91,7 +95,8 @@ export const OrderPage = () => {
         <input
           className="cafe-text-field js-order-comment-field cafe-block"
           rows="1"
-          placeholder="Add comment…"
+          placeholder={t('Add comment')}
+          // placeholder="Add comment"
           style={styles}
           type="text"
           value={comment}
@@ -99,7 +104,7 @@ export const OrderPage = () => {
         />
 
         <div className="cafe-text-field-hint">
-          Any special requests, details, final wishes etc.
+           {t('Any special requests, details, final wishes etc.')}
         </div>
       </div>
 

@@ -1,38 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 import "../../App.scss"
-import { Button } from './Button'
+import { Button } from "./Button"
+import { useTranslation } from "react-i18next"
 
-export function CardColumn({ food, onAdd, onRemove,quantity }) {
-    const [count, setCount] = useState(quantity || 0)
-    const { title, Image, price, id } = food
+export function CardColumn({ food, onAdd, onRemove, quantity }) {
+  const [count, setCount] = useState(quantity || 0)
+  const { title, Image, price, id } = food
+  const { t, i18n } = useTranslation()
 
-    const handleIncrement = () => {
-        setCount(count + 1)
-        onAdd(food)
-    }
-    
-    const handleDecrement = () => {
-        setCount(count - 1)
-        onRemove(food)
-    }
+  const handleIncrement = () => {
+    setCount(count + 1)
+    onAdd(food)
+  }
 
-    return (
-        <div className='CardColumn'>
-            <span className={`${count !== 0 ? 'card_badge' : 'card_badge--hidden'}`}>{count}</span>
-            <div className='image_container'>
-                <img src={Image} alt={title} />
-            </div>
-            <h4 className='card_title'>{title}</h4>
-            <p className='cart_text_center'>{price} ₪</p>
+  const handleDecrement = () => {
+    setCount(count - 1)
+    onRemove(food)
+  }
 
-            <div className='btn-container'>
-                <Button title={'+'} type={'add'} onClick={handleIncrement} />
-                {count !== 0 ? (
-                    <Button title={'-'} type={'remove'} onClick={handleDecrement} />
-                ) : (
-                    ''
-                )}
-            </div>
-        </div>
-    )
+  return (
+    <div className="CardColumn">
+      <span className={`${count !== 0 ? "card_badge" : "card_badge--hidden"}`}>
+        {count}
+      </span>
+      <div className="image_container">
+        <img src={Image} alt={title} />
+      </div>
+
+      {/* <h4 className="card_title">{title}</h4> */}
+      <h4 className="card_title">{t(title)}</h4>
+ 
+      <p className="cart_text_center">{price} ₪</p>
+
+      <div className="btn-container">
+        <Button title={"+"} type={"add"} onClick={handleIncrement} />
+        {count !== 0 ? (
+          <Button title={"-"} type={"remove"} onClick={handleDecrement} />
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
+  )
 }

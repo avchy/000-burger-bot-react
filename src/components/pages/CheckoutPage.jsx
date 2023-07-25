@@ -22,7 +22,11 @@ import { discount } from "constants/constants"
 
 const tele = window.Telegram.WebApp
 
+import { useTranslation } from "react-i18next"
+
 export function CheckoutPage() {
+  const { t, i18n } = useTranslation()
+
   const { env } = useNavigator()
 
   const [address, setAddress] = useState("")
@@ -101,52 +105,22 @@ export function CheckoutPage() {
 
   useEffect(() => {
     tele.BackButton.show()
-    tele.MainButton.setParams({ text: "PAY" })
+    tele.MainButton.setParams({ text: t("PAY") })
   }, [])
 
-  // const CssTextField = makeStyles({
-  //   root: {
-  //     "& label.Mui-focused": {
-  //       color: "white",
-  //     },
-  //     "& .MuiInput-underline:after": {
-  //       borderBottomColor: "yellow",
-  //     },
-  //     "& .MuiOutlinedInput-root": {
-  //       "& fieldset": {
-  //         borderColor: "white",
-  //       },
-  //       "&:hover fieldset": {
-  //         borderColor: "white",
-  //       },
-  //       "&.Mui-focused fieldset": {
-  //         borderColor: "yellow",
-  //       },
-  //     },
-  //   },
-  // })(TextField)
   return (
     <>
-      {/* <div className="testWindow">
-        <p className="testText">{`tempData ${JSON.stringify(
-          tempData,
-          null,
-          2
-        )}`}</p>
-        <p className="testText">{`tempError ${tempError}`}</p>
-      </div> */}
-
       <div className="checkoutPage">
-        <h1 className="title">Checkout</h1>
+        <h1 className="title">{t("Checkout")}</h1>
         <div className="orderContainer">
           <div className="imageContainer">
             <img src={orderImg} alt={"orderImg"} />
           </div>
 
           <div className="textContainer">
-            <div className="text1"> Order № 770770</div>
-            <div className="text1"> Perfect lunch from Burger Bot.</div>
-            <div className="text_small">{discount}% discount</div>
+            <div className="text1"> {t("Order")} № 770770</div>
+            <div className="text1"> {t('Perfect lunch from Burger Bot.')}</div>
+            <div className="text_small">{`${discount}% ${t("discount")}`}</div>
           </div>
         </div>
 
@@ -160,13 +134,13 @@ export function CheckoutPage() {
 
         <CardRowSmall
           key={9999}
-          food={{ id: 9999, title: "Free delivery", textColor: "#4AF2A1" }}
+          food={{ id: 9999, title:  t("Free delivery"), textColor: "#4AF2A1" }}
         />
         <CardRowSmall
           key={9998}
           food={{
             id: 9998,
-            title: "Discount",
+            title:   t("Discount"),
             price: (totalPrice * discount).toFixed(2),
             textColor: "#4AF2A1",
           }}
@@ -175,22 +149,22 @@ export function CheckoutPage() {
           key={9997}
           food={{
             id: 9997,
-            title: "Total Price:",
-            price: totalPriceWithDiscount,
+            title: t("Total Price:"),
+             price: totalPriceWithDiscount,
           }}
         />
       </div>
 
       {comment && (
         <div className="comment_container">
-          <div className="title_mini"> Your Comment : </div>
+          <div className="title_mini">  {t("Your Comment :")} </div>
           <div className="text_small">{comment}</div>
         </div>
       )}
 
       <div className="form">
         <div className="title_mini" style={{ color: "white" }}>
-          Choose where you eat
+          {t("Choose where you eat")}
         </div>
 
         <FormControl
@@ -198,7 +172,7 @@ export function CheckoutPage() {
           style={{ borderColor: "white", color: "white" }}
         >
           <InputLabel style={{ borderColor: "white", color: "white" }}>
-            Select Delivery Option
+            {t("Select Delivery Option")}
           </InputLabel>
           <Select
             value={optionDelivery}
@@ -221,8 +195,8 @@ export function CheckoutPage() {
             labelId="select-filter-by-field-labe;"
             id="select-filter-by-field"
           >
-            <MenuItem value="on_site">On Site</MenuItem>
-            <MenuItem value="take_away">Take Away</MenuItem>
+            <MenuItem value="on_site">{t("On Site")}</MenuItem>
+            <MenuItem value="take_away">{t("Take Away")}</MenuItem>
           </Select>
         </FormControl>
 
@@ -249,10 +223,10 @@ export function CheckoutPage() {
             }}
             className="input"
             type="text"
-            label="Address"
+            label={t("Address")}
             value={address}
             onChange={onChangeAddress}
-            placeholder="Enter address"
+            placeholder={t("Enter address")}
             InputLabelProps={{
               style: { color: "white" },
             }}
@@ -264,13 +238,11 @@ export function CheckoutPage() {
         )}
       </div>
 
-      {console.log("env  :>> ", env)}
-
       {env === "browser" &&
         (optionDelivery === "on_site" ||
           (optionDelivery === "take_away" && address)) && (
           <BigButton
-            title={`${"Payments"} `}
+            title={t("Payments")}
             type={"payments"}
             disable={cartItems.length === 0 ? true : false}
             onClick={onSubmit}

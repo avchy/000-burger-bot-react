@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Button } from "@mui/material"
 import { useTelegram } from "hooks/useTelegram"
 import "../../App.scss"
+ import { US, IL, RU } from "country-flag-icons/react/3x2"
 
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
@@ -17,10 +18,9 @@ export const Header = () => {
   const location = useLocation()
   const state = location?.state || []
 
-  
   const WebApp = window.Telegram.WebApp
   const initDataUnsafe = window.Telegram.WebApp?.initDataUnsafe
-  
+
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
   const fullURL = window.location.href
 
@@ -38,6 +38,7 @@ export const Header = () => {
         variant={currentLanguage === "en" ? "contained" : "outlined"}
         onClick={() => changeLanguage("en")}
       >
+        <US title="United States" className="countryFlag" />
         EN
       </Button>
       <Button
@@ -45,16 +46,19 @@ export const Header = () => {
         variant={currentLanguage === "ru" ? "contained" : "outlined"}
         onClick={() => changeLanguage("ru")}
       >
+        <RU title="Russian" className="countryFlag" />
         RU
       </Button>
+
       <Button
         sx={{ mr: 1 }}
         variant={currentLanguage === "he" ? "contained" : "outlined"}
         onClick={() => changeLanguage("he")}
       >
+        <IL title="Israel" className="countryFlag" />
         HE
       </Button>
-å
+
       <p className={"testText"}>
         {` initDataUnsafe - ${JSON.stringify(initDataUnsafe, null, 2)}`}{" "}
       </p>

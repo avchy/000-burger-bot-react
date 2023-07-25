@@ -1,9 +1,18 @@
 import "../../App.scss"
 
+
+
+import { useTranslation } from "react-i18next"
+
+
+
+
+
 export function CardRowSmall({ food }) {
   const { title, Image, price, quantity, textColor } = food
   console.log("textColor111", textColor)
   const priceAllItems = (price * (quantity || 1)).toFixed(2)
+  const { t, i18n } = useTranslation()
 
   return (
     <div className="CardRowSmall">
@@ -14,7 +23,11 @@ export function CardRowSmall({ food }) {
           </div>
         )}
 
-        <span className="cart_text_center">{title}</span>
+        <span className="cart_text_center">{t(title)}</span>
+        {/* <span className="cart_text_center">{title}</span> */}
+      
+
+        
         {/* <span className="cart_text_center left">{title}</span> */}
       </div>
 

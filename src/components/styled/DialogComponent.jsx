@@ -1,27 +1,16 @@
-import React, { useState, useCallback } from 'react'
-import {
-  Button,
-  CircularProgress,
-  Typography,
-  TableCell,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from '@mui/material'
+import * as React from "react"
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogContentText from "@mui/material/DialogContentText"
+import DialogTitle from "@mui/material/DialogTitle"
 
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
-import { AiFillCloseSquare } from 'react-icons/ai'
-import { IoCloseOutline } from 'react-icons/io5'
+import { useState, useCallback } from "react"
 
-const styled_icon = {
-  fontSize: '20px',
-  backgroundColor: '#F5F5F5',
-  color: '#3B3B3B',
-}
+export default function DialogComponent({ text, buttonRight, open, onClose }) {
+  console.log("{text, buttonRight}", { text, buttonRight })
 
-export const DialogComponent = ({ title, content, open, onClose }) => {
   const [dialogOpen, setDialogOpen] = useState(open)
 
   const handleCloseDialog = useCallback(() => {
@@ -37,60 +26,23 @@ export const DialogComponent = ({ title, content, open, onClose }) => {
     setDialogOpen(open)
   }, [open])
 
-  function CloseBox(props) {
-    const { children, onClose, ...other } = props
-
-    return (
-      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-        {children}
-        {onClose ? (
-          <IconButton
-            onClick={onClose}
-            size='large'
-            sx={{
-              position: 'absolute',
-              left: '24px',
-              top: '24px',
-              width: '32px',
-              height: '32px',
-              backgroundColor: '#F5F5F5',
-              borderRadius: '5px',
-            }}
-          >
-            <CloseIcon onClick={onClose} style={styled_icon} />
-            <IoCloseOutline onClick={onClose} style={styled_icon} />
-          </IconButton>
-        ) : null}
-      </DialogTitle>
-    )
-  }
-
   return (
     <>
-      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-        <CloseBox onClose={handleCloseDialog}></CloseBox>
-
-        <DialogTitle
-          sx={{
-            p: '85px 114px 0 114px',
-            font: 'normal normal 600 33px/39px Rubik',
-            color: ' #3B3B3B',
-            width: '355px',
-          }}
-        >
-          {title}
-        </DialogTitle>
-        <DialogContent
-          sx={{
-            p: '85px 114px 0 114px',
-            font: 'normal normal 300 26px/31px Rubik',
-            color: ' #3B3B3B',
-            width: '355px',
-            pb: '120px',
-          }}
-        >
-          {content}
+      <Dialog
+        open={open}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"DialogTitle"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {text}
+          </DialogContentText>
         </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>{buttonRight}</Button>
+        </DialogActions>
       </Dialog>
     </>
   )

@@ -19,6 +19,15 @@ body {
   margin-top: 50px;
 }
 
+.countryFlag {
+  padding: 10px;
+  // margin: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .title_mini {
   // text-align: center;
   // margin: 10px 0 10px 0;
@@ -114,7 +123,7 @@ body {
 
       .text1 {
         color: $white;
-        word-wrap: break-word; /* Перенос слов */ 
+        word-wrap: break-word; /* Перенос слов */
       }
 
       .text_small {
@@ -171,7 +180,7 @@ body {
   // .left {
   //   text-align: left;
   // }
-  
+
   .cart_text_center {
     text-align: center;
     // text-align: left;
@@ -264,8 +273,8 @@ body {
   margin: 13px 10px;
   position: relative;
   /* border-radius: 5px; */
-  overflow: hidden;  
-  white-space: pre-wrap; 
+  overflow: hidden;
+  white-space: pre-wrap;
   text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
 
   .image_container {
