@@ -28,7 +28,9 @@ export const OrderPage = () => {
   })
 
   useEffect(() => {
-    tele.MainButton.text = "CHECKOUT"
+    tele.MainButton.text = t("Checkout")
+    tele.BackButton.text = t("Edit")
+    tele.BackButton.show()
   }, [])
 
   const handleChange = (event) => {
@@ -45,8 +47,7 @@ export const OrderPage = () => {
   }, [cartItems, comment])
 
   const onBackButtonClicked = useCallback(() => {
-    // navigate(-1)
-    navigate("/", { state: { cartItems, comment, totalPrice } })
+     navigate("/", { state: { cartItems, comment, totalPrice } })
   }, [cartItems])
 
   useEffect(() => {

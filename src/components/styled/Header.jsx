@@ -90,7 +90,7 @@ export const Header = () => {
         </Button>
       </FlexRowContainer>
 
-      <p className="testText">{`user?.language_code ${user?.language_code}`}</p>
+      {/* <p className="testText">{`user?.language_code ${user?.language_code}`}</p> */}
 
       {/* <p className={"testText"}>
         {` initDataUnsafe - ${JSON.stringify(tele?.initDataUnsafe, null, 2)}`}{" "}
