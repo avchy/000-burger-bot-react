@@ -52,6 +52,8 @@
     "cvvCode is required": "требуется CVV-код",
     "email is required": "требуется электронная почта",
      
+    "CHECKOUT": "ОФОРМЛЕНИЕ ЗАКАЗА",
+    "VIEW ORDER": "ПРОСМОТР ЗАКАЗА",
     
     "ok": "ok",
     "Credit Card": "Кредитная карта",

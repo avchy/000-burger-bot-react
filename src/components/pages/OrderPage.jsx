@@ -28,7 +28,7 @@ export const OrderPage = () => {
   })
 
   useEffect(() => {
-    tele.MainButton.text = t("Checkout")
+    tele.MainButton.text = t("CHECKOUT")
     tele.BackButton.text = t("Edit")
     tele.BackButton.show()
   }, [])

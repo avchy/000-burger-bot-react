@@ -20,7 +20,7 @@ export const ProductsPage = () => {
 
   const { env } = useNavigator()
   const location = useLocation()
-   const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
+  const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -88,13 +88,12 @@ export const ProductsPage = () => {
 
   useEffect(() => {
     tele.BackButton.hide()
-    tele.MainButton.text = "VIEW ORDER"
+    tele.MainButton.text = t("VIEW ORDER")
     // tele.enableClosingConfirmation()
   }, [])
 
   return (
     <>
- 
       <div className="productsPage">
         <h1 className="title">{t("Burger Shop")}</h1>
         <div className="cards_container">
@@ -127,8 +126,6 @@ export const ProductsPage = () => {
           //   disable={cartItems.length === 0 ? true : false}
           //   onClick={onSubmit}
           // />
-          
-         
         )}
       </div>
     </>

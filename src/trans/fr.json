@@ -52,7 +52,8 @@
     "cvvCode is required": "Code CVV requis",
     "email is required": "Email requis",
     "ok": "ok",
-    
-    
+    "CHECKOUT": "PAIEMENT",
+    "VIEW ORDER": "VOIR LA COMMANDE",
     "Credit Card": "Carte de crédit",
-    "Buy with": "Acheter avec"}
+    "Buy with": "Acheter avec"
+}
