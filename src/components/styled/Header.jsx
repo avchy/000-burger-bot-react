@@ -10,6 +10,7 @@ const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
 import { Box } from "@mui/system"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+const tele = window.Telegram.WebApp
 
 export const Header = () => {
   const { user, onClose } = useTelegram()
@@ -17,9 +18,12 @@ export const Header = () => {
   const [currentLanguage, setCurrentLanguage] = useState("en")
 
   useEffect(() => {
+    tele.ready()
+  })
+
+  useEffect(() => {
     setCurrentLanguage(
-      window.Telegram.WebApp?.initDataUnsafe?.initDataUnsafe?.language_code ||
-        "en"
+      tele?.initDataUnsafe?.initDataUnsafe?.language_code || "en"
     )
   }, [])
 
@@ -51,7 +55,7 @@ export const Header = () => {
           marginBottom: "10px",
         }}
       >
-        {/* <p>{currentLanguage}</p> */}
+        <p>{currentLanguage}</p>
         <Button
           variant={currentLanguage === "en" ? "contained" : "outlined"}
           onClick={() => changeLanguage("en")}
