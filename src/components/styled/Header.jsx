@@ -44,6 +44,7 @@ export const Header = () => {
           // flexDirection: "row",
           // alignItems: "center",
           justifyContent: "space-around",
+          gap: "10px",
          }}
        >
         <Button
