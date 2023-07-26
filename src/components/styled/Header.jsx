@@ -12,7 +12,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 const tele = window.Telegram.WebApp
 
-const language_code = tele?.initDataUnsafe?.initDataUnsafe?.language_code
+const language_code = tele?.initDataUnsafe?.language_code
 console.log("language_code", language_code)
 
 export const Header = () => {
@@ -25,9 +25,7 @@ export const Header = () => {
   })
 
   useEffect(() => {
-    setCurrentLanguage(
-      language_code || "en"
-    )
+    setCurrentLanguage(language_code || "en")
   }, [language_code])
 
   const location = useLocation()
