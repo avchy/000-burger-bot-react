@@ -94,14 +94,14 @@ export const Header = () => {
 
       <p className="testText">{`user?.language_code ${user?.language_code}`}</p>
 
-      {/* 
+      
 
       <p className={"testText"}>
         {` initDataUnsafe - ${JSON.stringify(tele?.initDataUnsafe, null, 2)}`}{" "}
       </p>
       <p className={"testText"}>
         {` WebApp - ${JSON.stringify(WebApp, null, 2)}`}{" "}
-      </p> */}
+      </p>
 
       {/* 
     
