@@ -14,15 +14,12 @@ import { useTranslation } from "react-i18next"
 export const Header = () => {
   const { user, onClose } = useTelegram()
 
-  const initDataUnsafe = window.Telegram.WebApp?.initDataUnsafe || {}
-
-  const [currentLanguage, setCurrentLanguage] = useState(
-    initDataUnsafe.language_code || "en"
-  )
+  const [currentLanguage, setCurrentLanguage] = useState("en")
 
   useEffect(() => {
-    setCurrentLanguage(initDataUnsafe.language_code || currentLanguage)
-  }, [currentLanguage, initDataUnsafe.language_code])
+    const initDataUnsafe = window.Telegram.WebApp?.initDataUnsafe || "en"
+    setCurrentLanguage(initDataUnsafe.language_code)
+  }, [])
 
   const location = useLocation()
   const state = location?.state || []
