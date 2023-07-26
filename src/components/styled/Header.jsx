@@ -23,16 +23,15 @@ export const Header = () => {
   // })
 
   useEffect(() => {
-    const language_code = tele?.initDataUnsafe?.language_code;
-    console.log('useEffect_language_code', language_code);
-    console.log('currentLanguage', currentLanguage);
-  
+    const language_code = user?.language_code
+    console.log("useEffect_language_code", language_code)
+    console.log("currentLanguage", currentLanguage)
+
     if (language_code && currentLanguage !== language_code) {
-      setCurrentLanguage(language_code);
-      i18n.changeLanguage(language_code);
+      setCurrentLanguage(language_code)
+      i18n.changeLanguage(language_code)
     }
-  }, [tele?.initDataUnsafe?.language_code, currentLanguage]);
-  
+  }, [tele?.initDataUnsafe?.language_code, currentLanguage])
 
   const location = useLocation()
   const state = location?.state || []
@@ -41,7 +40,6 @@ export const Header = () => {
 
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
   const fullURL = window.location.href
-
 
   const changeLanguage = (language) => {
     setCurrentLanguage(language)
@@ -94,14 +92,12 @@ export const Header = () => {
 
       <p className="testText">{`user?.language_code ${user?.language_code}`}</p>
 
-      
-
-      <p className={"testText"}>
+      {/* <p className={"testText"}>
         {` initDataUnsafe - ${JSON.stringify(tele?.initDataUnsafe, null, 2)}`}{" "}
       </p>
       <p className={"testText"}>
         {` WebApp - ${JSON.stringify(WebApp, null, 2)}`}{" "}
-      </p>
+      </p> */}
 
       {/* 
     
