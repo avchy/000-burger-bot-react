@@ -1,10 +1,10 @@
-import React from 'react'
-import "../../App.scss"
+import React from "react"
+import { StyledButton } from "components/styled/StyledButton"
 
 export function BigButton({ title, disable, onClick }) {
-    return (
-        <button className={`bigButton`} disabled={disable} onClick={onClick}>
-            {title}
-        </button>
-    )
+  return (
+    <StyledButton variant="contained" disabled={disable} onClick={onClick}>
+      {title}
+    </StyledButton>
+  )
 }

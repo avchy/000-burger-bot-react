@@ -5,6 +5,7 @@ import { CardColumn } from "components/styled/CardColumn"
 import { BigButton } from "components/styled/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
+import { StyledButton } from "components/styled/StyledButton"
 
 const { getData } = require("db/db")
 const foods = getData()
@@ -121,6 +122,13 @@ export const ProductsPage = () => {
             disable={cartItems.length === 0 ? true : false}
             onClick={onSubmit}
           />
+          // <StyledButton
+          //   title={`Order`}
+          //   disable={cartItems.length === 0 ? true : false}
+          //   onClick={onSubmit}
+          // />
+          
+         
         )}
       </div>
     </>
