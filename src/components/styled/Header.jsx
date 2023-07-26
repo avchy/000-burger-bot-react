@@ -48,9 +48,10 @@ export const Header = () => {
           // alignItems: "center",
           justifyContent: "space-around",
           gap: "10px",
+          marginBottom: "10px",
         }}
       >
-        <p>{currentLanguage}</p>
+        {/* <p>{currentLanguage}</p> */}
         <Button
           variant={currentLanguage === "en" ? "contained" : "outlined"}
           onClick={() => changeLanguage("en")}

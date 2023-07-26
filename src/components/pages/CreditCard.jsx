@@ -267,12 +267,12 @@ ______________________________________________________
           )}
         </Box>
 
-        <DialogComponent
+        {/* <DialogComponent
           text={dialogText}
           buttonRight={t("ok")}
           open={dialogOpen}
           onClose={handleCloseDialog}
-        />
+        /> */}
 
         {/* {isSubmitting ? (
           <CircularProgress size={16} color="primary" sx={{ marginRight: "1rem" }} />
