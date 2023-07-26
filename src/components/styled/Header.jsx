@@ -17,8 +17,10 @@ export const Header = () => {
   const [currentLanguage, setCurrentLanguage] = useState("en")
 
   useEffect(() => {
-    const initDataUnsafe = window.Telegram.WebApp?.initDataUnsafe || "en"
-    setCurrentLanguage(initDataUnsafe.language_code)
+    setCurrentLanguage(
+      window.Telegram.WebApp?.initDataUnsafe?.initDataUnsafe?.language_code ||
+        "en"
+    )
   }, [])
 
   const location = useLocation()
