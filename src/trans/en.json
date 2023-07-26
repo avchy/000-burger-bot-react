@@ -52,16 +52,9 @@
     "cvvCode is required": " cvv Code is required",
     "email is required": " email is required",
     "ok": "ok",
-    
     "CHECKOUT": "CHECKOUT",
     "VIEW ORDER": "VIEW ORDER",
-    
+    "PAY": "PAY",
     "Credit Card": "Credit Card",
     "Buy with": "Buy with"
-     
-  
-      
-      
-      
-
 }
