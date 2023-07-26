@@ -18,14 +18,14 @@ console.log("language_code", language_code)
 export const Header = () => {
   const { user, onClose } = useTelegram()
 
-  const [currentLanguage, setCurrentLanguage] = useState(language_code || "en")
+  const [currentLanguage, setCurrentLanguage] = useState("en")
 
   useEffect(() => {
     tele.ready()
   })
 
   useEffect(() => {
-    setCurrentLanguage(language_code || "en")
+    setCurrentLanguage(language_code)
   }, [language_code])
 
   const location = useLocation()
