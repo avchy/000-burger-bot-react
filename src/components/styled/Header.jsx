@@ -26,9 +26,9 @@ export const Header = () => {
 
   useEffect(() => {
     setCurrentLanguage(
-      tele?.initDataUnsafe?.initDataUnsafe?.language_code || "en"
+      language_code || "en"
     )
-  }, [tele?.initDataUnsafe?.initDataUnsafe?.language_code])
+  }, [language_code])
 
   const location = useLocation()
   const state = location?.state || []
