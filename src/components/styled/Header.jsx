@@ -31,7 +31,7 @@ export const Header = () => {
       setCurrentLanguage(language_code)
       i18n.changeLanguage(language_code)
     }
-  }, [tele?.initDataUnsafe?.language_code, currentLanguage])
+  }, [user?.language_code])
 
   const location = useLocation()
   const state = location?.state || []
