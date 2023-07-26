@@ -4,7 +4,8 @@ import {BlackBox} from "./AllHelpComponents"
 
 export const StyledButton = styled(Button)(
   ({ theme }) => ({
-    backgroundColor: "#1a222c",
+    backgroundColor: "#1a3f6c",
+    // backgroundColor: "#1a222c",
     cursor: "pointer",
     width: "90%",
     height: "50px",
