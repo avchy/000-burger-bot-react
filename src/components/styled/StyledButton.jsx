@@ -1,9 +1,10 @@
 import { styled } from "@mui/system"
 import { Button } from "@mui/material"
+import {BlackBox} from "./AllHelpComponents"
 
 export const StyledButton = styled(Button)(
   ({ theme }) => ({
-    backgroundColor: "#000000",
+    backgroundColor: "#1a222c",
     cursor: "pointer",
     width: "90%",
     height: "50px",
@@ -16,7 +17,8 @@ export const StyledButton = styled(Button)(
 
     fontSize: "20px",
     fontWeight: "bold",
-  }),
- 
+    border : "2px solid #000",
+   }),
+
   { shouldForwardProp: (prop) => prop !== "variant" }
 )

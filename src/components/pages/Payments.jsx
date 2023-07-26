@@ -18,6 +18,8 @@ import { StyledButton } from "components/styled/StyledButton"
 import { ReactSVG } from "react-svg"
 import applePay from "../../images/icons/applePay.png"
 import googlePay from "../../images/icons/googlePay.png"
+import appleSVG from "../../images/svg_icons/icons8-apple-logo.svg"
+import googleSVG from "../../images/svg_icons/icons8-google.svg"
 const tele = window.Telegram.WebApp
 import { serverIP } from "constants/api"
 import axios from "axios"
@@ -117,24 +119,26 @@ export function Payments() {
 
         <StyledButton onClick={onApplePay} variant="contained">
           {t("Buy with")}
-          <img src={applePay} alt="applePay" /> Pay
+          <img src={appleSVG} alt="applePay" /> Pay
+          {/* <img src={applePay} alt="applePay" /> Pay */}
         </StyledButton>
 
         <StyledButton onClick={onGooglePay} variant="contained">
-          {t("Buy with")} <img src={googlePay} alt="googlePay" /> Pay
-        </StyledButton>
+          {t("Buy with")} <img src={googleSVG} alt="googlePay" /> Pay
+          {/* {t("Buy with")} <img src={googlePay} alt="googlePay" /> Pay */}
+         </StyledButton>
+
+       
+
+        {/* <ReactSVG
+          beforeInjection={(svg) => {
+            svg.classList.add("svg-class-name")
+            svg.setAttribute("style", "width: 20px", "height: 20px")
+          }}
+          className="wrapper-class-name"
+          src={googleSVG}
+        /> */}
       </FlexColumnContainer>
     </>
   )
-}
-
-{
-  /* <ReactSVG
-              beforeInjection={(svg) => {
-                svg.classList.add("svg-class-name")
-                svg.setAttribute("style", "width: 20px", "height: 20px")
-              }}
-              className="wrapper-class-name"
-              src={applePayLogoPath}
-            /> */
 }
