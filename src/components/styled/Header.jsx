@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "@mui/material"
 import { useTelegram } from "hooks/useTelegram"
 import "../../App.scss"
@@ -19,6 +19,10 @@ export const Header = () => {
   const [currentLanguage, setCurrentLanguage] = useState(
     initDataUnsafe.language_code || "en"
   )
+
+  useEffect(() => {
+    setCurrentLanguage(initDataUnsafe.language_code || currentLanguage)
+  }, [currentLanguage, initDataUnsafe.language_code])
 
   const location = useLocation()
   const state = location?.state || []
@@ -45,31 +49,32 @@ export const Header = () => {
           // alignItems: "center",
           justifyContent: "space-around",
           gap: "10px",
-         }}
-       >
+        }}
+      >
+        <p>{currentLanguage}</p>
         <Button
-           variant={currentLanguage === "en" ? "contained" : "outlined"}
+          variant={currentLanguage === "en" ? "contained" : "outlined"}
           onClick={() => changeLanguage("en")}
         >
           <US title="United States" className="countryFlag" />
           EN
         </Button>
         <Button
-           variant={currentLanguage === "ru" ? "contained" : "outlined"}
+          variant={currentLanguage === "ru" ? "contained" : "outlined"}
           onClick={() => changeLanguage("ru")}
         >
           <RU title="Russian" className="countryFlag" />
           RU
         </Button>
         <Button
-           variant={currentLanguage === "he" ? "contained" : "outlined"}
+          variant={currentLanguage === "he" ? "contained" : "outlined"}
           onClick={() => changeLanguage("he")}
         >
           <IL title="Israel" className="countryFlag" />
           HE
         </Button>
         <Button
-           variant={currentLanguage === "fr" ? "contained" : "outlined"}
+          variant={currentLanguage === "fr" ? "contained" : "outlined"}
           onClick={() => changeLanguage("fr")}
         >
           <FR title="France" className="countryFlag" />
