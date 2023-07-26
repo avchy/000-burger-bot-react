@@ -20,9 +20,9 @@ export const Header = () => {
 
   const [currentLanguage, setCurrentLanguage] = useState("en")
 
-  useEffect(() => {
-    tele.ready()
-  })
+  // useEffect(() => {
+  //   tele.ready()
+  // })
 
   useEffect(() => {
     setCurrentLanguage(language_code)
