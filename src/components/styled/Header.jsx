@@ -14,6 +14,7 @@ const tele = window.Telegram.WebApp
 
 export const Header = () => {
   const { user, onClose } = useTelegram()
+  const { t, i18n } = useTranslation()
 
   const [currentLanguage, setCurrentLanguage] = useState("en")
 
@@ -22,11 +23,16 @@ export const Header = () => {
   // })
 
   useEffect(() => {
-    const language_code = tele?.initDataUnsafe?.language_code
-    // language_code = "ru"
-
-    setCurrentLanguage(language_code)
-  }, [])
+    const language_code = tele?.initDataUnsafe?.language_code;
+    console.log('useEffect_language_code', language_code);
+    console.log('currentLanguage', currentLanguage);
+  
+    if (language_code && currentLanguage !== language_code) {
+      setCurrentLanguage(language_code);
+      i18n.changeLanguage(language_code);
+    }
+  }, [tele?.initDataUnsafe?.language_code, currentLanguage]);
+  
 
   const location = useLocation()
   const state = location?.state || []
@@ -36,7 +42,6 @@ export const Header = () => {
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
   const fullURL = window.location.href
 
-  const { t, i18n } = useTranslation()
 
   const changeLanguage = (language) => {
     setCurrentLanguage(language)
