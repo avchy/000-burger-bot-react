@@ -11,6 +11,9 @@ const { getData } = require("db/db")
 const foods = getData()
 const tele = window.Telegram.WebApp
 
+console.log('-----before ProductsPage,' )
+
+
 export const ProductsPage = () => {
   const { t, i18n } = useTranslation()
 
@@ -89,8 +92,15 @@ export const ProductsPage = () => {
   useEffect(() => {
     tele.BackButton.hide()
     tele.MainButton.text = t("VIEW ORDER")
-    // tele.enableClosingConfirmation()
-  }, [])
+    tele.isClosingConfirmationEnabled = false
+console.log('-----useEffect []' )
+   }, [])
+   
+   useEffect(() => {
+    
+    console.log('-----useEffect{},' )
+
+   } )
 
   return (
     <>

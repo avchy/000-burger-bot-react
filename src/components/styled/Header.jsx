@@ -7,7 +7,7 @@ import { FlexRowContainer } from "components/styled/AllHelpComponents"
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
   generatedGitInfo
-import { Box } from "@mui/system"
+// import { Box } from "@mui/system"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 const tele = window.Telegram.WebApp
