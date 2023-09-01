@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 
 
 export function CardRow({ food }) {
-  const { title, Image, price, id, quantity } = food
+  const { title, image, price, id, quantity } = food
   const priceAllItems = (price * (quantity || 1)).toFixed(2)
   const { t, i18n } = useTranslation()
 
@@ -17,7 +17,7 @@ export function CardRow({ food }) {
   return (
     <div className="CardRow">
       <div className="image_container">
-        <img src={Image} alt={title} />
+        <img src={image} alt={title} />
       </div>
 
       <span className="cart_text_center">

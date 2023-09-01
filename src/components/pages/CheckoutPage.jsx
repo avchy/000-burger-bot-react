@@ -54,7 +54,7 @@ export function CheckoutPage() {
 
   const onSubmit = useCallback(() => {
     for (let i = 0; i < cartItems.length; i++) {
-      delete cartItems[i].Image
+      delete cartItems[i].image
     }
 
     const data = {

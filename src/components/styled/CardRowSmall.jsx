@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next"
 
 
 export function CardRowSmall({ food }) {
-  const { title, Image, price, quantity, textColor } = food
+  const { title, image, price, quantity, textColor } = food
   console.log("textColor111", textColor)
   const priceAllItems = (price * (quantity || 1)).toFixed(2)
   const { t, i18n } = useTranslation()
@@ -17,9 +17,9 @@ export function CardRowSmall({ food }) {
   return (
     <div className="CardRowSmall">
       <div className="CardRowSmall">
-        {Image && (
+        {image && (
           <div className="image_container">
-            <img src={Image} alt={title} />
+            <img src={image} alt={title} />
           </div>
         )}
 

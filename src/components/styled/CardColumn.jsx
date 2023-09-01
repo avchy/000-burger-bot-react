@@ -3,16 +3,22 @@ import { Skeleton } from "@mui/material"
 import "../../App.scss"
 import { Button } from "./Button"
 import { useTranslation } from "react-i18next"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
+  const navigate = useNavigate()
+
   const [count, setCount] = useState(quantity || 0)
   const [imageLoaded, setImageLoaded] = useState(false) // State to track if the image has loaded
-  const { title, Image, price, id } = food
+  const { id, title, image, price, toppings } = food
   const { t, i18n } = useTranslation()
 
   const handleIncrement = () => {
     setCount(count + 1)
     onAdd(food)
+  }
+  const handleToppings = () => {
+    navigate("/product", { state: { food } })
   }
 
   const handleDecrement = () => {
@@ -40,7 +46,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
         style={{ display: imageLoaded ? "block" : "none" }}
       >
         <img
-          src={Image}
+          src={image}
           alt={title}
           onLoad={handleImageLoad}
           style={{ display: imageLoaded ? "block" : "none" }}
@@ -53,7 +59,11 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
       <p className="cart_text_center">{price} ₪</p>
 
       <div className="btn-container">
-        <Button title={"+"} type={"add"} onClick={handleIncrement} />
+        <Button
+          title={toppings ? "choose" : "+"}
+          type={"add"}
+          onClick={toppings ? handleToppings : handleIncrement}
+        />
         {count !== 0 ? (
           <Button title={"-"} type={"remove"} onClick={handleDecrement} />
         ) : (

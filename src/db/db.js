@@ -1,21 +1,77 @@
-import pizzaImg from "../images/menu/pizza.png"
-import burgerImg from "../images/menu/burger.png"
-import cocaImg from "../images/menu/coca.png"
-import saladImg from "../images/menu/salad.png"
-import waterImg from "../images/menu/water.png"
-import iceCreamImg1 from "../images/menu/icecream1.png"
-import iceCreamImg2 from "../images/menu/icecream2.png"
-import kebabImg from "../images/menu/kebab.png"
+import falafelImg from "../images/menu/falafel/falafel.png"
+
+import smallFriesImg from "../images/menu/fries/fries_small.png"
+import bigFriesImg from "../images/menu/fries/fries_big.png"
+import baguetteImg from "../images/menu/baguette/baguette.png"
+import sabichImg from "../images/menu/sabich/sabich.png"
+
+import cocaImg from "../images/menu/coca/coca.png"
+import fantaImg from "../images/menu/fanta/fanta.png"
+import waterImg from "../images/menu/water/water.png"
+
+import tomatoes from "../images/menu/toppings/tomatoes.png"
+import pickled_cucumbers from "../images/menu/toppings/pickled_cucumbers.png"
+import humus from "../images/menu/toppings/humus.png"
+import tahini from "../images/menu/toppings/tahini.png"
+import spicy_sauce from "../images/menu/toppings/spicy_sauce.png"
+import egg from "../images/menu/toppings/egg.png"
+import hacilim from "../images/menu/toppings/hacilim.png"
 
 export function getData() {
   return [
-    { id: 1, title: "Pizza", price: 17.99, Image: pizzaImg },
-    { id: 2, title: "Burger", price: 15, Image: burgerImg },
-    { id: 3, title: "Coca", price: 3.5, Image: cocaImg },
-    { id: 4, title: "Kebab", price: 13.99, Image: kebabImg },
-    { id: 5, title: "Salad", price: 2.5, Image: saladImg },
-    { id: 6, title: "Bottle of water", price: 0.99, Image: waterImg },
-    { id: 7, title: "Ice cream", price: 2.99, Image: iceCreamImg1 },
-    { id: 8, title: "Ice cream big", price: 3.99, Image: iceCreamImg2 },
+    {
+      id: 1,
+      title: "Falafel",
+      price: 15,
+      image: falafelImg,
+      description:
+        "Falafel is a deep-fried ball or patty made from ground chickpeas, fava beans, or both.",
+      toppings: [
+        { title: "tomatoes", image: tomatoes, count: 0 },
+        { title: "pickled_cucumbers", image: pickled_cucumbers, count: 0 },
+        { title: "humus", image: humus, count: 0 },
+        { title: "tahini", image: tahini, count: 0 },
+        { title: "spicy_sauce", image: spicy_sauce, count: 0 },
+      ],
+      paidToppings: [
+        { title: "egg", cost: 3, count: 0, image: egg },
+        { title: "hacilim", cost: 3, count: 0, image: hacilim },
+      ],
+    },
+
+    { id: 2, title: "Coca", price: 8, image: cocaImg },
+    { id: 3, title: "Fanta", price: 8, image: fantaImg },
+    { id: 4, title: "Water", price: 8, image: waterImg },
+
+    {
+      id: 9,
+      title: "Small Fries",
+      price: 8,
+      image: smallFriesImg,
+    },
+    {
+      id: 10,
+      title: "Large Fries",
+      price: 12,
+      image: bigFriesImg,
+    },
+    {
+      id: 11,
+      title: "Tuna Baguette",
+      price: 25,
+      image: baguetteImg,
+    },
+    {
+      id: 12,
+      title: "Sabich",
+      price: 18,
+      image: sabichImg,
+    },
+    {
+      id: 13,
+      title: "Falafel in Baguette",
+      price: 25,
+      image: baguetteImg,
+    },
   ]
 }

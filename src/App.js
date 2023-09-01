@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom"
 
 import { Header } from "components/styled/Header"
 import { ProductsPage } from "components/pages/ProductsPage"
+import { Product } from "components/pages/Product"
 import { OrderPage } from "components/pages/OrderPage"
 import { CheckoutPage } from "components/pages/CheckoutPage"
 import { CreditCard } from "components/pages/CreditCard"
@@ -49,6 +50,7 @@ export function App() {
           <Route path={"checkout"} element={<CheckoutPage />} />
           <Route path={"payments"} element={<Payments />} />
           <Route path={"creditCard"} element={<CreditCard />} />
+          <Route path={"product"} element={<Product />} />
 
           <Route path={"form"} element={<Form />} />
         </Routes>
