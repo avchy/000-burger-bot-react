@@ -2,11 +2,25 @@ import { useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import "../../App.scss"
 import { ButtonCounter } from "components/styled/ButtonCounter"
-import { Topping } from "components/styled/Topping"
 import { BigButton } from "components/styled/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import Avatar from "@mui/material/Avatar"
+
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TableRow,
+  Paper,
+  styled,
+  Box,
+  Button,
+  CircularProgress,
+  Typography,
+  TableCell,
+  TextField,
+} from "@mui/material"
 
 const { getData } = require("db/db")
 const foods = getData()
@@ -74,7 +88,19 @@ export const Product = () => {
   const onSubmit = useCallback(() => {
     console.log("onSubmit = useCallback :>> ")
     console.log("cartItems111111 :>> ", cartItems)
-    navigate("/order", { state: { cartItems } })
+
+    const exist = cartItems.find((x) => x.id === food.id)
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
+        )
+      )
+    } else {
+      setCartItems([...cartItems, { ...food, quantity: 1 }])
+    }
+
+    navigate("/", { state: { cartItems } })
   }, [cartItems])
 
   const onCancel = useCallback(() => {
@@ -132,82 +158,65 @@ export const Product = () => {
 
   return (
     <>
-      <div className="productsPage">
+      <Box className="checkoutPage">
         <h1 className="title">{food.title}</h1>
-        {/* <h1 className="title">{t("Burger Shop")}</h1> */}
-
         <ButtonCounter
           onAdd={onAdd}
           onRemove={onRemove}
           quantity={food.quantity}
         />
+        <Box className="orderContainer">
+          <Box className="imageContainer">
+            <img src={food.image} alt={"orderImg"} />
+          </Box>
 
-        <div className="imageContainer">
-          <img src={food.image} alt={"orderImg"} />
-        </div>
+          <Box className="textContainer">
+            <Box className="text1">{food.description}</Box>
+          </Box>
+        </Box>
 
-        <div className="textContainer">
-          <div className="text1">{food.description}</div>
-        </div>
-      </div>
-
-      {/* {food.toppings.map((topping) => {
-        return <Topping topping={topping} key={topping.id} />
-      })} */}
-
-      <div>
-        {food.toppings.map((topping) => (
-          <div
-            key={topping.title}
-            role="button"
-            tabIndex={0}
-            onClick={() => toggleTopping(topping.title)}
-            onKeyPress={(event) => handleKeyPress(event, topping.title)}
-            style={{ display: "inline-block", margin: "10px" }}
-          >
-            
-
-            <div
-              className={`topping-circle ${
-                selectedToppings.includes(topping.title) ? "selected" : ""
-              }`}
+        <Box>
+          {food.toppings.map((topping) => (
+            <Box
+              key={topping.title}
+              role="button"
+              tabIndex={0}
+              onClick={() => toggleTopping(topping.title)}
+              onKeyPress={(event) => handleKeyPress(event, topping.title)}
+              style={{ display: "inline-block", margin: "10px" }}
             >
-              <Avatar
-                alt={topping.title}
-                src={topping.image}
-                sx={{ width: 66, height: 66 }}
-              />
-            </div>
-            {topping.title}
-          </div>
-        ))}
-        <style>
-          {`
-          .topping-circle {
-            width: 100px;
-            height: 100px;
-            background-color: #ffe1e1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-          }
+              <Box
+                className={`topping-circle ${
+                  selectedToppings.includes(topping.title) ? "selected" : ""
+                }`}
+              >
+                <Avatar
+                  alt={topping.title}
+                  src={topping.image}
+                  sx={{ width: 66, height: 66 }}
+                />
+              </Box>
+              <Typography sx={{ m: 1 }}> {topping.title} </Typography>
+            </Box>
+          ))}
+        </Box>
 
-          .topping-circle.selected {
-            border: 4px solid orange;
-          }
-        `}
-        </style>
-      </div>
+        {env == "browser" && (
+          <FlexRowContainer>
+            <BigButton
+              title={`Cancel`}
+              onClick={onCancel}
+              backgroundColor={"grey"}
+            />
 
-      {env == "browser" && (
-        <FlexRowContainer>
-          <BigButton title={`Order`} onClick={onSubmit} />
-
-          <BigButton title={`Cancel`} onClick={onCancel} />
-        </FlexRowContainer>
-      )}
+            <BigButton
+              title={`Order`}
+              onClick={onSubmit}
+              backgroundColor={"#e0c521"}
+            />
+          </FlexRowContainer>
+        )}
+      </Box>
     </>
   )
 }

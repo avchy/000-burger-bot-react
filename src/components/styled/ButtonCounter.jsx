@@ -16,12 +16,12 @@ export function ButtonCounter({ food, onAdd, onRemove, quantity }) {
 
   return (
     <>
-    
-
       <div className="btn-container">
-      <span className={`${count !== 0 ? "card_badge" : "card_badge--hidden"}`}>
-        {count}
-      </span>
+        <span
+          className={`${count !== 0 ? "card_badge" : "card_badge--hidden"}`}
+        >
+          {count}
+        </span>
         <Button title={"+"} type={"add"} onClick={handleIncrement} />
         {count !== 0 ? (
           <Button title={"-"} type={"remove"} onClick={handleDecrement} />
