@@ -119,7 +119,7 @@ export function CheckoutPage() {
 
           <div className="textContainer">
             <div className="text1"> {t("Order")} № 770770</div>
-            <div className="text1"> {t('Perfect lunch from Burger Bot.')}</div>
+            <div className="text1"> {t('Perfect lunch from Falafel Bot.')}</div>
             <div className="text_small">{`${discount}% ${t("discount")}`}</div>
           </div>
         </div>

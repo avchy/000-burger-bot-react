@@ -3,11 +3,19 @@ import { StyledButton } from "components/styled/StyledButton"
 
 export function BigButton({ title, disable, onClick, backgroundColor }) {
   const buttonStyle = {
-    background: backgroundColor, // Здесь передайте цвет фона
-  };
+    background: backgroundColor, 
+    border: "4px solid black",
+      borderRadius :"10px"
+
+  }
 
   return (
-    <StyledButton variant="contained" disabled={disable} onClick={onClick} style={buttonStyle}>
+    <StyledButton
+      variant="contained"
+      disabled={disable}
+      onClick={onClick}
+      style={buttonStyle}
+    >
       {title}
     </StyledButton>
   )

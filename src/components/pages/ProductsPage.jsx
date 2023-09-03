@@ -103,7 +103,7 @@ export const ProductsPage = () => {
   return (
     <>
       <div className="productsPage">
-        <h1 className="title">{t("Burger Shop")}</h1>
+        <h1 className="title">{t("Falafel Shop")}</h1>
         <div className="cards_container">
           {foods.map((food) => {
             const cartItemWithQuantity = cartItems.find(

@@ -34,7 +34,7 @@ export const Product = () => {
   })
 
   const onAdd = (food) => {
-    console.log('food_onAdd', food)
+    console.log("food_onAdd", food)
     if (food.length === 0) {
       tele.MainButton.hide()
     } else {
@@ -51,7 +51,7 @@ export const Product = () => {
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
-    console.log('cartItems_onAdd :>> ', cartItems)
+    console.log("cartItems_onAdd :>> ", cartItems)
   }
 
   const onRemove = (food) => {
@@ -74,7 +74,7 @@ export const Product = () => {
   }
 
   const onSubmit = useCallback(() => {
-     console.log("cartItems111111 :>> ", cartItems)
+    console.log("cartItems111111 :>> ", cartItems)
 
     // const exist = cartItems.find((x) => x.id === food.id)
     // if (exist) {
@@ -148,13 +148,13 @@ export const Product = () => {
     <>
       <Box className="checkoutPage">
         <h1 className="title">{food.title}</h1>
-        
+
         <ButtonCounter
           onAdd={onAdd}
           onRemove={onRemove}
           quantity={food.quantity}
         />
-        
+
         <Box className="orderContainer">
           <Box className="imageContainer">
             <img src={food.image} alt={"orderImg"} />
@@ -165,19 +165,32 @@ export const Product = () => {
           </Box>
         </Box>
 
-        <Typography sx={{ m: 1, fontSize:"20px" }}> {t("toppings_free")}</Typography>
+        {/* toppings_free_____________________ */}
 
-  
+        <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)" }}>
+          {" "}
+          {t("toppings_free")}
+        </Typography>
 
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
           {food.toppings.map((topping) => (
             <Box
+              sx={{
+                width: "100px",
+                textAlign: "center",
+              }}
               key={topping.title}
               role="button"
               tabIndex={0}
               onClick={() => toggleTopping(topping.title)}
               onKeyPress={(event) => handleKeyPress(event, topping.title)}
-              style={{ display: "inline-block", margin: "10px" }}
             >
               <Box
                 className={`topping-circle ${
@@ -195,18 +208,30 @@ export const Product = () => {
           ))}
         </Box>
 
-        <Typography sx={{ m: 1, fontSize:"20px" }}> {t("toppings_paid")}  3 ₪ </Typography>
+        <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)" }}>
+          {" "}
+          {t("toppings_paid")} 3 ₪{" "}
+        </Typography>
 
- 
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
           {food.paidToppings.map((topping) => (
             <Box
+              sx={{
+                width: "100px",
+                textAlign: "center",
+              }}
               key={topping.title}
               role="button"
               tabIndex={0}
               onClick={() => toggleTopping(topping.title)}
               onKeyPress={(event) => handleKeyPress(event, topping.title)}
-              style={{ display: "inline-block", margin: "10px" }}
             >
               <Box
                 className={`topping-circle ${
@@ -220,25 +245,20 @@ export const Product = () => {
                 />
               </Box>
               <Typography sx={{ m: 1 }}> {t(topping.title)} </Typography>
- 
-               
             </Box>
           ))}
         </Box>
-        
-        
+
         {env == "browser" && (
           <FlexRowContainer>
             <BigButton
-               title={t("Cancel")}
-
+              title={t("Cancel")}
               onClick={onCancel}
               backgroundColor={"grey"}
             />
 
             <BigButton
-               title={t("Order")}
-
+              title={t("Order")}
               onClick={onSubmit}
               backgroundColor={"#e0c521"}
             />
