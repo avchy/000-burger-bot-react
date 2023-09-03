@@ -1,13 +1,30 @@
 {
-    "Burger Shop": "חנות ההמבורגרים",
-    "Pizza": "פיצה",
-    "Burger": "המבורגר",
-    "Coca": "קוקה",
-    "Kebab": "קבב",
-    "Salad": "סלט",
-    "Bottle of water": "בקבוק מים",
-    "Ice cream": "גלידה",
-    "Ice cream big": "גלידה גדולה",
+    
+    "Cancel": "בטל",
+    "Falafel_text": "פלאפל הוא כדור או פטישה טחונה שנעשית מקרח חומרים, פול חום, או שניים.",
+    "spicy_sauce": "רוטב חריף",
+    "toppings_free": "תוספות חינם",
+    "toppings_paid": "תוספות בתשלום",
+    
+    
+    "Falafel": "פָּלָאפֶל",
+    "Falafel in Baguette": "פָּלָאפֶל בַּבַּגֶּט",
+    "Tuna Baguette": "טוּנָה בַּבַּגֶּט",
+    "Sabich": "סַבִּיח",
+    "Large Fries": "פַּרְחַיּוֹת גְּדוֹלוֹת",
+    "Small Fries": "פַּרְחַיּוֹת קְטַנוֹת",
+    "hacilim": "חֲצִילִים",
+    "egg": "בֵּיצָה",
+    "tahini": "טַחִינָה",
+    "tomatoes": "עֲגָבִים",
+    "pickled_cucumbers": "מְלָפְפוֹנִים מְגוּרָרִים",
+    "humus": "חוּמוּס",
+    "Coca": "קוֹקָה",
+    "Fanta": "פַּנְטָה",
+    "Water": "מַיִם",
+    
+    
+    
     "Your Order": "ההזמנה שלך",
     "Checkout": "קופה",
     "discount": "הנחה",

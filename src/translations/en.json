@@ -1,18 +1,26 @@
 {
-    "Burger Shop": "Burger Shop",
-     "Coca": "Coca",
+    "Cancel": "Cancel",
+    "Falafel_text": "Falafel is a deep-fried ball or patty made from ground chickpeas, fava beans, or both.",
+    "spicy_sauce": "Spicy Sauce",
+    "toppings_free": "Free toppings",
+    "toppings_paid": "Paid toppings",
+
+    
+    "Falafel": "Falafel",
+    "Falafel in Baguette": "Falafel in Baguette",
+    "Tuna Baguette": "Tuna Baguette",
+    "Sabich": "Sabich",
+    "Large Fries": "Large Fries",
+    "Small Fries": "Small Fries",
+    "hacilim": "hacilim",
+    "egg": "egg",
+    "tahini": "tahini",
+    "tomatoes": "tomatoes",
+    "pickled_cucumbers": "Pickled Cucumbers",
+    "humus": "humus",
+    "Coca": "Coca",
     "Fanta": "Fanta",
-    "Bottle of water": "Bottle of water",
-    
-    
-    
-    "Fries": "Fries",
-    
-    
-    
-    
-    
-    
+    "Water": "Water",
     
     "Your Order": "Your Order",
     "Checkout": "Checkout",

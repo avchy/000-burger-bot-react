@@ -125,7 +125,7 @@ export const ProductsPage = () => {
         </div>
         {cartItems.length !== 0 && env == "browser" && (
           <BigButton
-            title={`Order`}
+             title={t("Order")}
             disable={cartItems.length === 0 ? true : false}
             onClick={onSubmit}
           />

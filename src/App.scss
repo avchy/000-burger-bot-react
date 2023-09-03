@@ -123,7 +123,9 @@ body {
 
       .text1 {
         color: $white;
-        word-wrap: break-word; /* Перенос слов */
+        word-wrap: break-word;  
+        font-size: calc(0.5em + 2vw);
+
       }
 
       .text_small {
@@ -206,6 +208,17 @@ body {
     justify-content: center;
   }
 
+  .buttons_container {
+    position: absolute;
+    right: 0;
+
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    float: right;
+    text-align: right;
+  }
+
   .card_badge {
     position: absolute;
     top: 0;
@@ -225,6 +238,10 @@ body {
     align-items: center;
 
     // opacity: 1;
+  }
+
+  .card_badge_simple {
+    padding: 5px;
   }
 
   .card_badge--hidden {

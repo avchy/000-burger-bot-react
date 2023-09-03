@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Button } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import { useTelegram } from "hooks/useTelegram"
 import "../../App.scss"
 import { US, IL, RU, FR } from "country-flag-icons/react/3x2"
@@ -7,7 +7,6 @@ import { FlexRowContainer } from "components/styled/AllHelpComponents"
 import generatedGitInfo from "helpers/generatedGitInfo.json"
 const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
   generatedGitInfo
-// import { Box } from "@mui/system"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 const tele = window.Telegram.WebApp
@@ -59,7 +58,15 @@ export const Header = () => {
           marginBottom: "10px",
         }}
       >
-        <p>{currentLanguage}</p>
+        {/* <p>{currentLanguage}</p> */}
+
+        <Typography
+          sx={{ border: "2px solid orange", padding: "4px 8px " }}
+          variant="body1"
+        >
+          {currentLanguage}
+        </Typography>
+
         <Button
           variant={currentLanguage === "en" ? "contained" : "outlined"}
           onClick={() => changeLanguage("en")}

@@ -7,20 +7,7 @@ import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import Avatar from "@mui/material/Avatar"
 
-import {
-  Table,
-  TableBody,
-  TableContainer,
-  TableRow,
-  Paper,
-  styled,
-  Box,
-  Button,
-  CircularProgress,
-  Typography,
-  TableCell,
-  TextField,
-} from "@mui/material"
+import { Box, Typography } from "@mui/material"
 
 const { getData } = require("db/db")
 const foods = getData()
@@ -47,6 +34,7 @@ export const Product = () => {
   })
 
   const onAdd = (food) => {
+    console.log('food_onAdd', food)
     if (food.length === 0) {
       tele.MainButton.hide()
     } else {
@@ -63,7 +51,7 @@ export const Product = () => {
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
-    // console.log('cartItems :>> ', cartItems)
+    console.log('cartItems_onAdd :>> ', cartItems)
   }
 
   const onRemove = (food) => {
@@ -86,20 +74,20 @@ export const Product = () => {
   }
 
   const onSubmit = useCallback(() => {
-    console.log("onSubmit = useCallback :>> ")
-    console.log("cartItems111111 :>> ", cartItems)
+     console.log("cartItems111111 :>> ", cartItems)
 
-    const exist = cartItems.find((x) => x.id === food.id)
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
-        )
-      )
-    } else {
-      setCartItems([...cartItems, { ...food, quantity: 1 }])
-    }
+    // const exist = cartItems.find((x) => x.id === food.id)
+    // if (exist) {
+    //   setCartItems(
+    //     cartItems.map((x) =>
+    //       x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
+    //     )
+    //   )
+    // } else {
+    //   setCartItems([...cartItems, { ...food, quantity: 1 }])
+    // }
 
+    // console.log("cartItems22222 :>> ", cartItems)
     navigate("/", { state: { cartItems } })
   }, [cartItems])
 
@@ -160,11 +148,13 @@ export const Product = () => {
     <>
       <Box className="checkoutPage">
         <h1 className="title">{food.title}</h1>
+        
         <ButtonCounter
           onAdd={onAdd}
           onRemove={onRemove}
           quantity={food.quantity}
         />
+        
         <Box className="orderContainer">
           <Box className="imageContainer">
             <img src={food.image} alt={"orderImg"} />
@@ -174,6 +164,10 @@ export const Product = () => {
             <Box className="text1">{food.description}</Box>
           </Box>
         </Box>
+
+        <Typography sx={{ m: 1, fontSize:"20px" }}> {t("toppings_free")}</Typography>
+
+  
 
         <Box>
           {food.toppings.map((topping) => (
@@ -196,21 +190,55 @@ export const Product = () => {
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
-              <Typography sx={{ m: 1 }}> {topping.title} </Typography>
+              <Typography sx={{ m: 1 }}> {t(topping.title)} </Typography>
             </Box>
           ))}
         </Box>
 
+        <Typography sx={{ m: 1, fontSize:"20px" }}> {t("toppings_paid")}  3 ₪ </Typography>
+
+ 
+        <Box>
+          {food.paidToppings.map((topping) => (
+            <Box
+              key={topping.title}
+              role="button"
+              tabIndex={0}
+              onClick={() => toggleTopping(topping.title)}
+              onKeyPress={(event) => handleKeyPress(event, topping.title)}
+              style={{ display: "inline-block", margin: "10px" }}
+            >
+              <Box
+                className={`topping-circle ${
+                  selectedToppings.includes(topping.title) ? "selected" : ""
+                }`}
+              >
+                <Avatar
+                  alt={topping.title}
+                  src={topping.image}
+                  sx={{ width: 66, height: 66 }}
+                />
+              </Box>
+              <Typography sx={{ m: 1 }}> {t(topping.title)} </Typography>
+ 
+               
+            </Box>
+          ))}
+        </Box>
+        
+        
         {env == "browser" && (
           <FlexRowContainer>
             <BigButton
-              title={`Cancel`}
+               title={t("Cancel")}
+
               onClick={onCancel}
               backgroundColor={"grey"}
             />
 
             <BigButton
-              title={`Order`}
+               title={t("Order")}
+
               onClick={onSubmit}
               backgroundColor={"#e0c521"}
             />
