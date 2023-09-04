@@ -31,8 +31,7 @@ export const CreditCard = () => {
   const navigate = useNavigate()
 
   const state = location?.state
-  console.log("state_CreditCard", state)
-
+ 
   const {
     queryId,
     products,
@@ -129,9 +128,7 @@ ______________________________________________________
       setDialogOpen(true)
     } catch (error) {
       setDialogText(JSON.stringify(error, null, 2))
-
-      // setDialogText(t("error"))
-      // setDialogOpen(true)
+ 
       console.log("error333", error)
     } finally {
       setIsSubmitting(false)
@@ -163,7 +160,7 @@ ______________________________________________________
   }, [onSubmit])
 
   useEffect(() => {
-    console.log("errors", errors)
+    console.log("errors444", errors)
   }, [errors])
 
   useEffect(() => {

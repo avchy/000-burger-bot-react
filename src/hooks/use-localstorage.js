@@ -12,6 +12,7 @@ const useLocalStorage = (key, defaultValue) => {
                 return defaultValue;
             }
         }catch(error){
+            console.log("error112221",error)
             return defaultValue;
         }
     })
@@ -21,7 +22,7 @@ const useLocalStorage = (key, defaultValue) => {
         try{ 
             localStorage.setItem(key, JSON.stringify(newValue))
         }catch (error){
-            console.log(error)
+            console.log("error111",error)
         }
         setStoredValue(newValue)
     }

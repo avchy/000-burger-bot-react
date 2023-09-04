@@ -10,8 +10,7 @@ import { useTranslation } from "react-i18next"
 
 export function CardRowSmall({ food }) {
   const { title, image, price, quantity, textColor } = food
-  console.log("textColor111", textColor)
-  const priceAllItems = (price * (quantity || 1)).toFixed(2)
+   const priceAllItems = (price * (quantity || 1)).toFixed(2)
   const { t, i18n } = useTranslation()
 
   return (

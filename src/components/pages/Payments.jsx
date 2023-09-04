@@ -32,8 +32,7 @@ export function Payments() {
 
   const location = useLocation()
   const state = location?.state
-  console.log("state_in_payments", state)
-  // const {
+   // const {
   //   queryId,
   //   products,
   //   comment,
@@ -59,9 +58,7 @@ export function Payments() {
   //   discount: discount,
   // }
 
-  // console.log("dataPay", dataPay)
-  console.log("state", state)
-
+ 
   const onCreditCard = useCallback(() => {
     navigate("/creditCard", { state: { ...state, paymentMethod: "card" } })
   }, [state])

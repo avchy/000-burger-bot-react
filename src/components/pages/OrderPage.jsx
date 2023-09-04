@@ -18,8 +18,7 @@ export const OrderPage = () => {
   const { env } = useNavigator()
 
   const location = useLocation()
-  console.log("location.state_OrderPage", location.state)
-  const cartItems = location.state.cartItems
+   const cartItems = location.state.cartItems
 
   const [comment, setComment] = useState("")
 

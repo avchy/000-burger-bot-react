@@ -3,10 +3,9 @@ import { StyledButton } from "components/styled/StyledButton"
 
 export function BigButton({ title, disable, onClick, backgroundColor }) {
   const buttonStyle = {
-    background: backgroundColor, 
+    background: backgroundColor,
     border: "4px solid black",
-      borderRadius :"10px"
-
+    borderRadius: "10px",
   }
 
   return (

@@ -25,8 +25,7 @@ export const Product = () => {
   const { env } = useNavigator()
   const location = useLocation()
   const [food, setFood] = useState(location?.state?.food || {})
-  console.log("food1111", food)
-  const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
+   const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -34,8 +33,7 @@ export const Product = () => {
   })
 
   const onAdd = (food) => {
-    console.log("food_onAdd", food)
-    if (food.length === 0) {
+     if (food.length === 0) {
       tele.MainButton.hide()
     } else {
       tele.MainButton.show()
@@ -51,8 +49,7 @@ export const Product = () => {
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
-    console.log("cartItems_onAdd :>> ", cartItems)
-  }
+   }
 
   const onRemove = (food) => {
     if (food.length === 0) {
@@ -73,9 +70,10 @@ export const Product = () => {
     }
   }
 
+  //=================================================
+  
   const onSubmit = useCallback(() => {
-    console.log("cartItems111111 :>> ", cartItems)
-
+ 
     // const exist = cartItems.find((x) => x.id === food.id)
     // if (exist) {
     //   setCartItems(
@@ -87,16 +85,16 @@ export const Product = () => {
     //   setCartItems([...cartItems, { ...food, quantity: 1 }])
     // }
 
-    // console.log("cartItems22222 :>> ", cartItems)
-    navigate("/", { state: { cartItems } })
+     navigate("/", { state: { cartItems } })
   }, [cartItems])
 
   const onCancel = useCallback(() => {
-    console.log("onCancel = useCallback :>> ")
-    console.log("cartItems111111 :>> ", cartItems)
-    navigate("/", { state: { cartItems } })
+     navigate("/", { state: { cartItems } })
   }, [cartItems])
 
+    //=================================================
+
+    
   const onBackButtonClicked = useCallback(() => {
     navigate("/", { state: { cartItems } })
   }, [cartItems])
@@ -115,12 +113,10 @@ export const Product = () => {
     tele.BackButton.hide()
     tele.MainButton.text = t("VIEW ORDER")
     tele.isClosingConfirmationEnabled = false
-    console.log("-----useEffect []")
-  }, [])
+   }, [])
 
   useEffect(() => {
-    console.log("-----useEffect{},")
-    tele.MainButton.text = t("VIEW ORDER")
+     tele.MainButton.text = t("VIEW ORDER")
   })
 
   //====================================================

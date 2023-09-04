@@ -23,9 +23,7 @@ export const Header = () => {
 
   useEffect(() => {
     const language_code = user?.language_code
-    console.log("useEffect_language_code", language_code)
-    console.log("currentLanguage", currentLanguage)
-
+ 
     if (language_code && currentLanguage !== language_code) {
       setCurrentLanguage(language_code)
       i18n.changeLanguage(language_code)

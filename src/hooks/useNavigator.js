@@ -30,8 +30,7 @@ export function useNavigator() {
       return M.join(" ")
     })()
 
-    console.log("navigator.sayswho", navigator.sayswho)
-  }, [])
+   }, [])
 
   return {
     env,

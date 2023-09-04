@@ -39,8 +39,7 @@ export function CheckoutPage() {
   const location = useLocation()
   const cartItems = location?.state?.cartItems || []
   const comment = location?.state?.comment
-  console.log("location?.state?", location?.state)
-
+ 
   const totalPrice = location?.state?.totalPrice
   const totalPriceWithDiscount = (totalPrice * (1 - discount)).toFixed(2)
 

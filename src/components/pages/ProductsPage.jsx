@@ -11,8 +11,7 @@ const { getData } = require("db/db")
 const foods = getData()
 const tele = window.Telegram.WebApp
 
-console.log("-----before ProductsPage,")
-
+ 
 export const ProductsPage = () => {
   const { t, i18n } = useTranslation()
 
@@ -46,8 +45,7 @@ export const ProductsPage = () => {
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
-    // console.log('cartItems :>> ', cartItems)
-  }
+   }
 
   const onRemove = (food) => {
     if (food.length === 0) {
@@ -69,9 +67,7 @@ export const ProductsPage = () => {
   }
 
   const onSubmit = useCallback(() => {
-    console.log("onSubmit = useCallback :>> ")
-    console.log("cartItems111111 :>> ", cartItems)
-    navigate("/order", { state: { cartItems } })
+     navigate("/order", { state: { cartItems } })
   }, [cartItems])
 
   const onBackButtonClicked = useCallback(() => {
@@ -92,12 +88,10 @@ export const ProductsPage = () => {
     tele.BackButton.hide()
     tele.MainButton.text = t("VIEW ORDER")
     tele.isClosingConfirmationEnabled = false
-    console.log("-----useEffect []")
-  }, [])
+   }, [])
 
   useEffect(() => {
-    console.log("-----useEffect{},")
-    tele.MainButton.text = t("VIEW ORDER")
+     tele.MainButton.text = t("VIEW ORDER")
   })
 
   return (
