@@ -25,7 +25,7 @@ export const Product = () => {
   const { env } = useNavigator()
   const location = useLocation()
   const [food, setFood] = useState(location?.state?.food || {})
-   const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
+  const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const Product = () => {
   })
 
   const onAdd = (food) => {
-     if (food.length === 0) {
+    if (food.length === 0) {
       tele.MainButton.hide()
     } else {
       tele.MainButton.show()
@@ -49,7 +49,7 @@ export const Product = () => {
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
-   }
+  }
 
   const onRemove = (food) => {
     if (food.length === 0) {
@@ -71,9 +71,8 @@ export const Product = () => {
   }
 
   //=================================================
-  
+
   const onSubmit = useCallback(() => {
- 
     // const exist = cartItems.find((x) => x.id === food.id)
     // if (exist) {
     //   setCartItems(
@@ -85,16 +84,15 @@ export const Product = () => {
     //   setCartItems([...cartItems, { ...food, quantity: 1 }])
     // }
 
-     navigate("/", { state: { cartItems } })
+    navigate("/", { state: { cartItems } })
   }, [cartItems])
 
   const onCancel = useCallback(() => {
-     navigate("/", { state: { cartItems } })
+    navigate("/", { state: { cartItems } })
   }, [cartItems])
 
-    //=================================================
+  //=================================================
 
-    
   const onBackButtonClicked = useCallback(() => {
     navigate("/", { state: { cartItems } })
   }, [cartItems])
@@ -113,10 +111,10 @@ export const Product = () => {
     tele.BackButton.hide()
     tele.MainButton.text = t("VIEW ORDER")
     tele.isClosingConfirmationEnabled = false
-   }, [])
+  }, [])
 
   useEffect(() => {
-     tele.MainButton.text = t("VIEW ORDER")
+    tele.MainButton.text = t("VIEW ORDER")
   })
 
   //====================================================
