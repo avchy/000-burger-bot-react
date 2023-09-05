@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import { Skeleton } from "@mui/material"
+import { Skeleton, Stack } from "@mui/material"
 import "../../App.scss"
 import { Button } from "./Button"
 import { useTranslation } from "react-i18next"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+// import * as React from 'react';
 
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const navigate = useNavigate()
@@ -36,21 +37,26 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
         {count}
       </span>
 
-      {/* Show Skeleton while image is loading */}
-      {!imageLoaded && <Skeleton variant="rounded" />}
-      {/* {!imageLoaded && <Skeleton variant="rounded" width={210} height={118} /> } */}
-
-      {/* Show the image after it has loaded */}
       <div
         className="image_container"
         style={{ display: imageLoaded ? "block" : "none" }}
       >
-        <img
-          src={image}
-          alt={title}
-          onLoad={handleImageLoad}
-          style={{ display: imageLoaded ? "block" : "none" }}
-        />
+        {!imageLoaded ? (
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            animation="wave"
+            variant="rectangular"
+            width={100}
+            height={100}
+          />
+        ) : (
+          <img
+            src={image}
+            alt={title}
+            onLoad={handleImageLoad}
+            style={{ display: imageLoaded ? "block" : "none" }}
+          />
+        )}
       </div>
 
       {/* <h4 className="card_title">{title}</h4> */}
