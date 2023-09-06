@@ -25,7 +25,9 @@ export const Product = () => {
   const exist = cartItems.find((x) => x.id === food.id)
 
   const [quantityItem, setQuantityItem] = useState(exist?.quantity || 1)
-  const [selectedToppings, setSelectedToppings] = useState([])
+  const [selectedToppings, setSelectedToppings] = useState(
+    exist?.selectedToppings || []
+  )
 
   useEffect(() => {
     tele.ready()
@@ -100,8 +102,16 @@ export const Product = () => {
   //=================================================
 
   const onSubmit = useCallback(() => {
+    console.log("selectedToppings", selectedToppings)
+    const exist = cartItems.find((x) => x.id === food.id)
+    setCartItems(
+      cartItems.map((x) =>
+        x.id === food.id ? { ...exist, selectedToppings } : x
+      )
+    )
+
     navigate("/")
-  }, [cartItems])
+  }, [cartItems,selectedToppings])
 
   const onCancel = useCallback(() => {
     const exist = cartItems.find((x) => x.id === food.id)
@@ -141,8 +151,10 @@ export const Product = () => {
   //====================================================
 
   const toggleTopping = (title) => {
-    console.log('cartItems222', cartItems)
+    console.log("cartItems222", cartItems)
+
     const isToppingSelected = selectedToppings.includes(title)
+
     if (isToppingSelected) {
       setSelectedToppings(
         selectedToppings.filter((topping) => topping !== title)
@@ -150,6 +162,9 @@ export const Product = () => {
     } else {
       setSelectedToppings([...selectedToppings, title])
     }
+    
+    console.log("selectedToppings", selectedToppings)
+
   }
 
   return (
@@ -177,9 +192,11 @@ export const Product = () => {
           </Box>
         </Box>
 
-        {/* toppings __________________________________________ */}
+        {/* Toppings __________________________________________ */}
 
-        <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)",fontWeight:700 }}>
+        <Typography
+          sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}
+        >
           {" "}
           {t("toppings")}
         </Typography>
@@ -215,13 +232,16 @@ export const Product = () => {
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
-              <Typography sx={{ m: 1 }}> {t(topping.title)} {topping.price !==0 ? `${topping.price}₪` : ""} </Typography>
+              <Typography sx={{ m: 1 }}>
+                {" "}
+                {t(topping.title)}{" "}
+                {topping.price !== 0 ? `${topping.price}₪` : ""}{" "}
+              </Typography>
             </Box>
           ))}
         </Box>
 
         {/* toppings_paid __________________________________________ */}
- 
 
         {env == "browser" && (
           <FlexRowContainer>
