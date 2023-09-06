@@ -9,37 +9,59 @@ import Avatar from "@mui/material/Avatar"
 
 import { Box, Typography } from "@mui/material"
 
-const { getData } = require("db/db")
-const foods = getData()
-
 const tele = window.Telegram.WebApp
 
 import {
   FlexRowContainer,
   StyledTextField,
 } from "components/styled/AllHelpComponents"
+import { CartContext } from "App"
+import { useContext } from "react"
 
 export const Product = () => {
   const { t, i18n } = useTranslation()
 
   const { env } = useNavigator()
-  const location = useLocation()
-  const [food, setFood] = useState(location?.state?.food || {})
-  const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const { cartItems, setCartItems } = useContext(CartContext)
+  const food = location?.state?.food
 
   useEffect(() => {
     tele.ready()
   })
 
-  const onAdd = (food) => {
-    if (food.length === 0) {
-      tele.MainButton.hide()
+  useEffect(() => {
+    const exist = cartItems.find((x) => x.id === food.id)
+    console.log("exist", exist)
+    console.log("food", food)
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === food.id ? { ...exist, quantity: exist.quantity } : x
+        )
+      )
     } else {
-      tele.MainButton.show()
+      setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
 
+    console.log("cartItems", cartItems)
+  }, [])
+
+  // const foodInCart = cartItems.find(
+  //   (item) => item.id === food.id
+  // )
+
+  const onAdd = () => {
+    // if (foodInCart.length === 0) {
+    //   tele.MainButton.hide()
+    // } else {
+    //   tele.MainButton.show()
+    // }
+
     const exist = cartItems.find((x) => x.id === food.id)
+
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
@@ -51,14 +73,15 @@ export const Product = () => {
     }
   }
 
-  const onRemove = (food) => {
-    if (food.length === 0) {
-      tele.MainButton.hide()
-    } else {
-      tele.MainButton.show()
-    }
+  const onRemove = () => {
+    // if (food.length === 0) {
+    //   tele.MainButton.hide()
+    // } else {
+    //   tele.MainButton.show()
+    // }
 
     const exist = cartItems.find((x) => x.id === food.id)
+
     if (exist.quantity === 1) {
       setCartItems(cartItems.filter((x) => x.id !== food.id))
     } else {
@@ -73,22 +96,16 @@ export const Product = () => {
   //=================================================
 
   const onSubmit = useCallback(() => {
-    // const exist = cartItems.find((x) => x.id === food.id)
-    // if (exist) {
-    //   setCartItems(
-    //     cartItems.map((x) =>
-    //       x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
-    //     )
-    //   )
-    // } else {
-    //   setCartItems([...cartItems, { ...food, quantity: 1 }])
-    // }
-
-    navigate("/", { state: { cartItems } })
+    navigate("/")
   }, [cartItems])
 
   const onCancel = useCallback(() => {
-    navigate("/", { state: { cartItems } })
+    const exist = cartItems.find((x) => x.id === food.id)
+    setCartItems(
+      cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: 0 } : x))
+    )
+
+    navigate("/")
   }, [cartItems])
 
   //=================================================
@@ -138,16 +155,22 @@ export const Product = () => {
     }
   }
 
+  const foodWithQuantity = cartItems.find((item) => item.id === food.id)
+  const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
+
   return (
     <>
       <Box className="checkoutPage">
-        <h1 className="title">{food.title}</h1>
+        {/* <h1 className="title">{food.title}</h1> */}
 
-        <ButtonCounter
-          onAdd={onAdd}
-          onRemove={onRemove}
-          quantity={food.quantity}
-        />
+        <Typography
+          sx={{ p: 2, textAlign: "center", fontSize: "calc(1.5em + 2vw)" }}
+        >
+          {" "}
+          {food.title}{" "}
+        </Typography>
+
+        <ButtonCounter onAdd={onAdd} onRemove={onRemove} quantity={quantity} />
 
         <Box className="orderContainer">
           <Box className="imageContainer">
@@ -203,7 +226,6 @@ export const Product = () => {
         </Box>
 
         <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)" }}>
-          {" "}
           {t("toppings_paid")} 3 ₪{" "}
         </Typography>
 
@@ -252,7 +274,7 @@ export const Product = () => {
             />
 
             <BigButton
-              title={t("Order")}
+              title={t("confirm")}
               onClick={onSubmit}
               backgroundColor={"#e0c521"}
             />

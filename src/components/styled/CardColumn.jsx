@@ -5,6 +5,8 @@ import { Button } from "./Button"
 import { useTranslation } from "react-i18next"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 // import * as React from 'react';
+import { CartContext } from "App"
+import { useContext } from "react"
 
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const navigate = useNavigate()
@@ -19,8 +21,8 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
     onAdd(food)
   }
   const handleToppings = () => {
-    navigate("/product", { state: { food } })
-  }
+     navigate("/product" , { state: { food } })
+   }
 
   const handleDecrement = () => {
     setCount(count - 1)
@@ -39,9 +41,18 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
 
       <div
         className="image_container"
+        // style={{ display: "block" }}
         style={{ display: imageLoaded ? "block" : "none" }}
       >
-        {!imageLoaded ? (
+        <img
+          src={image}
+          alt={title}
+          onLoad={handleImageLoad}
+          // style={{ display: imageLoaded ? "block" : "none" }}
+          style={{ display: "block" }}
+        />
+
+        {/* {!imageLoaded ? (
           <Skeleton
             sx={{ bgcolor: "grey.900" }}
             animation="wave"
@@ -54,9 +65,10 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
             src={image}
             alt={title}
             onLoad={handleImageLoad}
-            style={{ display: imageLoaded ? "block" : "none" }}
+            // style={{ display: imageLoaded ? "block" : "none" }}
+            style={{ display: "block" }}
           />
-        )}
+        )} */}
       </div>
 
       {/* <h4 className="card_title">{title}</h4> */}

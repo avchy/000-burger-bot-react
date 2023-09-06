@@ -15,8 +15,11 @@ import { useTranslation } from "react-i18next"
 import useLocalStorage from "./hooks/use-localstorage"
 import i18n from "./helpers/i18n"
 
-// const { getData } = require('./db/db')
-// const foods = getData()
+import React, { createContext, useState } from "react"
+
+const { getData } = require("./db/db")
+const cartItemsInitial = []
+// const cartItemsInitial = getData()
 
 const tele = window.Telegram.WebApp
 tele.isClosingConfirmationEnabled = "false"
@@ -31,30 +34,34 @@ const theme = createTheme({
   backgroundElements: "#1a222c",
 })
 
+export const CartContext = createContext()
+
 export function App() {
   const { t } = useTranslation()
   const [language, setLanguage] = useLocalStorage("language", "ru")
- 
+
+  const [cartItems, setCartItems] = useState(cartItemsInitial)
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-         <br />
-        
-        
-        <Header />
+    <CartContext.Provider value={{ cartItems, setCartItems }}>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <br />
 
-        <Routes>
-          <Route index element={<ProductsPage />} />
-          <Route path={"order"} element={<OrderPage />} />
-          <Route path={"checkout"} element={<CheckoutPage />} />
-          <Route path={"payments"} element={<Payments />} />
-          <Route path={"creditCard"} element={<CreditCard />} />
-          <Route path={"product"} element={<Product />} />
+          <Header />
 
-          <Route path={"form"} element={<Form />} />
-        </Routes>
-      </div>
-    </ThemeProvider>
+          <Routes>
+            <Route index element={<ProductsPage />} />
+            <Route path={"order"} element={<OrderPage />} />
+            <Route path={"checkout"} element={<CheckoutPage />} />
+            <Route path={"payments"} element={<Payments />} />
+            <Route path={"creditCard"} element={<CreditCard />} />
+            <Route path={"product"} element={<Product />} />
+
+            <Route path={"form"} element={<Form />} />
+          </Routes>
+        </div>
+      </ThemeProvider>
+    </CartContext.Provider>
   )
 }

@@ -24,6 +24,8 @@ const tele = window.Telegram.WebApp
 import { serverIP } from "constants/api"
 import axios from "axios"
 import { useTranslation } from "react-i18next"
+import { CartContext } from "App"
+import { useContext } from "react"
 
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")

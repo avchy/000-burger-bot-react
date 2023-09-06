@@ -7,6 +7,8 @@ import { CardRow } from "components/styled/CardRow"
 import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
 const tele = window.Telegram.WebApp
+import { CartContext } from "App"
+import { useContext } from "react"
 
 import { useTranslation } from "react-i18next"
 

@@ -13,7 +13,8 @@ import { StyledButton } from "components/styled/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
 import DialogComponent from "components/styled/DialogComponent"
 import CircularProgress from "@mui/material/CircularProgress"
-
+import { CartContext } from "App"
+import { useContext } from "react"
 const tele = window.Telegram.WebApp
 
 import { useTranslation } from "react-i18next"

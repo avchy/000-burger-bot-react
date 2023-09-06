@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react"
+import { useContext, useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import "../../App.scss"
 import { CardColumn } from "components/styled/CardColumn"
@@ -6,12 +6,12 @@ import { BigButton } from "components/styled/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import { StyledButton } from "components/styled/StyledButton"
-
+import { CartContext } from "App"
+ 
 const { getData } = require("db/db")
 const foods = getData()
 const tele = window.Telegram.WebApp
 
- 
 export const ProductsPage = () => {
   const { t, i18n } = useTranslation()
 
@@ -21,8 +21,10 @@ export const ProductsPage = () => {
 
   const { env } = useNavigator()
   const location = useLocation()
-  const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
+  // const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
   const navigate = useNavigate()
+
+  const { cartItems, setCartItems } = useContext(CartContext)
 
   useEffect(() => {
     tele.ready()
@@ -45,7 +47,7 @@ export const ProductsPage = () => {
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
-   }
+  }
 
   const onRemove = (food) => {
     if (food.length === 0) {
@@ -67,7 +69,7 @@ export const ProductsPage = () => {
   }
 
   const onSubmit = useCallback(() => {
-     navigate("/order", { state: { cartItems } })
+    navigate("/order", { state: { cartItems } })
   }, [cartItems])
 
   const onBackButtonClicked = useCallback(() => {
@@ -88,10 +90,10 @@ export const ProductsPage = () => {
     tele.BackButton.hide()
     tele.MainButton.text = t("VIEW ORDER")
     tele.isClosingConfirmationEnabled = false
-   }, [])
+  }, [])
 
   useEffect(() => {
-     tele.MainButton.text = t("VIEW ORDER")
+    tele.MainButton.text = t("VIEW ORDER")
   })
 
   return (
@@ -100,15 +102,15 @@ export const ProductsPage = () => {
         <h1 className="title">{t("Falafel Shop")}</h1>
         <div className="cards_container">
           {foods.map((food) => {
-            const cartItemWithQuantity = cartItems.find(
+            const foodWithQuantity = cartItems.find(
               (item) => item.id === food.id
             )
-            const quantity = cartItemWithQuantity
-              ? cartItemWithQuantity.quantity
+            const quantity = foodWithQuantity
+              ? foodWithQuantity.quantity
               : 0
             return (
               <CardColumn
-                food={food}
+                 food={food}
                 key={food.id}
                 onAdd={onAdd}
                 onRemove={onRemove}
@@ -119,7 +121,7 @@ export const ProductsPage = () => {
         </div>
         {cartItems.length !== 0 && env == "browser" && (
           <BigButton
-             title={t("Order")}
+            title={t("Order")}
             disable={cartItems.length === 0 ? true : false}
             onClick={onSubmit}
           />
