@@ -22,8 +22,8 @@ export function getData() {
         "spicy sauce",
       ],
       paidToppings: [
-        { title: "Egg", cost: 3 },
-        { title: "Hacilim", cost: 3 },
+        { title: "Egg", price: 3 },
+        { title: "Hacilim", price: 3 },
       ],
     },
 

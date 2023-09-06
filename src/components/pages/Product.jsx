@@ -141,6 +141,7 @@ export const Product = () => {
   //====================================================
 
   const toggleTopping = (title) => {
+    console.log('cartItems222', cartItems)
     const isToppingSelected = selectedToppings.includes(title)
     if (isToppingSelected) {
       setSelectedToppings(
@@ -213,7 +214,7 @@ export const Product = () => {
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
-              <Typography sx={{ m: 1 }}> {t(topping.title)} {topping.cost !==0 ? `${topping.cost}₪` : ""} </Typography>
+              <Typography sx={{ m: 1 }}> {t(topping.title)} {topping.price !==0 ? `${topping.price}₪` : ""} </Typography>
             </Box>
           ))}
         </Box>
