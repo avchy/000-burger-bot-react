@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect,useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
 import "../../App.scss"
@@ -8,8 +8,7 @@ import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
 const tele = window.Telegram.WebApp
 import { CartContext } from "App"
-import { useContext } from "react"
-
+   
 import { useTranslation } from "react-i18next"
 
 export const OrderPage = () => {
@@ -19,9 +18,9 @@ export const OrderPage = () => {
   const navigate = useNavigate()
   const { env } = useNavigator()
 
-  const location = useLocation()
-   const cartItems = location.state.cartItems
-
+  // const location = useLocation()
+  //  const cartItems = location.state.cartItems
+   const { cartItems, setCartItems } = useContext(CartContext)
   const [comment, setComment] = useState("")
 
   useEffect(() => {
@@ -32,6 +31,7 @@ export const OrderPage = () => {
     tele.MainButton.text = t("CHECKOUT")
     tele.BackButton.text = t("Edit")
     tele.BackButton.show()
+    console.log('cartItems', cartItems)
   }, [])
 
   const handleChange = (event) => {
@@ -74,11 +74,9 @@ export const OrderPage = () => {
       <div className="orderHeaderEdit">
         <h1 className="title">{t("Your Order")}</h1>
         <Link
-          // to="/"
-          onClick={(e) => {
+           onClick={(e) => {
             e.preventDefault()
-            // navigate("/")
-            navigate("/", { state: { cartItems, comment, totalPrice } })
+             navigate("/", { state: { cartItems, comment, totalPrice } })
           }}
           title="Edit"
           className="navLinkEdit"
@@ -98,8 +96,7 @@ export const OrderPage = () => {
           className="cafe-text-field js-order-comment-field cafe-block"
           rows="1"
           placeholder={t("Add comment")}
-          // placeholder="Add comment"
-          style={styles}
+           style={styles}
           type="text"
           value={comment}
           onChange={handleChange}

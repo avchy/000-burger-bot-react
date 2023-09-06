@@ -123,9 +123,8 @@ body {
 
       .text1 {
         color: $white;
-        word-wrap: break-word;  
+        word-wrap: break-word;
         font-size: calc(0.5em + 2vw);
-
       }
 
       .text_small {
@@ -165,23 +164,10 @@ body {
     text-align: center;
   }
 
-  // .card_title .cart_text_center {
-  //     font-weight: bold;
-  //     margin: 10px 0 0 0;
-  // }
-
   .card_title {
     text-align: center;
     display: inline-block;
-    // margin: 10px 0 0 0;
-    // .left {
-    //   text-align: left;
-    // }
   }
-
-  // .left {
-  //   text-align: left;
-  // }
 
   .cart_text_center {
     text-align: center;
@@ -212,9 +198,6 @@ body {
     position: absolute;
     right: 0;
 
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: center;
     float: right;
     text-align: right;
   }
@@ -271,26 +254,31 @@ body {
     object-fit: cover;
   }
 
-  .cart_text_center {
-    // text-align: center;
+  .card_row_text {
     text-align: left;
-
     display: flex;
     align-items: center;
-    // margin: 0 0 0 auto;
-  }
+    font-size: calc(1rem + 2vw);
+
+   }
+
+  .card_row_mini_text {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-size: calc(0.5rem + 2vw);
+
+   }
 }
 
 .CardRowSmall {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // padding: 0.5rem;
-
+ 
   margin: 13px 10px;
   position: relative;
-  /* border-radius: 5px; */
-  overflow: hidden;
+   overflow: hidden;
   white-space: pre-wrap;
   text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
 
@@ -315,18 +303,48 @@ body {
 }
 //   ====================================================================
 
+.CardRowSmall_toppings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  margin: 13px 10px;
+  position: relative;
+   overflow: hidden;
+  white-space: pre-wrap;
+  text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
+
+  .image_container {
+    width: 30px;
+    height: 30px;
+    margin: 0 20px 0 0;
+  }
+
+  .image_container img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .cart_text_center {
+    text-align: left;
+    // text-align: center;
+    display: flex;
+    align-items: center;
+    // margin: 0 0 0 auto;
+  }
+  
+}
+//   ====================================================================
+
 .form {
   background-color: $backgroundElements;
 
-  // padding: 0.5rem;
-  margin: 10px;
+   margin: 10px;
   border-radius: 5px;
-  // padding: 10px 20px;
-
+ 
   display: flex;
   flex-direction: column;
-  // width: 100%;
-
+ 
   .input {
     width: 80%;
     padding: 10px;

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback,useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   TextField,
@@ -20,8 +20,7 @@ import axios from "axios"
 import { StyledButton } from "components/styled/StyledButton"
 import { discount } from "constants/constants"
 import { CartContext } from "App"
-import { useContext } from "react"
-
+ 
 const tele = window.Telegram.WebApp
 
 import { useTranslation } from "react-i18next"
@@ -39,7 +38,9 @@ export function CheckoutPage() {
   const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
 
   const location = useLocation()
-  const cartItems = location?.state?.cartItems || []
+  // const cartItems = location?.state?.cartItems || []
+  const { cartItems, setCartItems } = useContext(CartContext)
+
   const comment = location?.state?.comment
  
   const totalPrice = location?.state?.totalPrice

@@ -111,7 +111,7 @@ export const Product = () => {
     )
 
     navigate("/")
-  }, [cartItems,selectedToppings])
+  }, [cartItems, selectedToppings])
 
   const onCancel = useCallback(() => {
     const exist = cartItems.find((x) => x.id === food.id)
@@ -151,8 +151,29 @@ export const Product = () => {
   //====================================================
 
   const toggleTopping = (title) => {
-    console.log("cartItems222", cartItems)
+ 
+    const exist = cartItems.find((x) => x.id === food.id);
 
+    if (exist) {
+      // Create a copy of the toppings array with updated counts
+      const updatedToppings = exist.toppings.map((topping) => {
+        if (topping.title === title) {
+          return { ...topping, count: topping.count === 0 ? 1 : 0 };
+        }
+        return topping;
+      });
+      
+      console.log('updatedToppings', updatedToppings)
+  
+      // Update the item in the cart with the updated toppings
+      const updatedCartItems = cartItems.map((item) =>
+        item.id === exist.id ? { ...exist, toppings: updatedToppings } : item
+      );
+  
+      // Update the cart items state
+      setCartItems(updatedCartItems);
+    }
+ 
     const isToppingSelected = selectedToppings.includes(title)
 
     if (isToppingSelected) {
@@ -162,10 +183,8 @@ export const Product = () => {
     } else {
       setSelectedToppings([...selectedToppings, title])
     }
-    
-    console.log("selectedToppings", selectedToppings)
 
-  }
+   }
 
   return (
     <>
