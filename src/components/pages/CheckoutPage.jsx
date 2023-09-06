@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback,useContext } from "react"
+import { useState, useEffect, useCallback, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   TextField,
@@ -20,7 +20,7 @@ import axios from "axios"
 import { StyledButton } from "components/styled/StyledButton"
 import { discount } from "constants/constants"
 import { CartContext } from "App"
- 
+
 const tele = window.Telegram.WebApp
 
 import { useTranslation } from "react-i18next"
@@ -42,7 +42,7 @@ export function CheckoutPage() {
   const { cartItems, setCartItems } = useContext(CartContext)
 
   const comment = location?.state?.comment
- 
+
   const totalPrice = location?.state?.totalPrice
   const totalPriceWithDiscount = (totalPrice * (1 - discount)).toFixed(2)
 
@@ -110,6 +110,8 @@ export function CheckoutPage() {
     tele.MainButton.setParams({ text: t("PAY") })
   }, [])
 
+  const currentTimestamp = Math.floor(Date.now() / 1000)
+console.log('cartItems999', cartItems)
   return (
     <>
       <div className="checkoutPage">
@@ -120,9 +122,12 @@ export function CheckoutPage() {
           </div>
 
           <div className="textContainer">
-            <div className="text1"> {t("Order")} № 770770</div>
-            <div className="text1"> {t('Perfect lunch from Falafel Bot.')}</div>
-            <div className="text_small">{`${discount}% ${t("discount")}`}</div>
+            <div className="text1">
+              {" "}
+              {t("Order")} № {currentTimestamp}
+            </div>
+            <div className="text1"> {t("Perfect lunch from Falafel Bot.")}</div>
+            {/* <div className="text_small">{`${discount}% ${t("discount")}`}</div> */}
           </div>
         </div>
 
@@ -134,35 +139,34 @@ export function CheckoutPage() {
           </div>
         )}
 
-        <CardRowSmall
+        {/* <CardRowSmall
           key={9999}
-          food={{ id: 9999, title:  t("Free delivery"), textColor: "#4AF2A1" }}
-        />
-        <CardRowSmall
+          food={{ id: 9999, title: t("Free delivery"), textColor: "#4AF2A1" }}
+        /> */}
+        {/* <CardRowSmall
           key={9998}
           food={{
             id: 9998,
-            title:   t("Discount"),
+            title: t("Discount"),
             price: (totalPrice * discount).toFixed(2),
             textColor: "#4AF2A1",
           }}
-        />
+        /> */}
         <CardRowSmall
           key={9997}
           food={{
             id: 9997,
             title: t("Total Price:"),
-             price: totalPriceWithDiscount,
+            price: totalPrice,
+            // price: totalPriceWithDiscount,
           }}
         />
       </div>
 
-      {comment && (
-        <div className="comment_container">
-          <div className="title_mini">  {t("Your Comment :")} </div>
-          <div className="text_small">{comment}</div>
-        </div>
-      )}
+      <div className="comment_container">
+        <div className="title_mini"> {t("Your Comment :")} </div>
+        <div className="text_small">{comment ? comment : "__no comment__"}</div>
+      </div>
 
       <div className="form">
         <div className="title_mini" style={{ color: "white" }}>
@@ -202,7 +206,7 @@ export function CheckoutPage() {
           </Select>
         </FormControl>
 
-        {optionDelivery === "take_away" && (
+        {/* {optionDelivery === "take_away" && (
           <TextField
             sx={{
               "& label.Mui-focused": {
@@ -237,10 +241,19 @@ export function CheckoutPage() {
             }}
             inputProps={{ style: { color: "white" } }}
           />
-        )}
+        )} */}
       </div>
 
-      {env === "browser" &&
+      {env === "browser" && (
+        <BigButton
+          title={t("Payments")}
+          type={"payments"}
+          disable={cartItems.length === 0 ? true : false}
+          onClick={onSubmit}
+        />
+      )}
+
+      {/* {env === "browser" &&
         (optionDelivery === "on_site" ||
           (optionDelivery === "take_away" && address)) && (
           <BigButton
@@ -249,7 +262,7 @@ export function CheckoutPage() {
             disable={cartItems.length === 0 ? true : false}
             onClick={onSubmit}
           />
-        )}
+        )} */}
     </>
   )
 }

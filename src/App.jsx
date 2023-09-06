@@ -17,8 +17,7 @@ import i18n from "./helpers/i18n"
 
 import React, { createContext, useState } from "react"
 
-const { getData } = require("./db/db")
-const cartItemsInitial = []
+// const { getData } = require("./db/db")
 // const cartItemsInitial = getData()
 
 const tele = window.Telegram.WebApp
@@ -39,8 +38,7 @@ export const CartContext = createContext()
 export function App() {
   const { t } = useTranslation()
   const [language, setLanguage] = useLocalStorage("language", "ru")
-
-  const [cartItems, setCartItems] = useState(cartItemsInitial)
+  const [cartItems, setCartItems] = useState([])
 
   return (
     <CartContext.Provider value={{ cartItems, setCartItems }}>

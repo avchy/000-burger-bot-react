@@ -7,6 +7,10 @@ $backgroundElements: #1a222c;
 
 $yellow: #e0c521;
 
+.App {
+//  padding: 8px;
+}
+
 body {
   background-color: $backgroundAll;
   color: $white;
@@ -114,13 +118,15 @@ body {
     }
 
     .textContainer {
-      // width: 45%;
-      word-break: break-all;
-
+  
+      
+       word-break: break-all;
       text-align: center;
-      display: inline-block;
-      margin: 0 0 0 auto;
-
+      display: flex; /* Используем flex-контейнер для вертикального центрирования */
+      flex-direction: column; /* Элементы будут располагаться вертикально */
+      justify-content: center; /* Выравниваем элементы по центру по вертикали */
+      align-items: center; /* Выравниваем элементы по центру по горизонтали */
+ 
       .text1 {
         color: $white;
         word-wrap: break-word;
@@ -131,6 +137,7 @@ body {
         color: $light_grey;
       }
     }
+    
   }
 
   .cardsContainer {
