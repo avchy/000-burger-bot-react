@@ -197,6 +197,7 @@ export const Product = () => {
               sx={{
                 width: "100px",
                 textAlign: "center",
+                margin: "10px",
               }}
               key={topping.title}
               role="button"
