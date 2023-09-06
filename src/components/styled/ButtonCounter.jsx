@@ -38,14 +38,16 @@ export function ButtonCounter({ food, onAdd, onRemove, quantity }) {
           // width: "30%",
         }}
       >
-        {count !== 0 ? (
+        {count   ? (
+        // {count !== 0 ? (
           <Button title={"-"} type={"remove"} onClick={handleDecrement} />
         ) : (
           ""
         )}
 
         <Box
-          sx={count !== 0 ? card_badge_simple : card_badge_hidden}
+          sx={ card_badge_simple }
+          // sx={count !== 0 ? card_badge_simple : card_badge_hidden}
           display="inline"
         >
           <Typography

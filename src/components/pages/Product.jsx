@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import "../../App.scss"
 import { ButtonCounter } from "components/styled/ButtonCounter"
@@ -11,12 +11,8 @@ import { Box, Typography } from "@mui/material"
 
 const tele = window.Telegram.WebApp
 
-import {
-  FlexRowContainer,
-  StyledTextField,
-} from "components/styled/AllHelpComponents"
+import { FlexRowContainer } from "components/styled/AllHelpComponents"
 import { CartContext } from "App"
-import { useContext } from "react"
 
 export const Product = () => {
   const { t, i18n } = useTranslation()
@@ -28,6 +24,10 @@ export const Product = () => {
   const { cartItems, setCartItems } = useContext(CartContext)
   const food = location?.state?.food
 
+  const exist = cartItems.find((x) => x.id === food.id)
+
+  const [quantityItem, setQuantityItem] = useState(exist?.quantity || 1)
+
   useEffect(() => {
     tele.ready()
   })
@@ -37,13 +37,18 @@ export const Product = () => {
     console.log("exist", exist)
     console.log("food", food)
     if (exist) {
+      console.log("  exist111")
+
       setCartItems(
         cartItems.map((x) =>
           x.id === food.id ? { ...exist, quantity: exist.quantity } : x
         )
       )
+      // setQuantityItem(exist.quantity)
     } else {
+      console.log("no exist111")
       setCartItems([...cartItems, { ...food, quantity: 1 }])
+      // setQuantityItem(1)
     }
 
     console.log("cartItems", cartItems)
@@ -155,9 +160,6 @@ export const Product = () => {
     }
   }
 
-  const foodWithQuantity = cartItems.find((item) => item.id === food.id)
-  const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
-
   return (
     <>
       <Box className="checkoutPage">
@@ -170,7 +172,11 @@ export const Product = () => {
           {food.title}{" "}
         </Typography>
 
-        <ButtonCounter onAdd={onAdd} onRemove={onRemove} quantity={quantity} />
+        <ButtonCounter
+          onAdd={onAdd}
+          onRemove={onRemove}
+          quantity={quantityItem}
+        />
 
         <Box className="orderContainer">
           <Box className="imageContainer">
