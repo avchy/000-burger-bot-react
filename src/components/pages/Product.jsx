@@ -16,17 +16,16 @@ import { CartContext } from "App"
 
 export const Product = () => {
   const { t, i18n } = useTranslation()
-
   const { env } = useNavigator()
   const navigate = useNavigate()
   const location = useLocation()
-
   const { cartItems, setCartItems } = useContext(CartContext)
-  const food = location?.state?.food
 
+  const food = location?.state?.food
   const exist = cartItems.find((x) => x.id === food.id)
 
   const [quantityItem, setQuantityItem] = useState(exist?.quantity || 1)
+  const [selectedToppings, setSelectedToppings] = useState([])
 
   useEffect(() => {
     tele.ready()
@@ -141,8 +140,6 @@ export const Product = () => {
 
   //====================================================
 
-  const [selectedToppings, setSelectedToppings] = useState([])
-
   const toggleTopping = (title) => {
     const isToppingSelected = selectedToppings.includes(title)
     if (isToppingSelected) {
@@ -154,21 +151,12 @@ export const Product = () => {
     }
   }
 
-  const handleKeyPress = (event, title) => {
-    if (event.key === "Enter") {
-      toggleTopping(title)
-    }
-  }
-
   return (
     <>
       <Box className="checkoutPage">
-        {/* <h1 className="title">{food.title}</h1> */}
-
         <Typography
           sx={{ p: 2, textAlign: "center", fontSize: "calc(1.5em + 2vw)" }}
         >
-          {" "}
           {food.title}{" "}
         </Typography>
 
@@ -188,7 +176,7 @@ export const Product = () => {
           </Box>
         </Box>
 
-        {/* toppings_free_____________________ */}
+        {/* toppings_free __________________________________________ */}
 
         <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)" }}>
           {" "}
@@ -213,7 +201,6 @@ export const Product = () => {
               role="button"
               tabIndex={0}
               onClick={() => toggleTopping(topping.title)}
-              onKeyPress={(event) => handleKeyPress(event, topping.title)}
             >
               <Box
                 className={`topping-circle ${
@@ -230,6 +217,8 @@ export const Product = () => {
             </Box>
           ))}
         </Box>
+
+        {/* toppings_paid __________________________________________ */}
 
         <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)" }}>
           {t("toppings_paid")} 3 ₪{" "}
@@ -253,7 +242,6 @@ export const Product = () => {
               role="button"
               tabIndex={0}
               onClick={() => toggleTopping(topping.title)}
-              onKeyPress={(event) => handleKeyPress(event, topping.title)}
             >
               <Box
                 className={`topping-circle ${
