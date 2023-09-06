@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import { Skeleton, Stack } from "@mui/material"
+// import { Skeleton, Stack } from "@mui/material"
 import "../../App.scss"
 import { Button } from "./Button"
 import { useTranslation } from "react-i18next"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 // import * as React from 'react';
-import { CartContext } from "App"
-import { useContext } from "react"
+// import { CartContext } from "App"
+// import { useContext } from "react"
 
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const navigate = useNavigate()

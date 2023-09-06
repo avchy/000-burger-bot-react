@@ -27,13 +27,16 @@ export function getData() {
       description:
         "Falafel is a deep-fried ball or patty made from ground chickpeas, fava beans, or both.",
       toppings: [
-        { title: "tomatoes", image: tomatoes, count: 0 },
-        { title: "pickled_cucumbers", image: pickled_cucumbers, count: 0 },
-        { title: "humus", image: humus, count: 0 },
-        { title: "tahini", image: tahini, count: 0 },
-        { title: "spicy_sauce", image: spicy_sauce, count: 0 },
-      ],
-      paidToppings: [
+        { title: "tomatoes", cost: 0, image: tomatoes, count: 0 },
+        {
+          title: "pickled_cucumbers",
+          cost: 0,
+          image: pickled_cucumbers,
+          count: 0,
+        },
+        { title: "humus", cost: 0, image: humus, count: 0 },
+        { title: "tahini", cost: 0, image: tahini, count: 0 },
+        { title: "spicy_sauce", cost: 0, image: spicy_sauce, count: 0 },
         { title: "egg", cost: 3, count: 0, image: egg },
         { title: "hacilim", cost: 3, count: 0, image: hacilim },
       ],

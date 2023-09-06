@@ -176,11 +176,11 @@ export const Product = () => {
           </Box>
         </Box>
 
-        {/* toppings_free __________________________________________ */}
+        {/* toppings __________________________________________ */}
 
-        <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)" }}>
+        <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)",fontWeight:700 }}>
           {" "}
-          {t("toppings_free")}
+          {t("toppings")}
         </Typography>
 
         <Box
@@ -213,51 +213,13 @@ export const Product = () => {
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
-              <Typography sx={{ m: 1 }}> {t(topping.title)} </Typography>
+              <Typography sx={{ m: 1 }}> {t(topping.title)} {topping.cost !==0 ? `${topping.cost}₪` : ""} </Typography>
             </Box>
           ))}
         </Box>
 
         {/* toppings_paid __________________________________________ */}
-
-        <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)" }}>
-          {t("toppings_paid")} 3 ₪{" "}
-        </Typography>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-around",
-          }}
-        >
-          {food.paidToppings.map((topping) => (
-            <Box
-              sx={{
-                width: "100px",
-                textAlign: "center",
-              }}
-              key={topping.title}
-              role="button"
-              tabIndex={0}
-              onClick={() => toggleTopping(topping.title)}
-            >
-              <Box
-                className={`topping-circle ${
-                  selectedToppings.includes(topping.title) ? "selected" : ""
-                }`}
-              >
-                <Avatar
-                  alt={topping.title}
-                  src={topping.image}
-                  sx={{ width: 66, height: 66 }}
-                />
-              </Box>
-              <Typography sx={{ m: 1 }}> {t(topping.title)} </Typography>
-            </Box>
-          ))}
-        </Box>
+ 
 
         {env == "browser" && (
           <FlexRowContainer>
