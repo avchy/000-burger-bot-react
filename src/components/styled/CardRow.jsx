@@ -35,7 +35,10 @@ export function CardRow({ food }) {
                     <img src={topping.image} alt={topping.title} />
                   </div>
                   <span className="card_row_text">{t(topping.title)}</span>
-                  <span className="card_row_text">{topping.price} ₪</span>
+                  <span className="card_row_text">
+                    {quantity !== 1 ? `x ${quantity} = ` : ""}
+                    {(topping.price * (quantity || 1)).toFixed(2)} ₪
+                  </span>
                 </div>
               )}
             </>
