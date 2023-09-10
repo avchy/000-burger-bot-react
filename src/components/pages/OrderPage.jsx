@@ -106,7 +106,7 @@ export const OrderPage = () => {
     <div className="orderPage">
       <div className="orderHeaderEdit">
         <h1 className="title">{t("Your Order")}</h1>
-        <Link
+        {/* <Link
           onClick={(e) => {
             e.preventDefault()
             navigate("/", { state: { cartItems, comment, totalPrice } })
@@ -115,7 +115,7 @@ export const OrderPage = () => {
           className="navLinkEdit"
         >
           {t("Edit")}
-        </Link>
+        </Link> */}
       </div>
 
       <div className="cardsContainer">
