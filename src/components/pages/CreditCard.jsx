@@ -33,6 +33,10 @@ export const CreditCard = () => {
   const { queryId, cartItems, comment, totalPrice, address, optionDelivery } =
     useContext(CartContext)
 
+    
+    console.log('queryId', queryId)
+    console.log('window.Telegram.WebApp.initDataUnsafe?.query_id', window.Telegram.WebApp.initDataUnsafe?.query_id)
+    
   const state = {
     queryId,
     cartItems,

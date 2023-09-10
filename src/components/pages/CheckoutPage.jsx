@@ -51,6 +51,8 @@ export function CheckoutPage() {
 
     console.log('user', user)
     console.log('queryIdTemp', queryIdTemp)
+    console.log('window.Telegram.WebApp.initDataUnsafe?.query_id', window.Telegram.WebApp.initDataUnsafe?.query_id)
+    
     
     setQueryId(queryIdTemp)
    }, [])
