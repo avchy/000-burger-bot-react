@@ -33,16 +33,13 @@ export function CardRowSmall({ food }) {
           return (
             <>
               {topping.count > 0 && (
-                <div className="CardRowSmall">
-             <div className="CardRowSmall">
-                
-                <div className="image_container">
-                  <img src={topping.image} alt={topping.title} />
-                </div>
-                <span className="card_row_text">{t(topping.title)}</span>
-              </div>
-
-
+                <div className="CardRowSmall" key={topping.title + index}>
+                  <div className="CardRowSmall">
+                    <div className="image_container">
+                      <img src={topping.image} alt={topping.title} />
+                    </div>
+                    <span className="card_row_text">{t(topping.title)}</span>
+                  </div>
 
                   <span className="card_row_text">
                     {quantity !== 1 ? `x ${quantity} = ` : ""}

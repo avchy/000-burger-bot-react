@@ -25,15 +25,15 @@ export const ProductsPage = () => {
   const navigate = useNavigate()
 
   const { cartItems, setCartItems } = useContext(CartContext)
-  const { query_id, setQueryId } = useContext(CartContext)
+  // const { query_id, setQueryId } = useContext(CartContext)
 
   useEffect(() => {
     tele.ready()
   })
 
-  useEffect(() => {
-    setQueryId(tele.initDataUnsafe?.query_id || 0)
-  }, [])
+  // useEffect(() => {
+  //   setQueryId(tele.initDataUnsafe?.query_id || 0)
+  // }, [])
 
   const onAdd = (food) => {
     if (food.length === 0) {
