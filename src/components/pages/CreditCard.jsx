@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback ,useContext} from "react"
 import axios from "axios"
 import {
   FlexColumnContainer,
@@ -14,8 +14,7 @@ import { useNavigator } from "hooks/useNavigator"
 import DialogComponent from "components/styled/DialogComponent"
 import CircularProgress from "@mui/material/CircularProgress"
 import { CartContext } from "App"
-import { useContext } from "react"
-const tele = window.Telegram.WebApp
+ const tele = window.Telegram.WebApp
 
 import { useTranslation } from "react-i18next"
 
