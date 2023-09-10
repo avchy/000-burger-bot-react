@@ -24,7 +24,11 @@ export const OrderPage = () => {
   // const location = useLocation()
   //  const cartItems = location.state.cartItems
   const { cartItems, setCartItems } = useContext(CartContext)
-  const [comment, setComment] = useState("")
+  // const [comment, setComment] = useState("")
+
+  const { comment, setComment } = useContext(CartContext)
+
+  const { totalPrice, setTotalPrice } = useContext(CartContext)
 
   useEffect(() => {
     tele.ready()
@@ -65,14 +69,19 @@ export const OrderPage = () => {
     return totalPrice
   }
 
-  const totalPrice = calculateTotalPrice(products, cartItems)
+  useEffect(() => {
+    setTotalPrice(calculateTotalPrice(products, cartItems))
+  }, [])
 
+ 
   const onSubmit = useCallback(() => {
-    navigate("/checkout", { state: { cartItems, comment, totalPrice } })
+    navigate("/checkout")
+    // navigate("/checkout", { state: { cartItems, comment, totalPrice } })
   }, [cartItems, comment])
 
   const onBackButtonClicked = useCallback(() => {
-    navigate("/", { state: { cartItems, comment, totalPrice } })
+    navigate("/")
+    // navigate("/", { state: { cartItems, comment, totalPrice } })
   }, [cartItems])
 
   useEffect(() => {

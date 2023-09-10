@@ -8,7 +8,7 @@ $backgroundElements: #1a222c;
 $yellow: #e0c521;
 
 .App {
-//  padding: 8px;
+  //  padding: 8px;
 }
 
 body {
@@ -118,15 +118,13 @@ body {
     }
 
     .textContainer {
-  
-      
-       word-break: break-all;
+      word-break: break-all;
       text-align: center;
       display: flex; /* Используем flex-контейнер для вертикального центрирования */
       flex-direction: column; /* Элементы будут располагаться вертикально */
       justify-content: center; /* Выравниваем элементы по центру по вертикали */
       align-items: center; /* Выравниваем элементы по центру по горизонтали */
- 
+
       .text1 {
         color: $white;
         word-wrap: break-word;
@@ -137,7 +135,6 @@ body {
         color: $light_grey;
       }
     }
-    
   }
 
   .cardsContainer {
@@ -241,14 +238,12 @@ body {
 //   ====================================================================
 
 .CardRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Три равные части */
+  gap: 0.5rem; /* Промежуток между колонками */
   padding: 0.5rem;
-
   margin: 13px 10px;
   position: relative;
-  /* border-radius: 5px; */
 
   .image_container {
     width: 50px;
@@ -262,32 +257,27 @@ body {
   }
 
   .card_row_text {
-    text-align: left;
     display: flex;
     align-items: center;
     font-size: calc(1rem + 2vw);
-
-   }
+    justify-content: flex-start;
+  }
 
   .card_row_mini_text {
-    text-align: left;
     display: flex;
     align-items: center;
     font-size: calc(0.5rem + 2vw);
-
-   }
+    justify-content: flex-start;
+  }
 }
 
 .CardRowSmall {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
- 
-  margin: 13px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Три равные части */
+  gap: 0.5rem; /* Промежуток между колонками */
+  // padding: 0.5rem;
+  margin: 5px;
   position: relative;
-   overflow: hidden;
-  white-space: pre-wrap;
-  text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
 
   .image_container {
     width: 30px;
@@ -302,11 +292,9 @@ body {
 
   .cart_text_center {
     text-align: left;
-    // text-align: center;
-    display: flex;
+     display: flex;
     align-items: center;
-    // margin: 0 0 0 auto;
-  }
+   }
 }
 //   ====================================================================
 
@@ -314,10 +302,10 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
+
   margin: 13px 10px;
   position: relative;
-   overflow: hidden;
+  overflow: hidden;
   white-space: pre-wrap;
   text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
 
@@ -339,19 +327,18 @@ body {
     align-items: center;
     // margin: 0 0 0 auto;
   }
-  
 }
 //   ====================================================================
 
 .form {
   background-color: $backgroundElements;
 
-   margin: 10px;
+  margin: 10px;
   border-radius: 5px;
- 
+
   display: flex;
   flex-direction: column;
- 
+
   .input {
     width: 80%;
     padding: 10px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback ,useContext} from "react"
+import React, { useState, useEffect, useCallback, useContext } from "react"
 import axios from "axios"
 import {
   FlexColumnContainer,
@@ -14,7 +14,7 @@ import { useNavigator } from "hooks/useNavigator"
 import DialogComponent from "components/styled/DialogComponent"
 import CircularProgress from "@mui/material/CircularProgress"
 import { CartContext } from "App"
- const tele = window.Telegram.WebApp
+const tele = window.Telegram.WebApp
 
 import { useTranslation } from "react-i18next"
 
@@ -30,17 +30,17 @@ export const CreditCard = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const state = location?.state
- 
-  const {
+  const { queryId, cartItems, comment, totalPrice, address, optionDelivery } =
+    useContext(CartContext)
+
+  const state = {
     queryId,
-    products,
-    totalPrice: totalPrice,
-    totalPriceWithDiscount: totalPriceWithDiscount,
+    cartItems,
     comment,
+    totalPrice,
     address,
-    discount,
-  } = state
+    optionDelivery,
+  }
 
   const handleCloseDialog = () => {
     setDialogOpen(false)
@@ -48,7 +48,7 @@ export const CreditCard = () => {
 
   const onBackButtonClicked = useCallback(() => {
     navigate(-1)
-  }, [products])
+  }, [cartItems])
 
   tele.BackButton.onClick(onBackButtonClicked)
 
@@ -64,42 +64,42 @@ export const CreditCard = () => {
 
   // const { register, handleSubmit, formState } = useForm(formOptions)
 
-  const validateFields = (data) => {
-    const errors = {}
+  // const validateFields = (data) => {
+  //   const errors = {}
 
-    if (!data.cardNumber || !/^\d{16}$/.test(data.cardNumber)) {
-      setError("cardNumber", {
-        type: "manual",
-        message: t("incorrectCardNumber"),
-      })
-      errors.cardNumber = t("incorrectCardNumber")
-    }
+  //   if (!data.cardNumber || !/^\d{16}$/.test(data.cardNumber)) {
+  //     setError("cardNumber", {
+  //       type: "manual",
+  //       message: t("incorrectCardNumber"),
+  //     })
+  //     errors.cardNumber = t("incorrectCardNumber")
+  //   }
 
-    if (!data.expiryDate || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(data.expiryDate)) {
-      setError("expiryDate", {
-        type: "manual",
-        message: t("incorrectExpiryDate"),
-      })
-      errors.expiryDate = t("incorrectExpiryDate")
-    }
+  //   if (!data.expiryDate || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(data.expiryDate)) {
+  //     setError("expiryDate", {
+  //       type: "manual",
+  //       message: t("incorrectExpiryDate"),
+  //     })
+  //     errors.expiryDate = t("incorrectExpiryDate")
+  //   }
 
-    if (!data.cvv || !/^\d{3,4}$/.test(data.cvv)) {
-      setError("cvv", {
-        type: "manual",
-        message: t("incorrectCvvCode"),
-      })
-      errors.cvv = t("incorrectCvvCode")
-    }
+  //   if (!data.cvv || !/^\d{3,4}$/.test(data.cvv)) {
+  //     setError("cvv", {
+  //       type: "manual",
+  //       message: t("incorrectCvvCode"),
+  //     })
+  //     errors.cvv = t("incorrectCvvCode")
+  //   }
 
-    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      setError("email", {
-        type: "manual",
-        message: t("incorrectEmail"),
-      })
-      errors.email = t("incorrectEmail")
-    }
-    return errors
-  }
+  //   if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+  //     setError("email", {
+  //       type: "manual",
+  //       message: t("incorrectEmail"),
+  //     })
+  //     errors.email = t("incorrectEmail")
+  //   }
+  //   return errors
+  // }
 
   const onSubmit = async (cardData) => {
     try {
@@ -128,7 +128,7 @@ ______________________________________________________
       setDialogOpen(true)
     } catch (error) {
       setDialogText(JSON.stringify(error, null, 2))
- 
+
       console.log("error333", error)
     } finally {
       setIsSubmitting(false)

@@ -38,10 +38,35 @@ export const CartContext = createContext()
 export function App() {
   const { t } = useTranslation()
   const [language, setLanguage] = useLocalStorage("language", "ru")
+  const [queryId, setQueryId] = useState(
+    window.Telegram.WebApp.initDataUnsafe?.query_id || 0
+  )
   const [cartItems, setCartItems] = useState([])
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [comment, setComment] = useState("")
+  const [address, setAddress] = useState("")
+  const [optionDelivery, setOptionDelivery] = useState("on_site")
+  const [paymentMethod, setPaymentMethod] = useState("")
+
+  // i18n.changeLanguage(language)
 
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        setCartItems,
+        queryId,
+        setQueryId,
+        totalPrice,
+        setTotalPrice,
+        comment,
+        setComment,
+        address,
+        setAddress,
+        optionDelivery,
+        setOptionDelivery,
+      }}
+    >
       <ThemeProvider theme={theme}>
         <div className="App">
           <br />

@@ -30,21 +30,25 @@ export function CheckoutPage() {
 
   const { env } = useNavigator()
 
-  const [address, setAddress] = useState("")
-  const [tempError, setTempError] = useState("---")
-  const [tempData, setTempData] = useState({})
-  const [optionDelivery, setOptionDelivery] = useState("on_site")
+  // const [address, setAddress] = useState("")
+  // const [tempError, setTempError] = useState("---")
+  // const [tempData, setTempData] = useState({})
+ 
 
-  const query_id = window.Telegram.WebApp.initDataUnsafe?.query_id
-
-  const location = useLocation()
+  // const location = useLocation()
   // const cartItems = location?.state?.cartItems || []
   const { cartItems, setCartItems } = useContext(CartContext)
+  const { comment, setComment} = useContext(CartContext)
+  const { totalPrice, setTotalPrice} = useContext(CartContext)
+  // const { queryId, setQueryId} = useContext(CartContext)
+  const { optionDelivery, setOptionDelivery} = useContext(CartContext)
+  const { address, setAddress} = useContext(CartContext)
 
-  const comment = location?.state?.comment
+  
+  // const comment = location?.state?.comment
 
-  const totalPrice = location?.state?.totalPrice
-  const totalPriceWithDiscount = (totalPrice * (1 - discount)).toFixed(2)
+  // const totalPrice = location?.state?.totalPrice
+  // const totalPriceWithDiscount = (totalPrice * (1 - discount)).toFixed(2)
 
   const navigate = useNavigate()
 
@@ -59,17 +63,18 @@ export function CheckoutPage() {
       delete cartItems[i].image
     }
 
-    const data = {
-      queryId: query_id,
-      products: cartItems,
-      comment: comment,
-      address: address,
-      discount: discount,
-      totalPrice: totalPrice,
-      totalPriceWithDiscount: totalPriceWithDiscount,
-    }
+    // const data = {
+    //   queryId: query_id,
+    //   products: cartItems,
+    //   comment: comment,
+    //   address: address,
+    //   discount: discount,
+    //   totalPrice: totalPrice,
+    //   totalPriceWithDiscount: totalPriceWithDiscount,
+    // }
 
-    navigate("/payments", { state: data })
+    navigate("/payments" )
+    // navigate("/payments", { state: data })
   }, [cartItems, comment])
 
   useEffect(() => {
@@ -98,12 +103,12 @@ export function CheckoutPage() {
     setOptionDelivery(e.target.value)
   }
 
-  useEffect(() => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    })
-  }, [optionDelivery])
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: document.body.scrollHeight,
+  //     behavior: "smooth",
+  //   })
+  // }, [optionDelivery])
 
   useEffect(() => {
     tele.BackButton.show()
@@ -111,8 +116,7 @@ export function CheckoutPage() {
   }, [])
 
   const currentTimestamp = Math.floor(Date.now() / 1000)
-console.log('cartItems999', cartItems)
-  return (
+   return (
     <>
       <div className="checkoutPage">
         <h1 className="title">{t("Checkout")}</h1>

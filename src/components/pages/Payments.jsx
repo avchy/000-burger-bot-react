@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback,useContext } from "react"
+import { useState, useEffect, useCallback, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   Radio,
@@ -25,41 +25,38 @@ import { serverIP } from "constants/api"
 import axios from "axios"
 import { useTranslation } from "react-i18next"
 import { CartContext } from "App"
- 
+
 export function Payments() {
-  const [paymentMethod, setPaymentMethod] = useState("")
+  // const [paymentMethod, setPaymentMethod] = useState("")
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
 
-  const location = useLocation()
-  const state = location?.state
-   // const {
-  //   queryId,
-  //   products,
-  //   comment,
-  //   totalPrice,
-  //   address,
-  //   discount,
-  //   totalPriceWithDiscount,
-  // } = state
+  // const location = useLocation()
+  // const state = location?.state
 
-  // const { cartItems, comment, totalPrice } = state
-  // const data = { cartItems, comment, totalPrice }
+  const {
+    queryId,
+    cartItems,
+    comment,
+    totalPrice,
+    address,
+    optionDelivery,
+    paymentMethod,
+    setPaymentMethod,
+  } = useContext(CartContext)
+
+  const state = {
+    queryId,
+    cartItems,
+    comment,
+    totalPrice,
+    address,
+    optionDelivery,
+   }
 
   tele.MainButton.hide()
   tele.BackButton.show()
 
-  // const dataPay = {
-  //   queryId: queryId,
-  //   products: products,
-  //   totalPrice: totalPrice,
-  //   totalPriceWithDiscount: totalPriceWithDiscount,
-  //   comment: comment,
-  //   address: address,
-  //   discount: discount,
-  // }
-
- 
   const onCreditCard = useCallback(() => {
     navigate("/creditCard", { state: { ...state, paymentMethod: "card" } })
   }, [state])
@@ -124,9 +121,7 @@ export function Payments() {
         <StyledButton onClick={onGooglePay} variant="contained">
           {t("Buy with")} <img src={googleSVG} alt="googlePay" /> Pay
           {/* {t("Buy with")} <img src={googlePay} alt="googlePay" /> Pay */}
-         </StyledButton>
-
-       
+        </StyledButton>
 
         {/* <ReactSVG
           beforeInjection={(svg) => {
