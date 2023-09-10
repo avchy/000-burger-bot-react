@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback,useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   Radio,
@@ -25,8 +25,7 @@ import { serverIP } from "constants/api"
 import axios from "axios"
 import { useTranslation } from "react-i18next"
 import { CartContext } from "App"
-import { useContext } from "react"
-
+ 
 export function Payments() {
   const [paymentMethod, setPaymentMethod] = useState("")
   const navigate = useNavigate()
