@@ -43,10 +43,17 @@ export function CheckoutPage() {
   const { optionDelivery, setOptionDelivery } = useContext(CartContext)
   const { address, setAddress } = useContext(CartContext)
 
+  const tele = window.Telegram.WebApp
+
   useEffect(() => {
-    tele.ready()
-    setQueryId(tele.initDataUnsafe?.query_id)
-  }, [])
+    const user = tele.initDataUnsafe?.user
+    const queryIdTemp = tele.initDataUnsafe?.query_id
+
+    console.log('user', user)
+    console.log('queryIdTemp', queryIdTemp)
+    
+    setQueryId(queryIdTemp)
+   }, [])
 
   // const comment = location?.state?.comment
 
