@@ -38,7 +38,7 @@ export function App() {
   const [queryId, setQueryId] = useState(0)
   const [cartItems, setCartItems] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
-  const [comment, setComment] = useState("__No comment__")
+  const [comment, setComment] = useState("")
   const [address, setAddress] = useState("")
   const [optionDelivery, setOptionDelivery] = useState("on_site")
   const [paymentMethod, setPaymentMethod] = useState("")

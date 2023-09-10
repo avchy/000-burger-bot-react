@@ -33,18 +33,21 @@ export function CheckoutPage() {
   // const [address, setAddress] = useState("")
   // const [tempError, setTempError] = useState("---")
   // const [tempData, setTempData] = useState({})
- 
 
   // const location = useLocation()
   // const cartItems = location?.state?.cartItems || []
   const { cartItems, setCartItems } = useContext(CartContext)
-  const { comment, setComment} = useContext(CartContext)
-  const { totalPrice, setTotalPrice} = useContext(CartContext)
-  // const { queryId, setQueryId} = useContext(CartContext)
-  const { optionDelivery, setOptionDelivery} = useContext(CartContext)
-  const { address, setAddress} = useContext(CartContext)
+  const { comment, setComment } = useContext(CartContext)
+  const { totalPrice, setTotalPrice } = useContext(CartContext)
+  const { queryId, setQueryId } = useContext(CartContext)
+  const { optionDelivery, setOptionDelivery } = useContext(CartContext)
+  const { address, setAddress } = useContext(CartContext)
 
-  
+  useEffect(() => {
+    tele.ready()
+    setQueryId(tele.initDataUnsafe?.query_id)
+  }, [])
+
   // const comment = location?.state?.comment
 
   // const totalPrice = location?.state?.totalPrice
@@ -63,18 +66,7 @@ export function CheckoutPage() {
       delete cartItems[i].image
     }
 
-    // const data = {
-    //   queryId: query_id,
-    //   products: cartItems,
-    //   comment: comment,
-    //   address: address,
-    //   discount: discount,
-    //   totalPrice: totalPrice,
-    //   totalPriceWithDiscount: totalPriceWithDiscount,
-    // }
-
-    navigate("/payments" )
-    // navigate("/payments", { state: data })
+    navigate("/payments")
   }, [cartItems, comment])
 
   useEffect(() => {
@@ -116,7 +108,7 @@ export function CheckoutPage() {
   }, [])
 
   const currentTimestamp = Math.floor(Date.now() / 1000)
-   return (
+  return (
     <>
       <div className="checkoutPage">
         <h1 className="title">{t("Checkout")}</h1>
