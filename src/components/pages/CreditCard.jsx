@@ -27,16 +27,17 @@ export const CreditCard = () => {
   const [dialogText, setDialogText] = useState("")
 
   const { env } = useNavigator()
-  const location = useLocation()
   const navigate = useNavigate()
 
   const { queryId, cartItems, comment, totalPrice, address, optionDelivery } =
     useContext(CartContext)
 
-    
-    console.log('queryId', queryId)
-    console.log('window.Telegram.WebApp.initDataUnsafe?.query_id', window.Telegram.WebApp.initDataUnsafe?.query_id)
-    
+  console.log("queryId", queryId)
+  console.log(
+    "window.Telegram.WebApp.initDataUnsafe?.query_id",
+    window.Telegram.WebApp.initDataUnsafe?.query_id
+  )
+
   const state = {
     queryId,
     cartItems,
