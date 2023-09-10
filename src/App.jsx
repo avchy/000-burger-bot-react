@@ -1,6 +1,6 @@
 import "./App.scss"
+import React, { createContext, useState, useEffect } from "react"
 import { Routes, Route } from "react-router-dom"
-
 import { Header } from "components/styled/Header"
 import { ProductsPage } from "components/pages/ProductsPage"
 import { Product } from "components/pages/Product"
@@ -10,12 +10,9 @@ import { CreditCard } from "components/pages/CreditCard"
 import { Payments } from "components/pages/Payments"
 import { Form } from "components/styled/Form"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
-
 import { useTranslation } from "react-i18next"
 import useLocalStorage from "./hooks/use-localstorage"
 import i18n from "./helpers/i18n"
-
-import React, { createContext, useState } from "react"
 
 // const { getData } = require("./db/db")
 // const cartItemsInitial = getData()
@@ -38,12 +35,10 @@ export const CartContext = createContext()
 export function App() {
   const { t } = useTranslation()
   const [language, setLanguage] = useLocalStorage("language", "ru")
-  const [queryId, setQueryId] = useState(
-    window.Telegram.WebApp.initDataUnsafe?.query_id || 0
-  )
+  const [queryId, setQueryId] = useState(0)
   const [cartItems, setCartItems] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
-  const [comment, setComment] = useState("")
+  const [comment, setComment] = useState("__No comment__")
   const [address, setAddress] = useState("")
   const [optionDelivery, setOptionDelivery] = useState("on_site")
   const [paymentMethod, setPaymentMethod] = useState("")

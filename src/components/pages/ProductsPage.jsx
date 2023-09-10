@@ -7,7 +7,7 @@ import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import { StyledButton } from "components/styled/StyledButton"
 import { CartContext } from "App"
- 
+
 const { getData } = require("db/db")
 const foods = getData()
 const tele = window.Telegram.WebApp
@@ -25,10 +25,15 @@ export const ProductsPage = () => {
   const navigate = useNavigate()
 
   const { cartItems, setCartItems } = useContext(CartContext)
+  const { query_id, setQueryId } = useContext(CartContext)
 
   useEffect(() => {
     tele.ready()
   })
+
+  useEffect(() => {
+    setQueryId(tele.initDataUnsafe?.query_id || 0)
+  }, [])
 
   const onAdd = (food) => {
     if (food.length === 0) {
@@ -105,12 +110,10 @@ export const ProductsPage = () => {
             const foodWithQuantity = cartItems.find(
               (item) => item.id === food.id
             )
-            const quantity = foodWithQuantity
-              ? foodWithQuantity.quantity
-              : 0
+            const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
             return (
               <CardColumn
-                 food={food}
+                food={food}
                 key={food.id}
                 onAdd={onAdd}
                 onRemove={onRemove}
