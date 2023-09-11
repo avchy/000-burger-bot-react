@@ -47,7 +47,7 @@ export function App() {
   const navigate = useNavigate()
 
   const onBackButtonClicked = useCallback(() => {
-    navigate("/")
+    navigate(-1)
   }, [cartItems])
 
   useEffect(() => {
