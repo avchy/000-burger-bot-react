@@ -95,6 +95,14 @@ export const ProductsPage = () => {
     tele.MainButton.text = t("VIEW ORDER")
   })
 
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      tele.MainButton.hide()
+    } else {
+      tele.MainButton.show()
+    }
+  }, [cartItems])
+
   return (
     <>
       <div className="productsPage">
