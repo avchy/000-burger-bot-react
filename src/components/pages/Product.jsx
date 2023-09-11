@@ -143,6 +143,7 @@ export const Product = () => {
 
   useEffect(() => {
     tele.BackButton.show()
+    tele.MainButton.show()
     //  tele.isClosingConfirmationEnabled = false
   }, [])
 
