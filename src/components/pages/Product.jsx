@@ -128,7 +128,7 @@ export const Product = () => {
     // navigate("/", { state: { cartItems } })
     setCartItems(cartItems.filter((x) => x.id !== food.id))
 
-    navigate("/" )
+    navigate("/")
   }, [cartItems])
 
   useEffect(() => {
@@ -193,7 +193,7 @@ export const Product = () => {
         <Typography
           sx={{ p: 2, textAlign: "center", fontSize: "calc(1.5em + 2vw)" }}
         >
-          {food.title}{" "}
+          {t(food.title)}
         </Typography>
 
         <ButtonCounter
@@ -208,7 +208,8 @@ export const Product = () => {
           </Box>
 
           <Box className="textContainer">
-            <Box className="text1">{food.description}</Box>
+            <Box className="text1"> {t(food.description)} </Box>
+            {/* <Box className="text1">{food.description}</Box> */}
           </Box>
         </Box>
 
@@ -217,7 +218,6 @@ export const Product = () => {
         <Typography
           sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}
         >
-          {" "}
           {t("toppings")}
         </Typography>
 
@@ -253,9 +253,8 @@ export const Product = () => {
                 />
               </Box>
               <Typography sx={{ m: 1 }}>
-                {" "}
-                {t(topping.title)}{" "}
-                {topping.price !== 0 ? `${topping.price}₪` : ""}{" "}
+                {t(topping.title)}
+                {topping.price !== 0 ? `${topping.price}₪` : ""}
               </Typography>
             </Box>
           ))}
