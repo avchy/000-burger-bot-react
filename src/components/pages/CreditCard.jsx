@@ -51,11 +51,11 @@ export const CreditCard = () => {
     setDialogOpen(false)
   }
 
-  const onBackButtonClicked = useCallback(() => {
-    navigate(-1)
-  }, [cartItems])
+  // const onBackButtonClicked = useCallback(() => {
+  //   navigate(-1)
+  // }, [cartItems])
 
-  tele.BackButton.onClick(onBackButtonClicked)
+  // tele.BackButton.onClick(onBackButtonClicked)
 
   const {
     register,
@@ -156,11 +156,11 @@ ______________________________________________________
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSubmit)
-    tele.onEvent("backButtonClicked", onBackButtonClicked)
+    // tele.onEvent("backButtonClicked", onBackButtonClicked)
 
     return () => {
       tele.offEvent("mainButtonClicked", onSubmit)
-      tele.offEvent("backButtonClicked", onBackButtonClicked)
+      // tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
 
