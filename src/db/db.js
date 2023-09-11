@@ -25,7 +25,8 @@ export function getData() {
       price: 15,
       image: falafelImg,
       description:
-        "Falafel is a deep-fried ball or patty made from ground chickpeas, fava beans, or both.",
+        // "Falafel is a deep-fried ball or patty made from ground chickpeas, fava beans, or both.",
+        "Falafel_description",
       toppings: [
         { title: "tomatoes", price: 0, image: tomatoes, count: 0 },
         {
