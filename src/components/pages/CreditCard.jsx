@@ -41,13 +41,15 @@ export const CreditCard = () => {
 
   const state = {
     queryId,
-    user_id: user.id,
-    user_name: user.username,
     cartItems,
     comment,
     totalPrice,
     address,
     optionDelivery,
+    
+    user_id: user.id,
+    user_name: user.username,
+    order_date: new Date().toLocaleString(),
   }
 
   const handleCloseDialog = () => {
