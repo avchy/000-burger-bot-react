@@ -125,7 +125,10 @@ export const Product = () => {
   //=================================================
 
   const onBackButtonClicked = useCallback(() => {
-    navigate("/", { state: { cartItems } })
+    // navigate("/", { state: { cartItems } })
+    setCartItems(cartItems.filter((x) => x.id !== food.id))
+
+    navigate("/" )
   }, [cartItems])
 
   useEffect(() => {
@@ -139,41 +142,39 @@ export const Product = () => {
   }, [onSubmit])
 
   useEffect(() => {
-    tele.BackButton.hide()
-    tele.MainButton.text = t("VIEW ORDER")
-    tele.isClosingConfirmationEnabled = false
+    tele.BackButton.show()
+    //  tele.isClosingConfirmationEnabled = false
   }, [])
 
   useEffect(() => {
-    tele.MainButton.text = t("VIEW ORDER")
+    tele.MainButton.text = t("confirm")
   })
 
   //====================================================
 
   const toggleTopping = (title) => {
- 
-    const exist = cartItems.find((x) => x.id === food.id);
+    const exist = cartItems.find((x) => x.id === food.id)
 
     if (exist) {
       // Create a copy of the toppings array with updated counts
       const updatedToppings = exist.toppings.map((topping) => {
         if (topping.title === title) {
-          return { ...topping, count: topping.count === 0 ? 1 : 0 };
+          return { ...topping, count: topping.count === 0 ? 1 : 0 }
         }
-        return topping;
-      });
-      
-      console.log('updatedToppings', updatedToppings)
-  
+        return topping
+      })
+
+      console.log("updatedToppings", updatedToppings)
+
       // Update the item in the cart with the updated toppings
       const updatedCartItems = cartItems.map((item) =>
         item.id === exist.id ? { ...exist, toppings: updatedToppings } : item
-      );
-  
+      )
+
       // Update the cart items state
-      setCartItems(updatedCartItems);
+      setCartItems(updatedCartItems)
     }
- 
+
     const isToppingSelected = selectedToppings.includes(title)
 
     if (isToppingSelected) {
@@ -183,8 +184,7 @@ export const Product = () => {
     } else {
       setSelectedToppings([...selectedToppings, title])
     }
-
-   }
+  }
 
   return (
     <>

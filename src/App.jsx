@@ -1,6 +1,6 @@
 import "./App.scss"
-import React, { createContext, useState, useEffect } from "react"
-import { Routes, Route } from "react-router-dom"
+import React, { createContext, useState, useEffect, useCallback } from "react"
+import { Routes, Route, useNavigate } from "react-router-dom"
 import { Header } from "components/styled/Header"
 import { ProductsPage } from "components/pages/ProductsPage"
 import { Product } from "components/pages/Product"
@@ -44,6 +44,24 @@ export function App() {
   const [paymentMethod, setPaymentMethod] = useState("")
 
   // i18n.changeLanguage(language)
+  const navigate = useNavigate()
+
+  const onBackButtonClicked = useCallback(() => {
+    navigate("/")
+  }, [cartItems])
+
+  useEffect(() => {
+    tele.onEvent("backButtonClicked", onBackButtonClicked)
+
+    return () => {
+      tele.offEvent("backButtonClicked", onBackButtonClicked)
+    }
+  }, [onBackButtonClicked])
+
+  useEffect(() => {
+    tele.BackButton.hide()
+    tele.isClosingConfirmationEnabled = false
+  }, [])
 
   return (
     <CartContext.Provider

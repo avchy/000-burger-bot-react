@@ -74,27 +74,21 @@ export const ProductsPage = () => {
   }
 
   const onSubmit = useCallback(() => {
-    navigate("/order", { state: { cartItems } })
-  }, [cartItems])
-
-  const onBackButtonClicked = useCallback(() => {
-    navigate("/", { state: { cartItems } })
+    navigate("/order")
   }, [cartItems])
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSubmit)
-    tele.onEvent("backButtonClicked", onBackButtonClicked)
 
     return () => {
       tele.offEvent("mainButtonClicked", onSubmit)
-      tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
 
   useEffect(() => {
     tele.BackButton.hide()
-    tele.MainButton.text = t("VIEW ORDER")
-    tele.isClosingConfirmationEnabled = false
+    // tele.MainButton.text = t("VIEW ORDER")
+    // tele.isClosingConfirmationEnabled = false
   }, [])
 
   useEffect(() => {
