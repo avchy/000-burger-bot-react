@@ -49,7 +49,7 @@ export const CreditCard = () => {
     
     user_id: user.id,
     user_name: user.username,
-    order_date: new Date().toLocaleString(),
+    order_date: new Date(),
   }
 
   const handleCloseDialog = () => {
