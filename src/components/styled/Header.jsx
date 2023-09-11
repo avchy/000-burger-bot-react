@@ -8,7 +8,7 @@ import generatedGitInfo from "helpers/generatedGitInfo.json"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
-const tele = window.Telegram.WebApp
+// const tele = window.Telegram.WebApp
 
 export const Header = () => {
   const { user, onClose } = useTelegram()
@@ -79,7 +79,7 @@ export const Header = () => {
             key={button.code}
             variant={currentLanguage === button.code ? "contained" : "outlined"}
             onClick={() => changeLanguage(button.code)}
-            sx={{ padding: "4px 8px" }}
+            sx={{ padding: "4px 4px" }}
           >
             {button.flag} &nbsp; &nbsp;
             {button.label}

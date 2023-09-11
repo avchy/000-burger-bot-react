@@ -29,17 +29,20 @@ export const CreditCard = () => {
   const { env } = useNavigator()
   const navigate = useNavigate()
 
-  const { queryId, cartItems, comment, totalPrice, address, optionDelivery } =
-    useContext(CartContext)
-
-  console.log("queryId", queryId)
-  console.log(
-    "window.Telegram.WebApp.initDataUnsafe?.query_id",
-    window.Telegram.WebApp.initDataUnsafe?.query_id
-  )
+  const {
+    queryId,
+    cartItems,
+    comment,
+    totalPrice,
+    address,
+    optionDelivery,
+    user,
+  } = useContext(CartContext)
 
   const state = {
     queryId,
+    user_id: user.id,
+    user_name: user.username,
     cartItems,
     comment,
     totalPrice,
@@ -127,14 +130,14 @@ ______________________________________________________
 
       setDialogOpen(true)
 
-      const response = await axios.post(serverIP + "/web-data", dataPay)
+      await axios.post(serverIP + "/web-data", dataPay)
+      // const response = await axios.post(serverIP + "/web-data", dataPay)
 
       setDialogText(t("success"))
       setDialogOpen(true)
     } catch (error) {
-      setDialogText(JSON.stringify(error, null, 2))
-
       console.log("error333", error)
+      setDialogText(JSON.stringify(error, null, 2))
     } finally {
       setIsSubmitting(false)
     }
