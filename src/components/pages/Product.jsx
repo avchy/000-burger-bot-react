@@ -209,8 +209,7 @@ export const Product = () => {
 
           <Box className="textContainer">
             <Box className="text1"> {t(food.description)} </Box>
-            {/* <Box className="text1">{food.description}</Box> */}
-          </Box>
+           </Box>
         </Box>
 
         {/* Toppings __________________________________________ */}

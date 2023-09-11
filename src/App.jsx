@@ -35,7 +35,8 @@ export const CartContext = createContext()
 export function App() {
   const { t } = useTranslation()
   const [language, setLanguage] = useLocalStorage("language", "ru")
-  const [queryId, setQueryId] = useState(0)
+  const [queryId, setQueryId] = useState(tele.initDataUnsafe?.query_id)
+  const [user, setUser] = useState(tele.initDataUnsafe?.user)
   const [cartItems, setCartItems] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
   const [comment, setComment] = useState("")
@@ -59,6 +60,8 @@ export function App() {
   }, [onBackButtonClicked])
 
   useEffect(() => {
+    console.log("tele.initDataUnsafe--->", tele.initDataUnsafe)
+
     tele.BackButton.hide()
     tele.isClosingConfirmationEnabled = false
   }, [])
@@ -78,6 +81,10 @@ export function App() {
         setAddress,
         optionDelivery,
         setOptionDelivery,
+        user,
+        setUser,
+        paymentMethod,
+        setPaymentMethod,
       }}
     >
       <ThemeProvider theme={theme}>

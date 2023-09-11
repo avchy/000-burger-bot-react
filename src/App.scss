@@ -129,6 +129,7 @@ body {
         color: $white;
         word-wrap: break-word;
         font-size: calc(0.5em + 2vw);
+        hyphens: none;
       }
 
       .text_small {

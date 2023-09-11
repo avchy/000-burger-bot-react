@@ -45,17 +45,17 @@ export function CheckoutPage() {
 
   const tele = window.Telegram.WebApp
 
-  useEffect(() => {
-    const user = tele.initDataUnsafe?.user
-    const queryIdTemp = tele.initDataUnsafe?.query_id
+  // useEffect(() => {
+  //   const user = tele.initDataUnsafe?.user
+  //   const queryIdTemp = tele.initDataUnsafe?.query_id
 
-    console.log('user', user)
-    console.log('queryIdTemp', queryIdTemp)
-    console.log('window.Telegram.WebApp.initDataUnsafe?.query_id', window.Telegram.WebApp.initDataUnsafe?.query_id)
+  //   console.log('user', user)
+  //   console.log('queryIdTemp', queryIdTemp)
+  //   console.log('window.Telegram.WebApp.initDataUnsafe?.query_id', window.Telegram.WebApp.initDataUnsafe?.query_id)
     
     
-    setQueryId(queryIdTemp)
-   }, [])
+  //   setQueryId(queryIdTemp)
+  //  }, [])
 
   // const comment = location?.state?.comment
 
