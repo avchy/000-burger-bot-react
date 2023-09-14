@@ -9,6 +9,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
 // const tele = window.Telegram.WebApp
+const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
+  generatedGitInfo
 
 export const Header = () => {
   const { user, onClose } = useTelegram()
@@ -86,6 +88,19 @@ export const Header = () => {
           </Button>
         ))}
       </FlexRowContainer>
+
+      <p className={"testText"}>{` timeCommitPushed - ${timeCommitPushed}`} </p>
+      <p className={"testText"}>
+        {" "}
+        {` timeUploadingToNetlify - ${timeUploadingToNetlify}`}{" "}
+      </p>
+
+      <p className={"testText"}> {` gitCommitHash - ${gitCommitHash}`} </p>
+
+      <p className={"testText"}>
+        {" "}
+        {` state - ${JSON.stringify(state, null, 2)}`}{" "}
+      </p>
     </>
   )
 }
