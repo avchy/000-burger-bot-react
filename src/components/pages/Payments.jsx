@@ -69,7 +69,7 @@ export function Payments() {
 
   const onApplePay = async () => {
     try {
-      const response = await axios.post(serverIP + "/web-data", {
+      const response = await axios.post(serverIP + "/orders", {
         ...state,
         paymentMethod: "applePay",
       })
@@ -81,7 +81,7 @@ export function Payments() {
 
   const onGooglePay = async () => {
     try {
-      const response = await axios.post(serverIP + "/web-data", {
+      const response = await axios.post(serverIP + "/orders", {
         ...state,
         paymentMethod: "googlePay",
       })

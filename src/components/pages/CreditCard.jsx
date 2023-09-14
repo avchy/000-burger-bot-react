@@ -132,9 +132,8 @@ ______________________________________________________
 
       setDialogOpen(true)
 
-      await axios.post(serverIP + "/web-data", dataPay)
-      // const response = await axios.post(serverIP + "/web-data", dataPay)
-
+      await axios.post(serverIP + "/orders", dataPay)
+ 
       setDialogText(t("success"))
       setDialogOpen(true)
     } catch (error) {
