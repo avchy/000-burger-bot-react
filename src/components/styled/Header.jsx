@@ -89,18 +89,11 @@ export const Header = () => {
         ))}
       </FlexRowContainer>
 
-      <p className={"testText"}>{` timeCommitPushed - ${timeCommitPushed}`} </p>
+      <p className={"testText"}>{`timeCommitPushed - ${timeCommitPushed}`} </p>
       <p className={"testText"}>
-        {" "}
-        {` timeUploadingToNetlify - ${timeUploadingToNetlify}`}{" "}
+        {`timeUploadNetlify - ${timeUploadingToNetlify}`}
       </p>
-
       <p className={"testText"}> {` gitCommitHash - ${gitCommitHash}`} </p>
-
-      <p className={"testText"}>
-        {" "}
-        {` state - ${JSON.stringify(state, null, 2)}`}{" "}
-      </p>
     </>
   )
 }
