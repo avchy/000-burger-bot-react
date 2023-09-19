@@ -71,9 +71,9 @@ export function CheckoutPage() {
   // tele.BackButton.onClick(onBackButtonClicked)
 
   const onSubmit = useCallback(() => {
-    for (let i = 0; i < cartItems.length; i++) {
-      delete cartItems[i].image
-    }
+    // for (let i = 0; i < cartItems.length; i++) {
+    //   delete cartItems[i].image
+    // }
 
     navigate("/payments")
   }, [cartItems, comment])
@@ -131,7 +131,7 @@ export function CheckoutPage() {
               {" "}
               {t("Order")} № {currentTimestamp}
             </div>
-            <div className="text1"> {t("Perfect lunch from Falafel Bot.")}</div>
+            <div className="text1"> {t("Perfect lunch from Falafel Shop.")}</div>
             {/* <div className="text_small">{`${discount}% ${t("discount")}`}</div> */}
           </div>
         </div>

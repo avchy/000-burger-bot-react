@@ -47,8 +47,8 @@ export const CreditCard = () => {
     address,
     optionDelivery,
 
-    user_id: user.id,
-    user_name: user.username,
+    user_id: user?.id || 0,
+    user_name: user?.username || "",
     order_date: new Date(),
   }
 
