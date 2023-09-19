@@ -46,12 +46,12 @@ export const CreditCard = () => {
     totalPrice,
     address,
     optionDelivery,
-    
+
     user_id: user.id,
     user_name: user.username,
     order_date: new Date(),
   }
-  
+
   console.log("state111", state)
 
   const handleCloseDialog = () => {
@@ -113,6 +113,61 @@ export const CreditCard = () => {
   //   return errors
   // }
 
+  //======================================================================
+
+  async function payCreditCard(dataPay) {
+    try {
+      const response = await axios.post(serverIP + "/pay_credit_card", dataPay)
+      // Обработка успешного ответа
+      console.log('Запрос "pay_credit_card" успешно выполнен')
+      // Дополнительный код для обработки ответа
+    } catch (error) {
+      // Обработка ошибки
+      console.error('Ошибка при выполнении запроса "pay_credit_card":', error)
+      // Не выполняем следующие запросы из-за ошибки
+      return
+    }
+  }
+
+  async function createOrderDB(dataPay) {
+    try {
+      const response = await axios.post(serverIP + "/create_order_db", dataPay)
+      // Обработка успешного ответа
+      console.log('Запрос "create_order_db" успешно выполнен')
+      // Дополнительный код для обработки ответа
+    } catch (error) {
+      // Обработка ошибки
+      console.error('Ошибка при выполнении запроса "create_order_db":', error)
+      // Не выполняем следующие запросы из-за ошибки
+      return
+    }
+  }
+
+  async function sendSMSTele(dataPay) {
+    try {
+      const response = await axios.post(serverIP + "/send_sms_tele", dataPay)
+      // Обработка успешного ответа
+      console.log('Запрос "send_sms_tele" успешно выполнен')
+      // Дополнительный код для обработки ответа
+    } catch (error) {
+      // Обработка ошибки
+      console.error('Ошибка при выполнении запроса "send_sms_tele":', error)
+      // Не выполняем следующие запросы из-за ошибки
+      return
+    }
+  }
+
+  // Здесь вызывайте функции в нужной последовательности
+  async function createOrder(dataPay) {
+    await payCreditCard(dataPay)
+    await createOrderDB(dataPay)
+    await sendSMSTele(dataPay)
+
+    // Другой код, который выполняется после завершения всех успешных запросов
+  }
+
+  //======================================================================
+
   const onSubmit = async (cardData) => {
     try {
       setIsSubmitting(true)
@@ -122,25 +177,35 @@ export const CreditCard = () => {
         paymentMethod: "card",
       }
 
-      setDialogText(
-        `
-        serverIP =  ${serverIP}  
-______________________________________________________
+      //       setDialogText(
+      //         `
+      //         serverIP =  ${serverIP}
+      // ______________________________________________________
 
-        dataPay =  ${JSON.stringify(dataPay, null, 2)}
-      
-      `
-      )
+      //         dataPay =  ${JSON.stringify(dataPay, null, 2)}
 
-      setDialogOpen(true)
+      //       `
+      //       )
 
-      await axios.post(serverIP + "/orders", dataPay)
- 
-      setDialogText(t("success"))
-      setDialogOpen(true)
+      // setDialogOpen(true)
+
+      // try {
+      //   await axios.post(serverIP + "/pay_credit_card", dataPay)
+      //   await axios.post(serverIP + "/create_order_db", dataPay)
+      //   await axios.post(serverIP + "/send_sms_tele", dataPay)
+      // } catch (error) {
+      //   console.log("error_pay_credit_card", error)
+      // }
+
+      createOrder(dataPay)
+
+      // await axios.post(serverIP + "/orders", dataPay)
+
+      // setDialogText(t("success"))
+      // setDialogOpen(true)
     } catch (error) {
       console.log("error333", error)
-      setDialogText(JSON.stringify(error, null, 2))
+      // setDialogText(JSON.stringify(error, null, 2))
     } finally {
       setIsSubmitting(false)
     }
