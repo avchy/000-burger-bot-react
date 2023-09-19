@@ -22,9 +22,9 @@ export const CreditCard = () => {
   const { t, i18n } = useTranslation()
 
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [dialogOpen, setDialogOpen] = useState(false)
-  const [tempErrors, setTempErrors] = useState({})
-  const [dialogText, setDialogText] = useState("")
+  // const [dialogOpen, setDialogOpen] = useState(false)
+  // const [tempErrors, setTempErrors] = useState({})
+  // const [dialogText, setDialogText] = useState("")
 
   const { env } = useNavigator()
   const navigate = useNavigate()
@@ -54,9 +54,9 @@ export const CreditCard = () => {
 
   console.log("state111", state)
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false)
-  }
+  // const handleCloseDialog = () => {
+  //   setDialogOpen(false)
+  // }
 
   // const onBackButtonClicked = useCallback(() => {
   //   navigate(-1)

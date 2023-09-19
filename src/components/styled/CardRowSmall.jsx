@@ -22,7 +22,7 @@ export function CardRowSmall({ food }) {
         </div>
         {
           <span className="cart_text_center" style={{ color: textColor }}>
-            {quantity && quantity !== 1 ? `x ${quantity} = ` : ""}
+            {quantity && quantity !== 1 ? `${price} x ${quantity} = ` : ""}
             {price ? priceAllItems : "0.00"} ₪
           </span>
         }
@@ -42,7 +42,7 @@ export function CardRowSmall({ food }) {
                   </div>
 
                   <span className="card_row_text">
-                    {quantity !== 1 ? `x ${quantity} = ` : ""}
+                    {quantity !== 1 ? `${topping.price} x ${quantity} = ` : ""}
                     {(topping.price * (quantity || 1)).toFixed(2)} ₪
                   </span>
                 </div>
