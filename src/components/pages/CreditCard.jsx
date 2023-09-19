@@ -52,7 +52,7 @@ export const CreditCard = () => {
     order_date: new Date(),
   }
 
-  console.log("state111", state)
+  console.log("state_CreditCard", state)
 
   // const handleCloseDialog = () => {
   //   setDialogOpen(false)
