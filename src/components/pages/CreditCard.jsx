@@ -39,6 +39,8 @@ export const CreditCard = () => {
     user,
   } = useContext(CartContext)
 
+   
+  
   const state = {
     queryId,
     cartItems,
@@ -172,10 +174,22 @@ export const CreditCard = () => {
     try {
       setIsSubmitting(true)
 
-      const dataPay = {
-        ...state,
-        paymentMethod: "card",
-      }
+// Создаем новый массив cartItems без свойства "image"
+const cartItemsWithoutImage = cartItems.map(item => {
+  const { image, ...rest } = item; // Используем деструктуризацию, чтобы убрать свойство "image"
+  return rest; // Возвращаем остальные свойства без "image"
+});
+
+const dataPay = {
+  ...state,
+  paymentMethod: "card",
+  cartItems: cartItemsWithoutImage, // Заменяем "cartItems" новым массивом без "image"
+}
+    
+      // const dataPay = {
+      //   ...state,
+      //   paymentMethod: "card",
+      // }
 
       //       setDialogText(
       //         `
@@ -188,14 +202,7 @@ export const CreditCard = () => {
       //       )
 
       // setDialogOpen(true)
-
-      // try {
-      //   await axios.post(serverIP + "/pay_credit_card", dataPay)
-      //   await axios.post(serverIP + "/create_order_db", dataPay)
-      //   await axios.post(serverIP + "/send_sms_tele", dataPay)
-      // } catch (error) {
-      //   console.log("error_pay_credit_card", error)
-      // }
+ 
 
       createOrder(dataPay)
 
