@@ -52,8 +52,7 @@ export function CheckoutPage() {
   //   console.log('user', user)
   //   console.log('queryIdTemp', queryIdTemp)
   //   console.log('window.Telegram.WebApp.initDataUnsafe?.query_id', window.Telegram.WebApp.initDataUnsafe?.query_id)
-    
-    
+
   //   setQueryId(queryIdTemp)
   //  }, [])
 
@@ -71,10 +70,6 @@ export function CheckoutPage() {
   // tele.BackButton.onClick(onBackButtonClicked)
 
   const onSubmit = useCallback(() => {
-    // for (let i = 0; i < cartItems.length; i++) {
-    //   delete cartItems[i].image
-    // }
-
     navigate("/payments")
   }, [cartItems, comment])
 
@@ -131,7 +126,10 @@ export function CheckoutPage() {
               {" "}
               {t("Order")} № {currentTimestamp}
             </div>
-            <div className="text1"> {t("Perfect lunch from Falafel Shop.")}</div>
+            <div className="text1">
+              {" "}
+              {t("Perfect lunch from Falafel Shop.")}
+            </div>
             {/* <div className="text_small">{`${discount}% ${t("discount")}`}</div> */}
           </div>
         </div>
