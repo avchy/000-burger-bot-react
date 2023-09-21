@@ -347,7 +347,11 @@ export const CreditCard = () => {
         {/* {isSubmitting ? (
           <CircularProgress size={16} color="primary" sx={{ marginRight: "1rem" }} />
         ) : null} */}
-        {isSubmitting ? (
+
+      </FlexColumnContainer>
+      
+{      console.log('isSubmitting', isSubmitting)
+}      {isSubmitting ? (
           <div id="fullscreen-overlay">
             <FlexColumnContainer>
               <Box sx={{ fontSize: 3 }}>Sending...</Box>
@@ -359,7 +363,6 @@ export const CreditCard = () => {
             </FlexColumnContainer>
           </div>
         ) : null}
-      </FlexColumnContainer>
     </>
   )
 }
