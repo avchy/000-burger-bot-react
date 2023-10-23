@@ -5,7 +5,7 @@ import "../../App.scss"
 import { US, IL, RU, FR } from "country-flag-icons/react/3x2"
 import { FlexRowContainer } from "components/styled/AllHelpComponents"
 import generatedGitInfo from "helpers/generatedGitInfo.json"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+// import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
 // const tele = window.Telegram.WebApp
@@ -13,12 +13,15 @@ const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
   generatedGitInfo
 
 export const Header = () => {
-  const { user, onClose } = useTelegram()
+  const { user, queryId, onClose } = useTelegram()
   const { t, i18n } = useTranslation()
   const [currentLanguage, setCurrentLanguage] = useState("en")
-  const location = useLocation()
-  const state = location?.state || []
-
+  // const location = useLocation()
+  // const state = location?.state || []
+  const [isTestTextVisible, setTestTextVisible] = useState(false)
+  const toggleTestText = () => {
+    setTestTextVisible(!isTestTextVisible)
+  }
   useEffect(() => {
     const language_code = user?.language_code
     if (language_code && currentLanguage !== language_code) {
@@ -89,11 +92,24 @@ export const Header = () => {
         ))}
       </FlexRowContainer>
 
-      <p className={"testText"}>{`timeCommitPushed - ${timeCommitPushed}`} </p>
-      <p className={"testText"}>
-        {`timeUploadNetlify - ${timeUploadingToNetlify}`}
-      </p>
-      <p className={"testText"}> {` gitCommitHash - ${gitCommitHash}`} </p>
+      <Button
+        sx={{ width: "100%", color: "black", height: "30px" }}
+        onClick={toggleTestText}
+      >
+        {/* Toggle Test Text */}
+      </Button>
+      {isTestTextVisible && (
+        <>
+          <p className={"testText"}>
+            {`timeCommitPushed - ${timeCommitPushed}`}{" "}
+          </p>
+          <p
+            className={"testText"}
+          >{`timeUploadNetlify - ${timeUploadingToNetlify}`}</p>
+          <p className={"testText"}>{`gitCommitHash - ${gitCommitHash}`}</p>
+          <p className={"testText"}>{`queryId - ${queryId}`}</p>
+        </>
+      )}
     </>
   )
 }
