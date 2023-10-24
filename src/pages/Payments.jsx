@@ -250,14 +250,28 @@ export const Payments = () => {
 
   // onSubmit onGooglePay -----testing-----------------
   const onGooglePay = async () => {
+    setIsSubmitting(true)
+
     try {
-      const response = await axios.post(serverIP + "/orders", {
-        ...state,
-        paymentMethod: "googlePay",
+      // Создаем новый массив cartItems без свойства "image"
+      const cartItemsWithoutImage = cartItems.map((item) => {
+        const { image, ...rest } = item // Используем деструктуризацию, чтобы убрать свойство "image"
+        return rest // Возвращаем остальные свойства без "image"
       })
-      console.log("googlePay_success")
+
+      const dataPay = {
+        ...state,
+        paymentMethod: "onGooglePay",
+        cartItems: cartItemsWithoutImage, // Заменяем "cartItems" новым массивом без "image"
+      }
+
+      //отправка данных
+      await createOrderDB(dataPay)
+      await sendSMSTele(dataPay)
     } catch (error) {
-      console.log("googlePay_error", error)
+      console.log("error333", error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -349,7 +363,7 @@ export const Payments = () => {
             <CircularProgress
               size={64}
               color="primary"
-              sx={{ marginLeft : "5rem" , marginTop: "5rem"}}
+              sx={{ marginLeft: "5rem", marginTop: "5rem" }}
             />
           </FlexColumnContainer>
         </Box>
@@ -417,10 +431,6 @@ export const Payments = () => {
           open={dialogOpen}
           onClose={handleCloseDialog}
         /> */}
-
-          {/* {isSubmitting ? (
-          <CircularProgress size={16} color="primary" sx={{ marginRight: "1rem" }} />
-        ) : null} */}
         </FlexColumnContainer>
       )}
 
@@ -431,12 +441,10 @@ export const Payments = () => {
       <StyledButton onClick={onApplePay} variant="contained">
         {t("Buy with")}
         <img src={appleSVG} alt="applePay" /> Pay
-        {/* <img src={applePay} alt="applePay" /> Pay */}
       </StyledButton>
 
       <StyledButton onClick={onGooglePay} variant="contained">
         {t("Buy with")} <img src={googleSVG} alt="googlePay" /> Pay
-        {/* {t("Buy with")} <img src={googlePay} alt="googlePay" /> Pay */}
       </StyledButton>
     </>
   )
