@@ -17,6 +17,7 @@ import { CartContext } from "App"
 const tele = window.Telegram.WebApp
 
 import { useTranslation } from "react-i18next"
+import { creditCardInitialData } from "constants/constants"
 
 export const CreditCard = () => {
   const { t, i18n } = useTranslation()
@@ -159,7 +160,10 @@ export const CreditCard = () => {
 
   // Здесь вызывайте функции в нужной последовательности
   async function createOrder(dataPay) {
+    //выбор платежки
     await payCreditCard(dataPay)
+
+    //отправка данных
     await createOrderDB(dataPay)
     await sendSMSTele(dataPay)
 
@@ -169,9 +173,9 @@ export const CreditCard = () => {
   //======================================================================
 
   const onSubmit = async (cardData) => {
-    try {
-      setIsSubmitting(true)
+    setIsSubmitting(true)
 
+    try {
       // Создаем новый массив cartItems без свойства "image"
       const cartItemsWithoutImage = cartItems.map((item) => {
         const { image, ...rest } = item // Используем деструктуризацию, чтобы убрать свойство "image"
@@ -188,12 +192,9 @@ export const CreditCard = () => {
       //         `
       //         serverIP =  ${serverIP}
       // ______________________________________________________
-
       //         dataPay =  ${JSON.stringify(dataPay, null, 2)}
-
       //       `
       //       )
-
       // setDialogOpen(true)
 
       createOrder(dataPay)
@@ -206,13 +207,6 @@ export const CreditCard = () => {
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  const creditCardInitialData = {
-    cardNumber: "1234567890123456",
-    expiryDate: "12/23",
-    cvv: "123",
-    email: "john.doe@example.com",
   }
 
   useEffect(() => {
@@ -283,7 +277,7 @@ export const CreditCard = () => {
   return (
     <>
       {console.log("isSubmitting", isSubmitting)}
-      {isSubmitting && (
+      {isSubmitting ? (
         <div id="fullscreen-overlay">
           <FlexColumnContainer>
             <Box sx={{ fontSize: 3 }}>Sending...</Box>
@@ -294,74 +288,74 @@ export const CreditCard = () => {
             />
           </FlexColumnContainer>
         </div>
-      )}
+      ) : (
+        <FlexColumnContainer
+          sx={{
+            pt: "20px",
+            backgroundColor: "white",
+            gap: 2,
+            color: "black",
+            height: "100vh",
+            padding: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <h1 className="title">{t("paymentHeading")}</h1>
 
-      <FlexColumnContainer
-        sx={{
-          pt: "20px",
-          backgroundColor: "white",
-          gap: 2,
-          color: "black",
-          height: "100vh",
-          padding: "20px",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <h1 className="title">{t("paymentHeading")}</h1>
-
-        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-          <StyledTextField
-            {...register("cardNumber", {
-              required: t("cardNumber is required"),
-            })}
-            label={t("cardNumberLabel")}
-            error={!!errors.cardNumber}
-            helperText={errors.cardNumber?.message}
-            sx={{ width: "100%", mb: 2 }}
-          />
-
-          <Box sx={{ display: "flex", gap: "16px", pb: 2 }}>
+          <Box component="form" onSubmit={handleSubmit(onSubmit)}>
             <StyledTextField
-              {...register("expiryDate", {
-                required: t("expiryDate is required"),
+              {...register("cardNumber", {
+                required: t("cardNumber is required"),
               })}
-              label={t("expiryDateLabel")}
-              error={!!errors.expiryDate}
-              helperText={errors.expiryDate?.message}
-              sx={{ flex: 1, mr: 2 }}
+              label={t("cardNumberLabel")}
+              error={!!errors.cardNumber}
+              helperText={errors.cardNumber?.message}
+              sx={{ width: "100%", mb: 2 }}
             />
-            <StyledTextField
-              {...register("cvv", { required: t("cvvCode is required") })}
-              label={t("cvvCodeLabel")}
-              error={!!errors.cvv}
-              helperText={errors.cvv?.message}
-              sx={{ flex: 1 }}
-            />
-          </Box>
-          <StyledTextField
-            {...register("email", { required: t("email is required") })}
-            label={t("emailLabel")}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-            sx={{ width: "100%", mb: 2 }}
-          />
-          {env === "browser" && (
-            <StyledButton type="submit">{t("submitButton")}</StyledButton>
-          )}
-        </Box>
 
-        {/* <DialogComponent
+            <Box sx={{ display: "flex", gap: "16px", pb: 2 }}>
+              <StyledTextField
+                {...register("expiryDate", {
+                  required: t("expiryDate is required"),
+                })}
+                label={t("expiryDateLabel")}
+                error={!!errors.expiryDate}
+                helperText={errors.expiryDate?.message}
+                sx={{ flex: 1, mr: 2 }}
+              />
+              <StyledTextField
+                {...register("cvv", { required: t("cvvCode is required") })}
+                label={t("cvvCodeLabel")}
+                error={!!errors.cvv}
+                helperText={errors.cvv?.message}
+                sx={{ flex: 1 }}
+              />
+            </Box>
+            <StyledTextField
+              {...register("email", { required: t("email is required") })}
+              label={t("emailLabel")}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+              sx={{ width: "100%", mb: 2 }}
+            />
+            {env === "browser" && (
+              <StyledButton type="submit">{t("submitButton")}</StyledButton>
+            )}
+          </Box>
+
+          {/* <DialogComponent
           text={dialogText}
           buttonRight={t("ok")}
           open={dialogOpen}
           onClose={handleCloseDialog}
         /> */}
 
-        {/* {isSubmitting ? (
+          {/* {isSubmitting ? (
           <CircularProgress size={16} color="primary" sx={{ marginRight: "1rem" }} />
         ) : null} */}
-      </FlexColumnContainer>
+        </FlexColumnContainer>
+      )}
     </>
   )
 }
