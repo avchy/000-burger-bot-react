@@ -162,18 +162,6 @@ export const Payments = () => {
     }
   }
 
-  // Здесь вызывайте функции в нужной последовательности
-  // async function createOrder(dataPay) {
-  //   //выбор платежки
-  //   await payCreditCard(dataPay)
-
-  //   //отправка данных
-  //   await createOrderDB(dataPay)
-  //   await sendSMSTele(dataPay)
-
-  //   // Другой код, который выполняется после завершения всех успешных запросов
-  // }
-
   //======================================================================
   // onSubmit card =====================
 
@@ -282,24 +270,24 @@ export const Payments = () => {
     setValue("email", creditCardInitialData.email)
   }, [setValue])
 
-  useEffect(() => {
-    tele.onEvent("mainButtonClicked", onSubmit)
-    // tele.onEvent("backButtonClicked", onBackButtonClicked)
+  // useEffect(() => {
+  //   tele.onEvent("mainButtonClicked", onSubmit)
+  //   // tele.onEvent("backButtonClicked", onBackButtonClicked)
 
-    return () => {
-      tele.offEvent("mainButtonClicked", onSubmit)
-      // tele.offEvent("backButtonClicked", onBackButtonClicked)
-    }
-  }, [onSubmit])
+  //   return () => {
+  //     tele.offEvent("mainButtonClicked", onSubmit)
+  //     // tele.offEvent("backButtonClicked", onBackButtonClicked)
+  //   }
+  // }, [onSubmit])
 
   useEffect(() => {
     console.log("errors444", errors)
   }, [errors])
 
-  useEffect(() => {
-    tele.MainButton.show()
-    tele.MainButton.setParams({ text: t("submitButton") })
-  }, [])
+  // useEffect(() => {
+  //   tele.MainButton.show()
+  //   tele.MainButton.setParams({ text: t("submitButton") })
+  // }, [])
 
   // const validationSchema = Yup.object().shape({
   //   firstName: Yup.string().required('First Name is required'),
@@ -341,7 +329,7 @@ export const Payments = () => {
   // const { errors } = formState
 
   const onCreditCard = () => {
-    setFormOpenCreditCard(true)
+    setFormOpenCreditCard(formOpenCreditCard ? false : true)
   }
 
   return (
@@ -368,6 +356,10 @@ export const Payments = () => {
           </FlexColumnContainer>
         </Box>
       ) : null}
+
+      <StyledButton onClick={onCreditCard} variant="contained">
+        {t("Credit Card")}
+      </StyledButton>
 
       {formOpenCreditCard && (
         <FlexColumnContainer
@@ -420,9 +412,16 @@ export const Payments = () => {
               helperText={errors.email?.message}
               sx={{ width: "100%", mb: 2 }}
             />
-            {env === "browser" && (
-              <StyledButton type="submit">{t("submitButton")}</StyledButton>
-            )}
+
+            <StyledButton type="submit" variant="contained">
+              {t("submitButton")}{" "}
+            </StyledButton>
+
+            {/* {env === "browser" && (
+              <StyledButton type="submit" variant="contained">
+                {t("submitButton")}{" "}
+              </StyledButton>
+            )} */}
           </Box>
 
           {/* <DialogComponent
@@ -433,10 +432,6 @@ export const Payments = () => {
         /> */}
         </FlexColumnContainer>
       )}
-
-      <StyledButton onClick={onCreditCard} variant="contained">
-        {t("Credit Card")}
-      </StyledButton>
 
       <StyledButton onClick={onApplePay} variant="contained">
         {t("Buy with")}
