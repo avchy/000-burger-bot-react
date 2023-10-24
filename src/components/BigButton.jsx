@@ -1,5 +1,5 @@
 import React from "react"
-import { StyledButton } from "components/styled/StyledButton"
+import { StyledButton } from "components/StyledButton"
 
 export function BigButton({ title, disable, onClick, backgroundColor }) {
   const buttonStyle = {

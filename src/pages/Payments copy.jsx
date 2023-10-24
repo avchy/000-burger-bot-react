@@ -11,15 +11,15 @@ import {
 import {
   FlexColumnContainer,
   Layout,
-} from "components/styled/AllHelpComponents"
+} from "components/AllHelpComponents"
 
-import { BigButton } from "components/styled/BigButton"
-import { StyledButton } from "components/styled/StyledButton"
+import { BigButton } from "components/BigButton"
+import { StyledButton } from "components/StyledButton"
 import { ReactSVG } from "react-svg"
-import applePay from "../../images/icons/applePay.png"
-import googlePay from "../../images/icons/googlePay.png"
-import appleSVG from "../../images/svg_icons/icons8-apple-logo.svg"
-import googleSVG from "../../images/svg_icons/icons8-google.svg"
+import applePay from "../images/icons/applePay.png"
+import googlePay from "../images/icons/googlePay.png"
+import appleSVG from "../images/svg_icons/icons8-apple-logo.svg"
+import googleSVG from "../images/svg_icons/icons8-google.svg"
 const tele = window.Telegram.WebApp
 import { serverIP } from "constants/api"
 import axios from "axios"

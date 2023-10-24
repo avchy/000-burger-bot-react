@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
-import "../../App.scss"
-import { BigButton } from "components/styled/BigButton"
-import { CardRow } from "components/styled/CardRow"
+import "App.scss"
+import { BigButton } from "components/BigButton"
+import { CardRow } from "components/CardRow"
 import { useTelegram } from "hooks/useTelegram"
 import { useNavigator } from "hooks/useNavigator"
 const tele = window.Telegram.WebApp
@@ -11,7 +11,7 @@ import { CartContext } from "App"
 
 import { useTranslation } from "react-i18next"
 
-const { getData } = require("../../db/db")
+const { getData } = require("../db/db")
 const products = getData()
 
 export const OrderPage = () => {

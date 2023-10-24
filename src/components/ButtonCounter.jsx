@@ -1,12 +1,12 @@
 import React, { useState,useContext } from "react"
-import "../../App.scss"
+import "App.scss"
 import { Button } from "./Button"
 import { Box, Typography } from "@mui/material"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   FlexRowContainer,
   StyledTextField,
-} from "components/styled/AllHelpComponents"
+} from "components/AllHelpComponents"
 import { CartContext } from "App"
  
 const card_badge_simple = { padding: "0 8px" }

@@ -3,26 +3,28 @@ import axios from "axios"
 import {
   FlexColumnContainer,
   StyledTextField,
-} from "components/styled/AllHelpComponents"
+} from "components/AllHelpComponents"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button, Typography, Grid } from "@mui/material"
 import { useForm } from "react-hook-form"
 import { serverIP } from "constants/api"
 import { Box } from "@mui/system"
-import { StyledButton } from "components/styled/StyledButton"
+import { StyledButton } from "components/StyledButton"
 import { useNavigator } from "hooks/useNavigator"
-import DialogComponent from "components/styled/DialogComponent"
+import DialogComponent from "components/DialogComponent"
 import CircularProgress from "@mui/material/CircularProgress"
 import { CartContext } from "App"
-const tele = window.Telegram.WebApp
-
+import appleSVG from "../images/svg_icons/icons8-apple-logo.svg"
+import googleSVG from "../images/svg_icons/icons8-google.svg"
 import { useTranslation } from "react-i18next"
 import { creditCardInitialData } from "constants/constants"
 
-export const CreditCard = () => {
+export const Payments = () => {
   const { t, i18n } = useTranslation()
+  const tele = window.Telegram.WebApp
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formOpenCreditCard, setFormOpenCreditCard] = useState(false)
   // const [dialogOpen, setDialogOpen] = useState(false)
   // const [tempErrors, setTempErrors] = useState({})
   // const [dialogText, setDialogText] = useState("")
@@ -130,6 +132,10 @@ export const CreditCard = () => {
     }
   }
 
+
+
+  //========================================
+
   async function createOrderDB(dataPay) {
     try {
       const response = await axios.post(serverIP + "/create_order_db", dataPay)
@@ -159,18 +165,19 @@ export const CreditCard = () => {
   }
 
   // Здесь вызывайте функции в нужной последовательности
-  async function createOrder(dataPay) {
-    //выбор платежки
-    await payCreditCard(dataPay)
+  // async function createOrder(dataPay) {
+  //   //выбор платежки
+  //   await payCreditCard(dataPay)
 
-    //отправка данных
-    await createOrderDB(dataPay)
-    await sendSMSTele(dataPay)
+  //   //отправка данных
+  //   await createOrderDB(dataPay)
+  //   await sendSMSTele(dataPay)
 
-    // Другой код, который выполняется после завершения всех успешных запросов
-  }
+  //   // Другой код, который выполняется после завершения всех успешных запросов
+  // }
 
   //======================================================================
+  // onSubmit card =====================
 
   const onSubmit = async (cardData) => {
     setIsSubmitting(true)
@@ -197,7 +204,13 @@ export const CreditCard = () => {
       //       )
       // setDialogOpen(true)
 
-      createOrder(dataPay)
+      // createOrder(dataPay)
+
+      await payCreditCard(dataPay)
+
+      //отправка данных
+      await createOrderDB(dataPay)
+      await sendSMSTele(dataPay)
 
       // setDialogText(t("success"))
       // setDialogOpen(true)
@@ -208,6 +221,51 @@ export const CreditCard = () => {
       setIsSubmitting(false)
     }
   }
+  
+  
+    // onSubmit onGooglePay =====================
+
+  const onApplePay = async () => {
+    setIsSubmitting(true)
+
+    try {
+      // Создаем новый массив cartItems без свойства "image"
+      const cartItemsWithoutImage = cartItems.map((item) => {
+        const { image, ...rest } = item // Используем деструктуризацию, чтобы убрать свойство "image"
+        return rest // Возвращаем остальные свойства без "image"
+      })
+
+      const dataPay = {
+        ...state,
+        paymentMethod: "onApplePay",
+        cartItems: cartItemsWithoutImage, // Заменяем "cartItems" новым массивом без "image"
+      }
+
+      //отправка данных
+      await createOrderDB(dataPay)
+      await sendSMSTele(dataPay)
+    } catch (error) {
+      console.log("error333", error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  
+  // onSubmit onGooglePay -----testing-----------------
+  const onGooglePay = async () => {
+    try {
+      const response = await axios.post(serverIP + "/orders", {
+        ...state,
+        paymentMethod: "googlePay",
+      })
+      console.log("googlePay_success")
+    } catch (error) {
+      console.log("googlePay_error", error)
+    }
+  }
+  
+  
 
   useEffect(() => {
     setValue("cardNumber", creditCardInitialData.cardNumber)
@@ -274,6 +332,10 @@ export const CreditCard = () => {
   // const formOptions = { resolver: yupResolver(validationSchema) }
   // const { errors } = formState
 
+  const onCreditCard = () => {
+    setFormOpenCreditCard(true)
+  }
+
   return (
     <>
       {console.log("isSubmitting", isSubmitting)}
@@ -288,7 +350,9 @@ export const CreditCard = () => {
             />
           </FlexColumnContainer>
         </div>
-      ) : (
+      ) : null}
+
+      {formOpenCreditCard && (
         <FlexColumnContainer
           sx={{
             pt: "20px",
@@ -356,6 +420,21 @@ export const CreditCard = () => {
         ) : null} */}
         </FlexColumnContainer>
       )}
+
+      <StyledButton onClick={onCreditCard} variant="contained">
+        {t("Credit Card")}
+      </StyledButton>
+
+      <StyledButton onClick={onApplePay} variant="contained">
+        {t("Buy with")}
+        <img src={appleSVG} alt="applePay" /> Pay
+        {/* <img src={applePay} alt="applePay" /> Pay */}
+      </StyledButton>
+
+      <StyledButton onClick={onGooglePay} variant="contained">
+        {t("Buy with")} <img src={googleSVG} alt="googlePay" /> Pay
+        {/* {t("Buy with")} <img src={googlePay} alt="googlePay" /> Pay */}
+      </StyledButton>
     </>
   )
 }

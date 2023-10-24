@@ -1,11 +1,11 @@
 import { useContext, useState, useCallback, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import "../../App.scss"
-import { CardColumn } from "components/styled/CardColumn"
-import { BigButton } from "components/styled/BigButton"
+import "App.scss"
+import { CardColumn } from "components/CardColumn"
+import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
-import { StyledButton } from "components/styled/StyledButton"
+import { StyledButton } from "components/StyledButton"
 import { CartContext } from "App"
 
 const { getData } = require("db/db")

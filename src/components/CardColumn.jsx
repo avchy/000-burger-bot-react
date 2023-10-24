@@ -1,6 +1,6 @@
 import React, { useState,useContext } from "react"
 // import { Skeleton, Stack } from "@mui/material"
-import "../../App.scss"
+import "App.scss"
 import { Button } from "./Button"
 import { useTranslation } from "react-i18next"
 import { Link, useLocation, useNavigate } from "react-router-dom"
