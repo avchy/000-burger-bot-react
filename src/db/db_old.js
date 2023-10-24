@@ -1,11 +1,11 @@
-import pizzaImg from "../images/menu/pizza.png"
-import burgerImg from "../images/menu/burger.png"
-import cocaImg from "../images/menu/coca.png"
-import saladImg from "../images/menu/salad.png"
-import waterImg from "../images/menu/water.png"
-import iceCreamImg1 from "../images/menu/icecream1.png"
-import iceCreamImg2 from "../images/menu/icecream2.png"
-import kebabImg from "../images/menu/kebab.png"
+import pizzaImg from "images/menu/pizza.png"
+import burgerImg from "images/menu/burger.png"
+import cocaImg from "images/menu/coca.png"
+import saladImg from "images/menu/salad.png"
+import waterImg from "images/menu/water.png"
+import iceCreamImg1 from "images/menu/icecream1.png"
+import iceCreamImg2 from "images/menu/icecream2.png"
+import kebabImg from "images/menu/kebab.png"
 
 export function getData() {
   return [

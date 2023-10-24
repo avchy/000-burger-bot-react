@@ -11,7 +11,7 @@ import { CartContext } from "App"
 
 import { useTranslation } from "react-i18next"
 
-const { getData } = require("../db/db")
+const { getData } = require("db/db")
 const products = getData()
 
 export const OrderPage = () => {

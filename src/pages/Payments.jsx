@@ -14,8 +14,8 @@ import { useNavigator } from "hooks/useNavigator"
 import DialogComponent from "components/DialogComponent"
 import CircularProgress from "@mui/material/CircularProgress"
 import { CartContext } from "App"
-import appleSVG from "../images/svg_icons/icons8-apple-logo.svg"
-import googleSVG from "../images/svg_icons/icons8-google.svg"
+import appleSVG from "images/svg_icons/icons8-apple-logo.svg"
+import googleSVG from "images/svg_icons/icons8-google.svg"
 import { useTranslation } from "react-i18next"
 import { creditCardInitialData } from "constants/constants"
 
@@ -132,8 +132,6 @@ export const Payments = () => {
     }
   }
 
-
-
   //========================================
 
   async function createOrderDB(dataPay) {
@@ -221,9 +219,8 @@ export const Payments = () => {
       setIsSubmitting(false)
     }
   }
-  
-  
-    // onSubmit onGooglePay =====================
+
+  // onSubmit onGooglePay =====================
 
   const onApplePay = async () => {
     setIsSubmitting(true)
@@ -251,7 +248,6 @@ export const Payments = () => {
     }
   }
 
-  
   // onSubmit onGooglePay -----testing-----------------
   const onGooglePay = async () => {
     try {
@@ -264,8 +260,6 @@ export const Payments = () => {
       console.log("googlePay_error", error)
     }
   }
-  
-  
 
   useEffect(() => {
     setValue("cardNumber", creditCardInitialData.cardNumber)
@@ -340,16 +334,25 @@ export const Payments = () => {
     <>
       {console.log("isSubmitting", isSubmitting)}
       {isSubmitting ? (
-        <div id="fullscreen-overlay">
+        <Box id="fullscreen-overlay">
           <FlexColumnContainer>
-            <Box sx={{ fontSize: 3 }}>Sending...</Box>
+            <Typography
+              sx={{
+                padding: "4px 8px ",
+                width: "40px",
+                height: "40px",
+              }}
+              variant="h3"
+            >
+              Sending...
+            </Typography>
             <CircularProgress
-              size={32}
+              size={64}
               color="primary"
-              sx={{ marginRight: "1rem" }}
+              sx={{ marginLeft : "5rem" , marginTop: "5rem"}}
             />
           </FlexColumnContainer>
-        </div>
+        </Box>
       ) : null}
 
       {formOpenCreditCard && (
