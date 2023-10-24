@@ -16,8 +16,10 @@ backup
 .eslintcache
 0-backup
 000-backup
- generatedGitInfo.json
- 
+
+**/generatedGitInfo.json
+generatedGitInfo.json
+
 # classic ignoring files===============
 
 # next.js
@@ -41,7 +43,6 @@ backup
 .env.test.local
 .env.production.local
 
-
 .DS_Store
 
 # //===========================
@@ -50,12 +51,8 @@ backup
 .pnp.js
 *.pem
 
-
-
 # testing
 /coverage
-
-
 
 # debug
 npm-debug.log*
@@ -70,8 +67,6 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-
-
 
 # typescript
 *.tsbuildinfo

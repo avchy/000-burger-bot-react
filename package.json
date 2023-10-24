@@ -31,6 +31,11 @@
         "web-vitals": "^2.1.4",
         "yup": "^0.32.9"
     },
+    
+    "devDependencies": {
+		"@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+	  },
+      
     "scripts": {
         "git-info": "node src/helpers/gitInfo.js",
         "start": "npm run git-info && react-scripts start",
