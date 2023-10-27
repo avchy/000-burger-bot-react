@@ -9,15 +9,15 @@ import {
   makeStyles,
 } from "@mui/material"
 
-import "../../App.scss"
+import "App.scss"
 import { serverIP, port } from "constants/api.js"
-import { BigButton } from "components/styled/BigButton"
-import { CardRowSmall } from "components/styled/CardRowSmall"
+import { BigButton } from "components/BigButton"
+import { CardRowSmall } from "components/CardRowSmall"
 import { useTelegram } from "hooks/useTelegram"
-import orderImg from "../../images/orderImg.png"
+import orderImg from "images/orderImg.png"
 import { useNavigator } from "hooks/useNavigator"
 import axios from "axios"
-import { StyledButton } from "components/styled/StyledButton"
+import { StyledButton } from "components/StyledButton"
 import { discount } from "constants/constants"
 import { CartContext } from "App"
 

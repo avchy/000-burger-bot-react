@@ -1,21 +1,21 @@
-import falafelImg from "../images/menu/falafel/falafel.png"
+import falafelImg from "images/menu/falafel/falafel.png"
 
-import smallFriesImg from "../images/menu/fries/fries_small.png"
-import bigFriesImg from "../images/menu/fries/fries_big.png"
-import baguetteImg from "../images/menu/baguette/baguette.png"
-import sabichImg from "../images/menu/sabich/sabich.png"
+import smallFriesImg from "images/menu/fries/fries_small.png"
+import bigFriesImg from "images/menu/fries/fries_big.png"
+import baguetteImg from "images/menu/baguette/baguette.png"
+import sabichImg from "images/menu/sabich/sabich.png"
 
-import cocaImg from "../images/menu/coca/coca.png"
-import fantaImg from "../images/menu/fanta/fanta.png"
-import waterImg from "../images/menu/water/water.png"
+import cocaImg from "images/menu/coca/coca.png"
+import fantaImg from "images/menu/fanta/fanta.png"
+import waterImg from "images/menu/water/water.png"
 
-import tomatoes from "../images/menu/toppings/tomatoes.png"
-import pickled_cucumbers from "../images/menu/toppings/pickled_cucumbers.png"
-import humus from "../images/menu/toppings/humus.png"
-import tahini from "../images/menu/toppings/tahini.png"
-import spicy_sauce from "../images/menu/toppings/spicy_sauce.png"
-import egg from "../images/menu/toppings/egg.png"
-import hacilim from "../images/menu/toppings/hacilim.png"
+import tomatoes from "images/menu/toppings/tomatoes.png"
+import pickled_cucumbers from "images/menu/toppings/pickled_cucumbers.png"
+import humus from "images/menu/toppings/humus.png"
+import tahini from "images/menu/toppings/tahini.png"
+import spicy_sauce from "images/menu/toppings/spicy_sauce.png"
+import egg from "images/menu/toppings/egg.png"
+import hacilim from "images/menu/toppings/hacilim.png"
 
 export function getData() {
   return [

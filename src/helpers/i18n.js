@@ -1,7 +1,7 @@
-import en from "../translations/en.json"
-import ru from "../translations/ru.json"
-import he from "../translations/he.json"
-import fr from "../translations/fr.json"
+import en from "translations/en.json"
+import ru from "translations/ru.json"
+import he from "translations/he.json"
+import fr from "translations/fr.json"
 
 import { initReactI18next } from "react-i18next"
 import i18n from "i18next"

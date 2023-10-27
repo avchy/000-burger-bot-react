@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import "../../App.scss"
-import { ButtonCounter } from "components/styled/ButtonCounter"
-import { BigButton } from "components/styled/BigButton"
+import "App.scss"
+import { ButtonCounter } from "components/ButtonCounter"
+import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import Avatar from "@mui/material/Avatar"
@@ -11,7 +11,7 @@ import { Box, Typography } from "@mui/material"
 
 const tele = window.Telegram.WebApp
 
-import { FlexRowContainer } from "components/styled/AllHelpComponents"
+import { FlexRowContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
 
 export const Product = () => {

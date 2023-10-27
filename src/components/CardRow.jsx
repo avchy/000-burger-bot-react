@@ -1,10 +1,10 @@
-import "../../App.scss"
+import "App.scss"
 
 import { useTranslation } from "react-i18next"
 import {
   FlexColumnContainer,
   FlexRowContainer,
-} from "components/styled/AllHelpComponents"
+} from "components/AllHelpComponents"
 import { Box } from "@mui/system"
 
 export function CardRow({ food }) {

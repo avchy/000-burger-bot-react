@@ -1,4 +1,4 @@
-import "../../App.scss"
+import "App.scss"
 
 import { useTranslation } from "react-i18next"
 
