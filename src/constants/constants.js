@@ -7,4 +7,11 @@ const creditCardInitialData = {
   email: "john.doe@example.com",
 }
 
-module.exports = { discount, creditCardInitialData }
+const tableData = [
+  { value: "", label: "Выберите номер столика" },
+  { value: "1", label: "Столик 1" },
+  { value: "2", label: "Столик 2" },
+  { value: "3", label: "Столик 3" },
+]
+
+module.exports = { discount, creditCardInitialData, tableData }

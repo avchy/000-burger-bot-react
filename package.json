@@ -1,62 +1,60 @@
 {
-    "name": "tele-burger-react",
-    "main": "index.js",
-    "version": "7.7.0",
-    "private": true,
-    "dependencies": {
-        "@emotion/react": "^11.10.5",
-        "@emotion/styled": "^11.10.5",
-        "@hookform/resolvers": "^2.7.1",
-        "@mui/icons-material": "^5.10.9",
-        "@mui/material": "^5.10.11",
-        "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^13.3.0",
-        "@testing-library/user-event": "^13.5.0",
-        "axios": "^1.4.0",
-        "country-flag-icons": "^1.5.7",
-        "dotenv": "^16.1.4",
-        "i18next": "^23.2.11",
-        "i18next-browser-languagedetector": "^7.1.0",
-        "i18next-http-backend": "^2.2.1",
-        "next-google-fonts": "^2.2.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-hook-form": "^7.12.1",
-        "react-i18next": "^13.0.2",
-        "react-icons": "^4.9.0",
-        "react-router-dom": "^6.11.2",
-        "react-scripts": "5.0.1",
-        "react-svg": "^16.1.18",
-        "sass": "^1.55.0",
-        "web-vitals": "^2.1.4",
-        "yup": "^0.32.9"
-    },
-    
-    "devDependencies": {
-		"@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-	  },
-      
-    "scripts": {
-        "git-info": "node src/helpers/gitInfo.js",
-        "start": "npm run git-info && react-scripts start",
-        "build": "CI=false npm run git-info && react-scripts build"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    }
+  "name": "tele-burger-react",
+  "main": "index.js",
+  "version": "7.7.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@hookform/resolvers": "^2.7.1",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.11",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "country-flag-icons": "^1.5.7",
+    "dotenv": "^16.1.4",
+    "i18next": "^23.2.11",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "i18next-http-backend": "^2.2.1",
+    "next-google-fonts": "^2.2.0",
+    "react-hook-form": "^7.12.1",
+    "react-i18next": "^13.0.2",
+    "react-icons": "^4.9.0",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "5.0.1",
+    "react-svg": "^16.1.18",
+    "sass": "^1.55.0",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  },
+  "scripts": {
+    "git-info": "node src/helpers/gitInfo.js",
+    "start": "npm run git-info && react-scripts start",
+    "build": "CI=false npm run git-info && react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

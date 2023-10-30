@@ -1,4 +1,4 @@
-import "./App.scss"
+import "App.scss"
 import React, { createContext, useState, useEffect, useCallback } from "react"
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { Header } from "components/Header"

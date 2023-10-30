@@ -1,14 +1,38 @@
 import React, { useEffect, useState } from "react"
-import { Button, Typography } from "@mui/material"
+import { Button, Typography, MenuItem, Select, Box } from "@mui/material"
 import { useTelegram } from "hooks/useTelegram"
 import "App.scss"
 import { US, IL, RU, FR } from "country-flag-icons/react/3x2"
 import { FlexRowContainer } from "components/AllHelpComponents"
 import generatedGitInfo from "helpers/generatedGitInfo.json"
-// import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import axios from "axios"
+import { serverIP, port } from "constants/api"
+import { tableData } from "constants/constants"
 
-// const tele = window.Telegram.WebApp
+const languageButtons = [
+  {
+    code: "en",
+    label: "EN",
+    flag: <US title="United States" className="countryFlag" />,
+  },
+  {
+    code: "ru",
+    label: "RU",
+    flag: <RU title="Russian" className="countryFlag" />,
+  },
+  {
+    code: "he",
+    label: "HE",
+    flag: <IL title="Israel" className="countryFlag" />,
+  },
+  {
+    code: "fr",
+    label: "FR",
+    flag: <FR title="France" className="countryFlag" />,
+  },
+]
+
 const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
   generatedGitInfo
 
@@ -16,9 +40,12 @@ export const Header = () => {
   const { user, queryId, onClose } = useTelegram()
   const { t, i18n } = useTranslation()
   const [currentLanguage, setCurrentLanguage] = useState("en")
-  // const location = useLocation()
-  // const state = location?.state || []
   const [isTestTextVisible, setTestTextVisible] = useState(false)
+  const [tableNumber, setTableNumber] = useState("")
+  const handleTableNumberChange = (event) => {
+    setTableNumber(event.target.value)
+  }
+
   const toggleTestText = () => {
     setTestTextVisible(!isTestTextVisible)
   }
@@ -35,28 +62,29 @@ export const Header = () => {
     i18n.changeLanguage(language)
   }
 
-  const languageButtons = [
-    {
-      code: "en",
-      label: "EN",
-      flag: <US title="United States" className="countryFlag" />,
-    },
-    {
-      code: "ru",
-      label: "RU",
-      flag: <RU title="Russian" className="countryFlag" />,
-    },
-    {
-      code: "he",
-      label: "HE",
-      flag: <IL title="Israel" className="countryFlag" />,
-    },
-    {
-      code: "fr",
-      label: "FR",
-      flag: <FR title="France" className="countryFlag" />,
-    },
-  ]
+  async function onSendWaiter() {
+    const dataPay = {
+      queryId: "0",
+      cartItems: [],
+      comment: "Send Waiter",
+      totalPrice: "-",
+      paymentMethod: "-",
+
+      address: `tableNumber: ${tableNumber}`,
+      optionDelivery: "Send Waiter",
+
+      user_id: user?.id || 0,
+      user_name: user?.username || "",
+    }
+
+    try {
+      const response = await axios.post(serverIP + "/create_order_db", dataPay)
+      console.log('Запрос "onSendWaiter" успешно выполнен')
+    } catch (error) {
+      console.error('Ошибка при выполнении запроса "onSendWaiter":', error)
+      return
+    }
+  }
 
   return (
     <>
@@ -110,6 +138,28 @@ export const Header = () => {
           <p className={"testText"}>{`queryId - ${queryId}`}</p>
         </>
       )}
+      <Box sx={{ padding: "10px 20px " }}>
+        <Select
+          value={tableNumber}
+          onChange={handleTableNumberChange}
+          sx={{ width: "100%", marginBottom: "10px" }}
+        >
+          {tableData.map((table) => (
+            <MenuItem key={table.value} value={table.value}>
+              {table.label}
+            </MenuItem>
+          ))}
+        </Select>
+
+        <Button
+          variant="contained"
+          sx={{ width: "100%", color: "black", height: "30px" }}
+          onClick={onSendWaiter}
+          disabled={!tableNumber}
+        >
+          вызвать официанта
+        </Button>
+      </Box>
     </>
   )
 }

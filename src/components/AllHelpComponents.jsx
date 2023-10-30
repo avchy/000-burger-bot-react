@@ -9,11 +9,10 @@ import {
   Button,
   CircularProgress,
   Typography,
-  TableCell,TextField
+  TableCell,
+  TextField,
 } from "@mui/material"
 
-
- 
 export const FlexRowContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
@@ -34,12 +33,10 @@ export const CenterBox = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
 }))
- 
-export const StyledTextField = styled(TextField)(({ theme }) => ({
- color: "white",
 
+export const StyledTextField = styled(TextField)(({ theme }) => ({
+  color: "white",
 }))
- 
 
 export const Container = styled(Box)`
   display: flex;
