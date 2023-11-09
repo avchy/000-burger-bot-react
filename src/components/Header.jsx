@@ -16,6 +16,7 @@ const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
 
 export const Header = () => {
   const theme = useTheme()
+  const tele = window.Telegram.WebApp
 
   const { user, queryId, onClose } = useTelegram()
   const { t, i18n } = useTranslation()
@@ -26,10 +27,10 @@ export const Header = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
-    
-    console.log('window.location.search :>> ', window.location.search);
-    console.log('searchParams :>> ', searchParams);
-    
+
+    console.log("window.location.search :>> ", window.location.search)
+    console.log("searchParams :>> ", searchParams)
+
     const restaurant_name = searchParams.get("restaurant_name")
     setRestaurant_name(restaurant_name)
   }, [])
@@ -142,11 +143,7 @@ export const Header = () => {
       {isTestTextVisible && (
         <>
           <p className={"testText"}>
-            {`window.location.search - ${window.location.search}`}{" "}
-          </p>
-         
-          <p className={"testText"}>
-            {`Restaurant Name - ${restaurant_name}`}{" "}
+            {`initDataUnsafe - ${JSON.stringify(tele.initDataUnsafe)}`}{" "}
           </p>
 
           <p className={"testText"}>
