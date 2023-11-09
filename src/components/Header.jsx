@@ -26,6 +26,10 @@ export const Header = () => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
+    
+    console.log('window.location.search :>> ', window.location.search);
+    console.log('searchParams :>> ', searchParams);
+    
     const restaurant_name = searchParams.get("restaurant_name")
     setRestaurant_name(restaurant_name)
   }, [])
