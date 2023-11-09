@@ -9,43 +9,27 @@ import { useTranslation } from "react-i18next"
 import axios from "axios"
 import { serverIP, port } from "constants/api"
 import { tableData } from "constants/constants"
-
-const languageButtons = [
-  {
-    code: "en",
-    label: "EN",
-    flag: <US title="United States" className="countryFlag" />,
-  },
-  {
-    code: "ru",
-    label: "RU",
-    flag: <RU title="Russian" className="countryFlag" />,
-  },
-  {
-    code: "he",
-    label: "HE",
-    flag: <IL title="Israel" className="countryFlag" />,
-  },
-  {
-    code: "fr",
-    label: "FR",
-    flag: <FR title="France" className="countryFlag" />,
-  },
-]
-
+import { languageButtons } from "../constants/languageButtons";
+ 
 const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
   generatedGitInfo
 
-import { BrowserRouter as Router, useParams } from "react-router-dom"
-
+ 
 export const Header = () => {
-  const { restaurant_name } = useParams()
-
+ 
   const { user, queryId, onClose } = useTelegram()
   const { t, i18n } = useTranslation()
   const [currentLanguage, setCurrentLanguage] = useState("en")
   const [isTestTextVisible, setTestTextVisible] = useState(false)
   const [tableNumber, setTableNumber] = useState("")
+  const [restaurant_name, setRestaurant_name] = useState("")
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    const restaurant_name = searchParams.get("restaurant_name")
+    setRestaurant_name(restaurant_name)
+   }, [])
+
   const handleTableNumberChange = (event) => {
     setTableNumber(event.target.value)
   }
@@ -125,11 +109,15 @@ export const Header = () => {
       </FlexRowContainer>
 
       <Button
-        sx={{ width: "100%", color: "black", height: "30px" }}
+        sx={{
+          width: "100%",
+          color: "black",
+          height: "30px",
+          border: "1px solid black",
+        }}
         onClick={toggleTestText}
-      >
-        {/* Toggle Test Text */}
-      </Button>
+      ></Button>
+
       {isTestTextVisible && (
         <>
           <p className={"testText"}>
@@ -149,7 +137,7 @@ export const Header = () => {
           <p className={"testText"}>{`queryId - ${queryId}`}</p>
         </>
       )}
-      <Box sx={{ padding: "10px 20px " }}>
+      <Box sx={{ padding: "10px 20px ", backgroundColor: "#539acd" }}>
         <Select
           value={tableNumber}
           onChange={handleTableNumberChange}
@@ -168,7 +156,7 @@ export const Header = () => {
           onClick={onSendWaiter}
           disabled={!tableNumber}
         >
-          вызвать официанта
+          call the waiter{" "}
         </Button>
       </Box>
     </>

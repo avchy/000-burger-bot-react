@@ -94,8 +94,10 @@ export function App() {
           <Header />
 
           <Routes>
-            <Route index element={<ProductsPage />} />
+            <Route path={"/"} element={<ProductsPage />} />
+            {/* <Route index element={<ProductsPage />} /> */}
             <Route path={"order"} element={<OrderPage />} />
+            {/* <Route path={"order/:restaurant_name"} element={<OrderPage />} /> */}
             <Route path={"checkout"} element={<CheckoutPage />} />
             <Route path={"payments"} element={<Payments />} />
             <Route path={"creditCard"} element={<CreditCard />} />
