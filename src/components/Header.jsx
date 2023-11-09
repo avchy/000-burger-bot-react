@@ -142,6 +142,10 @@ export const Header = () => {
       {isTestTextVisible && (
         <>
           <p className={"testText"}>
+            {`window.location.search - ${window.location.search}`}{" "}
+          </p>
+         
+          <p className={"testText"}>
             {`Restaurant Name - ${restaurant_name}`}{" "}
           </p>
 
