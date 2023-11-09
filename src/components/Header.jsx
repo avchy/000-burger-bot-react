@@ -36,7 +36,11 @@ const languageButtons = [
 const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
   generatedGitInfo
 
+import { BrowserRouter as Router, useParams } from "react-router-dom"
+
 export const Header = () => {
+  const { restaurant_name } = useParams()
+
   const { user, queryId, onClose } = useTelegram()
   const { t, i18n } = useTranslation()
   const [currentLanguage, setCurrentLanguage] = useState("en")
@@ -129,12 +133,19 @@ export const Header = () => {
       {isTestTextVisible && (
         <>
           <p className={"testText"}>
+            {`Restaurant Name - ${restaurant_name}`}{" "}
+          </p>
+
+          <p className={"testText"}>
             {`timeCommitPushed - ${timeCommitPushed}`}{" "}
           </p>
+
           <p
             className={"testText"}
           >{`timeUploadNetlify - ${timeUploadingToNetlify}`}</p>
+
           <p className={"testText"}>{`gitCommitHash - ${gitCommitHash}`}</p>
+
           <p className={"testText"}>{`queryId - ${queryId}`}</p>
         </>
       )}
