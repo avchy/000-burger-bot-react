@@ -12,11 +12,7 @@ const { getData } = require("db/db")
 const foods = getData()
 const tele = window.Telegram.WebApp
 
-import { useParams } from "react-router-dom"
-
 export const ProductsPage = () => {
-  const { restaurant_name } = useParams()
-
   const { t, i18n } = useTranslation()
 
   // const changeLanguage = (language) => {
