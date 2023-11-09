@@ -1,5 +1,5 @@
-import React from "react";
-import { US, IL, RU, FR } from "country-flag-icons/react/3x2";
+import React from "react"
+import { US, IL, RU, FR } from "country-flag-icons/react/3x2"
 
 export const languageButtons = [
   {
@@ -22,4 +22,4 @@ export const languageButtons = [
     label: "FR",
     flag: <FR title="France" className="countryFlag" />,
   },
-];
+]

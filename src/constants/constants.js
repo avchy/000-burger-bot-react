@@ -8,10 +8,10 @@ const creditCardInitialData = {
 }
 
 const tableData = [
-  { value: "", label: "Выберите номер столика" },
-  { value: "1", label: "Столик 1" },
-  { value: "2", label: "Столик 2" },
-  { value: "3", label: "Столик 3" },
+  { value: "", label: "Select a table number" },
+  { value: "1", label: "Table 1" },
+  { value: "2", label: "Table 2" },
+  { value: "3", label: "Table 3" },
 ]
 
 module.exports = { discount, creditCardInitialData, tableData }
