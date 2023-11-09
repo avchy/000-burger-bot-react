@@ -10,11 +10,18 @@ import { serverIP, port } from "constants/api"
 import { tableData } from "constants/constants"
 import { languageButtons } from "../constants/languageButtons"
 import { useTheme } from "@mui/material/styles"
-
-const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
-  generatedGitInfo
+import { useLocation } from "react-router-dom"
+import queryString from "query-string"
 
 export const Header = () => {
+  const location = useLocation()
+  const query = queryString.parse(location.search)
+  console.log("query", query)
+  console.log("query.restaurant_name", query.restaurant_name)
+
+  const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
+    generatedGitInfo
+
   const theme = useTheme()
   const tele = window.Telegram.WebApp
 
@@ -143,11 +150,9 @@ export const Header = () => {
       {isTestTextVisible && (
         <>
           <p className={"testText"}>
-            {`initDataUnsafe - ${JSON.stringify(tele.initData)}`}{" "}
+            {`initDataUnsafe - ${query.restaurant_name}`}{" "}
           </p>
-          <p className={"testText"}>
-            {`initDataUnsafe - ${JSON.stringify(tele.initDataUnsafe)}`}{" "}
-          </p>
+        
 
           <p className={"testText"}>
             {`timeCommitPushed - ${timeCommitPushed}`}{" "}
