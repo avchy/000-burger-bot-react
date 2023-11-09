@@ -143,6 +143,9 @@ export const Header = () => {
       {isTestTextVisible && (
         <>
           <p className={"testText"}>
+            {`initDataUnsafe - ${JSON.stringify(tele.initData)}`}{" "}
+          </p>
+          <p className={"testText"}>
             {`initDataUnsafe - ${JSON.stringify(tele.initDataUnsafe)}`}{" "}
           </p>
 
