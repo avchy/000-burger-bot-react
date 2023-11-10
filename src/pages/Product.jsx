@@ -1,3 +1,4 @@
+const tele = window.Telegram.WebApp
 import { useState, useCallback, useEffect, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import "App.scss"
@@ -6,10 +7,8 @@ import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import Avatar from "@mui/material/Avatar"
-
 import { Box, Typography } from "@mui/material"
-
-const tele = window.Telegram.WebApp
+import { cloudinaryURL } from "constants/api"
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
 
@@ -207,7 +206,8 @@ export const Product = () => {
         <Box className="orderContainer">
           <Box className="imageContainer">
             <img
-              src={isPhotoUrl(food.image) ? food.image : default_dish_img}
+              src={isPhotoUrl(food.image) ? cloudinaryURL +food.image : default_dish_img}
+ 
               alt={"orderImg"}
             />
           </Box>

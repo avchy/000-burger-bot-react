@@ -23,10 +23,19 @@ import {
 // const { getData } = require("db/db")
 // const foods = getData()
 const tele = window.Telegram.WebApp
-
 import queryString from "query-string"
 
+
+import {Cloudinary} from "@cloudinary/url-gen";
+import {AdvancedImage} from "@cloudinary/react";
+
+
+
 export const ProductsPage = () => {
+  // const cld = new Cloudinary({cloud: {cloudName: 'dvb3cxb9h'}});
+  // const myImage = new CloudinaryImage('sample', {cloudName: 'your-cloud-name'}).resize(fill().width(100).height(150));
+  // <AdvancedImage cldImg={myImage} />
+
   const location = useLocation()
   const query = queryString.parse(location.search)
   console.log("query222", query)
