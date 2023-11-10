@@ -6,9 +6,20 @@ import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import { StyledButton } from "components/StyledButton"
+import { FlexColumnContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
 import axios from "axios"
-
+import {
+  Box,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  CircularProgress,
+  Paper,
+  Typography,
+} from "@mui/material"
 // const { getData } = require("db/db")
 // const foods = getData()
 const tele = window.Telegram.WebApp
@@ -22,6 +33,7 @@ export const ProductsPage = () => {
   console.log("query.restaurant_name2222", query.restaurant_name)
 
   const { t, i18n } = useTranslation()
+  const [loading, setLoading] = useState(true)
 
   // const changeLanguage = (language) => {
   //   i18n.changeLanguage(language)
@@ -51,8 +63,11 @@ export const ProductsPage = () => {
       setFoods(response.data)
 
       console.log('Запрос "getMenu" успешно выполнен')
+      setLoading(false)
     } catch (error) {
       console.error('Ошибка при выполнении запроса "getMenu":', error)
+      setLoading(false)
+
       return
     }
   }
@@ -130,38 +145,48 @@ export const ProductsPage = () => {
 
   return (
     <>
-      <div className="productsPage">
-        {/* <h1 className="title">{t("Falafel Shop")}</h1> */}
-        <div className="cards_container">
-          {foods.map((food) => {
-            const foodWithQuantity = cartItems.find(
-              (item) => item.id === food.id
-            )
-            const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
-            return (
-              <CardColumn
-                food={food}
-                key={food.id}
-                onAdd={onAdd}
-                onRemove={onRemove}
-                quantity={quantity}
-              />
-            )
-          })}
-        </div>
-        {cartItems.length !== 0 && env == "browser" && (
-          <BigButton
-            title={t("Order")}
-            disable={cartItems.length === 0 ? true : false}
-            onClick={onSubmit}
+      {loading ? (
+        <div id="fullscreen-overlay">
+          <CircularProgress
+            size={64}
+            color="primary"
+            sx={{ marginRight: "1rem" }}
           />
-          // <StyledButton
-          //   title={`Order`}
-          //   disable={cartItems.length === 0 ? true : false}
-          //   onClick={onSubmit}
-          // />
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="productsPage">
+          {/* <h1 className="title">{t("Falafel Shop")}</h1> */}
+          <div className="cards_container">
+            {foods.map((food) => {
+              const foodWithQuantity = cartItems.find(
+                (item) => item.id === food.id
+              )
+              const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
+              return (
+                <CardColumn
+                  food={food}
+                  key={food.id}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                  quantity={quantity}
+                />
+              )
+            })}
+          </div>
+          {cartItems.length !== 0 && env == "browser" && (
+            <BigButton
+              title={t("Order")}
+              disable={cartItems.length === 0 ? true : false}
+              onClick={onSubmit}
+            />
+            // <StyledButton
+            //   title={`Order`}
+            //   disable={cartItems.length === 0 ? true : false}
+            //   onClick={onSubmit}
+            // />
+          )}
+        </div>
+      )}
     </>
   )
 }
