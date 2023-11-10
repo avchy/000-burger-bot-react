@@ -10,6 +10,8 @@ import Avatar from "@mui/material/Avatar"
 import { Box, Typography } from "@mui/material"
 
 const tele = window.Telegram.WebApp
+import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
+import isPhotoUrl from "helpers/isPhotoUrl"
 
 import { FlexRowContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
@@ -204,12 +206,15 @@ export const Product = () => {
 
         <Box className="orderContainer">
           <Box className="imageContainer">
-            <img src={food.image} alt={"orderImg"} />
+            <img
+              src={isPhotoUrl(food.image) ? food.image : default_dish_img}
+              alt={"orderImg"}
+            />
           </Box>
 
           <Box className="textContainer">
             <Box className="text1"> {t(food.description)} </Box>
-           </Box>
+          </Box>
         </Box>
 
         {/* Toppings __________________________________________ */}
@@ -247,7 +252,9 @@ export const Product = () => {
               >
                 <Avatar
                   alt={topping.title}
-                  src={topping.image}
+                  src={
+                    isPhotoUrl(topping.image) ? topping.image : default_dish_img
+                  }
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
