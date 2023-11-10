@@ -10,10 +10,11 @@ import { serverIP, port } from "constants/api"
 import { tableData } from "constants/constants"
 import { languageButtons } from "../constants/languageButtons"
 import { useTheme } from "@mui/material/styles"
-import { useLocation } from "react-router-dom"
-import queryString from "query-string"
 import { StyledButton } from "components/StyledButton"
 import waiterImg from "images/waiter.png"
+
+import { useLocation } from "react-router-dom"
+import queryString from "query-string"
 
 export const Header = () => {
   const location = useLocation()
@@ -173,7 +174,7 @@ export const Header = () => {
       {isTestTextVisible && (
         <>
           <p className={"testText"}>
-            {`initDataUnsafe - ${query.restaurant_name}`}{" "}
+            {`restaurant_name - ${query.restaurant_name}`}{" "}
           </p>
 
           <p className={"testText"}>

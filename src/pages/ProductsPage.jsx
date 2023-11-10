@@ -7,12 +7,20 @@ import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import { StyledButton } from "components/StyledButton"
 import { CartContext } from "App"
+import axios from "axios"
 
-const { getData } = require("db/db")
-const foods = getData()
+// const { getData } = require("db/db")
+// const foods = getData()
 const tele = window.Telegram.WebApp
 
+import queryString from "query-string"
+
 export const ProductsPage = () => {
+  const location = useLocation()
+  const query = queryString.parse(location.search)
+  console.log("query222", query)
+  console.log("query.restaurant_name2222", query.restaurant_name)
+
   const { t, i18n } = useTranslation()
 
   // const changeLanguage = (language) => {
@@ -20,8 +28,7 @@ export const ProductsPage = () => {
   // }
 
   const { env } = useNavigator()
-  const location = useLocation()
-  // const [cartItems, setCartItems] = useState(location?.state?.cartItems || [])
+  const [foods, setFoods] = useState([])
   const navigate = useNavigate()
 
   const { cartItems, setCartItems } = useContext(CartContext)
@@ -31,6 +38,30 @@ export const ProductsPage = () => {
     tele.ready()
   })
 
+  const getMenu = async () => {
+    const url = "https://burgerim.ru/menu/"
+    const restaurant = query.restaurant_name || "cafecafe"
+    // const restaurant = 'cafecafe'
+
+    try {
+      // const response = await axios.get("https://burgerim.ru/menu/cafecafe")
+      const response = await axios.get(url + restaurant)
+
+      console.log("response.data", response.data)
+      setFoods(response.data)
+
+      console.log('Запрос "getMenu" успешно выполнен')
+    } catch (error) {
+      console.error('Ошибка при выполнении запроса "getMenu":', error)
+      return
+    }
+  }
+  useEffect(() => {
+    tele.BackButton.hide()
+    getMenu()
+    // tele.MainButton.text = t("VIEW ORDER")
+    // tele.isClosingConfirmationEnabled = false
+  }, [])
   // useEffect(() => {
   //   setQueryId(tele.initDataUnsafe?.query_id || 0)
   // }, [])
@@ -84,12 +115,6 @@ export const ProductsPage = () => {
       tele.offEvent("mainButtonClicked", onSubmit)
     }
   }, [onSubmit])
-
-  useEffect(() => {
-    tele.BackButton.hide()
-    // tele.MainButton.text = t("VIEW ORDER")
-    // tele.isClosingConfirmationEnabled = false
-  }, [])
 
   useEffect(() => {
     tele.MainButton.text = t("VIEW ORDER")
