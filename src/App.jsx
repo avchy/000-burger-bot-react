@@ -28,10 +28,10 @@ const theme = createTheme({
   },
   backgroundAll: "#131415",
   backgroundElements: "#1a222c",
-  
+
   blue: "#1a3f6c",
   blue2: "#539acd",
-  
+
   palette: {
     primary: {
       main: "#1a3f6c",
@@ -52,6 +52,7 @@ export function App() {
   const [totalPrice, setTotalPrice] = useState(0)
   const [comment, setComment] = useState("")
   const [address, setAddress] = useState("")
+  const [telephone, setTelephone] = useState("")
   const [optionDelivery, setOptionDelivery] = useState("on_site")
   const [paymentMethod, setPaymentMethod] = useState("")
 
@@ -75,7 +76,8 @@ export function App() {
 
     tele.BackButton.hide()
     tele.isClosingConfirmationEnabled = false
-  }, [])
+    
+   }, [])
 
   return (
     <CartContext.Provider
@@ -90,6 +92,8 @@ export function App() {
         setComment,
         address,
         setAddress,
+        telephone,
+        setTelephone,
         optionDelivery,
         setOptionDelivery,
         user,

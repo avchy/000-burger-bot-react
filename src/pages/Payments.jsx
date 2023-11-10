@@ -38,8 +38,10 @@ export const Payments = () => {
     comment,
     totalPrice,
     address,
+    telephone,
     optionDelivery,
     user,
+    
   } = useContext(CartContext)
 
   const state = {
@@ -48,6 +50,7 @@ export const Payments = () => {
     comment,
     totalPrice,
     address,
+    telephone,
     optionDelivery,
 
     user_id: user?.id || 0,
@@ -284,10 +287,9 @@ export const Payments = () => {
     console.log("errors444", errors)
   }, [errors])
 
-  // useEffect(() => {
-  //   tele.MainButton.show()
-  //   tele.MainButton.setParams({ text: t("submitButton") })
-  // }, [])
+  useEffect(() => {
+    tele.MainButton.hide()
+   }, [])
 
   // const validationSchema = Yup.object().shape({
   //   firstName: Yup.string().required('First Name is required'),

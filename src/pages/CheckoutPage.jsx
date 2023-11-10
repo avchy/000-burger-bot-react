@@ -1,3 +1,4 @@
+import "App.scss"
 import { useState, useEffect, useCallback, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
@@ -7,43 +8,28 @@ import {
   Select,
   MenuItem,
   makeStyles,
+  Box,
 } from "@mui/material"
 
-import "App.scss"
-import { serverIP, port } from "constants/api.js"
 import { BigButton } from "components/BigButton"
+import { StyledTextField } from "components/StyledTextField"
 import { CardRowSmall } from "components/CardRowSmall"
-import { useTelegram } from "hooks/useTelegram"
 import orderImg from "images/orderImg.png"
 import { useNavigator } from "hooks/useNavigator"
-import axios from "axios"
-import { StyledButton } from "components/StyledButton"
-import { discount } from "constants/constants"
 import { CartContext } from "App"
-
-const tele = window.Telegram.WebApp
-
 import { useTranslation } from "react-i18next"
 
 export function CheckoutPage() {
+  const tele = window.Telegram.WebApp
   const { t, i18n } = useTranslation()
-
   const { env } = useNavigator()
-
-  // const [address, setAddress] = useState("")
-  // const [tempError, setTempError] = useState("---")
-  // const [tempData, setTempData] = useState({})
-
-  // const location = useLocation()
-  // const cartItems = location?.state?.cartItems || []
   const { cartItems, setCartItems } = useContext(CartContext)
   const { comment, setComment } = useContext(CartContext)
   const { totalPrice, setTotalPrice } = useContext(CartContext)
   const { queryId, setQueryId } = useContext(CartContext)
   const { optionDelivery, setOptionDelivery } = useContext(CartContext)
   const { address, setAddress } = useContext(CartContext)
-
-  const tele = window.Telegram.WebApp
+  const { telephone, setTelephone } = useContext(CartContext)
 
   // useEffect(() => {
   //   const user = tele.initDataUnsafe?.user
@@ -84,7 +70,7 @@ export function CheckoutPage() {
   }, [onSubmit])
 
   useEffect(() => {
-    if (optionDelivery == "take_away" && !address) {
+    if (optionDelivery == "delivery" && !address) {
       tele.MainButton.hide()
     } else {
       tele.MainButton.show()
@@ -93,6 +79,9 @@ export function CheckoutPage() {
 
   const onChangeAddress = (e) => {
     setAddress(e.target.value)
+  }
+  const onChangeTelephone = (e) => {
+    setTelephone(e.target.value)
   }
 
   const onChangeOption = (e) => {
@@ -206,45 +195,26 @@ export function CheckoutPage() {
           >
             <MenuItem value="on_site">{t("On Site")}</MenuItem>
             <MenuItem value="take_away">{t("Take Away")}</MenuItem>
+            <MenuItem value="delivery">{t("Delivery")}</MenuItem>
           </Select>
         </FormControl>
 
-        {/* {optionDelivery === "take_away" && (
-          <TextField
-            sx={{
-              "& label.Mui-focused": {
-                color: "white",
-              },
-              "& .MuiInput-underline:after": {
-                borderBottomColor: "yellow",
-              },
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "white",
-                },
-                "&:hover fieldset": {
-                  borderColor: "white",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "yellow",
-                },
-              },
-            }}
-            className="input"
-            type="text"
-            label={t("Address")}
-            value={address}
-            onChange={onChangeAddress}
-            placeholder={t("Enter address")}
-            InputLabelProps={{
-              style: { color: "white" },
-            }}
-            InputProps={{
-              style: { color: "white", borderColor: "white" },
-            }}
-            inputProps={{ style: { color: "white" } }}
-          />
-        )} */}
+        {optionDelivery === "delivery" && (
+          <Box>
+            <StyledTextField
+              label={t("Address")}
+              value={address}
+              onChange={onChangeAddress}
+              placeholder={t("Enter address")}
+            />
+            <StyledTextField
+              label={t("Telephone")}
+              value={telephone}
+              onChange={onChangeTelephone}
+              placeholder={t("Enter Telephone")}
+            />
+          </Box>
+        )}
       </div>
 
       {env === "browser" && (
