@@ -206,8 +206,11 @@ export const Product = () => {
         <Box className="orderContainer">
           <Box className="imageContainer">
             <img
-              src={isPhotoUrl(food.image) ? cloudinaryURL +food.image : default_dish_img}
- 
+              src={
+                isPhotoUrl(food.image)
+                  ? cloudinaryURL + food.image
+                  : default_dish_img
+              }
               alt={"orderImg"}
             />
           </Box>
@@ -260,7 +263,7 @@ export const Product = () => {
               </Box>
               <Typography sx={{ m: 1 }}>
                 {t(topping.title)}
-                {topping.price !== 0 ? `${topping.price}₪` : ""}
+                {topping.price !== 0 ? ` + ₪${topping.price}` : ""}
               </Typography>
             </Box>
           ))}

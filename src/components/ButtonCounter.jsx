@@ -1,14 +1,11 @@
-import React, { useState,useContext } from "react"
+import React, { useState, useContext } from "react"
 import "App.scss"
 import { Button } from "./Button"
 import { Box, Typography } from "@mui/material"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import {
-  FlexRowContainer,
-  StyledTextField,
-} from "components/AllHelpComponents"
+import { FlexRowContainer, StyledTextField } from "components/AllHelpComponents"
 import { CartContext } from "App"
- 
+
 const card_badge_simple = { padding: "0 8px" }
 const card_badge_hidden = { display: "none" }
 
@@ -37,15 +34,14 @@ export function ButtonCounter({ food, onAdd, onRemove, quantity }) {
           // width: "30%",
         }}
       >
-        {count   ? (
-        // {count !== 0 ? (
+        {count ? (
           <Button title={"-"} type={"remove"} onClick={handleDecrement} />
         ) : (
           ""
         )}
 
         <Box
-          sx={ card_badge_simple }
+          sx={card_badge_simple}
           // sx={count !== 0 ? card_badge_simple : card_badge_hidden}
           display="inline"
         >
@@ -53,7 +49,7 @@ export function ButtonCounter({ food, onAdd, onRemove, quantity }) {
             sx={{ border: "2px solid orange", padding: "4px 8px " }}
             variant="body1"
           >
-            {  count}
+            {count}
             {/* {count === 1 ? count + 1 : count} */}
           </Typography>
         </Box>
