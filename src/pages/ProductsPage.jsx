@@ -32,11 +32,9 @@ export const ProductsPage = () => {
   // const cld = new Cloudinary({cloud: {cloudName: 'dvb3cxb9h'}});
   // const myImage = new CloudinaryImage('sample', {cloudName: 'your-cloud-name'}).resize(fill().width(100).height(150));
   // <AdvancedImage cldImg={myImage} />
-
   const location = useLocation()
-  const query = queryString.parse(location.search)
-  console.log('query222', query)
-  console.log('query.restaurant_name2222', query.restaurant_name)
+
+
 
   const { t, i18n } = useTranslation()
   const [loading, setLoading] = useState(true)
@@ -57,6 +55,9 @@ export const ProductsPage = () => {
   })
 
   const getMenu = async () => {
+    const query = queryString.parse(location.search)
+    console.log('query222', query)
+    console.log('query.restaurant_name2222', query.restaurant_name)
     const url = 'https://burgerim.ru/menu/'
     const restaurant = query.restaurant_name
     // const restaurant = query.restaurant_name || "cafecafe"
@@ -64,6 +65,7 @@ export const ProductsPage = () => {
 
     try {
       // const response = await axios.get("https://burgerim.ru/menu/cafecafe")
+      console.log('url + restaurant :>> ', url + restaurant);
       const response = await axios.get(url + restaurant)
 
       console.log('response.data', response.data)
@@ -83,7 +85,7 @@ export const ProductsPage = () => {
     getMenu()
     // tele.MainButton.text = t("VIEW ORDER")
     // tele.isClosingConfirmationEnabled = false
-  }, [query.restaurant_name])
+  }, [ ])
   // useEffect(() => {
   //   setQueryId(tele.initDataUnsafe?.query_id || 0)
   // }, [])
