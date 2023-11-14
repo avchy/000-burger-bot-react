@@ -61,7 +61,8 @@ export const ProductsPage = () => {
 
   const getMenu = async () => {
     const url = "https://burgerim.ru/menu/"
-    const restaurant = query.restaurant_name || "cafecafe"
+    const restaurant = query.restaurant_name  
+    // const restaurant = query.restaurant_name || "cafecafe"
     // const restaurant = 'cafecafe'
 
     try {
@@ -85,7 +86,7 @@ export const ProductsPage = () => {
     getMenu()
     // tele.MainButton.text = t("VIEW ORDER")
     // tele.isClosingConfirmationEnabled = false
-  }, [])
+  }, [query.restaurant_name ])
   // useEffect(() => {
   //   setQueryId(tele.initDataUnsafe?.query_id || 0)
   // }, [])
