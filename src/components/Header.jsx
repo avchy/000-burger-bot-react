@@ -54,10 +54,10 @@ export const Header = () => {
     setTestTextVisible(!isTestTextVisible)
   }
   useEffect(() => {
-    const language_code = user?.language_code
-    if (language_code && currentLanguage !== language_code) {
-      setCurrentLanguage(language_code)
-      i18n.changeLanguage(language_code)
+    // const language_code = user?.language_code
+    if (user?.language_code && currentLanguage !== user?.language_code) {
+      setCurrentLanguage(user?.language_code)
+      i18n.changeLanguage(user?.language_code)
     }
   }, [user?.language_code])
 
@@ -175,6 +175,12 @@ export const Header = () => {
         <>
           <p className={"testText"}>
             {`restaurant_name - ${query.restaurant_name}`}{" "}
+          </p>
+          <p className={"testText"}>
+            {`user?.language_code - ${user?.language_code}`}{" "}
+          </p>
+          <p className={"testText"}>
+            {`currentLanguage - ${currentLanguage}`}{" "}
           </p>
 
           <p className={"testText"}>
