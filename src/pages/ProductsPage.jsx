@@ -64,7 +64,7 @@ export const ProductsPage = () => {
     try {
       // const response = await axios.get("https://burgerim.ru/menu/cafecafe")
       console.log('url + restaurant :>> ', url + '?restaurant_name=' + restaurant)
-      const response = await axios.get(url + restaurant)
+      const response = await axios.get(url + '?restaurant_name=' + restaurant)
 
       console.log('response.data', response.data)
       setFoods(response.data)
