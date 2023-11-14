@@ -34,8 +34,6 @@ export const ProductsPage = () => {
   // <AdvancedImage cldImg={myImage} />
   const location = useLocation()
 
-
-
   const { t, i18n } = useTranslation()
   const [loading, setLoading] = useState(true)
 
@@ -65,7 +63,7 @@ export const ProductsPage = () => {
 
     try {
       // const response = await axios.get("https://burgerim.ru/menu/cafecafe")
-      console.log('url + restaurant :>> ', url + restaurant);
+      console.log('url + restaurant :>> ', url + '?restaurant_name=' + restaurant)
       const response = await axios.get(url + restaurant)
 
       console.log('response.data', response.data)
@@ -85,7 +83,7 @@ export const ProductsPage = () => {
     getMenu()
     // tele.MainButton.text = t("VIEW ORDER")
     // tele.isClosingConfirmationEnabled = false
-  }, [ ])
+  }, [])
   // useEffect(() => {
   //   setQueryId(tele.initDataUnsafe?.query_id || 0)
   // }, [])
