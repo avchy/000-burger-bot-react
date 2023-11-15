@@ -14,9 +14,16 @@
     "dist",
     "dist*",
     "node_modules",
+    "config",
+    "tests",
+    "public",
+    "app",
+    "concat-stats-for",
     "subfolder/dist",
     "subfolder/node_modules",
     "**/dist/*",
     "**/node_modules/*"
   ]
 }
+
+ 

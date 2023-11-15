@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react"
+import React, { useState, useContext } from "react"
 // import { Skeleton, Stack } from "@mui/material"
 import "App.scss"
 import { Button } from "./Button"
@@ -6,7 +6,10 @@ import { useTranslation } from "react-i18next"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 // import * as React from 'react';
 // import { CartContext } from "App"
- 
+import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
+import isPhotoUrl from "helpers/isPhotoUrl"
+import { cloudinaryURL } from "constants/api"
+
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const navigate = useNavigate()
 
@@ -20,8 +23,8 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
     onAdd(food)
   }
   const handleToppings = () => {
-     navigate("/product" , { state: { food } })
-   }
+    navigate("/product", { state: { food } })
+  }
 
   const handleDecrement = () => {
     setCount(count - 1)
@@ -44,7 +47,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
         style={{ display: imageLoaded ? "block" : "none" }}
       >
         <img
-          src={image}
+          src={isPhotoUrl(image) ? cloudinaryURL + image : default_dish_img}
           alt={title}
           onLoad={handleImageLoad}
           // style={{ display: imageLoaded ? "block" : "none" }}

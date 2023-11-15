@@ -1,4 +1,4 @@
-import "./App.scss"
+import "App.scss"
 import React, { createContext, useState, useEffect, useCallback } from "react"
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { Header } from "components/Header"
@@ -28,6 +28,17 @@ const theme = createTheme({
   },
   backgroundAll: "#131415",
   backgroundElements: "#1a222c",
+
+  blue: "#1a3f6c",
+  blue2: "#539acd",
+
+  palette: {
+    primary: {
+      main: "#1a3f6c",
+      secondary: "#539acd",
+    },
+    // Добавь другие цвета по необходимости
+  },
 })
 
 export const CartContext = createContext()
@@ -41,6 +52,7 @@ export function App() {
   const [totalPrice, setTotalPrice] = useState(0)
   const [comment, setComment] = useState("")
   const [address, setAddress] = useState("")
+  const [telephone, setTelephone] = useState("")
   const [optionDelivery, setOptionDelivery] = useState("on_site")
   const [paymentMethod, setPaymentMethod] = useState("")
 
@@ -64,7 +76,8 @@ export function App() {
 
     tele.BackButton.hide()
     tele.isClosingConfirmationEnabled = false
-  }, [])
+    
+   }, [])
 
   return (
     <CartContext.Provider
@@ -79,6 +92,8 @@ export function App() {
         setComment,
         address,
         setAddress,
+        telephone,
+        setTelephone,
         optionDelivery,
         setOptionDelivery,
         user,
@@ -94,8 +109,10 @@ export function App() {
           <Header />
 
           <Routes>
-            <Route index element={<ProductsPage />} />
+            <Route path={"/"} element={<ProductsPage />} />
+            {/* <Route index element={<ProductsPage />} /> */}
             <Route path={"order"} element={<OrderPage />} />
+            {/* <Route path={"order/:restaurant_name"} element={<OrderPage />} /> */}
             <Route path={"checkout"} element={<CheckoutPage />} />
             <Route path={"payments"} element={<Payments />} />
             <Route path={"creditCard"} element={<CreditCard />} />

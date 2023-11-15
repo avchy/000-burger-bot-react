@@ -1,3 +1,4 @@
+const tele = window.Telegram.WebApp
 import { useState, useCallback, useEffect, useContext } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import "App.scss"
@@ -6,10 +7,10 @@ import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import Avatar from "@mui/material/Avatar"
-
 import { Box, Typography } from "@mui/material"
-
-const tele = window.Telegram.WebApp
+import { cloudinaryURL } from "constants/api"
+import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
+import isPhotoUrl from "helpers/isPhotoUrl"
 
 import { FlexRowContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
@@ -204,12 +205,19 @@ export const Product = () => {
 
         <Box className="orderContainer">
           <Box className="imageContainer">
-            <img src={food.image} alt={"orderImg"} />
+            <img
+              src={
+                isPhotoUrl(food.image)
+                  ? cloudinaryURL + food.image
+                  : default_dish_img
+              }
+              alt={"orderImg"}
+            />
           </Box>
 
           <Box className="textContainer">
             <Box className="text1"> {t(food.description)} </Box>
-           </Box>
+          </Box>
         </Box>
 
         {/* Toppings __________________________________________ */}
@@ -247,13 +255,15 @@ export const Product = () => {
               >
                 <Avatar
                   alt={topping.title}
-                  src={topping.image}
+                  src={
+                    isPhotoUrl(topping.image) ? topping.image : default_dish_img
+                  }
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
               <Typography sx={{ m: 1 }}>
                 {t(topping.title)}
-                {topping.price !== 0 ? `${topping.price}₪` : ""}
+                {topping.price !== 0 ? ` + ₪${topping.price}` : ""}
               </Typography>
             </Box>
           ))}
