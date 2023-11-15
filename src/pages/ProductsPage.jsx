@@ -56,7 +56,6 @@ export const ProductsPage = () => {
     const query = queryString.parse(location.search)
     console.log('query222', query)
     console.log('query.restaurant_name2222', query.restaurant_name)
-    const url = 'https://burgerim.ru/menu/'
     const restaurant = query.restaurant_name
     // const restaurant = query.restaurant_name || "cafecafe"
     // const restaurant = 'cafecafe'
@@ -66,9 +65,9 @@ export const ProductsPage = () => {
 
       // console.log('url + restaurant :>> ', url + '?restaurant_name=' + restaurant)
       // const response = await axios.get(url + '?restaurant_name=' + restaurant)
-
-      const response = await axios.get(url + restaurant)
-      console.log('url + restaurant :>> ', url + restaurant)
+      
+      const response = await axios.get('https://burgerim.ru/menu/' + restaurant)
+      console.log('url + restaurant :>> ', 'https://burgerim.ru/menu/' + restaurant)
 
       console.log('response.data', response.data)
       setFoods(response.data)
