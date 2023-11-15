@@ -52,7 +52,7 @@ export const ProductsPage = () => {
     tele.ready()
   })
 
-  const getMenu = async () => {
+  const getdDishes = async () => {
     const query = queryString.parse(location.search)
     console.log('query222', query)
     console.log('query.restaurant_name2222', query.restaurant_name)
@@ -61,21 +61,21 @@ export const ProductsPage = () => {
     // const restaurant = 'cafecafe'
 
     try {
-      // const response = await axios.get('https://burgerim.ru/menu/cafecafe')
+      // const response = await axios.get('https://burgerim.ru/dishes/cafecafe')
 
       // console.log('url + restaurant :>> ', url + '?restaurant_name=' + restaurant)
       // const response = await axios.get(url + '?restaurant_name=' + restaurant)
       
-      const response = await axios.get('https://burgerim.ru/menu/' + restaurant)
-      console.log('url + restaurant :>> ', 'https://burgerim.ru/menu/' + restaurant)
+      const response = await axios.get('https://burgerim.ru/dishes/' + restaurant)
+      console.log('url + restaurant :>> ', 'https://burgerim.ru/dishes/' + restaurant)
 
       console.log('response.data', response.data)
       setFoods(response.data)
 
-      console.log('Запрос "getMenu" успешно выполнен')
+      console.log('Запрос "getdDishes" успешно выполнен')
       setLoading(false)
     } catch (error) {
-      console.error('Ошибка при выполнении запроса "getMenu":', error)
+      console.error('Ошибка при выполнении запроса "getdDishes":', error)
       setLoading(false)
 
       return
@@ -83,7 +83,7 @@ export const ProductsPage = () => {
   }
   useEffect(() => {
     tele.BackButton.hide()
-    getMenu()
+    getdDishes()
     // tele.MainButton.text = t("VIEW ORDER")
     // tele.isClosingConfirmationEnabled = false
   }, [])
