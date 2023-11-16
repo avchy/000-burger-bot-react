@@ -6,6 +6,7 @@ import { Box } from "@mui/system"
 
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
+import toppings_icon from "images/toppings_icon.png"
 
 export function CardRow({ food }) {
   const { title, image, price, id, quantity, toppings } = food
@@ -35,7 +36,7 @@ export function CardRow({ food }) {
                     {/* <img src={topping.image} alt={topping.title} /> */}
 
                     <img
-                      src={isPhotoUrl(topping.image) ? topping.image : default_dish_img}
+                      src={isPhotoUrl(topping.image) ? topping.image : toppings_icon}
                       alt={topping.title}
                     />
                   </div>

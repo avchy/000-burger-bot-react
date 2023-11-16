@@ -10,6 +10,7 @@ import Avatar from "@mui/material/Avatar"
 import { Box, Typography } from "@mui/material"
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
+import toppings_icon from "images/toppings_icon.png"
 
 import { FlexRowContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
@@ -222,7 +223,7 @@ export const Product = () => {
               >
                 <Avatar
                   alt={topping.title}
-                  src={isPhotoUrl(topping.image) ? topping.image : default_dish_img}
+                  src={isPhotoUrl(topping.image) ? topping.image : toppings_icon}
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
