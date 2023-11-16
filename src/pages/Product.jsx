@@ -173,7 +173,7 @@ export const Product = () => {
 
   return (
     <>
-      <Box className="checkoutPage">
+      <Box className="pageContainer">
         <Typography sx={{ p: 2, textAlign: "center", fontSize: "calc(1.5em + 2vw)" }}>
           {t(food.title)}
         </Typography>

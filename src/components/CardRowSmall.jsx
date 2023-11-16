@@ -1,8 +1,9 @@
 import "App.scss"
-
 import { useTranslation } from "react-i18next"
-
 import { Box } from "@mui/material"
+
+import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
+import isPhotoUrl from "helpers/isPhotoUrl"
 
 export function CardRowSmall({ food }) {
   const { title, image, price, quantity, textColor, toppings } = food
@@ -15,7 +16,7 @@ export function CardRowSmall({ food }) {
         <div className="CardRowSmall">
           {image && (
             <div className="image_container">
-              <img src={image} alt={title} />
+          <img src={isPhotoUrl(image) ? image : default_dish_img} alt={title} />
             </div>
           )}
           <span className="cart_text_center">{t(title)}</span>
@@ -36,7 +37,7 @@ export function CardRowSmall({ food }) {
                 <div className="CardRowSmall" key={topping.title + index}>
                   <div className="CardRowSmall">
                     <div className="image_container">
-                      <img src={topping.image} alt={topping.title} />
+                    <img src={isPhotoUrl(topping.image) ? topping.image : default_dish_img} alt={topping.title} />
                     </div>
                     <span className="card_row_text">{t(topping.title)}</span>
                   </div>

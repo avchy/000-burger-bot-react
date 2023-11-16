@@ -5,8 +5,7 @@ import { Header } from "components/Header"
 import { ProductsPage } from "pages/ProductsPage"
 import { Product } from "pages/Product"
 import { OrderPage } from "pages/OrderPage"
-import { CheckoutPage } from "pages/CheckoutPage"
-import { CreditCard } from "pages/CreditCard"
+ import { CreditCard } from "pages/CreditCard"
 import { Payments } from "pages/Payments"
 import { Form } from "components/Form"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
@@ -165,8 +164,7 @@ export function App() {
               {/* <Route index element={<ProductsPage />} /> */}
               <Route path={"order"} element={<OrderPage />} />
               {/* <Route path={"order/:restaurant_name"} element={<OrderPage />} /> */}
-              <Route path={"checkout"} element={<CheckoutPage />} />
-              <Route path={"payments"} element={<Payments />} />
+               <Route path={"payments"} element={<Payments />} />
               <Route path={"creditCard"} element={<CreditCard />} />
               <Route path={"product"} element={<Product />} />
 

@@ -74,7 +74,7 @@ body {
 }
 //   ====================================================================
 
-.checkoutPage {
+.pageContainer {
   position: relative;
 
   background-color: $backgroundElements;
@@ -123,6 +123,7 @@ body {
       flex-direction: column; /* Элементы будут располагаться вертикально */
       justify-content: center; /* Выравниваем элементы по центру по вертикали */
       align-items: center; /* Выравниваем элементы по центру по горизонтали */
+      width: 100%;
 
       .text1 {
         color: $white;
