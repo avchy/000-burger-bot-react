@@ -55,19 +55,19 @@ export const ProductsPage = () => {
   const getdDishes = async () => {
     const query = queryString.parse(location.search)
     console.log('query222', query)
-    console.log('query.restaurant_name2222', query.restaurant_name)
-    const restaurant = query.restaurant_name
-    // const restaurant = query.restaurant_name || "cafecafe"
-    // const restaurant = 'cafecafe'
+    console.log('query.restaurant_id2222', query.restaurant_id)
+    const restaurant_id = query.restaurant_id
+    // const restaurant_id= query.restaurant_id || "cafecafe"
+    // const restaurant_id= 'cafecafe'
 
     try {
       // const response = await axios.get('https://burgerim.ru/dishes/cafecafe')
 
-      // console.log('url + restaurant :>> ', url + '?restaurant_name=' + restaurant)
-      // const response = await axios.get(url + '?restaurant_name=' + restaurant)
-      
-      const response = await axios.get('https://burgerim.ru/dishes/' + restaurant)
-      console.log('url + restaurant :>> ', 'https://burgerim.ru/dishes/' + restaurant)
+      // console.log('url + restaurant_id:>> ', url + '?restaurant_id=' + restaurant)
+      // const response = await axios.get(url + '?restaurant_id=' + restaurant)
+
+      const response = await axios.get('https://burgerim.ru/dishes/' + restaurant_id)
+      console.log('url + restaurant_id:>> ', 'https://burgerim.ru/dishes/' + restaurant_id)
 
       console.log('response.data', response.data)
       setFoods(response.data)
