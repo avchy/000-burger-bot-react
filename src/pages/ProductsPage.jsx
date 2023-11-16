@@ -1,14 +1,14 @@
-import { useContext, useState, useCallback, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import 'App.scss'
-import { CardColumn } from 'components/CardColumn'
-import { BigButton } from 'components/BigButton'
-import { useNavigator } from 'hooks/useNavigator'
-import { useTranslation } from 'react-i18next'
-import { StyledButton } from 'components/StyledButton'
-import { FlexColumnContainer } from 'components/AllHelpComponents'
-import { CartContext } from 'App'
-import axios from 'axios'
+import { useContext, useState, useCallback, useEffect } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import "App.scss"
+import { CardColumn } from "components/CardColumn"
+import { BigButton } from "components/BigButton"
+import { useNavigator } from "hooks/useNavigator"
+import { useTranslation } from "react-i18next"
+import { StyledButton } from "components/StyledButton"
+import { FlexColumnContainer } from "components/AllHelpComponents"
+import { CartContext } from "App"
+// import axios from "axios"
 import {
   Box,
   Table,
@@ -19,11 +19,11 @@ import {
   CircularProgress,
   Paper,
   Typography,
-} from '@mui/material'
+} from "@mui/material"
 // const { getData } = require("db/db")
 // const foods = getData()
 const tele = window.Telegram.WebApp
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 // import { Cloudinary } from '@cloudinary/url-gen'
 // import { AdvancedImage } from '@cloudinary/react'
@@ -35,58 +35,59 @@ export const ProductsPage = () => {
   const location = useLocation()
 
   const { t, i18n } = useTranslation()
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
 
   // const changeLanguage = (language) => {
   //   i18n.changeLanguage(language)
   // }
 
   const { env } = useNavigator()
-  const [foods, setFoods] = useState([])
+  // const [foods, setFoods] = useState([])
   const navigate = useNavigate()
 
-  const { cartItems, setCartItems } = useContext(CartContext)
+  const { cartItems, setCartItems, foods } = useContext(CartContext)
   // const { query_id, setQueryId } = useContext(CartContext)
 
   useEffect(() => {
     tele.ready()
   })
 
-  const getDishes = async () => {
-    const query = queryString.parse(location.search)
-    console.log('query222', query)
-    console.log('query.restaurant_id2222', query.restaurant_id)
-    const restaurant_id = query.restaurant_id
-    // const restaurant_id= query.restaurant_id || "cafecafe"
-    // const restaurant_id= 'cafecafe'
+  // const getDishes = async () => {
+  //   // const query = queryString.parse(location.search)
+  //   // console.log('query222', query)
+  //   // console.log('query.restaurant_id2222', query.restaurant_id)
+  //   // const restaurant_id = query.restaurant_id
 
-    try {
-      // const response = await axios.get('https://burgerim.ru/dishes/cafecafe')
+  //   // const restaurant_id= query.restaurant_id || "cafecafe"
+  //   // const restaurant_id= 'cafecafe'
 
-      // console.log('url + restaurant_id:>> ', url + '?restaurant_id=' + restaurant)
-      // const response = await axios.get(url + '?restaurant_id=' + restaurant)
+  //   try {
+  //     // const response = await axios.get('https://burgerim.ru/dishes/cafecafe')
 
-      const response = await axios.get('https://burgerim.ru/dishes/' + restaurant_id)
-      console.log('url + restaurant_id:>> ', 'https://burgerim.ru/dishes/' + restaurant_id)
+  //     // console.log('url + restaurant_id:>> ', url + '?restaurant_id=' + restaurant)
+  //     // const response = await axios.get(url + '?restaurant_id=' + restaurant)
 
-      console.log('response.data', response.data)
-      setFoods(response.data)
+  //     const response = await axios.get("https://burgerim.ru/dishes/" + restaurant_id)
+  //     console.log("url + restaurant_id:>> ", "https://burgerim.ru/dishes/" + restaurant_id)
 
-      console.log('Запрос "getDishes" успешно выполнен')
-      setLoading(false)
-    } catch (error) {
-      console.error('Ошибка при выполнении запроса "getDishes":', error)
-      setLoading(false)
+  //     console.log("response.data", response.data)
+  //     setFoods(response.data)
 
-      return
-    }
-  }
+  //     console.log('Запрос "getDishes" успешно выполнен')
+  //     setLoading(false)
+  //   } catch (error) {
+  //     console.error('Ошибка при выполнении запроса "getDishes":', error)
+  //     setLoading(false)
+
+  //     return
+  //   }
+  // }
   useEffect(() => {
     tele.BackButton.hide()
-    getDishes()
+    // getDishes()
     // tele.MainButton.text = t("VIEW ORDER")
     // tele.isClosingConfirmationEnabled = false
-  }, [])
+  }, [ ])
   // useEffect(() => {
   //   setQueryId(tele.initDataUnsafe?.query_id || 0)
   // }, [])
@@ -100,7 +101,9 @@ export const ProductsPage = () => {
 
     const exist = cartItems.find((x) => x.id === food.id)
     if (exist) {
-      setCartItems(cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x)))
+      setCartItems(
+        cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x))
+      )
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
     }
@@ -117,24 +120,26 @@ export const ProductsPage = () => {
     if (exist.quantity === 1) {
       setCartItems(cartItems.filter((x) => x.id !== food.id))
     } else {
-      setCartItems(cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x)))
+      setCartItems(
+        cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x))
+      )
     }
   }
 
   const onSubmit = useCallback(() => {
-    navigate('/order')
+    navigate("/order")
   }, [cartItems])
 
   useEffect(() => {
-    tele.onEvent('mainButtonClicked', onSubmit)
+    tele.onEvent("mainButtonClicked", onSubmit)
 
     return () => {
-      tele.offEvent('mainButtonClicked', onSubmit)
+      tele.offEvent("mainButtonClicked", onSubmit)
     }
   }, [onSubmit])
 
   useEffect(() => {
-    tele.MainButton.text = t('VIEW ORDER')
+    tele.MainButton.text = t("VIEW ORDER")
   })
 
   useEffect(() => {
@@ -147,22 +152,34 @@ export const ProductsPage = () => {
 
   return (
     <>
-      {loading ? (
-        <div id='fullscreen-overlay'>
-          <CircularProgress size={64} color='primary' sx={{ marginRight: '1rem' }} />
+      {/* {loading ? (
+        <div id="fullscreen-overlay">
+          <CircularProgress size={64} color="primary" sx={{ marginRight: "1rem" }} />
         </div>
-      ) : (
-        <div className='productsPage'>
+      ) : ( */}
+        <div className="productsPage">
           {/* <h1 className="title">{t("Falafel Shop")}</h1> */}
-          <div className='cards_container'>
+          <div className="cards_container">
             {foods.map((food) => {
               const foodWithQuantity = cartItems.find((item) => item.id === food.id)
               const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
-              return <CardColumn food={food} key={food.id} onAdd={onAdd} onRemove={onRemove} quantity={quantity} />
+              return (
+                <CardColumn
+                  food={food}
+                  key={food.id}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                  quantity={quantity}
+                />
+              )
             })}
           </div>
-          {cartItems.length !== 0 && env == 'browser' && (
-            <BigButton title={t('Order')} disable={cartItems.length === 0 ? true : false} onClick={onSubmit} />
+          {cartItems.length !== 0 && env == "browser" && (
+            <BigButton
+              title={t("Order")}
+              disable={cartItems.length === 0 ? true : false}
+              onClick={onSubmit}
+            />
             // <StyledButton
             //   title={`Order`}
             //   disable={cartItems.length === 0 ? true : false}
@@ -170,7 +187,7 @@ export const ProductsPage = () => {
             // />
           )}
         </div>
-      )}
+      {/* )} */}
     </>
   )
 }

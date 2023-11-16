@@ -8,8 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 // import { CartContext } from "App"
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
-import { cloudinaryURL } from "constants/api"
-
+ 
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const navigate = useNavigate()
 
