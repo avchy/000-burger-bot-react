@@ -47,7 +47,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
         style={{ display: imageLoaded ? "block" : "none" }}
       >
         <img
-          src={isPhotoUrl(image) ? cloudinaryURL + image : default_dish_img}
+          src={isPhotoUrl(image) ?  image : default_dish_img}
           alt={title}
           onLoad={handleImageLoad}
           // style={{ display: imageLoaded ? "block" : "none" }}

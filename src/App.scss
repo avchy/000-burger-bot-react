@@ -103,7 +103,6 @@ body {
 
     .imageContainer {
       // width: 45%;
-
       // width: 100px;
       height: 100%;
       margin: 0 20px 0 0;
@@ -245,7 +244,7 @@ body {
   padding: 0.5rem;
   margin: 13px 10px;
   position: relative;
- 
+
   .image_container {
     width: 50px;
     height: 50px;
@@ -296,9 +295,9 @@ body {
 
   .cart_text_center {
     text-align: left;
-     display: flex;
+    display: flex;
     align-items: center;
-   }
+  }
 }
 //   ====================================================================
 
@@ -545,7 +544,7 @@ body {
   position: relative;
 }
 .topping-circle.selected::after {
-  content: " "+"✓";
+  content: ' '+'✓';
   white-space: pre;
   font-weight: bold;
   position: absolute;

@@ -25,8 +25,8 @@ import {
 const tele = window.Telegram.WebApp
 import queryString from 'query-string'
 
-import { Cloudinary } from '@cloudinary/url-gen'
-import { AdvancedImage } from '@cloudinary/react'
+// import { Cloudinary } from '@cloudinary/url-gen'
+// import { AdvancedImage } from '@cloudinary/react'
 
 export const ProductsPage = () => {
   // const cld = new Cloudinary({cloud: {cloudName: 'dvb3cxb9h'}});
@@ -52,7 +52,7 @@ export const ProductsPage = () => {
     tele.ready()
   })
 
-  const getdDishes = async () => {
+  const getDishes = async () => {
     const query = queryString.parse(location.search)
     console.log('query222', query)
     console.log('query.restaurant_id2222', query.restaurant_id)
@@ -72,10 +72,10 @@ export const ProductsPage = () => {
       console.log('response.data', response.data)
       setFoods(response.data)
 
-      console.log('Запрос "getdDishes" успешно выполнен')
+      console.log('Запрос "getDishes" успешно выполнен')
       setLoading(false)
     } catch (error) {
-      console.error('Ошибка при выполнении запроса "getdDishes":', error)
+      console.error('Ошибка при выполнении запроса "getDishes":', error)
       setLoading(false)
 
       return
@@ -83,7 +83,7 @@ export const ProductsPage = () => {
   }
   useEffect(() => {
     tele.BackButton.hide()
-    getdDishes()
+    getDishes()
     // tele.MainButton.text = t("VIEW ORDER")
     // tele.isClosingConfirmationEnabled = false
   }, [])

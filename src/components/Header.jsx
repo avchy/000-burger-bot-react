@@ -15,6 +15,7 @@ import waiterImg from 'images/waiter.png'
 
 import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
+import InputLabel from '@mui/material/InputLabel'
 
 export const Header = () => {
   const location = useLocation()
@@ -101,7 +102,7 @@ export const Header = () => {
 
   return (
     <>
-      <FlexRowContainer sx={{ justifyContent: 'space-between' }}>
+      <FlexRowContainer>
         <Select
           value={currentLanguage}
           onChange={(event) => changeLanguage(event.target.value)}
@@ -129,12 +130,18 @@ export const Header = () => {
             <img loading='lazy' src={waiterImg} alt={'waiterImg'} width='50' height='50' />
           </div>
         </StyledButton>
-        {formOpenSendWaiter && (
-          <Box sx={{ padding: '10px 20px ', backgroundColor: theme.blue }}>
+      </FlexRowContainer>
+
+      {formOpenSendWaiter && (
+        <FlexRowContainer sx={{ backgroundColor: theme.blue, justifyContent: 'space-around' }}>
+          <Box>
+            <InputLabel id='select-label'>Choose your table</InputLabel>
             <Select
+              label='Choose your table'
+              labelId='select-label'
               value={tableNumber}
               onChange={handleTableNumberChange}
-              sx={{ width: '150px', marginBottom: '10px' }}
+              sx={{ width: '150px' }}
             >
               {tableData.map((table) => (
                 <MenuItem key={table.value} value={table.value}>
@@ -142,17 +149,18 @@ export const Header = () => {
                 </MenuItem>
               ))}
             </Select>
-            <Button
-              variant='contained'
-              sx={{ width: '150px', color: 'black', height: '100%' }}
-              onClick={onSendWaiter}
-              disabled={!tableNumber}
-            >
-              call the waiter{' '}
-            </Button>
           </Box>
-        )}
-      </FlexRowContainer>
+
+          <StyledButton
+            variant='contained'
+            sx={{ width: '150px', color: 'black', height: '100%' }}
+            onClick={onSendWaiter}
+            disabled={!tableNumber}
+          >
+            call the waiter{' '}
+          </StyledButton>
+        </FlexRowContainer>
+      )}
 
       <Button
         sx={{
