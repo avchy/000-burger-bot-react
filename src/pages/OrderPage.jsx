@@ -14,7 +14,8 @@ import {
 import { BigButton } from "components/BigButton"
 import { StyledTextField } from "components/StyledTextField"
 import { CardRowSmall } from "components/CardRowSmall"
-import orderImg from "images/orderImg.png"
+import orderImg from "images/Cafe_Cafe_Logo.png"
+// import orderImg from "images/orderImg.png"
 import { useNavigator } from "hooks/useNavigator"
 import { CartContext } from "App"
 import { useTranslation } from "react-i18next"
@@ -31,6 +32,7 @@ export function OrderPage() {
   const { t, i18n } = useTranslation()
   const { env } = useNavigator()
   const { cartItems, setCartItems } = useContext(CartContext)
+  const {foods, setFoods} = useContext(CartContext)
   const { comment, setComment } = useContext(CartContext)
   const { totalPrice, setTotalPrice } = useContext(CartContext)
   const { queryId, setQueryId } = useContext(CartContext)
@@ -113,6 +115,41 @@ export function OrderPage() {
   }, [])
 
   const currentTimestamp = Math.floor(Date.now() / 1000)
+  
+  
+  
+  function calculateTotalPrice(products, order) {
+    let totalPrice = 0
+
+    for (const item of order) {
+      const product = products.find((p) => p.id === item.id)
+      if (product) {
+        totalPrice += product.price * item.quantity
+
+        if (item?.selectedToppings) {
+          for (const topping of item.selectedToppings) {
+            const toppingData = product.toppings.find(
+              (t) => t.title === topping
+            )
+            if (toppingData) {
+              totalPrice += toppingData.price * item.quantity
+            }
+          }
+        }
+      }
+    }
+
+    return totalPrice
+  }
+
+  useEffect(() => {
+    console.log('cartItems111', cartItems)
+    console.log('foods222', foods)
+
+    setTotalPrice(calculateTotalPrice(foods, cartItems))
+   }, [])
+
+  
   return (
     <>
       <div className="pageContainer">

@@ -6,7 +6,8 @@ import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
 
 export function CardRowSmall({ food }) {
-  const { title, image, price, quantity, textColor, toppings } = food
+  console.log("food222", food)
+  const { title, image, price, quantity, textColor, toppings, selectedToppings } = food
   const priceAllItems = (price * (quantity || 1)).toFixed(2)
   const { t, i18n } = useTranslation()
 
@@ -16,7 +17,7 @@ export function CardRowSmall({ food }) {
         <div className="CardRowSmall">
           {image && (
             <div className="image_container">
-          <img src={isPhotoUrl(image) ? image : default_dish_img} alt={title} />
+              <img src={isPhotoUrl(image) ? image : default_dish_img} alt={title} />
             </div>
           )}
           <span className="cart_text_center">{t(title)}</span>
@@ -28,7 +29,37 @@ export function CardRowSmall({ food }) {
           </span>
         }
       </div>
+      {console.log("selectedToppings", selectedToppings)}
+      {console.log("selectedToppings?.length", selectedToppings?.length)}{" "}
+      {selectedToppings?.length > 0 &&
+        selectedToppings.map((selectedTopping, index) => {
+          const topping = toppings.find((t) => t.title.trim() === selectedTopping.trim())
 
+          console.log("selectedTopping555", selectedTopping)
+          console.log("topping555", topping)
+
+          if (!topping) return null
+
+          return (
+            <div className="CardRowSmall" key={topping.title + index}>
+              <div className="CardRowSmall">
+                <div className="image_container">
+                  <img
+                    src={isPhotoUrl(topping.image) ? topping.image : default_dish_img}
+                    alt={topping.title}
+                  />
+                </div>
+                <span className="card_row_text">{t(topping.title)}</span>
+              </div>
+
+              <span className="card_row_text">
+                {quantity !== 1 ? `${topping.price} x ${quantity} = ` : ""}
+                {(topping.price * (quantity || 1)).toFixed(2)} ₪
+              </span>
+            </div>
+          )
+        })}
+      {/* 
       {toppings?.length > 0 &&
         toppings.map((topping, index) => {
           return (
@@ -50,8 +81,7 @@ export function CardRowSmall({ food }) {
               )}
             </>
           )
-        })}
-
+        })} */}
       <Box sx={{ width: "100%", height: "1px", backgroundColor: "grey" }}></Box>
     </>
   )
