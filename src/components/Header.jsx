@@ -18,10 +18,10 @@ import queryString from 'query-string'
 
 export const Header = () => {
   const location = useLocation()
-  console.log('location :>> ', location);
+  console.log('location :>> ', location)
   const query = queryString.parse(location.search)
   console.log('query', query)
-  console.log('query.restaurant_name', query.restaurant_name)
+  console.log('query.restaurant_id', query.restaurant_id)
 
   const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } = generatedGitInfo
 
@@ -33,7 +33,7 @@ export const Header = () => {
   const [currentLanguage, setCurrentLanguage] = useState('en')
   const [isTestTextVisible, setTestTextVisible] = useState(false)
   const [tableNumber, setTableNumber] = useState('')
-  const [restaurant_name, setRestaurant_name] = useState('')
+  const [restaurant_id, setRestaurant_id] = useState('')
   const [formOpenSendWaiter, setFormOpenSendWaiter] = useState(false)
 
   useEffect(() => {
@@ -42,11 +42,11 @@ export const Header = () => {
     console.log('window.location.search :>> ', window.location.search)
     console.log('searchParams :>> ', searchParams)
 
-    const restaurant_name = searchParams.get('restaurant_name')
-    setRestaurant_name(restaurant_name)
-    
-    const fullPath = window.location.href;
-    console.log('Полный путь адреса:', fullPath);
+    const restaurant_id = searchParams.get('restaurant_id')
+    setRestaurant_id(restaurant_id)
+
+    const fullPath = window.location.href
+    console.log('Полный путь адреса:', fullPath)
   }, [])
 
   const handleTableNumberChange = (event) => {
@@ -166,8 +166,8 @@ export const Header = () => {
 
       {isTestTextVisible && (
         <>
-           <p className={'testText'}>{`window.location.href - ${window.location.href}`} </p>
-          <p className={'testText'}>{`restaurant_name - ${query.restaurant_name}`} </p>
+          <p className={'testText'}>{`window.location.href - ${window.location.href}`} </p>
+          <p className={'testText'}>{`restaurant_id - ${query.restaurant_id}`} </p>
           <p className={'testText'}>{`user?.language_code - ${user?.language_code}`} </p>
           <p className={'testText'}>{`currentLanguage - ${currentLanguage}`} </p>
 
