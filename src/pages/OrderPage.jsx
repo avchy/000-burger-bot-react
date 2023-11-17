@@ -1,152 +1,274 @@
-import { useState, useCallback, useEffect, useContext } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import "App.scss";
+import { useState, useEffect, useCallback, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+	TextField,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
+	makeStyles,
+	Box,
+} from "@mui/material";
 
-import "App.scss"
-import { BigButton } from "components/BigButton"
-import { CardRow } from "components/CardRow"
-import { useTelegram } from "hooks/useTelegram"
-import { useNavigator } from "hooks/useNavigator"
-const tele = window.Telegram.WebApp
-import { CartContext } from "App"
+import { BigButton } from "components/BigButton";
+import { StyledTextField } from "components/StyledTextField";
+import { CardRowSmall } from "components/CardRowSmall";
+import orderImg from "images/Cafe_Cafe_Logo.png";
+// import orderImg from "images/orderImg.png"
+import { useNavigator } from "hooks/useNavigator";
+import { CartContext } from "App";
+import { useTranslation } from "react-i18next";
+import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents";
 
-import { useTranslation } from "react-i18next"
+const styles = {
+	overflow: "hidden",
+	overflowWrap: "break-word",
+	height: "46px",
+};
 
-const { getData } = require("db/db")
-const products = getData()
+export function OrderPage() {
+	const tele = window.Telegram.WebApp;
+	const { t, i18n } = useTranslation();
+	const { env } = useNavigator();
 
-export const OrderPage = () => {
-  const { t, i18n } = useTranslation()
+	const {
+		telephone,
+		setTelephone,
+		address,
+		setAddress,
+		cartItems,
+		settings,
+		foods,
+		comment,
+		setComment,
+		totalPrice,
+		setTotalPrice,
+		optionDelivery,
+		setOptionDelivery,
+	} = useContext(CartContext);
 
-  // const { tele } = useTelegram()
-  const navigate = useNavigate()
-  const { env } = useNavigator()
+	const handleChange = (event) => {
+		setComment(event.target.value);
+	};
 
-  // const location = useLocation()
-  //  const cartItems = location.state.cartItems
-  const { cartItems, setCartItems } = useContext(CartContext)
-  // const [comment, setComment] = useState("")
+	const navigate = useNavigate();
 
-  const { comment, setComment } = useContext(CartContext)
+	// const onBackButtonClicked = useCallback(() => {
+	//   navigate(-1)
+	// }, [cartItems])
 
-  const { totalPrice, setTotalPrice } = useContext(CartContext)
+	// tele.BackButton.onClick(onBackButtonClicked)
 
-  useEffect(() => {
-    tele.ready()
-  })
+	const onSubmit = useCallback(() => {
+		navigate("/payments");
+	}, [cartItems, comment]);
 
-  useEffect(() => {
-    tele.MainButton.text = t("CHECKOUT")
-    tele.BackButton.text = t("Edit")
-    tele.BackButton.show()
-    console.log("cartItems", cartItems)
-  }, [])
+	useEffect(() => {
+		tele.onEvent("mainButtonClicked", onSubmit);
+		// tele.onEvent("backButtonClicked", onBackButtonClicked)
 
-  const handleChange = (event) => {
-    setComment(event.target.value)
-  }
+		return () => {
+			tele.offEvent("mainButtonClicked", onSubmit);
+			// tele.offEvent("backButtonClicked", onBackButtonClicked)
+		};
+	}, [onSubmit]);
 
-  function calculateTotalPrice(products, order) {
-    let totalPrice = 0
+	useEffect(() => {
+		if (optionDelivery == "delivery" && !address) {
+			tele.MainButton.hide();
+		} else {
+			tele.MainButton.show();
+		}
+	}, [address]);
 
-    for (const item of order) {
-      const product = products.find((p) => p.id === item.id)
-      if (product) {
-        totalPrice += product.price * item.quantity
+	const onChangeAddress = (e) => {
+		setAddress(e.target.value);
+	};
+	const onChangeTelephone = (e) => {
+		setTelephone(e.target.value);
+	};
 
-        if (item?.selectedToppings) {
-          for (const topping of item.selectedToppings) {
-            const toppingData = product.toppings.find(
-              (t) => t.title === topping
-            )
-            if (toppingData) {
-              totalPrice += toppingData.price * item.quantity
-            }
-          }
-        }
-      }
-    }
+	const onChangeOption = (e) => {
+		setOptionDelivery(e.target.value);
+	};
 
-    return totalPrice
-  }
+	// useEffect(() => {
+	//   window.scrollTo({
+	//     top: document.body.scrollHeight,
+	//     behavior: "smooth",
+	//   })
+	// }, [optionDelivery])
 
-  useEffect(() => {
-    setTotalPrice(calculateTotalPrice(products, cartItems))
-  }, [])
+	useEffect(() => {
+		tele.BackButton.show();
+		tele.MainButton.setParams({ text: t("PAY") });
+	}, []);
 
- 
-  const onSubmit = useCallback(() => {
-    navigate("/checkout")
-    // navigate("/checkout", { state: { cartItems, comment, totalPrice } })
-  }, [cartItems, comment])
+	const currentTimestamp = Math.floor(Date.now() / 1000);
 
-  const onBackButtonClicked = useCallback(() => {
-    navigate("/")
-    // navigate("/", { state: { cartItems, comment, totalPrice } })
-  }, [cartItems])
+	function calculateTotalPrice(products, order) {
+		let totalPrice = 0;
 
-  useEffect(() => {
-    tele.onEvent("mainButtonClicked", onSubmit)
-    tele.onEvent("backButtonClicked", onBackButtonClicked)
+		for (const item of order) {
+			const product = products.find((p) => p.id === item.id);
+			if (product) {
+				totalPrice += product.price * item.quantity;
 
-    return () => {
-      tele.offEvent("mainButtonClicked", onSubmit)
-      tele.offEvent("backButtonClicked", onBackButtonClicked)
-    }
-  }, [onSubmit])
+				if (item?.selectedToppings) {
+					for (const topping of item.selectedToppings) {
+						const toppingData = product.toppings.find((t) => t.title === topping);
+						if (toppingData) {
+							totalPrice += toppingData.price * item.quantity;
+						}
+					}
+				}
+			}
+		}
 
-  const styles = {
-    overflow: "hidden",
-    overflowWrap: "break-word",
-    height: "46px",
-  }
+		return totalPrice;
+	}
 
-  const isEmptyCart = cartItems.length === 0
+	useEffect(() => {
+		console.log("cartItems111", cartItems);
+		console.log("foods222", foods);
 
-  return (
-    <div className="orderPage">
-      <div className="orderHeaderEdit">
-        <h1 className="title">{t("Your Order")}</h1>
-        {/* <Link
-          onClick={(e) => {
-            e.preventDefault()
-            navigate("/", { state: { cartItems, comment, totalPrice } })
+		setTotalPrice(calculateTotalPrice(foods, cartItems));
+	}, []);
+
+	return (
+		<>
+			<div className="pageContainer">
+				<h1 className="title">{t("Order")}</h1>
+				<div className="orderContainer">
+					<div className="imageContainer">
+						<img src={orderImg} alt={"orderImg"} />
+					</div>
+
+					<div className="textContainer">
+						<div className="text1">
+							{" "}
+							{t("Order")} № {currentTimestamp}
+						</div>
+						{/* <div className="text1"> {t("Perfect lunch from Falafel Shop.")}</div> */}
+						<div className="text1"> {settings.textToOrder} </div>
+						{/* <div className="text_small">{`${discount}% ${t("discount")}`}</div> */}
+					</div>
+				</div>
+
+				{cartItems && cartItems.length > 0 && (
+					<div className="cardsContainer">
+						{cartItems.map((food) => {
+							return <CardRowSmall food={food} key={food.id} />;
+						})}
+					</div>
+				)}
+
+				{/* <CardRowSmall
+          key={9999}
+          food={{ id: 9999, title: t("Free delivery"), textColor: "#4AF2A1" }}
+        /> */}
+				{/* <CardRowSmall
+          key={9998}
+          food={{
+            id: 9998,
+            title: t("Discount"),
+            price: (totalPrice * discount).toFixed(2),
+            textColor: "#4AF2A1",
           }}
-          title="Edit"
-          className="navLinkEdit"
-        >
-          {t("Edit")}
-        </Link> */}
-      </div>
+        /> */}
+				<CardRowSmall
+					key={9997}
+					food={{
+						id: 9997,
+						title: t("Total Price:"),
+						price: totalPrice,
+						// price: totalPriceWithDiscount,
+					}}
+				/>
+			</div>
 
-      <div className="cardsContainer">
-        {cartItems.map((food) => {
-          return <CardRow food={food} key={food.id} />
-        })}
-      </div>
+			<div className="comment_container">
+				<div className="title_mini"> {t("Your Comment :")} </div>
 
-      <div className="cafe-text-field-wrap">
-        <input
-          className="cafe-text-field js-order-comment-field cafe-block"
-          rows="1"
-          placeholder={t("Add comment")}
-          style={styles}
-          type="text"
-          value={comment}
-          onChange={handleChange}
-        />
+				<input
+					className="cafe-text-field js-order-comment-field cafe-block"
+					rows="1"
+					placeholder={t("Add comment")}
+					style={styles}
+					type="text"
+					value={comment}
+					onChange={handleChange}
+				/>
 
-        <div className="cafe-text-field-hint">
-          {t("Any special requests, details, final wishes etc.")}
-        </div>
-      </div>
+				<div className="cafe-text-field-hint">
+					{t("Any special requests, details, final wishes etc.")}
+				</div>
+			</div>
 
-      {env == "browser" && (
+			<div className="form">
+				<div className="title_mini" style={{ color: "white" }}>
+					{t("Choose where you eat")}
+				</div>
+
+				<FormControl className="select" style={{ borderColor: "white", color: "white" }}>
+					<InputLabel style={{ borderColor: "white", color: "white" }}>
+						{t("Select Delivery Option")}
+					</InputLabel>
+					<StyledSelect
+						value={optionDelivery}
+						onChange={onChangeOption}
+					 
+						labelId="select-filter-by-field-labe;"
+						id="select-filter-by-field"
+					>
+						<MenuItem value="on_site">{t("On Site")}</MenuItem>
+						<MenuItem value="take_away">{t("Take Away")}</MenuItem>
+						<MenuItem value="delivery">{t("Delivery")}</MenuItem>
+					</StyledSelect>
+				</FormControl>
+
+				{optionDelivery === "delivery" && (
+					<Box>
+						<StyledTextField
+							label={t("Address")}
+							value={address}
+							onChange={onChangeAddress}
+							placeholder={t("Enter address")}
+						/>
+						<StyledTextField
+							label={t("Telephone")}
+							value={telephone}
+							onChange={onChangeTelephone}
+							placeholder={t("Enter Telephone")}
+						/>
+					</Box>
+				)}
+			</div>
+
+			{/* {env === "browser" && (
         <BigButton
-          title={`${!isEmptyCart ? `Buy ${totalPrice} ₪` : ""} `}
-          disable={isEmptyCart ? true : false}
+          title={t("Payments")}
+          type={"payments"}
+          disable={cartItems.length === 0 ? true : false}
           onClick={onSubmit}
         />
-      )}
-    </div>
-  )
+      )} */}
+
+			{env == "browser" && (
+				<BigButton title={`${`Buy ${totalPrice} ₪`} `} onClick={onSubmit} />
+			)}
+
+			{/* {env === "browser" &&
+        (optionDelivery === "on_site" ||
+          (optionDelivery === "take_away" && address)) && (
+          <BigButton
+            title={t("Payments")}
+            type={"payments"}
+            disable={cartItems.length === 0 ? true : false}
+            onClick={onSubmit}
+          />
+        )} */}
+		</>
+	);
 }

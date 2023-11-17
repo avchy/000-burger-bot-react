@@ -8,9 +8,9 @@ import { useNavigator } from "hooks/useNavigator"
 import { useTranslation } from "react-i18next"
 import Avatar from "@mui/material/Avatar"
 import { Box, Typography } from "@mui/material"
-import { cloudinaryURL } from "constants/api"
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
+import toppings_icon from "images/toppings_icon.png"
 
 import { FlexRowContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
@@ -26,9 +26,7 @@ export const Product = () => {
   const exist = cartItems.find((x) => x.id === food.id)
 
   const [quantityItem, setQuantityItem] = useState(exist?.quantity || 1)
-  const [selectedToppings, setSelectedToppings] = useState(
-    exist?.selectedToppings || []
-  )
+  const [selectedToppings, setSelectedToppings] = useState(exist?.selectedToppings || [])
 
   useEffect(() => {
     tele.ready()
@@ -42,9 +40,7 @@ export const Product = () => {
       console.log("  exist111")
 
       setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity } : x
-        )
+        cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity } : x))
       )
       // setQuantityItem(exist.quantity)
     } else {
@@ -71,9 +67,7 @@ export const Product = () => {
 
     if (exist) {
       setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
-        )
+        cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x))
       )
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
@@ -93,9 +87,7 @@ export const Product = () => {
       setCartItems(cartItems.filter((x) => x.id !== food.id))
     } else {
       setCartItems(
-        cartItems.map((x) =>
-          x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x
-        )
+        cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x))
       )
     }
   }
@@ -105,20 +97,14 @@ export const Product = () => {
   const onSubmit = useCallback(() => {
     console.log("selectedToppings", selectedToppings)
     const exist = cartItems.find((x) => x.id === food.id)
-    setCartItems(
-      cartItems.map((x) =>
-        x.id === food.id ? { ...exist, selectedToppings } : x
-      )
-    )
+    setCartItems(cartItems.map((x) => (x.id === food.id ? { ...exist, selectedToppings } : x)))
 
     navigate("/")
   }, [cartItems, selectedToppings])
 
   const onCancel = useCallback(() => {
     const exist = cartItems.find((x) => x.id === food.id)
-    setCartItems(
-      cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: 0 } : x))
-    )
+    setCartItems(cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: 0 } : x)))
 
     navigate("/")
   }, [cartItems])
@@ -180,9 +166,7 @@ export const Product = () => {
     const isToppingSelected = selectedToppings.includes(title)
 
     if (isToppingSelected) {
-      setSelectedToppings(
-        selectedToppings.filter((topping) => topping !== title)
-      )
+      setSelectedToppings(selectedToppings.filter((topping) => topping !== title))
     } else {
       setSelectedToppings([...selectedToppings, title])
     }
@@ -190,28 +174,17 @@ export const Product = () => {
 
   return (
     <>
-      <Box className="checkoutPage">
-        <Typography
-          sx={{ p: 2, textAlign: "center", fontSize: "calc(1.5em + 2vw)" }}
-        >
+      <Box className="pageContainer">
+        <Typography sx={{ p: 2, textAlign: "center", fontSize: "calc(1.5em + 2vw)" }}>
           {t(food.title)}
         </Typography>
-
-        <ButtonCounter
-          onAdd={onAdd}
-          onRemove={onRemove}
-          quantity={quantityItem}
-        />
-
+        <ButtonCounter onAdd={onAdd} onRemove={onRemove} quantity={quantityItem} />
+        {console.log("food.image", food.image)}{" "}
         <Box className="orderContainer">
           <Box className="imageContainer">
             <img
-              src={
-                isPhotoUrl(food.image)
-                  ? cloudinaryURL + food.image
-                  : default_dish_img
-              }
-              alt={"orderImg"}
+              src={isPhotoUrl(food.image) ? food.image : default_dish_img}
+              alt={"productImageContainer"}
             />
           </Box>
 
@@ -219,15 +192,10 @@ export const Product = () => {
             <Box className="text1"> {t(food.description)} </Box>
           </Box>
         </Box>
-
         {/* Toppings __________________________________________ */}
-
-        <Typography
-          sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}
-        >
+        <Typography sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}>
           {t("toppings")}
         </Typography>
-
         <Box
           sx={{
             display: "flex",
@@ -255,9 +223,7 @@ export const Product = () => {
               >
                 <Avatar
                   alt={topping.title}
-                  src={
-                    isPhotoUrl(topping.image) ? topping.image : default_dish_img
-                  }
+                  src={isPhotoUrl(topping.image) ? topping.image : toppings_icon}
                   sx={{ width: 66, height: 66 }}
                 />
               </Box>
@@ -268,22 +234,12 @@ export const Product = () => {
             </Box>
           ))}
         </Box>
-
         {/* toppings_paid __________________________________________ */}
-
         {env == "browser" && (
           <FlexRowContainer>
-            <BigButton
-              title={t("Cancel")}
-              onClick={onCancel}
-              backgroundColor={"grey"}
-            />
+            <BigButton title={t("Cancel")} onClick={onCancel} backgroundColor={"grey"} />
 
-            <BigButton
-              title={t("confirm")}
-              onClick={onSubmit}
-              backgroundColor={"#e0c521"}
-            />
+            <BigButton title={t("confirm")} onClick={onSubmit} backgroundColor={"#e0c521"} />
           </FlexRowContainer>
         )}
       </Box>
