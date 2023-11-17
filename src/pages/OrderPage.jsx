@@ -30,14 +30,22 @@ export function OrderPage() {
 	const tele = window.Telegram.WebApp;
 	const { t, i18n } = useTranslation();
 	const { env } = useNavigator();
-	const { cartItems, setCartItems } = useContext(CartContext);
-	const { foods, setFoods } = useContext(CartContext);
-	const { comment, setComment } = useContext(CartContext);
-	const { totalPrice, setTotalPrice } = useContext(CartContext);
-	const { queryId, setQueryId } = useContext(CartContext);
-	const { optionDelivery, setOptionDelivery } = useContext(CartContext);
-	const { address, setAddress } = useContext(CartContext);
-	const { telephone, setTelephone } = useContext(CartContext);
+
+	const {
+		telephone,
+		setTelephone,
+		address,
+		setAddress,
+		cartItems,
+		settings,
+		foods,
+		comment,
+		setComment,
+		totalPrice,
+		setTotalPrice,
+		optionDelivery,
+		setOptionDelivery,
+	} = useContext(CartContext);
 
 	const handleChange = (event) => {
 		setComment(event.target.value);
@@ -142,6 +150,7 @@ export function OrderPage() {
 							{t("Order")} № {currentTimestamp}
 						</div>
 						{/* <div className="text1"> {t("Perfect lunch from Falafel Shop.")}</div> */}
+						<div className="text1"> {settings.textToOrder} </div>
 						{/* <div className="text_small">{`${discount}% ${t("discount")}`}</div> */}
 					</div>
 				</div>
