@@ -39,7 +39,7 @@
     "expiryDateLabel": "תאריך תפוגה",
     "cvvCodeLabel": "קוד CVV",
     "emailLabel": "דואר אלקטרוני",
-    "paymentHeading": "תשלום בכרטיס",
+    "cardPayment": "תשלום בכרטיס",
     "submitButton": "שליחה",
     "incorrectCardNumber": "מספר כרטיס שגוי",
     "incorrectExpiryDate": "תאריך תפוגה שגוי",

@@ -301,7 +301,7 @@ export const CreditCard = () => {
             alignItems: "center",
           }}
         >
-          <h1 className="title">{t("paymentHeading")}</h1>
+          <h1 className="title">{t("cardPayment")}</h1>
 
           <Box component="form" onSubmit={handleSubmit(onSubmit)}>
             <StyledTextField

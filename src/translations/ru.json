@@ -39,7 +39,7 @@
     "expiryDateLabel": "Срок действия",
     "cvvCodeLabel": "CVV-код",
     "emailLabel": "Электронная почта",
-    "paymentHeading": "Оплата картой",
+    "cardPayment": "Оплата картой",
     "submitButton": "Отправить",
     "incorrectCardNumber": "Неправильный номер карты",
     "incorrectExpiryDate": "Неправильный срок действия",

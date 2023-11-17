@@ -292,10 +292,12 @@ export const Payments = () => {
 				</Box>
 			) : null}
 
-			{settings.showCreditCardButton && (
+			{settings.showCreditCardButton ? (
 				<StyledButton onClick={onShowCreditCard} variant="contained">
 					{t("Credit Card")}
 				</StyledButton>
+			) : (
+				<></>
 			)}
 
 			{formOpenCreditCard && (
@@ -311,7 +313,7 @@ export const Payments = () => {
 						alignItems: "center",
 					}}
 				>
-					<h1 className="title">{t("paymentHeading")}</h1>
+					<h1 className="title">{t("cardPayment")}</h1>
 
 					<Box component="form" onSubmit={handleSubmit(onCreditCard)}>
 						<StyledTextField
@@ -370,23 +372,29 @@ export const Payments = () => {
 				</FlexColumnContainer>
 			)}
 
-			{settings.showApplePayButton && (
+			{settings.showApplePayButton ? (
 				<StyledButton onClick={onApplePay} variant="contained">
 					{t("Buy with")}
 					<img src={appleSVG} alt="applePay" /> Pay
 				</StyledButton>
+			) : (
+				<></>
 			)}
 
-			{settings.showGooglePayButton && (
+			{settings.showGooglePayButton ? (
 				<StyledButton onClick={onGooglePay} variant="contained">
 					{t("Buy with")} <img src={googleSVG} alt="googlePay" /> Pay
 				</StyledButton>
+			) : (
+				<></>
 			)}
 
-			{settings.showOrderButton && (
+			{settings.showOrderButton ? (
 				<StyledButton onClick={onOrderToWaiter} variant="contained">
 					{t("Order to Waiter")}
 				</StyledButton>
+			) : (
+				<></>
 			)}
 		</>
 	);

@@ -37,7 +37,7 @@
     "expiryDateLabel": "Date d'expiration",
     "cvvCodeLabel": "Code CVV",
     "emailLabel": "Email",
-    "paymentHeading": "Paiement par carte",
+    "cardPayment": "Paiement par carte",
     "submitButton": "Valider",
     "incorrectCardNumber": "Numéro de carte incorrect",
     "incorrectExpiryDate": "Date d'expiration incorrecte",
