@@ -19,6 +19,7 @@ import orderImg from "images/Cafe_Cafe_Logo.png";
 import { useNavigator } from "hooks/useNavigator";
 import { CartContext } from "App";
 import { useTranslation } from "react-i18next";
+import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents";
 
 const styles = {
 	overflow: "hidden",
@@ -214,31 +215,17 @@ export function OrderPage() {
 					<InputLabel style={{ borderColor: "white", color: "white" }}>
 						{t("Select Delivery Option")}
 					</InputLabel>
-					<Select
+					<StyledSelect
 						value={optionDelivery}
 						onChange={onChangeOption}
-						sx={{
-							"color": "white",
-							".MuiOutlinedInput-notchedOutline": {
-								borderColor: "rgb(255, 255, 255)",
-							},
-							"&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-								borderColor: "rgb(255, 255, 255)",
-							},
-							"&:hover .MuiOutlinedInput-notchedOutline": {
-								borderColor: "rgb(255, 255, 255)",
-							},
-							".MuiSvgIcon-root ": {
-								fill: "white !important",
-							},
-						}}
+					 
 						labelId="select-filter-by-field-labe;"
 						id="select-filter-by-field"
 					>
 						<MenuItem value="on_site">{t("On Site")}</MenuItem>
 						<MenuItem value="take_away">{t("Take Away")}</MenuItem>
 						<MenuItem value="delivery">{t("Delivery")}</MenuItem>
-					</Select>
+					</StyledSelect>
 				</FormControl>
 
 				{optionDelivery === "delivery" && (

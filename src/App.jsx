@@ -5,8 +5,7 @@ import { Header } from "components/Header";
 import { ProductsPage } from "pages/ProductsPage";
 import { Product } from "pages/Product";
 import { OrderPage } from "pages/OrderPage";
-import { CreditCard } from "pages/CreditCard";
-import { Payments } from "pages/Payments";
+ import { Payments } from "pages/Payments";
 import { Form } from "components/Form";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
@@ -179,8 +178,7 @@ export function App() {
 							<Route path={"order"} element={<OrderPage />} />
 							{/* <Route path={"order/:restaurant_name"} element={<OrderPage />} /> */}
 							<Route path={"payments"} element={<Payments />} />
-							<Route path={"creditCard"} element={<CreditCard />} />
-							<Route path={"product"} element={<Product />} />
+ 							<Route path={"product"} element={<Product />} />
 
 							<Route path={"form"} element={<Form />} />
 						</Routes>

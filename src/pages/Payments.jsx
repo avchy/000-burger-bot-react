@@ -307,7 +307,7 @@ export const Payments = () => {
 						backgroundColor: "white",
 						gap: 2,
 						color: "black",
-						height: "100vh",
+						// height: "100vh",
 						padding: "20px",
 						justifyContent: "center",
 						alignItems: "center",
