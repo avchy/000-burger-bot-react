@@ -5,6 +5,8 @@ import fr from "translations/fr.json"
 
 import { initReactI18next } from "react-i18next"
 import i18n from "i18next"
+import Backend from 'i18next-xhr-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 const resources = {
   en: {
@@ -22,10 +24,17 @@ const resources = {
 }
 
 // eslint-disable-next-line
-i18n.use(initReactI18next).init({
+i18n
+.use(Backend)
+.use(LanguageDetector)
+.use(initReactI18next).init({
   resources,
+  debug: true,
+  interpolation: {
+    escapeValue: false,
+  },
   lng: JSON.parse(localStorage.getItem("language")),
-  fallbackLng: "ru",
+  fallbackLng: "en",
 })
 
 export default i18n

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
+import "App.scss";
+import axios from "axios";
+
 import { Button, Typography, MenuItem, Select, Box } from "@mui/material";
 import { useTelegram } from "hooks/useTelegram";
-import "App.scss";
 import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents";
-import generatedGitInfo from "helpers/generatedGitInfo.json";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
 import { serverIP, port } from "constants/api";
 import { tableData } from "constants/constants";
 import { languageButtons } from "../constants/languageButtons";
 import { useTheme } from "@mui/material/styles";
 import { StyledButton } from "components/StyledButton";
-import waiterImg from "images/waiter.png";
-
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import InputLabel from "@mui/material/InputLabel";
+import waiterImg from "images/waiter.png";
+import generatedGitInfo from "helpers/generatedGitInfo.json";
 
 export const Header = () => {
 	const location = useLocation();
@@ -28,7 +28,6 @@ export const Header = () => {
 	const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } = generatedGitInfo;
 
 	const theme = useTheme();
-	// const tele = window.Telegram.WebApp
 
 	const { user, queryId, onClose } = useTelegram();
 	const { t, i18n } = useTranslation();
@@ -57,18 +56,6 @@ export const Header = () => {
 
 	const toggleTestText = () => {
 		setTestTextVisible(!isTestTextVisible);
-	};
-	useEffect(() => {
-		// const language_code = user?.language_code
-		if (user?.language_code && currentLanguage !== user?.language_code) {
-			setCurrentLanguage(user?.language_code);
-			i18n.changeLanguage(user?.language_code);
-		}
-	}, [user?.language_code]);
-
-	const changeLanguage = (language) => {
-		setCurrentLanguage(language);
-		i18n.changeLanguage(language);
 	};
 
 	async function onSendWaiter() {
@@ -106,6 +93,18 @@ export const Header = () => {
 		setFormOpenSendWaiter(formOpenSendWaiter ? false : true);
 	};
 
+	useEffect(() => {
+		// const language_code = user?.language_code
+		if (user?.language_code && currentLanguage !== user?.language_code) {
+			setCurrentLanguage(user?.language_code);
+			i18n.changeLanguage(user?.language_code);
+		}
+	}, [user?.language_code]);
+
+	const changeLanguage = (language) => {
+		setCurrentLanguage(language);
+		i18n.changeLanguage(language);
+	};
 	return (
 		<>
 			<FlexRowContainer>
