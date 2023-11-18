@@ -19,10 +19,10 @@ import generatedGitInfo from "helpers/generatedGitInfo.json";
 
 export const Header = () => {
 	const location = useLocation();
-	console.log("location :>> ", location);
+	// console.log("location :>> ", location);
 	const query = queryString.parse(location.search);
-	console.log("query", query);
-	console.log("query.restaurant_id", query.restaurant_id);
+	// console.log("query", query);
+	// console.log("query.restaurant_id", query.restaurant_id);
 	const [isButtonDisabled, setButtonDisabled] = useState(false);
 
 	const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } = generatedGitInfo;
@@ -40,14 +40,14 @@ export const Header = () => {
 	useEffect(() => {
 		const searchParams = new URLSearchParams(window.location.search);
 
-		console.log("window.location.search :>> ", window.location.search);
-		console.log("searchParams :>> ", searchParams);
+		// console.log("window.location.search :>> ", window.location.search);
+		// console.log("searchParams :>> ", searchParams);
 
 		const restaurant_id = searchParams.get("restaurant_id");
 		setRestaurant_id(restaurant_id);
 
 		const fullPath = window.location.href;
-		console.log("Полный путь адреса:", fullPath);
+		// console.log("Полный путь адреса:", fullPath);
 	}, []);
 
 	const handleTableNumberChange = (event) => {
@@ -128,7 +128,7 @@ export const Header = () => {
 						</MenuItem>
 					))}
 				</Select>
-				{console.log("isButtonDisabled", isButtonDisabled)}
+				{/* {console.log("isButtonDisabled", isButtonDisabled)} */}
 				<StyledButton
 					disabled={isButtonDisabled}
 					onClick={onOpenSendWaiter}
