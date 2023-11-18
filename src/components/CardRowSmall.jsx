@@ -8,7 +8,16 @@ import isPhotoUrl from "helpers/isPhotoUrl";
 
 export function CardRowSmall({ food }) {
 	console.log("food222", food);
-	const { title, image, price, quantity, textColor, toppings, selectedToppings } = food;
+	const {
+		title,
+		image,
+		price,
+		quantity,
+		textColor,
+		toppings,
+		selectedToppings,
+		selectedExtrasNames,
+	} = food;
 	const priceAllItems = (price * (quantity || 1)).toFixed(2);
 	const { t, i18n } = useTranslation();
 
@@ -37,7 +46,20 @@ export function CardRowSmall({ food }) {
 							<img src={isPhotoUrl(image) ? image : default_dish_img} alt={title} />
 						</div>
 					)}
-					<span className="cart_text_center">{t(title)}</span>
+
+					{console.log("333selectedExtrasNames", selectedExtrasNames)}
+					<p>
+						{t(title)}
+
+						{selectedExtrasNames &&
+							Object.keys(selectedExtrasNames).map((key) => (
+								<>
+									<br />
+									<span> {key} :</span>
+									<span> {selectedExtrasNames[key]}</span>
+								</>
+							))}
+					</p>
 				</div>
 				{
 					<span className="cart_text_center" style={{ color: textColor }}>

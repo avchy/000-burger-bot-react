@@ -114,11 +114,13 @@ export const Product = () => {
 		console.log("selectedToppings", selectedToppings);
 		const exist = cartItems.find((x) => x.id === food.id);
 		setCartItems(
-			cartItems.map((x) => (x.id === food.id ? { ...exist, selectedToppings } : x))
+			cartItems.map((x) =>
+				x.id === food.id ? { ...exist, selectedToppings, selectedExtrasNames } : x
+			)
 		);
 
 		navigate("/");
-	}, [cartItems, selectedToppings]);
+	}, [cartItems, selectedToppings, selectedExtrasNames]);
 
 	const onCancel = useCallback(() => {
 		const exist = cartItems.find((x) => x.id === food.id);

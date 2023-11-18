@@ -131,7 +131,7 @@ export function OrderPage() {
 
 	useEffect(() => {
 		console.log("cartItems111", cartItems);
-		console.log("foods222", foods);
+		// console.log("foods222", foods);
 
 		setTotalPrice(calculateTotalPrice(foods, cartItems));
 	}, []);
@@ -256,7 +256,8 @@ export function OrderPage() {
       )} */}
 
 			{env == "browser" && (
-				<BigButton title={`${`Buy ${totalPrice} ₪`} `} onClick={onSubmit} />
+				<BigButton title={`${t("Buy")} ${totalPrice} ₪`} onClick={onSubmit} />
+				// <BigButton title={`${`Buy ${totalPrice} ₪`} `} onClick={onSubmit} />
 			)}
 
 			{/* {env === "browser" &&
