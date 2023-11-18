@@ -196,12 +196,12 @@ export const Product = () => {
 
 	// Функция для группировки опций по типам
 	const groupExtrasByType = (extras) => {
-		return extras.reduce((grouped, option) => {
-			const { type } = option;
+		return extras.reduce((grouped, extra) => {
+			const { type } = extra;
 			if (!grouped[type]) {
 				grouped[type] = [];
 			}
-			grouped[type].push(option);
+			grouped[type].push(extra);
 			return grouped;
 		}, {});
 	};
@@ -265,12 +265,12 @@ export const Product = () => {
 											value={getTypeValue(type)}
 											onChange={handleTypeChange(type)}
 										>
-											{typeExtras.map((option) => (
+											{typeExtras.map((extra) => (
 												<FormControlLabel
-													key={option.id}
-													value={String(option.id)}
+													key={extra.id}
+													value={String(extra.id)}
 													control={<Radio />}
-													label={t(option.title)}
+													label={t(extra.title)}
 												/>
 											))}
 										</RadioGroup>
