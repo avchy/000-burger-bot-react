@@ -79,7 +79,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
 
       <div className="btn-container">
         <Button
-          title={toppings ? "choose" : "+"}
+          title={toppings ? `${t("choose")}` : "+"}
           type={"add"}
           onClick={toppings ? handleToppings : handleIncrement}
         />

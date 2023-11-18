@@ -153,7 +153,7 @@ export const Header = () => {
 				>
 					<Box>
 						<InputLabel sx={{ color: "white" }} id="select-label">
-							Choose your table
+							{t("Choose your table")}
 						</InputLabel>
 						<StyledSelect
 							label="Choose your table"
