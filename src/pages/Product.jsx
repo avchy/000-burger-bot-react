@@ -212,10 +212,14 @@ export const Product = () => {
 			...selectedExtras,
 			[type]: e.target.value,
 		});
-		// setSelectedExtrasNames({
-		// 	...selectedExtrasNames,
-		// 	[type]: e.target.value,
-		// });
+
+		console.log("e.target.value", e.target.value);
+		setSelectedExtrasNames({
+			...selectedExtrasNames,
+			[type]:
+				food.extras.find((extra) => String(extra.id) === String(e.target.value))?.title ||
+				"",
+		});
 	};
 
 	// Получение выбранного значения для каждого типа
@@ -224,8 +228,8 @@ export const Product = () => {
 	// Фильтрация опций для отображения салатов и хлебов
 	const groupedExtras = groupExtrasByType(food.extras);
 
-  
-  console.log('selectedExtras1111', selectedExtras)
+	console.log("selectedExtras1111", selectedExtras);
+	console.log("selectedExtrasNames2222", selectedExtrasNames);
 	return (
 		<>
 			<Box className="pageContainer">
