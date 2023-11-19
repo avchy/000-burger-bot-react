@@ -1,6 +1,6 @@
 import "App.scss";
 import { useTranslation } from "react-i18next";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg";
 import toppings_icon from "images/toppings_icon.png";
@@ -27,7 +27,9 @@ export function CardRowSmall({ food }) {
 		// Добавляем стоимость выбранных топпингов, если они есть
 		if (selectedToppings && selectedToppings.length > 0) {
 			selectedToppings.forEach((selectedTopping) => {
-				const topping = toppings.find((t) => t.title.trim() === selectedTopping.trim());
+				const topping = toppings.find(
+					(t) => t.title.trim() === selectedTopping.trim()
+				);
 				if (topping) {
 					totalPrice += topping.price * (quantity || 1);
 				}
@@ -39,79 +41,84 @@ export function CardRowSmall({ food }) {
 
 	return (
 		<>
-			<div className="CardRowSmall">
-				<div className="CardRowSmall">
-					{image && (
-						<div className="image_container" style={{ width: "100px" }}>
-							<img src={isPhotoUrl(image) ? image : default_dish_img} alt={title} />
-						</div>
-					)}
-
-					{console.log("333selectedExtrasNames", selectedExtrasNames)}
-					<p>
+			<Box className="CardRowSmall">
+				<Box className="CardRowSmall">
+					<Box className="image_container">
+						<img
+							src={isPhotoUrl(image) ? image : default_dish_img}
+							alt={title}
+						/>
+					</Box>
+					<Typography sx={{ lineHeight: 1 }} className="card_row_text">
 						{t(title)}
-
 						{selectedExtrasNames &&
 							Object.keys(selectedExtrasNames).map((key) => (
-								<>
+								<Box key={key}>
 									<br />
-									<span> {key} :</span>
-									<span> {selectedExtrasNames[key]}</span>
-								</>
+									{"("} <span> {key} :</span>
+									<span> {selectedExtrasNames[key]}</span> {")"}
+								</Box>
 							))}
-					</p>
-				</div>
-				{
-					<span className="cart_text_center" style={{ color: textColor }}>
-						{quantity && quantity !== 1 ? `${price} x ${quantity} = ` : ""}
-						{price ? priceAllItems : "0.00"} ₪
-					</span>
-				}
-			</div>
-			{console.log("selectedToppings", selectedToppings)}
-			{console.log("selectedToppings?.length", selectedToppings?.length)}{" "}
+					</Typography>
+				</Box>
+
+				<Typography className="cart_text_center" sx={{ color: textColor }}>
+					{quantity && quantity !== 1 ? `${price} x ${quantity} = ` : ""}
+					{price ? priceAllItems : "0.00"} ₪
+				</Typography>
+			</Box>
+
+			{/* selectedToppings================================================ */}
+
 			{selectedToppings?.length > 0 &&
 				selectedToppings.map((selectedTopping, index) => {
-					const topping = toppings.find((t) => t.title.trim() === selectedTopping.trim());
-
-					console.log("selectedTopping555", selectedTopping);
-					console.log("topping555", topping);
+					const topping = toppings.find(
+						(t) => t.title.trim() === selectedTopping.trim()
+					);
 
 					if (!topping) return null;
 
 					return (
-						<div
+						<Box
 							className="CardRowSmall"
 							style={{ margin: "0 10px" }}
 							key={topping.title + index}
 						>
-							<div className="CardRowSmall">
-								<div className="image_container">
+							<Box className="CardRowSmall">
+								<Box className="image_container">
 									<img
-										src={isPhotoUrl(topping.image) ? topping.image : toppings_icon}
+										src={
+											isPhotoUrl(topping.image) ? topping.image : toppings_icon
+										}
 										alt={topping.title}
 									/>
-								</div>
-								<span className="card_row_text">{t(topping.title)}</span>
-							</div>
-
-							<span className="card_row_text">
+								</Box>
+								<Typography className="card_row_text">
+									{t(topping.title)}
+								</Typography>
+							</Box>
+							<Typography className="card_row_text">
 								{quantity !== 1 ? `${topping.price} x ${quantity} = ` : ""}
 								{(topping.price * (quantity || 1)).toFixed(2)} ₪
-							</span>
-						</div>
+							</Typography>
+						</Box>
 					);
 				})}
-			{title != "Total Price:" && (
-				<div className="CardRowSmall">
-					<span className="cart_text_center">{t("Dish Price:")}</span>
-					<span className="cart_text_center" style={{ color: textColor }}>
+
+			{title !== "Total Price:" && (
+				<Box className="CardRowSmall">
+					<Typography className="cart_text_center">
+						{t("Total Dish Price:")}
+					</Typography>
+					<Typography className="cart_text_center" sx={{ color: textColor }}>
 						{calculateTotalPrice()} ₪
-					</span>
-				</div>
+					</Typography>
+				</Box>
 			)}
-			{title != "Total Price:" && (
-				<Box sx={{ width: "100%", height: "1px", backgroundColor: "grey" }}></Box>
+			{title !== "Total Price:" && (
+				<Box
+					sx={{ width: "100%", height: "1px", backgroundColor: "grey" }}
+				></Box>
 			)}
 		</>
 	);

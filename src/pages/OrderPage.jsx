@@ -9,13 +9,13 @@ import {
 	MenuItem,
 	makeStyles,
 	Box,
+	Typography,
 } from "@mui/material";
 
 import { BigButton } from "components/BigButton";
 import { StyledTextField } from "components/StyledTextField";
 import { CardRowSmall } from "components/CardRowSmall";
 import orderImg from "images/Cafe_Cafe_Logo.png";
-// import orderImg from "images/orderImg.png"
 import { useNavigator } from "hooks/useNavigator";
 import { CartContext } from "App";
 import { useTranslation } from "react-i18next";
@@ -117,7 +117,9 @@ export function OrderPage() {
 
 				if (item?.selectedToppings) {
 					for (const topping of item.selectedToppings) {
-						const toppingData = product.toppings.find((t) => t.title === topping);
+						const toppingData = product.toppings.find(
+							(t) => t.title === topping
+						);
 						if (toppingData) {
 							totalPrice += toppingData.price * item.quantity;
 						}
@@ -131,8 +133,6 @@ export function OrderPage() {
 
 	useEffect(() => {
 		console.log("cartItems111", cartItems);
-		// console.log("foods222", foods);
-
 		setTotalPrice(calculateTotalPrice(foods, cartItems));
 	}, []);
 
@@ -150,9 +150,7 @@ export function OrderPage() {
 							{" "}
 							{t("Order")} № {currentTimestamp}
 						</div>
-						{/* <div className="text1"> {t("Perfect lunch from Falafel Shop.")}</div> */}
 						<div className="text1"> {settings.textToOrder} </div>
-						{/* <div className="text_small">{`${discount}% ${t("discount")}`}</div> */}
 					</div>
 				</div>
 
@@ -164,28 +162,13 @@ export function OrderPage() {
 					</div>
 				)}
 
-				{/* <CardRowSmall
-          key={9999}
-          food={{ id: 9999, title: t("Free delivery"), textColor: "#4AF2A1" }}
-        /> */}
-				{/* <CardRowSmall
-          key={9998}
-          food={{
-            id: 9998,
-            title: t("Discount"),
-            price: (totalPrice * discount).toFixed(2),
-            textColor: "#4AF2A1",
-          }}
-        /> */}
-				<CardRowSmall
-					key={9997}
-					food={{
-						id: 9997,
-						title: t("Total Price:"),
-						price: totalPrice,
-						// price: totalPriceWithDiscount,
-					}}
-				/>
+				<Box className="CardRowSmall" style={{ margin: "10px" }}>
+					<Typography className="card_row_text">{t("Total Price:")}</Typography>
+
+					<Typography className="card_row_text">
+						{totalPrice.toFixed(2)} ₪
+					</Typography>
+				</Box>
 			</div>
 
 			<div className="comment_container">
@@ -211,14 +194,16 @@ export function OrderPage() {
 					{t("Choose where you eat")}
 				</div>
 
-				<FormControl className="select" style={{ borderColor: "white", color: "white" }}>
+				<FormControl
+					className="select"
+					style={{ borderColor: "white", color: "white" }}
+				>
 					<InputLabel style={{ borderColor: "white", color: "white" }}>
 						{t("Select Delivery Option")}
 					</InputLabel>
 					<StyledSelect
 						value={optionDelivery}
 						onChange={onChangeOption}
-					 
 						labelId="select-filter-by-field-labe;"
 						id="select-filter-by-field"
 					>
@@ -246,30 +231,9 @@ export function OrderPage() {
 				)}
 			</div>
 
-			{/* {env === "browser" && (
-        <BigButton
-          title={t("Payments")}
-          type={"payments"}
-          disable={cartItems.length === 0 ? true : false}
-          onClick={onSubmit}
-        />
-      )} */}
-
 			{env == "browser" && (
 				<BigButton title={`${t("Buy")} ${totalPrice} ₪`} onClick={onSubmit} />
-				// <BigButton title={`${`Buy ${totalPrice} ₪`} `} onClick={onSubmit} />
 			)}
-
-			{/* {env === "browser" &&
-        (optionDelivery === "on_site" ||
-          (optionDelivery === "take_away" && address)) && (
-          <BigButton
-            title={t("Payments")}
-            type={"payments"}
-            disable={cartItems.length === 0 ? true : false}
-            onClick={onSubmit}
-          />
-        )} */}
 		</>
 	);
 }

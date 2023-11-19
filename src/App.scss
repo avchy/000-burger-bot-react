@@ -44,16 +44,6 @@ body {
 
 //   ====================================================================
 
-.productsPage {
-	.cards_container {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-}
-
-//   ====================================================================
-
 .orderPage {
 	background-color: $backgroundElements;
 	border-radius: 5px;
@@ -264,7 +254,6 @@ body {
 		align-items: center;
 		font-size: calc(0.8rem + 1vw);
 		min-width: 70px;
-
 	}
 
 	.card_row_mini_text {
@@ -302,7 +291,6 @@ body {
 		display: flex;
 		align-items: center;
 		min-width: 70px;
-
 	}
 }
 //   ====================================================================
@@ -336,7 +324,6 @@ body {
 		align-items: center;
 		// margin: 0 0 0 auto;
 		min-width: 70px;
-
 	}
 }
 //   ====================================================================

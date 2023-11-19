@@ -136,13 +136,15 @@ export const Header = () => {
 				>
 					{t("Call the waiter")}
 					<div className="imageContainer">
-						<img
-							loading="lazy"
-							src={waiterImg}
-							alt={"waiterImg"}
-							width="50"
-							height="50"
-						/>
+						{!isButtonDisabled && (
+							<img
+								loading="lazy"
+								src={waiterImg}
+								alt={"waiterImg"}
+								width="50"
+								height="50"
+							/>
+						)}
 					</div>
 				</StyledButton>
 			</FlexRowContainer>
