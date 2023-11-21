@@ -1,38 +1,42 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext } from "react";
 // import { Skeleton, Stack } from "@mui/material"
-import "App.scss"
-import { Button } from "./Button"
-import { useTranslation } from "react-i18next"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import "App.scss";
+import { Button } from "./Button";
+import { useTranslation } from "react-i18next";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import * as React from 'react';
 // import { CartContext } from "App"
-import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
-import isPhotoUrl from "helpers/isPhotoUrl"
- 
-export function CardColumn({ food, onAdd, onRemove, quantity }) {
-  const navigate = useNavigate()
+import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg";
+import isPhotoUrl from "helpers/isPhotoUrl";
+import {
+  FlexRowContainer,
+  StyledTextField,
+} from "components/AllHelpComponents";
 
-  const [count, setCount] = useState(quantity || 0)
-  const [imageLoaded, setImageLoaded] = useState(false) // State to track if the image has loaded
-  const { id, title, image, price, toppings } = food
-  const { t, i18n } = useTranslation()
+export function CardColumn({ food, onAdd, onRemove, quantity }) {
+  const navigate = useNavigate();
+
+  const [count, setCount] = useState(quantity || 0);
+  const [imageLoaded, setImageLoaded] = useState(false); // State to track if the image has loaded
+  const { id, title, image, price, toppings } = food;
+  const { t, i18n } = useTranslation();
 
   const handleIncrement = () => {
-    setCount(count + 1)
-    onAdd(food)
-  }
+    setCount(count + 1);
+    onAdd(food);
+  };
   const handleToppings = () => {
-    navigate("/product", { state: { food } })
-  }
+    navigate("/product", { state: { food } });
+  };
 
   const handleDecrement = () => {
-    setCount(count - 1)
-    onRemove(food)
-  }
+    setCount(count - 1);
+    onRemove(food);
+  };
 
   const handleImageLoad = () => {
-    setImageLoaded(true)
-  }
+    setImageLoaded(true);
+  };
 
   return (
     <div className="CardColumn">
@@ -46,7 +50,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
         style={{ display: imageLoaded ? "block" : "none" }}
       >
         <img
-          src={isPhotoUrl(image) ?  image : default_dish_img}
+          src={isPhotoUrl(image) ? image : default_dish_img}
           alt={title}
           onLoad={handleImageLoad}
           // style={{ display: imageLoaded ? "block" : "none" }}
@@ -77,7 +81,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
 
       <p className="cart_text_center">{price} ₪</p>
 
-      <div className="btn-container">
+      <FlexRowContainer>
         <Button
           title={toppings ? `${t("choose")}` : "+"}
           type={"add"}
@@ -88,7 +92,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
         ) : (
           ""
         )}
-      </div>
+      </FlexRowContainer>
     </div>
-  )
+  );
 }
