@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import axios from "axios";
-import { FlexColumnContainer, StyledTextField } from "components/AllHelpComponents";
+import {
+	FlexColumnContainer,
+	StyledTextField,
+} from "components/AllHelpComponents";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Typography, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -15,7 +18,7 @@ import appleSVG from "images/svg_icons/icons8-apple-logo.svg";
 import googleSVG from "images/svg_icons/icons8-google.svg";
 import { useTranslation } from "react-i18next";
 import { creditCardInitialData } from "constants/constants";
-
+import { LoadingOverlay } from "components/LoadingOverlay";
 export const Payments = () => {
 	const { t, i18n } = useTranslation();
 	const tele = window.Telegram.WebApp;
@@ -270,27 +273,7 @@ export const Payments = () => {
 	return (
 		<>
 			{console.log("isSubmitting", isSubmitting)}
-			{isSubmitting ? (
-				<Box id="fullscreen-overlay">
-					<FlexColumnContainer>
-						<Typography
-							sx={{
-								padding: "4px 8px ",
-								width: "40px",
-								height: "40px",
-							}}
-							variant="h3"
-						>
-							Sending...
-						</Typography>
-						<CircularProgress
-							size={64}
-							color="primary"
-							sx={{ marginLeft: "5rem", marginTop: "5rem" }}
-						/>
-					</FlexColumnContainer>
-				</Box>
-			) : null}
+			{isSubmitting ? <LoadingOverlay /> : null}
 
 			{settings.showCreditCardButton ? (
 				<StyledButton onClick={onShowCreditCard} variant="contained">

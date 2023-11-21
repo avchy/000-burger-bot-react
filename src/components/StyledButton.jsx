@@ -1,9 +1,11 @@
-import { styled } from "@mui/system"
-import { Button } from "@mui/material"
-import {BlackBox} from "./AllHelpComponents"
+import { styled } from "@mui/system";
+import { Button } from "@mui/material";
+import { BlackBox } from "./AllHelpComponents";
 
 export const StyledButton = styled(Button)(
-  ({ theme }) => ({
+  ({ theme }) => 
+  
+  ({
     backgroundColor: "#1a3f6c",
     // backgroundColor: "#1a222c",
     cursor: "pointer",
@@ -18,8 +20,8 @@ export const StyledButton = styled(Button)(
 
     fontSize: "20px",
     fontWeight: "bold",
-    border : "2px solid #000",
-   }),
+    border: "2px solid #000",
+  }),
 
   { shouldForwardProp: (prop) => prop !== "variant" }
-)
+);

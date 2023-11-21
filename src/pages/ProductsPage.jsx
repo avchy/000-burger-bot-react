@@ -10,148 +10,155 @@ import { FlexColumnContainer } from "components/AllHelpComponents";
 import { CartContext } from "App";
 // import axios from "axios"
 import {
-	Box,
-	Table,
-	TableHead,
-	TableRow,
-	TableCell,
-	TableBody,
-	CircularProgress,
-	Paper,
-	Typography,
+  Box,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  CircularProgress,
+  Paper,
+  Typography,
 } from "@mui/material";
 const tele = window.Telegram.WebApp;
 
 export const ProductsPage = () => {
-	const location = useLocation();
-	const { t, i18n } = useTranslation();
-	const { env } = useNavigator();
-	const navigate = useNavigate();
-	const { cartItems, setCartItems, foods } = useContext(CartContext);
+  const location = useLocation();
+  const { t, i18n } = useTranslation();
+  const { env } = useNavigator();
+  const navigate = useNavigate();
+  const { cartItems, setCartItems, foods } = useContext(CartContext);
 
-	const onAdd = (food) => {
-		if (food.length === 0) {
-			tele.MainButton.hide();
-		} else {
-			tele.MainButton.show();
-		}
+  const onAdd = (food) => {
+    if (food.length === 0) {
+      tele.MainButton.hide();
+    } else {
+      tele.MainButton.show();
+    }
 
-		const exist = cartItems.find((x) => x.id === food.id);
-		if (exist) {
-			setCartItems(
-				cartItems.map((x) =>
-					x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
-				)
-			);
-		} else {
-			setCartItems([...cartItems, { ...food, quantity: 1 }]);
-		}
-	};
+    const exist = cartItems.find((x) => x.id === food.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...food, quantity: 1 }]);
+    }
+  };
 
-	const onRemove = (food) => {
-		if (food.length === 0) {
-			tele.MainButton.hide();
-		} else {
-			tele.MainButton.show();
-		}
+  const onRemove = (food) => {
+    if (food.length === 0) {
+      tele.MainButton.hide();
+    } else {
+      tele.MainButton.show();
+    }
 
-		const exist = cartItems.find((x) => x.id === food.id);
-		if (exist.quantity === 1) {
-			setCartItems(cartItems.filter((x) => x.id !== food.id));
-		} else {
-			setCartItems(
-				cartItems.map((x) =>
-					x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x
-				)
-			);
-		}
-	};
+    const exist = cartItems.find((x) => x.id === food.id);
+    if (exist.quantity === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== food.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x
+        )
+      );
+    }
+  };
 
-	const onSubmit = useCallback(() => {
-		navigate("/order");
-	}, [cartItems]);
+  const onSubmit = useCallback(() => {
+    navigate("/order");
+  }, [cartItems]);
 
-	useEffect(() => {
-		tele.ready();
-		tele.MainButton.text = t("VIEW ORDER");
-	});
+  useEffect(() => {
+    tele.ready();
+    tele.MainButton.text = t("VIEW ORDER");
+  });
 
-	useEffect(() => {
-		tele.BackButton.hide();
-		// tele.isClosingConfirmationEnabled = false
-	}, []);
+  useEffect(() => {
+    tele.BackButton.hide();
+    // tele.isClosingConfirmationEnabled = false
+  }, []);
 
-	useEffect(() => {
-		tele.onEvent("mainButtonClicked", onSubmit);
+  useEffect(() => {
+    tele.onEvent("mainButtonClicked", onSubmit);
 
-		return () => {
-			tele.offEvent("mainButtonClicked", onSubmit);
-		};
-	}, [onSubmit]);
+    return () => {
+      tele.offEvent("mainButtonClicked", onSubmit);
+    };
+  }, [onSubmit]);
 
-	useEffect(() => {
-		if (cartItems.length === 0) {
-			tele.MainButton.hide();
-		} else {
-			tele.MainButton.show();
-		}
-	}, [cartItems]);
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      tele.MainButton.hide();
+    } else {
+      tele.MainButton.show();
+    }
+  }, [cartItems]);
 
-	const flexStyle = { display: "flex", flexWrap: "wrap", justifyContent: "center" };
-	return (
-		<>
-			<Box sx={flexStyle}>
-				<Box sx={flexStyle}>
-					{foods.map((food) => {
-						const foodWithQuantity = cartItems.find((item) => item.id === food.id);
-						const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0;
-						return (
-							<CardColumn
-								food={food}
-								key={food.id}
-								onAdd={onAdd}
-								onRemove={onRemove}
-								quantity={quantity}
-							/>
-						);
-					})}
-				</Box>
-				{cartItems.length !== 0 && env === "browser" && (
-					<BigButton
-						title={t("Order")}
-						disable={cartItems.length === 0 ? true : false}
-						onClick={onSubmit}
-					/>
-				)}
-			</Box>
-		</>
+  const flexStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  };
+  return (
+    <>
+      <Box sx={flexStyle}>
+        <Box sx={flexStyle}>
+          {foods.map((food) => {
+            const foodWithQuantity = cartItems.find(
+              (item) => item.id === food.id
+            );
+            const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0;
+            return (
+              <CardColumn
+                food={food}
+                key={food.id}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                quantity={quantity}
+              />
+            );
+          })}
+        </Box>
+        {cartItems.length !== 0 && env === "browser" && (
+          <BigButton
+            disable={cartItems.length === 0 ? true : false}
+            onClick={onSubmit}
+          >
+            {t("Order")}
+          </BigButton>
+        )}
+      </Box>
+    </>
 
-		// <>
-		// 	<div className="productsPage">
-		// 		{/* <h1 className="title">{t("Falafel Shop")}</h1> */}
-		// 		<div className="cards_container">
-		// 			{foods.map((food) => {
-		// 				const foodWithQuantity = cartItems.find((item) => item.id === food.id);
-		// 				const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0;
-		// 				return (
-		// 					<CardColumn
-		// 						food={food}
-		// 						key={food.id}
-		// 						onAdd={onAdd}
-		// 						onRemove={onRemove}
-		// 						quantity={quantity}
-		// 					/>
-		// 				);
-		// 			})}
-		// 		</div>
-		// 		{cartItems.length !== 0 && env == "browser" && (
-		// 			<BigButton
-		// 				title={t("Order")}
-		// 				disable={cartItems.length === 0 ? true : false}
-		// 				onClick={onSubmit}
-		// 			/>
-		// 		)}
-		// 	</div>
-		// </>
-	);
+    // <>
+    // 	<div className="productsPage">
+    // 		{/* <h1 className="title">{t("Falafel Shop")}</h1> */}
+    // 		<div className="cards_container">
+    // 			{foods.map((food) => {
+    // 				const foodWithQuantity = cartItems.find((item) => item.id === food.id);
+    // 				const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0;
+    // 				return (
+    // 					<CardColumn
+    // 						food={food}
+    // 						key={food.id}
+    // 						onAdd={onAdd}
+    // 						onRemove={onRemove}
+    // 						quantity={quantity}
+    // 					/>
+    // 				);
+    // 			})}
+    // 		</div>
+    // 		{cartItems.length !== 0 && env == "browser" && (
+    // 			<BigButton
+    // 				title={t("Order")}
+    // 				disable={cartItems.length === 0 ? true : false}
+    // 				onClick={onSubmit}
+    // 			/>
+    // 		)}
+    // 	</div>
+    // </>
+  );
 };
