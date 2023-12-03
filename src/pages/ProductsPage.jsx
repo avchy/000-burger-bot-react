@@ -1,30 +1,16 @@
 import { useContext, useState, useCallback, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "App.scss";
 import { CardColumn } from "components/CardColumn";
 import { BigButton } from "components/BigButton";
 import { useNavigator } from "hooks/useNavigator";
 import { useTranslation } from "react-i18next";
-import { StyledButton } from "components/StyledButton";
-import { FlexColumnContainer } from "components/AllHelpComponents";
 import { CartContext } from "App";
-// import axios from "axios"
-import {
-  Box,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  CircularProgress,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box } from "@mui/material";
 const tele = window.Telegram.WebApp;
 
 export const ProductsPage = () => {
-  const location = useLocation();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { env } = useNavigator();
   const navigate = useNavigate();
   const { cartItems, setCartItems, foods } = useContext(CartContext);

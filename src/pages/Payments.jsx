@@ -7,7 +7,7 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Typography, Grid } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { serverIP } from "constants/api";
+import { baseURL } from "constants/api";
 import { Box } from "@mui/system";
 import { StyledButton } from "components/StyledButton";
 import { useNavigator } from "hooks/useNavigator";
@@ -123,7 +123,7 @@ export const Payments = () => {
 
 	async function payCreditCard(dataPay) {
 		try {
-			const response = await axios.post(serverIP + "/pay_credit_card", dataPay);
+			const response = await axios.post(baseURL + "/pay_credit_card", dataPay);
 			// Обработка успешного ответа
 			console.log('Запрос "pay_credit_card" успешно выполнен');
 			// Дополнительный код для обработки ответа
@@ -139,7 +139,7 @@ export const Payments = () => {
 
 	async function createOrderDB(dataPay) {
 		try {
-			const response = await axios.post(serverIP + "/create_order_db", dataPay);
+			const response = await axios.post(baseURL + "/create_order_db", dataPay);
 			// Обработка успешного ответа
 			console.log('Запрос "create_order_db" успешно выполнен');
 			// Дополнительный код для обработки ответа
@@ -153,7 +153,7 @@ export const Payments = () => {
 
 	async function sendSMSTele(dataPay) {
 		try {
-			const response = await axios.post(serverIP + "/send_sms_tele", dataPay);
+			const response = await axios.post(baseURL + "/send_sms_tele", dataPay);
 			// Обработка успешного ответа
 			console.log('Запрос "send_sms_tele" успешно выполнен');
 			// Дополнительный код для обработки ответа

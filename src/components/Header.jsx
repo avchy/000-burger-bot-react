@@ -6,7 +6,7 @@ import { Button, Typography, MenuItem, Select, Box } from "@mui/material";
 import { useTelegram } from "hooks/useTelegram";
 import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents";
 import { useTranslation } from "react-i18next";
-import { serverIP, port } from "constants/api";
+import { baseURL } from "constants/api";
 import { tableData } from "constants/constants";
 import { languageButtons } from "../constants/languageButtons";
 import { useTheme } from "@mui/material/styles";
@@ -68,7 +68,7 @@ export const Header = () => {
         setButtonDisabled(false); // Включаем кнопку через 5 секунд
       }, 5000);
 
-      const response = await axios.post(serverIP + "/create_order_db", dataPay);
+      const response = await axios.post(baseURL + "/create_order_db", dataPay);
       console.log('Запрос "onSendWaiter" успешно выполнен');
     } catch (error) {
       console.error('Ошибка при выполнении запроса "onSendWaiter":', error);

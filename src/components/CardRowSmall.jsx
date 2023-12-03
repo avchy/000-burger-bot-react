@@ -28,7 +28,7 @@ export function CardRowSmall({ food }) {
 		if (selectedToppings && selectedToppings.length > 0) {
 			selectedToppings.forEach((selectedTopping) => {
 				const topping = toppings.find(
-					(t) => t.title.trim() === selectedTopping.trim()
+					(t) => t.title?.trim() === selectedTopping.trim()
 				);
 				if (topping) {
 					totalPrice += topping.price * (quantity || 1);
@@ -73,7 +73,7 @@ export function CardRowSmall({ food }) {
 			{selectedToppings?.length > 0 &&
 				selectedToppings.map((selectedTopping, index) => {
 					const topping = toppings.find(
-						(t) => t.title.trim() === selectedTopping.trim()
+						(t) => t.title?.trim() === selectedTopping.trim()
 					);
 
 					if (!topping) return null;

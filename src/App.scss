@@ -6,7 +6,6 @@ $backgroundAll: #131415;
 $backgroundElements: #1a222c;
 
 $yellow: #e0c521;
- 
 
 body {
   background-color: $backgroundAll;
@@ -40,27 +39,7 @@ body {
 }
 
 //   ====================================================================
-
-.orderPage {
-  background-color: $backgroundElements;
-  border-radius: 5px;
-
-  .orderHeaderEdit {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .cardsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
-    // border: 2px solid #e0c521;
-  }
-}
-//   ====================================================================
-
+ 
 .pageContainer {
   position: relative;
 
@@ -88,19 +67,14 @@ body {
     border: 2px solid $yellow;
     border-radius: 5px;
 
-    .imageContainer {
-      // width: 45%;
-      // width: 100px;
+    .imageContainer { 
       height: 100%;
       margin: 0 20px 0 0;
     }
 
     .imageContainer img {
-      // width: 100%;
-      height: 20vw;
-
-      // height: 100px;
-      object-fit: cover;
+       height: 20vw; 
+       object-fit: cover;
     }
 
     .textContainer {
@@ -118,20 +92,15 @@ body {
         font-size: calc(0.5em + 2vw);
         hyphens: none;
       }
-
-      .text_small {
-        color: $light_grey;
-      }
+ 
     }
   }
 
   .cardsContainer {
-    // width: 80%;
-    display: flex;
+     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    flex-direction: column;
-
+    flex-direction: column; 
     border: 2px solid $yellow;
     border-radius: 5px;
   }
@@ -153,25 +122,18 @@ body {
 
   .card_title {
     font-weight: 400;
-    text-align: center;
-  }
-
-  .card_title {
+    text-align: center; 
     text-align: center;
     display: inline-block;
   }
 
   .cart_text_center {
-    text-align: center;
-    // text-align: left;
-
+    text-align: center; 
     display: inline-block;
     margin: 10px 0 0 0;
   }
 
-  .image_container {
-    // width: 100px;
-    // height: 100px;
+  .image_container { 
     margin: 0 auto;
   }
 
@@ -181,19 +143,7 @@ body {
     max-height: 90px;
   }
 
-  .btn-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .buttons_container {
-    position: absolute;
-    right: 0;
-
-    float: right;
-    text-align: right;
-  }
+ 
 
   .card_badge {
     position: absolute;
@@ -211,9 +161,7 @@ body {
     font-size: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-
-    // opacity: 1;
+    align-items: center; 
   }
 
   .card_badge_simple {
@@ -252,13 +200,7 @@ body {
     font-size: calc(0.8rem + 1vw);
     min-width: 70px;
   }
-
-  .card_row_mini_text {
-    text-align: left;
-    display: flex;
-    align-items: center;
-    font-size: calc(0.5rem + 2vw);
-  }
+ 
 }
 
 .CardRowSmall {
@@ -291,38 +233,7 @@ body {
   }
 }
 //   ====================================================================
-
-.CardRowSmall_toppings {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  margin: 13px 10px;
-  position: relative;
-  overflow: hidden;
-  white-space: pre-wrap;
-  text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
-
-  .image_container {
-    width: 30px;
-    height: 30px;
-    margin: 0 20px 0 0;
-  }
-
-  .image_container img {
-    width: 100%;
-    object-fit: cover;
-  }
-
-  .cart_text_center {
-    text-align: left;
-    // text-align: center;
-    display: flex;
-    align-items: center;
-    // margin: 0 0 0 auto;
-    min-width: 70px;
-  }
-}
+ 
 //   ====================================================================
 
 .form {
@@ -383,14 +294,7 @@ body {
 }
 
 // ====================================================================
-
-.navLinkEdit {
-  text-align: right;
-  font-size: 1.2rem;
-  color: $green;
-  font-weight: 600;
-  margin-right: 20px;
-}
+ 
 
 .totalPrice {
   margin-left: 20px;
@@ -402,9 +306,7 @@ body {
 }
 
 .cafe-text-field {
-  // color: $text;
-  color: var(--text-color);
-
+   color: var(--text-color); 
   font-family: var(--default-font);
   font-size: 17px;
   line-height: 21px;
@@ -430,26 +332,15 @@ body {
   padding: 10px 20px 24px;
   color: grey;
 }
-.selectField {
-  width: 50%;
-}
+ 
 .comment_container {
-  background-color: $backgroundElements;
-
+  background-color: $backgroundElements; 
   padding: 0.5rem;
   margin: 10px;
   border-radius: 5px;
-
-  .text_small {
-    padding: 0.5rem;
-    margin: 10px;
-  }
+ 
 }
-
-.testWindow {
-  padding-top: 30px;
-  margin-top: 30px;
-}
+ 
 
 .testText {
   border: solid 1px #396490;
@@ -467,7 +358,6 @@ body {
   justify-content: center;
   cursor: pointer;
 }
- 
 
 .topping-circle.selected {
   border: 7px solid orange;

@@ -41,6 +41,7 @@
   "scripts": {
     "git-info": "node src/helpers/gitInfo.js",
     "start": "npm run git-info && react-scripts start",
+    "dev": "REACT_APP_STAGE=local react-scripts start",
     "build": "CI=false npm run git-info && react-scripts build"
   },
   "eslintConfig": {

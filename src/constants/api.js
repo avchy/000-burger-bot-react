@@ -1,11 +1,18 @@
-const serverIP = 'https://burgerim.ru'
-
 const cloudinaryURL =
-    'https://res.cloudinary.com/dvb3cxb9h/image/upload/v1699620958/burger_shop/'
+  "https://res.cloudinary.com/dvb3cxb9h/image/upload/v1699620958/burger_shop/";
 
+const port = "8000";
 
-// const serverIP = 'http://94.198.216.20'
-// const serverIP = 'http://54.86.166.140'
-const port = '8000'
+const developmentURL = "http://localhost:5005";
+const productionURL = "https://burgerim.ru";
 
-module.exports = { serverIP, port ,cloudinaryURL }
+// export const baseURL =
+//   process.env.NODE_ENV === "development" ? developmentURL : productionURL;
+
+const baseURL =
+  process.env.REACT_APP_STAGE === "local" ? developmentURL : productionURL;
+
+console.log("process.env.REACT_APP_STAGE", process.env.REACT_APP_STAGE);
+console.log("baseURL", baseURL);
+
+module.exports = { baseURL, port, cloudinaryURL };
