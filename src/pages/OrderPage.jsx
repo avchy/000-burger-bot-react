@@ -132,7 +132,7 @@ export function OrderPage() {
   }
 
   useEffect(() => {
-    console.log("cartItems111", cartItems);
+    // console.log("cartItems111", cartItems);
     setTotalPrice(calculateTotalPrice(foods, cartItems));
   }, []);
 
