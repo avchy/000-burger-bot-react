@@ -47,37 +47,21 @@ export const Product = () => {
 
   useEffect(() => {
     const exist = cartItems.find((x) => x.id === food.id)
-    console.log("exist", exist)
-    console.log("food", food)
-    if (exist) {
-      console.log("  exist111")
 
+    if (exist) {
       setCartItems(
         cartItems.map((x) =>
           x.id === food.id ? { ...exist, quantity: exist.quantity } : x
         )
       )
-      // setQuantityItem(exist.quantity)
     } else {
-      // console.log("no exist111")
       setCartItems([...cartItems, { ...food, quantity: 1 }])
-      // setQuantityItem(1)
     }
 
     console.log("cartItems", cartItems)
   }, [])
 
-  // const foodInCart = cartItems.find(
-  //   (item) => item.id === food.id
-  // )
-
   const onAdd = () => {
-    // if (foodInCart.length === 0) {
-    //   tele.MainButton.hide()
-    // } else {
-    //   tele.MainButton.show()
-    // }
-
     const exist = cartItems.find((x) => x.id === food.id)
 
     if (exist) {
@@ -92,12 +76,6 @@ export const Product = () => {
   }
 
   const onRemove = () => {
-    // if (food.length === 0) {
-    //   tele.MainButton.hide()
-    // } else {
-    //   tele.MainButton.show()
-    // }
-
     const exist = cartItems.find((x) => x.id === food.id)
 
     if (exist.quantity === 1) {
@@ -139,35 +117,23 @@ export const Product = () => {
   //=================================================
 
   const onBackButtonClicked = useCallback(() => {
-    // navigate("/", { state: { cartItems } })
     setCartItems(cartItems.filter((x) => x.id !== food.id))
 
     navigate("/")
   }, [cartItems])
 
   useEffect(() => {
-    // tele.onEvent("mainButtonClicked", onSubmit);
     tele.onEvent("backButtonClicked", onBackButtonClicked)
 
     return () => {
-      // tele.offEvent("mainButtonClicked", onSubmit);
       tele.offEvent("backButtonClicked", onBackButtonClicked)
     }
   }, [onSubmit])
 
   useEffect(() => {
     tele.BackButton.show()
-    // tele.MainButton.show();
     //  tele.isClosingConfirmationEnabled = false
   }, [])
-
-  // useEffect(() => {
-  // 	tele.MainButton.text = t("confirm");
-  // });
-
-  useEffect(() => {
-    console.log("groupedExtras2222 :>> ", groupedExtras)
-  }, [groupedExtras])
 
   //====================================================
 
@@ -175,7 +141,6 @@ export const Product = () => {
     const exist = cartItems.find((x) => x.id === food.id)
 
     if (exist) {
-      // Create a copy of the toppings array with updated counts
       const updatedToppings = exist.toppings.map((topping) => {
         if (topping.title === title) {
           return { ...topping, count: topping.count === 0 ? 1 : 0 }
@@ -214,7 +179,6 @@ export const Product = () => {
       [type]: e.target.value,
     })
 
-    console.log("e.target.value", e.target.value)
     setSelectedExtrasNames({
       ...selectedExtrasNames,
       [type]:
@@ -223,11 +187,8 @@ export const Product = () => {
     })
   }
 
-  // Получение выбранного значения для каждого типа
   const getTypeValue = (type) => selectedExtras[type] || ""
   useEffect(() => {
-    console.log("typesList :>> ", typesList)
-
     function groupExtrasByType(extras) {
       const grouped = {}
 
@@ -244,17 +205,13 @@ export const Product = () => {
       return grouped
     }
 
-    console.log("food.extras :>> ", food.extras)
     if (typesList.length > 0) {
       const groupedExtras = groupExtrasByType(food.extras)
 
-      console.log("groupedExtras2222 :>> ", groupedExtras)
       setGroupedExtras(groupedExtras) // Обновление состояния groupedExtras
     }
   }, [typesList])
 
-  // console.log("selectedExtras1111", selectedExtras)
-  // console.log("selectedExtrasNames2222", selectedExtrasNames)
   return (
     <>
       <Box className="pageContainer">
@@ -283,10 +240,15 @@ export const Product = () => {
         </Box>
         {/* extras __________________________________________ */}
         {groupedExtras && (
-          // {food.extras?.length > 0 && (
           <>
             <Typography
-              sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}
+              sx={{
+                p: 2,
+                fontSize: "calc(0.5em + 2vw)",
+                fontWeight: 700,
+                borderBottom: "1px solid #e0c521",
+                width: "50%",
+              }}
             >
               {t("Extras")}
             </Typography>
@@ -323,7 +285,13 @@ export const Product = () => {
         {food.toppings.length > 0 && (
           <>
             <Typography
-              sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}
+              sx={{
+                p: 2,
+                fontSize: "calc(0.5em + 2vw)",
+                fontWeight: 700,
+                borderBottom: "1px solid #e0c521",
+                width: "50%",
+              }}
             >
               {t("toppings")}
             </Typography>
@@ -352,7 +320,7 @@ export const Product = () => {
                       selectedToppings.includes(topping.title) ? "selected" : ""
                     }`}
                   >
-                    {/* {console.log("topping.image", topping.image)} */}
+                    {console.log("topping.image222", topping.image)}
                     <Avatar
                       alt={topping.title}
                       src={
