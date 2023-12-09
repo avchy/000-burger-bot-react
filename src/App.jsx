@@ -3,7 +3,14 @@ import queryString from "query-string"
 import theme from "./styles/theme"
 import axios from "axios"
 import React, { createContext, useState, useEffect, useCallback } from "react"
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+  Redirect,
+} from "react-router-dom"
 import { Header } from "components/Header"
 import { ProductsPage } from "pages/ProductsPage"
 import { Product } from "components/Product"
@@ -145,13 +152,23 @@ export function App() {
             <LoadingOverlay />
           ) : (
             <Routes>
+              {/* <Route exact path="/">
+                <Redirect to="/?restaurant_id=2" />
+              </Route> */}
+
+              {/* <Route
+                path="/"
+                element={<Navigate to="/?restaurant_id=2" replace={true}/>}
+              /> */}
+
               <Route path={"/"} element={<ProductsPage />} />
+              {/* <Route path={"/?restaurant_id=2"} element={<ProductsPage />} /> */}
               {/* <Route index element={<ProductsPage />} /> */}
               <Route path={"order"} element={<OrderPage />} />
               {/* <Route path={"order/:restaurant_name"} element={<OrderPage />} /> */}
               <Route path={"payments"} element={<Payments />} />
               <Route path={"product"} element={<Product />} />
-              {/* <Route path={"product/:id"} element={<Product />} /> */}
+              <Route path={"product/:id"} element={<Product />} />
 
               <Route path={"form"} element={<Form />} />
             </Routes>
