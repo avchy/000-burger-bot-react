@@ -69,7 +69,7 @@ export const Header = () => {
       }, 5000);
 
       const response = await axios.post(baseURL + "/create_order_db", dataPay);
-      console.log('Запрос "onSendWaiter" успешно выполнен');
+      // console.log('Запрос "onSendWaiter" успешно выполнен');
     } catch (error) {
       console.error('Ошибка при выполнении запроса "onSendWaiter":', error);
       return;

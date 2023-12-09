@@ -1,4 +1,7 @@
 import "App.scss"
+import queryString from "query-string"
+import theme from "./styles/theme"
+import axios from "axios"
 import React, { createContext, useState, useEffect, useCallback } from "react"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import { Header } from "components/Header"
@@ -8,14 +11,9 @@ import { OrderPage } from "pages/OrderPage"
 import { Payments } from "pages/Payments"
 import { Form } from "components/Form"
 import { ThemeProvider } from "@mui/material/styles"
-import { useTranslation } from "react-i18next"
-import useLocalStorage from "./hooks/use-localstorage"
-import queryString from "query-string"
-import { CircularProgress } from "@mui/material"
-import theme from "./styles/theme"
-import axios from "axios"
 import { baseURL } from "constants/api"
 import { LoadingOverlay } from "components/LoadingOverlay"
+
 const tele = window.Telegram.WebApp
 tele.isClosingConfirmationEnabled = "false"
 
@@ -56,14 +54,12 @@ export function App() {
 
   const getDishes = async (restaurant_id) => {
     const url = baseURL + "/dishes/" + restaurant_id
-    // console.log("url :>> ", url);
     try {
       const response = await axios.get(url)
 
-      console.log("getDishes_response.data", response.data)
       setFoods(response.data)
 
-      console.log('Запрос "getDishes" успешно выполнен')
+      // console.log('Запрос "getDishes" успешно выполнен')
       setLoading(false)
     } catch (error) {
       console.error('Ошибка при выполнении запроса "getDishes":', error)
@@ -79,10 +75,10 @@ export function App() {
         "https://burgerim.ru/settings/" + restaurant_id
       )
 
-      console.log("getSettings-response.data", response.data)
+      // console.log("getSettings-response.data", response.data)
       setSettings(response.data[0])
 
-      console.log('Запрос "getSettings" успешно выполнен')
+      // console.log('Запрос "getSettings" успешно выполнен')
     } catch (error) {
       console.error('Ошибка при выполнении запроса "getSettings":', error)
       return
@@ -93,7 +89,6 @@ export function App() {
     try {
       const response = await axios.get(`${baseURL}/types/` + restaurant_id)
 
-      console.log("response.data2222 :>> ", response.data)
       setTypesList(response.data)
     } catch (error) {
       console.error('Ошибка при выполнении запроса "getTypes":', error)
@@ -101,7 +96,7 @@ export function App() {
   }
 
   useEffect(() => {
-    console.log("tele.initDataUnsafe--->", tele.initDataUnsafe)
+    // console.log("tele.initDataUnsafe--->", tele.initDataUnsafe)
 
     tele.BackButton.hide()
     tele.isClosingConfirmationEnabled = false
@@ -156,6 +151,7 @@ export function App() {
               {/* <Route path={"order/:restaurant_name"} element={<OrderPage />} /> */}
               <Route path={"payments"} element={<Payments />} />
               <Route path={"product"} element={<Product />} />
+              {/* <Route path={"product/:id"} element={<Product />} /> */}
 
               <Route path={"form"} element={<Form />} />
             </Routes>

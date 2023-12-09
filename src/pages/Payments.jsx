@@ -272,7 +272,7 @@ export const Payments = () => {
 
 	return (
 		<>
-			{console.log("isSubmitting", isSubmitting)}
+			{/* {console.log("isSubmitting", isSubmitting)} */}
 			{isSubmitting ? <LoadingOverlay /> : null}
 
 			{settings.showCreditCardButton ? (

@@ -7,7 +7,7 @@ import toppings_icon from "images/toppings_icon.png";
 import isPhotoUrl from "helpers/isPhotoUrl";
 
 export function CardRowSmall({ food }) {
-	console.log("food222", food);
+	// console.log("food222", food);
 	const {
 		title,
 		image,

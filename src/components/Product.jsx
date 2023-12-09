@@ -22,6 +22,8 @@ import toppings_icon from "images/toppings_icon.png"
 
 import { FlexRowContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
+import { LoadingOverlay } from "./LoadingOverlay"
+import queryString from "query-string"
 
 export const Product = () => {
   const { t, i18n } = useTranslation()
@@ -32,15 +34,20 @@ export const Product = () => {
 
   const food = location?.state?.food
   const exist = cartItems.find((x) => x.id === food.id)
+  
+  const query = queryString.parse(location.search)
+  const dish_id = query.dish_id
+  
+  // const food = cartItems.find((x) => x.id === dish_id.id)
+  // const exist = cartItems.find((x) => x.id === dish_id.id)
+
 
   const [quantityItem, setQuantityItem] = useState(exist?.quantity || 1)
   const [selectedToppings, setSelectedToppings] = useState(
     exist?.selectedToppings || []
   )
   const [selectedExtras, setSelectedExtras] = useState({})
-  const [selectedExtrasNames, setSelectedExtrasNames] = useState(
-    cartItems?.selectedExtrasNames || {}
-  )
+  const [selectedExtrasNames, setSelectedExtrasNames] = useState({})
   const [groupedExtras, setGroupedExtras] = useState({})
 
   useEffect(() => {
@@ -180,7 +187,7 @@ export const Product = () => {
   //================================================
 
   // Обработчики изменения выбранных опций для каждого типа
- 
+
   const handleTypeChange = (type) => (e) => {
     const selectedExtraId = e.target.value
     const selectedExtra = food.extras.find(
@@ -237,8 +244,18 @@ export const Product = () => {
     }
   }, [typesList])
 
+  useEffect(() => {
+    console.log(
+      "cartItems?.selectedExtrasNames :>> ",
+      cartItems?.selectedExtrasNames
+    )
+    // cartItems?.selectedExtrasNames?.length > 0 &&
+    setSelectedExtrasNames(cartItems?.selectedExtrasNames)
+  }, [  ])
+
   return (
     <>
+      {!cartItems && <LoadingOverlay />}
       <Box className="pageContainer">
         <Typography
           sx={{ p: 2, textAlign: "center", fontSize: "calc(1.5em + 2vw)" }}
@@ -278,7 +295,7 @@ export const Product = () => {
             >
               {t("Extras")}
             </Typography>
-            {Object.entries(groupedExtras).map(([type, typeExtras]) => (
+            {   Object.entries(groupedExtras).map(([type, typeExtras]) => (
               <div key={type}>
                 <Typography
                   sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}
@@ -292,13 +309,28 @@ export const Product = () => {
                       value={getTypeValue(type)}
                       onChange={handleTypeChange(type)}
                     >
-                      {typeExtras.map((extra) => (
-                        <FormControlLabel
-                          key={extra.id}
-                          value={String(extra.id)}
-                          control={<Radio />}
-                          label={t(extra.title)}
-                        />
+                      
+                      { typeExtras.map((extra) => (
+                        <>
+                          {console.log("selectedExtrasNames :>> ", selectedExtrasNames)}
+                          {console.log("cartItems :>> ", cartItems)}
+                          {console.log("extra :>> ", extra)}
+
+                          <FormControlLabel
+                            key={extra.id}
+                            value={String(extra.id)}
+                            // control={<Radio />}
+                            control={
+                              <Radio
+                                checked={
+                                  selectedExtrasNames &&
+                                  selectedExtrasNames[type] == extra.title
+                                }
+                              />
+                            }
+                            label={t(extra.title)}
+                          />
+                        </>
                       ))}
                     </RadioGroup>
                   </FormControl>
