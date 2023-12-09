@@ -1,6 +1,6 @@
-import "App.scss";
-import { useState, useEffect, useCallback, useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import "App.scss"
+import { useState, useEffect, useCallback, useContext } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   TextField,
   FormControl,
@@ -10,27 +10,27 @@ import {
   makeStyles,
   Box,
   Typography,
-} from "@mui/material";
+} from "@mui/material"
 
-import { BigButton } from "components/BigButton";
-import { StyledTextField } from "components/StyledTextField";
-import { CardRowSmall } from "components/CardRowSmall";
-import orderImg from "images/Cafe_Cafe_Logo.png";
-import { useNavigator } from "hooks/useNavigator";
-import { CartContext } from "App";
-import { useTranslation } from "react-i18next";
-import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents";
+import { BigButton } from "components/BigButton"
+import { StyledTextField } from "components/StyledTextField"
+import { CardRowSmall } from "components/CardRowSmall"
+import orderImg from "images/Cafe_Cafe_Logo.png"
+import { useNavigator } from "hooks/useNavigator"
+import { CartContext } from "App"
+import { useTranslation } from "react-i18next"
+import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents"
 
 const styles = {
   overflow: "hidden",
   overflowWrap: "break-word",
   height: "46px",
-};
+}
 
 export function OrderPage() {
-  const tele = window.Telegram.WebApp;
-  const { t, i18n } = useTranslation();
-  const { env } = useNavigator();
+  const tele = window.Telegram.WebApp
+  const { t, i18n } = useTranslation()
+  const { env } = useNavigator()
 
   const {
     telephone,
@@ -46,13 +46,13 @@ export function OrderPage() {
     setTotalPrice,
     optionDelivery,
     setOptionDelivery,
-  } = useContext(CartContext);
+  } = useContext(CartContext)
 
   const handleChange = (event) => {
-    setComment(event.target.value);
-  };
+    setComment(event.target.value)
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // const onBackButtonClicked = useCallback(() => {
   //   navigate(-1)
@@ -61,37 +61,41 @@ export function OrderPage() {
   // tele.BackButton.onClick(onBackButtonClicked)
 
   const onSubmit = useCallback(() => {
-    navigate("/payments");
-  }, [cartItems, comment]);
+    navigate("/payments")
+  }, [cartItems, comment])
+
+  const onBack = () => {
+    navigate("/products")
+  }
 
   useEffect(() => {
-    tele.onEvent("mainButtonClicked", onSubmit);
+    tele.onEvent("mainButtonClicked", onSubmit)
     // tele.onEvent("backButtonClicked", onBackButtonClicked)
 
     return () => {
-      tele.offEvent("mainButtonClicked", onSubmit);
+      tele.offEvent("mainButtonClicked", onSubmit)
       // tele.offEvent("backButtonClicked", onBackButtonClicked)
-    };
-  }, [onSubmit]);
+    }
+  }, [onSubmit])
 
   useEffect(() => {
     if (optionDelivery == "delivery" && !address) {
-      tele.MainButton.hide();
+      tele.MainButton.hide()
     } else {
-      tele.MainButton.show();
+      tele.MainButton.show()
     }
-  }, [address]);
+  }, [address])
 
   const onChangeAddress = (e) => {
-    setAddress(e.target.value);
-  };
+    setAddress(e.target.value)
+  }
   const onChangeTelephone = (e) => {
-    setTelephone(e.target.value);
-  };
+    setTelephone(e.target.value)
+  }
 
   const onChangeOption = (e) => {
-    setOptionDelivery(e.target.value);
-  };
+    setOptionDelivery(e.target.value)
+  }
 
   // useEffect(() => {
   //   window.scrollTo({
@@ -101,40 +105,40 @@ export function OrderPage() {
   // }, [optionDelivery])
 
   useEffect(() => {
-    tele.BackButton.show();
-    tele.MainButton.setParams({ text: t("PAY") });
-  }, []);
+    tele.BackButton.show()
+    tele.MainButton.setParams({ text: t("PAY") })
+  }, [])
 
-  const currentTimestamp = Math.floor(Date.now() / 1000);
+  const currentTimestamp = Math.floor(Date.now() / 1000)
 
   function calculateTotalPrice(products, order) {
-    let totalPrice = 0;
+    let totalPrice = 0
 
     for (const item of order) {
-      const product = products.find((p) => p.id === item.id);
+      const product = products.find((p) => p.id === item.id)
       if (product) {
-        totalPrice += product.price * item.quantity;
+        totalPrice += product.price * item.quantity
 
         if (item?.selectedToppings) {
           for (const topping of item.selectedToppings) {
             const toppingData = product.toppings.find(
               (t) => t.title === topping
-            );
+            )
             if (toppingData) {
-              totalPrice += toppingData.price * item.quantity;
+              totalPrice += toppingData.price * item.quantity
             }
           }
         }
       }
     }
 
-    return totalPrice;
+    return totalPrice
   }
 
   useEffect(() => {
     // console.log("cartItems111", cartItems);
-    setTotalPrice(calculateTotalPrice(foods, cartItems));
-  }, []);
+    setTotalPrice(calculateTotalPrice(foods, cartItems))
+  }, [])
 
   return (
     <>
@@ -150,14 +154,14 @@ export function OrderPage() {
               {" "}
               {t("Order")} № {currentTimestamp}
             </div>
-            <div className="text1"> {settings.textToOrder} </div>
+            <div className="text1"> {settings?.textToOrder} </div>
           </div>
         </div>
 
         {cartItems && cartItems.length > 0 && (
           <div className="cardsContainer">
             {cartItems.map((food) => {
-              return <CardRowSmall food={food} key={food.id} />;
+              return <CardRowSmall food={food} key={food.id} />
             })}
           </div>
         )}
@@ -232,10 +236,14 @@ export function OrderPage() {
       </div>
 
       {env == "browser" && (
+        <BigButton onClick={onBack}>{`${t("Back")}  `}</BigButton>
+      )}
+
+      {env == "browser" && (
         <BigButton onClick={onSubmit}>
           {`${t("Buy")} ${totalPrice} ₪`}
         </BigButton>
       )}
     </>
-  );
+  )
 }

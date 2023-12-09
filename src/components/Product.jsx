@@ -38,8 +38,15 @@ export const Product = () => {
     exist?.selectedToppings || []
   )
   const [selectedExtras, setSelectedExtras] = useState({})
-  const [selectedExtrasNames, setSelectedExtrasNames] = useState({})
+  const [selectedExtrasNames, setSelectedExtrasNames] = useState(
+    cartItems?.selectedExtrasNames || {}
+  )
   const [groupedExtras, setGroupedExtras] = useState({})
+
+  useEffect(() => {
+    console.log("selectedExtras :>> ", selectedExtras)
+    console.log("selectedExtrasNames :>> ", selectedExtrasNames)
+  }, [selectedExtras, selectedExtrasNames])
 
   useEffect(() => {
     tele.ready()
@@ -173,23 +180,41 @@ export const Product = () => {
   //================================================
 
   // Обработчики изменения выбранных опций для каждого типа
+ 
   const handleTypeChange = (type) => (e) => {
+    const selectedExtraId = e.target.value
+    const selectedExtra = food.extras.find(
+      (extra) => String(extra.id) === String(selectedExtraId)
+    )
+
     setSelectedExtras({
       ...selectedExtras,
-      [type]: e.target.value,
+      [type]: selectedExtraId,
     })
 
     setSelectedExtrasNames({
       ...selectedExtrasNames,
-      [type]:
-        food.extras.find((extra) => String(extra.id) === String(e.target.value))
-          ?.title || "",
+      [type]: selectedExtra?.title || "",
     })
   }
 
-  const getTypeValue = (type) => selectedExtras[type] || ""
+  const getTypeValue = (type) => {
+    console.log("type2222 :>> ", type)
+    console.log("selectedExtras type2222 :>> ", selectedExtras)
+    console.log("selectedExtrasNames type2222 :>> ", selectedExtrasNames)
+    console.log("cartItems type2222 :>> ", cartItems)
+    // selectedExtrasNames[type] || ""
+    selectedExtras[type] || ""
+  }
+
+  // const getTypeValue = (type) => selectedExtras[type] || ""
+
   useEffect(() => {
     function groupExtrasByType(extras) {
+      if (extras.length === 0) {
+        return null
+      }
+
       const grouped = {}
 
       for (const extra of extras) {
@@ -239,6 +264,7 @@ export const Product = () => {
           </Box>
         </Box>
         {/* extras __________________________________________ */}
+        {console.log("groupedExtras :>> ", groupedExtras)}
         {groupedExtras && (
           <>
             <Typography
@@ -320,7 +346,6 @@ export const Product = () => {
                       selectedToppings.includes(topping.title) ? "selected" : ""
                     }`}
                   >
-                    {console.log("topping.image222", topping.image)}
                     <Avatar
                       alt={topping.title}
                       src={

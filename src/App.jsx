@@ -23,7 +23,6 @@ tele.expand() //расширяем на все окно
 
 export const CartContext = createContext()
 
- 
 export function App() {
   const location = useLocation()
   const [foods, setFoods] = useState([])
@@ -108,7 +107,6 @@ export function App() {
     tele.isClosingConfirmationEnabled = false
 
     const query = queryString.parse(location.search)
-    console.log("query222", query)
     const restaurant_id = query.restaurant_id
 
     getSettings(restaurant_id)
