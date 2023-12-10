@@ -24,7 +24,7 @@ const FlexColumnContainer = styled("div")({
 export const LoadingOverlay = () => {
   return (
     <FullscreenOverlayBox>
-      <FlexColumnContainer sx={{ justifyContent: "center" }}>
+      {/* <FlexColumnContainer sx={{ justifyContent: "center" }}> */}
         {/* <Typography
           sx={{ padding: "4px 8px ", width: "40px", height: "40px" }}
           variant="h3"
@@ -34,9 +34,9 @@ export const LoadingOverlay = () => {
         <CircularProgress
           size={64}
           color="primary"
-          sx={{ marginLeft: "5rem", marginTop: "5rem" }}
+          // sx={{ marginLeft: "5rem", marginTop: "5rem" }}
         />
-      </FlexColumnContainer>
+      {/* </FlexColumnContainer> */}
     </FullscreenOverlayBox>
   );
 };
