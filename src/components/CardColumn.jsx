@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react"
 import "App.scss"
 import { Button } from "./Button"
 import { useTranslation } from "react-i18next"
+import i18n from "helpers/i18n"
+
 import { Link, useLocation, useNavigate } from "react-router-dom"
 // import * as React from 'react';
 // import { CartContext } from "App"
@@ -16,7 +18,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const [count, setCount] = useState(quantity || 0)
   const [imageLoaded, setImageLoaded] = useState(false) // State to track if the image has loaded
   const { id, title, image, price, toppings } = food
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const handleIncrement = () => {
     setCount(count + 1)

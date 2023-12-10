@@ -5,7 +5,9 @@ import { Button, Typography, MenuItem, Select, Box } from "@mui/material"
 
 import { useTelegram } from "hooks/useTelegram"
 import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents"
+
 import { useTranslation } from "react-i18next"
+import i18n from "helpers/i18n"
 import { baseURL } from "constants/api"
 import { tableData } from "constants/constants"
 import { languageButtons } from "../constants/languageButtons"
@@ -26,7 +28,7 @@ export const Header = () => {
     generatedGitInfo
   const theme = useTheme()
   const { user, queryId, onClose } = useTelegram()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const [currentLanguage, setCurrentLanguage] = useState("en")
   const [isTestTextVisible, setTestTextVisible] = useState(false)
   const [tableNumber, setTableNumber] = useState("")

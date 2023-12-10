@@ -4,7 +4,9 @@ import "App.scss"
 import { CardColumn } from "components/CardColumn"
 import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
+
 import { useTranslation } from "react-i18next"
+import i18n from "helpers/i18n"
 import { CartContext } from "App"
 import { Box } from "@mui/material"
 const tele = window.Telegram.WebApp
@@ -88,8 +90,7 @@ export const ProductsPage = () => {
     flexWrap: "wrap",
     justifyContent: "center",
   }
-  
-  
+
   return (
     <>
       <Box sx={flexStyle}>

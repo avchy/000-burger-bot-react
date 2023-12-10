@@ -14,7 +14,9 @@ import "App.scss"
 import { ButtonCounter } from "components/ButtonCounter"
 import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
+
 import { useTranslation } from "react-i18next"
+import i18n from "helpers/i18n"
 import Avatar from "@mui/material/Avatar"
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
@@ -26,7 +28,7 @@ import { LoadingOverlay } from "./LoadingOverlay"
 import queryString from "query-string"
 
 export const Product = () => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { env } = useNavigator()
   const navigate = useNavigate()
   const location = useLocation()

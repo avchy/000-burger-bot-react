@@ -18,7 +18,9 @@ import { CardRowSmall } from "components/CardRowSmall"
 import orderImg from "images/Cafe_Cafe_Logo.png"
 import { useNavigator } from "hooks/useNavigator"
 import { CartContext } from "App"
+
 import { useTranslation } from "react-i18next"
+import i18n from "helpers/i18n"
 import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents"
 
 const styles = {
@@ -29,7 +31,7 @@ const styles = {
 
 export function OrderPage() {
   const tele = window.Telegram.WebApp
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { env } = useNavigator()
 
   const {

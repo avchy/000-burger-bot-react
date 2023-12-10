@@ -1,7 +1,12 @@
 import "App.scss"
 
 import { useTranslation } from "react-i18next"
-import { FlexColumnContainer, FlexRowContainer } from "components/AllHelpComponents"
+import i18n from "helpers/i18n"
+
+import {
+  FlexColumnContainer,
+  FlexRowContainer,
+} from "components/AllHelpComponents"
 import { Box } from "@mui/system"
 
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
@@ -11,7 +16,7 @@ import toppings_icon from "images/toppings_icon.png"
 export function CardRow({ food }) {
   const { title, image, price, id, quantity, toppings } = food
   const priceAllItems = (price * (quantity || 1)).toFixed(2)
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <>
@@ -36,7 +41,11 @@ export function CardRow({ food }) {
                     {/* <img src={topping.image} alt={topping.title} /> */}
 
                     <img
-                      src={isPhotoUrl(topping.image) ? topping.image : toppings_icon}
+                      src={
+                        isPhotoUrl(topping.image)
+                          ? topping.image
+                          : toppings_icon
+                      }
                       alt={topping.title}
                     />
                   </div>
