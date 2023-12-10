@@ -260,7 +260,6 @@ export const Product = () => {
     }
 
     console.log("titl3232e :>> ", title)
- 
 
     const selectedExtraId = title
     const selectedExtra = food.extras.find(
@@ -280,14 +279,13 @@ export const Product = () => {
     // }
   }
 
-  
   useEffect(() => {
     // Получение начального значения selectedExtrasNames из cartItems
-    const exist = cartItems.find((x) => x.id === food.id);
+    const exist = cartItems.find((x) => x.id === food.id)
     if (exist && exist.selectedExtrasNames) {
-      setSelectedExtrasNames(exist.selectedExtrasNames);
+      setSelectedExtrasNames(exist.selectedExtrasNames)
     }
-  }, [  ]);
+  }, [])
   return (
     <>
       {!cartItems && <LoadingOverlay />}
@@ -323,7 +321,8 @@ export const Product = () => {
             <Typography
               sx={{
                 p: 2,
-                fontSize: "calc(0.5em + 2vw)",
+                fontSize: "calc(0.7em + 2vw)",
+                color: "#e0c521",
                 fontWeight: 700,
                 borderBottom: "1px solid #e0c521",
                 width: "50%",
@@ -343,49 +342,52 @@ export const Product = () => {
                     <RadioGroup
                       name={type}
                       value={getTypeValue(type)}
-                      // onChange={handleTypeChange(type)}
-
                       onChange={(e) => toggleExtras(e.target.value, type)} // Вызов handleExtrasChange при изменении значения
-                      //  onChange={(e) => handleExtrasChange(type, e.target.value)} // Вызов handleExtrasChange при изменении значения
                     >
                       {typeExtras.map((extra) => (
                         <>
-                          {console.log(
-                            "selectedExtrasNames :>> ",
-                            selectedExtrasNames
-                          )}
-                          {console.log("_product_cartItems :>> ", cartItems)}
-
-                          {console.log(
-                            "cartItems?.selectedExtrasNames :>> ",
-                            cartItems?.selectedExtrasNames
-                          )}
-                          {console.log("[type] :>> ", [type])}
-
-                          {console.log(" extra.title :>> ", extra.title)}
-                          {console.log(
-                            "   cartItems[0]?.selectedExtrasNames> ",
-                            cartItems[0]?.selectedExtrasNames
-                          )}
-
                           <FormControlLabel
                             key={extra.id}
                             value={String(extra.id)}
-                            // control={<Radio />}
-
+ 
                             control={
                               <Radio
+                                icon={
+                                  <Box className={`topping-circle  `}>
+                                    <Avatar
+                                      alt={extra.title}
+                                      src={
+                                        isPhotoUrl(extra.image)
+                                          ? extra.image
+                                          : toppings_icon
+                                      }
+                                      sx={{ width: 66, height: 66 }}
+                                    />
+                                  </Box>
+                                }
+                                checkedIcon={
+                                  <Box className={`topping-circle selected`}>
+                                    <Avatar
+                                      alt={extra.title}
+                                      src={
+                                        isPhotoUrl(extra.image)
+                                          ? extra.image
+                                          : toppings_icon
+                                      }
+                                      sx={{ width: 66, height: 66 }}
+                                    />
+                                  </Box>
+                                }
                                 checked={
-                                  selectedExtrasNames ?
-                                    selectedExtrasNames[type] ===
-                                      extra.title :
-                                  (cartItems[0]?.selectedExtrasNames &&
-                                    Object.entries(
-                                      cartItems[0]?.selectedExtrasNames
-                                    )
-                                      .flat()
-                                      .join(", ")
-                                      .includes(extra.title))
+                                  selectedExtrasNames
+                                    ? selectedExtrasNames[type] === extra.title
+                                    : cartItems[0]?.selectedExtrasNames &&
+                                      Object.entries(
+                                        cartItems[0]?.selectedExtrasNames
+                                      )
+                                        .flat()
+                                        .join(", ")
+                                        .includes(extra.title)
                                 }
                               />
                             }
@@ -407,7 +409,8 @@ export const Product = () => {
             <Typography
               sx={{
                 p: 2,
-                fontSize: "calc(0.5em + 2vw)",
+                fontSize: "calc(0.7em + 2vw)",
+                color: "#e0c521",
                 fontWeight: 700,
                 borderBottom: "1px solid #e0c521",
                 width: "50%",
