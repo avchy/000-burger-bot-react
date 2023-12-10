@@ -86,8 +86,7 @@ export const Header = () => {
     console.log("user?.language_code :>> ", user?.language_code)
     console.log("currentLanguage :>> ", currentLanguage)
     if (user?.language_code && user?.language_code !== currentLanguage) {
-      setCurrentLanguage(user?.language_code)
-      i18n.changeLanguage(user?.language_code)
+      changeLanguage(user?.language_code)
     }
   }, [user])
 
