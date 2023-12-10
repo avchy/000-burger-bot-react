@@ -322,9 +322,9 @@ export const Product = () => {
               sx={{
                 p: 2,
                 fontSize: "calc(0.7em + 2vw)",
-                color: "#e0c521",
+                color: "tomato",
                 fontWeight: 700,
-                borderBottom: "1px solid #e0c521",
+                borderBottom: "1px solid tomato",
                 width: "50%",
               }}
             >
@@ -349,11 +349,10 @@ export const Product = () => {
                           <FormControlLabel
                             key={extra.id}
                             value={String(extra.id)}
- 
                             control={
                               <Radio
                                 icon={
-                                  <Box className={`topping-circle  `}>
+                                  <Box className={`extra-circle`}>
                                     <Avatar
                                       alt={extra.title}
                                       src={
@@ -366,7 +365,7 @@ export const Product = () => {
                                   </Box>
                                 }
                                 checkedIcon={
-                                  <Box className={`topping-circle selected`}>
+                                  <Box className={`extra-circle selected`}>
                                     <Avatar
                                       alt={extra.title}
                                       src={

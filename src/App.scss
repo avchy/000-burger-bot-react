@@ -39,7 +39,7 @@ body {
 }
 
 //   ====================================================================
- 
+
 .pageContainer {
   position: relative;
 
@@ -67,14 +67,14 @@ body {
     border: 2px solid $yellow;
     border-radius: 5px;
 
-    .imageContainer { 
+    .imageContainer {
       height: 100%;
       margin: 0 20px 0 0;
     }
 
     .imageContainer img {
-       height: 20vw; 
-       object-fit: cover;
+      height: 20vw;
+      object-fit: cover;
     }
 
     .textContainer {
@@ -92,15 +92,14 @@ body {
         font-size: calc(0.5em + 2vw);
         hyphens: none;
       }
- 
     }
   }
 
   .cardsContainer {
-     display: flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    flex-direction: column; 
+    flex-direction: column;
     border: 2px solid $yellow;
     border-radius: 5px;
   }
@@ -122,18 +121,18 @@ body {
 
   .card_title {
     font-weight: 400;
-    text-align: center; 
+    text-align: center;
     text-align: center;
     display: inline-block;
   }
 
   .cart_text_center {
-    text-align: center; 
+    text-align: center;
     display: inline-block;
     margin: 10px 0 0 0;
   }
 
-  .image_container { 
+  .image_container {
     margin: 0 auto;
   }
 
@@ -142,8 +141,6 @@ body {
     object-fit: cover;
     max-height: 90px;
   }
-
- 
 
   .card_badge {
     position: absolute;
@@ -161,7 +158,7 @@ body {
     font-size: 20px;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
   }
 
   .card_badge_simple {
@@ -200,7 +197,6 @@ body {
     font-size: calc(0.8rem + 1vw);
     min-width: 70px;
   }
- 
 }
 
 .CardRowSmall {
@@ -233,7 +229,7 @@ body {
   }
 }
 //   ====================================================================
- 
+
 //   ====================================================================
 
 .form {
@@ -294,7 +290,6 @@ body {
 }
 
 // ====================================================================
- 
 
 .totalPrice {
   margin-left: 20px;
@@ -306,7 +301,7 @@ body {
 }
 
 .cafe-text-field {
-   color: var(--text-color); 
+  color: var(--text-color);
   font-family: var(--default-font);
   font-size: 17px;
   line-height: 21px;
@@ -332,21 +327,21 @@ body {
   padding: 10px 20px 24px;
   color: grey;
 }
- 
+
 .comment_container {
-  background-color: $backgroundElements; 
+  background-color: $backgroundElements;
   padding: 0.5rem;
   margin: 10px;
   border-radius: 5px;
- 
 }
- 
 
 .testText {
   border: solid 1px #396490;
   padding: 0.5rem;
   margin: 10px;
 }
+
+// ________________________________________________________________
 
 .topping-circle {
   width: 100px;
@@ -374,6 +369,38 @@ body {
   width: 20px;
   height: 20px;
   border: 4px solid orange; /* Цвет галочки */
+  border-radius: 50%; /* Создаем круглую рамку вокруг галочки */
+  background-color: rgb(136, 235, 255); /* Задаем цвет голубого фона */
+}
+
+// ________________________________________________________________
+
+.extra-circle {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.extra-circle.selected {
+  border: 7px solid tomato;
+  position: relative;
+}
+.extra-circle.selected::after {
+  content: " "+"✓";
+  white-space: pre;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  color: #131415;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  border: 4px solid tomato; /* Цвет галочки */
   border-radius: 50%; /* Создаем круглую рамку вокруг галочки */
   background-color: rgb(136, 235, 255); /* Задаем цвет голубого фона */
 }
