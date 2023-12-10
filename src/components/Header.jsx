@@ -30,14 +30,14 @@ export const Header = () => {
   const [currentLanguage, setCurrentLanguage] = useState("en")
   const [isTestTextVisible, setTestTextVisible] = useState(false)
   const [tableNumber, setTableNumber] = useState("")
-  const [restaurant_id, setRestaurant_id] = useState("")
+  // const [restaurant_id, setRestaurant_id] = useState("")
   const [formOpenSendWaiter, setFormOpenSendWaiter] = useState(false)
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search)
-    const restaurant_id = searchParams.get("restaurant_id")
-    setRestaurant_id(restaurant_id)
-  }, [])
+  // useEffect(() => {
+  //   const searchParams = new URLSearchParams(window.location.search)
+  //   const restaurant_id = searchParams.get("restaurant_id")
+  //   setRestaurant_id(restaurant_id)
+  // }, [])
 
   const handleTableNumberChange = (event) => {
     setTableNumber(event.target.value)
@@ -83,7 +83,9 @@ export const Header = () => {
   }
 
   useEffect(() => {
-    if (user?.language_code !== currentLanguage) {
+    console.log("user?.language_code :>> ", user?.language_code)
+    console.log("currentLanguage :>> ", currentLanguage)
+    if (user?.language_code && user?.language_code !== currentLanguage) {
       setCurrentLanguage(user?.language_code)
       i18n.changeLanguage(user?.language_code)
     }
