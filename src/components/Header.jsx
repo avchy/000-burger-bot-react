@@ -105,16 +105,10 @@ export const Header = () => {
             border: "2px solid orange",
             backgroundColor: theme.blue,
             width: "150px",
-            height: "82px",
-            marginBottom: "10px",
           }}
         >
           {languageButtons.map((button) => (
-            <MenuItem
-              key={button.code}
-              value={button.code}
-              sx={{ height: "100px" }}
-            >
+            <MenuItem key={button.code} value={button.code}>
               <FlexRowContainer>
                 <Box>{button.flag} </Box>
 
