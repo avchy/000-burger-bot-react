@@ -36,11 +36,14 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2"
   },
   "scripts": {
     "git-info": "node src/helpers/gitInfo.js",
     "start": "npm run git-info && react-scripts start",
+    "dev": "REACT_APP_STAGE=local react-scripts start",
     "build": "CI=false npm run git-info && react-scripts build"
   },
   "eslintConfig": {

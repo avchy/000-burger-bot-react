@@ -1,96 +1,21 @@
 import { useContext, useState, useCallback, useEffect } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import "App.scss"
 import { CardColumn } from "components/CardColumn"
 import { BigButton } from "components/BigButton"
 import { useNavigator } from "hooks/useNavigator"
-import { useTranslation } from "react-i18next"
-import { StyledButton } from "components/StyledButton"
-import { FlexColumnContainer } from "components/AllHelpComponents"
-import { CartContext } from "App"
-// import axios from "axios"
-import {
-  Box,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  CircularProgress,
-  Paper,
-  Typography,
-} from "@mui/material"
-// const { getData } = require("db/db")
-// const foods = getData()
-const tele = window.Telegram.WebApp
-// import queryString from 'query-string'
 
-// import { Cloudinary } from '@cloudinary/url-gen'
-// import { AdvancedImage } from '@cloudinary/react'
+import { useTranslation } from "react-i18next"
+import i18n from "helpers/i18n"
+import { CartContext } from "App"
+import { Box } from "@mui/material"
+const tele = window.Telegram.WebApp
 
 export const ProductsPage = () => {
-  // const cld = new Cloudinary({cloud: {cloudName: 'dvb3cxb9h'}});
-  // const myImage = new CloudinaryImage('sample', {cloudName: 'your-cloud-name'}).resize(fill().width(100).height(150));
-  // <AdvancedImage cldImg={myImage} />
-  const location = useLocation()
-
-  const { t, i18n } = useTranslation()
-  // const [loading, setLoading] = useState(true)
-
-  // const changeLanguage = (language) => {
-  //   i18n.changeLanguage(language)
-  // }
-
+  const { t } = useTranslation()
   const { env } = useNavigator()
-  // const [foods, setFoods] = useState([])
   const navigate = useNavigate()
-
   const { cartItems, setCartItems, foods } = useContext(CartContext)
-  // const { query_id, setQueryId } = useContext(CartContext)
-
-  useEffect(() => {
-    tele.ready()
-  })
-
-  // const getDishes = async () => {
-  //   // const query = queryString.parse(location.search)
-  //   // console.log('query222', query)
-  //   // console.log('query.restaurant_id2222', query.restaurant_id)
-  //   // const restaurant_id = query.restaurant_id
-
-  //   // const restaurant_id= query.restaurant_id || "cafecafe"
-  //   // const restaurant_id= 'cafecafe'
-
-  //   try {
-  //     // const response = await axios.get('https://burgerim.ru/dishes/cafecafe')
-
-  //     // console.log('url + restaurant_id:>> ', url + '?restaurant_id=' + restaurant)
-  //     // const response = await axios.get(url + '?restaurant_id=' + restaurant)
-
-  //     const response = await axios.get("https://burgerim.ru/dishes/" + restaurant_id)
-  //     console.log("url + restaurant_id:>> ", "https://burgerim.ru/dishes/" + restaurant_id)
-
-  //     console.log("response.data", response.data)
-  //     setFoods(response.data)
-
-  //     console.log('Запрос "getDishes" успешно выполнен')
-  //     setLoading(false)
-  //   } catch (error) {
-  //     console.error('Ошибка при выполнении запроса "getDishes":', error)
-  //     setLoading(false)
-
-  //     return
-  //   }
-  // }
-  useEffect(() => {
-    tele.BackButton.hide()
-    // getDishes()
-    // tele.MainButton.text = t("VIEW ORDER")
-    // tele.isClosingConfirmationEnabled = false
-  }, [ ])
-  // useEffect(() => {
-  //   setQueryId(tele.initDataUnsafe?.query_id || 0)
-  // }, [])
 
   const onAdd = (food) => {
     if (food.length === 0) {
@@ -102,7 +27,9 @@ export const ProductsPage = () => {
     const exist = cartItems.find((x) => x.id === food.id)
     if (exist) {
       setCartItems(
-        cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x))
+        cartItems.map((x) =>
+          x.id === food.id ? { ...exist, quantity: exist.quantity + 1 } : x
+        )
       )
     } else {
       setCartItems([...cartItems, { ...food, quantity: 1 }])
@@ -121,7 +48,9 @@ export const ProductsPage = () => {
       setCartItems(cartItems.filter((x) => x.id !== food.id))
     } else {
       setCartItems(
-        cartItems.map((x) => (x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x))
+        cartItems.map((x) =>
+          x.id === food.id ? { ...exist, quantity: exist.quantity - 1 } : x
+        )
       )
     }
   }
@@ -129,6 +58,16 @@ export const ProductsPage = () => {
   const onSubmit = useCallback(() => {
     navigate("/order")
   }, [cartItems])
+
+  useEffect(() => {
+    tele.ready()
+    tele.MainButton.text = t("VIEW ORDER")
+  })
+
+  useEffect(() => {
+    tele.BackButton.hide()
+    // tele.isClosingConfirmationEnabled = false
+  }, [])
 
   useEffect(() => {
     tele.onEvent("mainButtonClicked", onSubmit)
@@ -139,10 +78,6 @@ export const ProductsPage = () => {
   }, [onSubmit])
 
   useEffect(() => {
-    tele.MainButton.text = t("VIEW ORDER")
-  })
-
-  useEffect(() => {
     if (cartItems.length === 0) {
       tele.MainButton.hide()
     } else {
@@ -150,44 +85,69 @@ export const ProductsPage = () => {
     }
   }, [cartItems])
 
+  const flexStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  }
+
   return (
     <>
-      {/* {loading ? (
-        <div id="fullscreen-overlay">
-          <CircularProgress size={64} color="primary" sx={{ marginRight: "1rem" }} />
-        </div>
-      ) : ( */}
-        <div className="productsPage">
-          {/* <h1 className="title">{t("Falafel Shop")}</h1> */}
-          <div className="cards_container">
-            {foods.map((food) => {
-              const foodWithQuantity = cartItems.find((item) => item.id === food.id)
-              const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
-              return (
-                <CardColumn
-                  food={food}
-                  key={food.id}
-                  onAdd={onAdd}
-                  onRemove={onRemove}
-                  quantity={quantity}
-                />
-              )
-            })}
-          </div>
-          {cartItems.length !== 0 && env == "browser" && (
-            <BigButton
-              title={t("Order")}
-              disable={cartItems.length === 0 ? true : false}
-              onClick={onSubmit}
-            />
-            // <StyledButton
-            //   title={`Order`}
-            //   disable={cartItems.length === 0 ? true : false}
-            //   onClick={onSubmit}
-            // />
-          )}
-        </div>
-      {/* )} */}
+      <Box sx={flexStyle}>
+        <Box sx={flexStyle}>
+          {foods.map((food) => {
+            const foodWithQuantity = cartItems.find(
+              (item) => item.id === food.id
+            )
+            const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
+            return (
+              <CardColumn
+                food={food}
+                key={food.id}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                quantity={quantity}
+              />
+            )
+          })}
+        </Box>
+        {cartItems.length !== 0 && env === "browser" && (
+          <BigButton
+            disable={cartItems.length === 0 ? true : false}
+            onClick={onSubmit}
+          >
+            {t("Order")}
+          </BigButton>
+        )}
+      </Box>
     </>
+
+    // <>
+    // 	<div className="productsPage">
+    // 		{/* <h1 className="title">{t("Falafel Shop")}</h1> */}
+    // 		<div className="cards_container">
+    // 			{foods.map((food) => {
+    // 				const foodWithQuantity = cartItems.find((item) => item.id === food.id);
+    // 				const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0;
+    // 				return (
+    // 					<CardColumn
+    // 						food={food}
+    // 						key={food.id}
+    // 						onAdd={onAdd}
+    // 						onRemove={onRemove}
+    // 						quantity={quantity}
+    // 					/>
+    // 				);
+    // 			})}
+    // 		</div>
+    // 		{cartItems.length !== 0 && env == "browser" && (
+    // 			<BigButton
+    // 				title={t("Order")}
+    // 				disable={cartItems.length === 0 ? true : false}
+    // 				onClick={onSubmit}
+    // 			/>
+    // 		)}
+    // 	</div>
+    // </>
   )
 }

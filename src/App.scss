@@ -7,560 +7,401 @@ $backgroundElements: #1a222c;
 
 $yellow: #e0c521;
 
-.App {
-	//  padding: 8px;
-}
-
 body {
-	background-color: $backgroundAll;
-	color: $white;
+  background-color: $backgroundAll;
+  color: $white;
 }
 
 //   ====================================================================
 
 .title {
-	text-align: center;
-	margin-top: 50px;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .countryFlag {
-	// padding: 2px;
-	margin: 0 10px;
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
-	object-fit: cover;
+  // padding: 2px;
+  margin: 0 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .title_mini {
-	// text-align: center;
-	// margin: 10px 0 10px 0;
-	font-size: 20px;
-	font-weight: 600;
-	color: white;
-	padding: 0.5rem;
-	margin: 13px 10px;
+  // text-align: center;
+  // margin: 10px 0 10px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  padding: 0.5rem;
+  margin: 13px 10px;
 }
 
-//   ====================================================================
-
-.productsPage {
-	.cards_container {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-}
-
-//   ====================================================================
-
-.orderPage {
-	background-color: $backgroundElements;
-	border-radius: 5px;
-
-	.orderHeaderEdit {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-	}
-
-	.cardsContainer {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		flex-direction: column;
-		// border: 2px solid #e0c521;
-	}
-}
 //   ====================================================================
 
 .pageContainer {
-	position: relative;
+  position: relative;
 
-	background-color: $backgroundElements;
+  background-color: $backgroundElements;
 
-	display: flex;
-	flex-direction: column;
-	// flex-direction: row;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  // flex-direction: row;
+  justify-content: space-between;
 
-	padding: 0.5rem;
+  padding: 0.5rem;
 
-	margin: 10px;
-	border-radius: 5px;
+  margin: 10px;
+  border-radius: 5px;
 
-	.orderContainer {
-		height: 30%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		padding: 0.5rem 0.5rem;
-		margin: 10px 0px;
-		position: relative;
+  .orderContainer {
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem;
+    margin: 10px 0px;
+    position: relative;
 
-		border: 2px solid $yellow;
-		border-radius: 5px;
+    border: 2px solid $yellow;
+    border-radius: 5px;
 
-		.imageContainer {
-			// width: 45%;
-			// width: 100px;
-			height: 100%;
-			margin: 0 20px 0 0;
-		}
+    .imageContainer {
+      height: 100%;
+      margin: 0 20px 0 0;
+    }
 
-		.imageContainer img {
-			// width: 100%;
-			height: 20vw;
+    .imageContainer img {
+      height: 20vw;
+      object-fit: cover;
+    }
 
-			// height: 100px;
-			object-fit: cover;
-		}
+    .textContainer {
+      word-break: break-all;
+      text-align: center;
+      display: flex; /* Используем flex-контейнер для вертикального центрирования */
+      flex-direction: column; /* Элементы будут располагаться вертикально */
+      justify-content: center; /* Выравниваем элементы по центру по вертикали */
+      align-items: center; /* Выравниваем элементы по центру по горизонтали */
+      width: 100%;
 
-		.textContainer {
-			word-break: break-all;
-			text-align: center;
-			display: flex; /* Используем flex-контейнер для вертикального центрирования */
-			flex-direction: column; /* Элементы будут располагаться вертикально */
-			justify-content: center; /* Выравниваем элементы по центру по вертикали */
-			align-items: center; /* Выравниваем элементы по центру по горизонтали */
-			width: 100%;
+      .text1 {
+        color: $white;
+        word-wrap: break-word;
+        font-size: calc(0.5em + 2vw);
+        hyphens: none;
+      }
+    }
+  }
 
-			.text1 {
-				color: $white;
-				word-wrap: break-word;
-				font-size: calc(0.5em + 2vw);
-				hyphens: none;
-			}
-
-			.text_small {
-				color: $light_grey;
-			}
-		}
-	}
-
-	.cardsContainer {
-		// width: 80%;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		flex-direction: column;
-
-		border: 2px solid $yellow;
-		border-radius: 5px;
-	}
+  .cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid $yellow;
+    border-radius: 5px;
+  }
 }
 
 //   ====================================================================
 
 .CardColumn {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 150px;
-	height: 250px;
-	border: 2px solid $yellow;
-	padding: 0.5rem 0.1rem;
-	margin: 13px 10px;
-	position: relative;
-	border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px;
+  height: 250px;
+  border: 2px solid $yellow;
+  padding: 0.5rem 0.1rem;
+  margin: 13px 10px;
+  position: relative;
+  border-radius: 5px;
 
-	.card_title {
-		font-weight: 400;
-		text-align: center;
-	}
+  .card_title {
+    font-weight: 400;
+    text-align: center;
+    text-align: center;
+    display: inline-block;
+  }
 
-	.card_title {
-		text-align: center;
-		display: inline-block;
-	}
+  .cart_text_center {
+    text-align: center;
+    display: inline-block;
+    margin: 10px 0 0 0;
+  }
 
-	.cart_text_center {
-		text-align: center;
-		// text-align: left;
+  .image_container {
+    margin: 0 auto;
+  }
 
-		display: inline-block;
-		margin: 10px 0 0 0;
-	}
+  .image_container img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 90px;
+  }
 
-	.image_container {
-		// width: 100px;
-		// height: 100px;
-		margin: 0 auto;
-	}
+  .card_badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background-color: rgb(227, 112, 30);
+    border-radius: 50%;
+    transform: translate(20px, -20px) scale(1);
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid rgb(227, 112, 30);
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-	.image_container img {
-		width: 100%;
-		object-fit: cover;
-	}
+  .card_badge_simple {
+    padding: 5px;
+  }
 
-	.btn-container {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-	}
-
-	.buttons_container {
-		position: absolute;
-		right: 0;
-
-		float: right;
-		text-align: right;
-	}
-
-	.card_badge {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 40px;
-		height: 40px;
-		background-color: rgb(227, 112, 30);
-		border-radius: 50%;
-		transform: translate(20px, -20px) scale(1);
-		color: #fff;
-		font-weight: bold;
-		text-align: center;
-		border: 2px solid rgb(227, 112, 30);
-		font-size: 20px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		// opacity: 1;
-	}
-
-	.card_badge_simple {
-		padding: 5px;
-	}
-
-	.card_badge--hidden {
-		display: none;
-	}
+  .card_badge--hidden {
+    display: none;
+  }
 }
 //   ====================================================================
 
 .CardRow {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding: 0.5rem;
-	margin: 13px 10px;
-	position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin: 13px 10px;
+  position: relative;
 
-	.image_container {
-		width: 50px;
-		height: 50px;
-		margin: 0 30px 0 0;
-	}
+  .image_container {
+    width: 50px;
+    height: 50px;
+    margin: 0 30px 0 0;
+  }
 
-	.image_container img {
-		width: 100%;
-		object-fit: cover;
-	}
+  .image_container img {
+    width: 100%;
+    object-fit: cover;
+  }
 
-	.card_row_text {
-		text-align: left;
-		display: flex;
-		align-items: center;
-		font-size: calc(0.8rem + 1vw);
-		min-width: 70px;
-
-	}
-
-	.card_row_mini_text {
-		text-align: left;
-		display: flex;
-		align-items: center;
-		font-size: calc(0.5rem + 2vw);
-	}
+  .card_row_text {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-size: calc(0.8rem + 1vw);
+    min-width: 70px;
+  }
 }
 
 .CardRowSmall {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-	margin: 13px 10px;
-	position: relative;
-	overflow: hidden;
-	white-space: pre-wrap;
-	text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
+  margin: 10px 0px 10px 10px;
+  position: relative;
+  overflow: hidden;
+  white-space: pre-wrap;
+  text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
 
-	.image_container {
-		width: 50px;
-		height: 50px;
-		margin: 0 20px 0 0;
-	}
+  .image_container {
+    width: 50px;
+    height: 50px;
+    margin: 0 20px 0 0;
+  }
 
-	.image_container img {
-		width: 100%;
-		object-fit: cover;
-	}
+  .image_container img {
+    width: 100%;
+    object-fit: cover;
+  }
 
-	.cart_text_center {
-		text-align: left;
-		display: flex;
-		align-items: center;
-		min-width: 70px;
-
-	}
+  .cart_text_center {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    min-width: 70px;
+  }
 }
 //   ====================================================================
 
-.CardRowSmall_toppings {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-	margin: 13px 10px;
-	position: relative;
-	overflow: hidden;
-	white-space: pre-wrap;
-	text-overflow: ellipsis; /* Обрезать текст и добавить многоточие в конце */
-
-	.image_container {
-		width: 30px;
-		height: 30px;
-		margin: 0 20px 0 0;
-	}
-
-	.image_container img {
-		width: 100%;
-		object-fit: cover;
-	}
-
-	.cart_text_center {
-		text-align: left;
-		// text-align: center;
-		display: flex;
-		align-items: center;
-		// margin: 0 0 0 auto;
-		min-width: 70px;
-
-	}
-}
 //   ====================================================================
 
 .form {
-	background-color: $backgroundElements;
+  background-color: $backgroundElements;
 
-	margin: 10px;
-	border-radius: 5px;
+  margin: 10px;
+  border-radius: 5px;
 
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-	.input {
-		width: 80%;
-		padding: 10px;
-		margin: 10px;
-	}
+  .input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+  }
 
-	.select {
-		width: 80%;
-		padding: 10px;
-		margin: 10px;
-	}
-}
-
-//   ====================================================================
-
-#fullscreen-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.9); /* Цвет с прозрачностью 0.5 */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-}
-
-#fullscreen-overlay.hidden {
-	display: none;
-}
-
-.header {
-	width: 100%;
-	// height: 50px;
-	display: flex;
-	flex-wrap: wrap;
-
-	align-items: center;
-	// padding: 0 20px;
-
-	.username {
-		margin-left: auto;
-	}
+  .select {
+    width: 80%;
+    padding: 10px;
+    margin: 10px;
+  }
 }
 
 // Buttons ====================================================================
-.bigButton {
-	position: relative;
-	left: 50%;
-	transform: translate(-50%, 0);
-
-	margin: 10px 0 10px 0;
-	padding: 0.6rem 0.8rem;
-	font-size: 1.2rem;
-	text-align: center;
-	border: 0;
-	outline: none;
-	border-radius: 10px;
-	box-shadow: 1px -3px 52px -5px rgba(0, 0, 0, 0.77);
-	cursor: pointer;
-}
 
 .btn {
-	padding: 0.6rem 0.8rem;
-	font-size: 1.2rem;
-	text-align: center;
-	border: 0;
-	outline: none;
-	border-radius: 10px;
-	width: 120px;
-	margin-left: 10px;
-	box-shadow: 1px -3px 52px -5px rgba(0, 0, 0, 0.77);
-	cursor: pointer;
+  padding: 0.6rem 0.8rem;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 0;
+  outline: none;
+  border-radius: 10px;
+  width: 120px;
+  margin: 10px;
+  box-shadow: 1px -3px 52px -5px rgba(0, 0, 0, 0.77);
+  cursor: pointer;
 }
 
 .btn.add {
-	background-color: $yellow;
+  background-color: $yellow;
 }
 
 .btn.remove {
-	background-color: tomato;
-}
-
-.btn.checkout {
-	background-color: $green;
-	width: 150px;
-	color: #fff;
-	font-size: 14px;
+  background-color: tomato;
 }
 
 .btn:active {
-	transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .btn.add:active {
-	background-color: #ad9a1c;
+  background-color: #ad9a1c;
 }
 
 .btn.remove:active {
-	background-color: rgb(185, 73, 54);
-}
-
-.btn.checkout:active {
-	background-color: rgb(30, 93, 41);
+  background-color: rgb(185, 73, 54);
 }
 
 // ====================================================================
 
-.navLinkEdit {
-	text-align: right;
-	font-size: 1.2rem;
-	color: $green;
-	font-weight: 600;
-	margin-right: 20px;
-}
-
 .totalPrice {
-	margin-left: 20px;
+  margin-left: 20px;
 }
 
 .cafe-text-field-wrap {
-	margin-top: 14px;
-	color: black;
+  margin-top: 14px;
+  color: black;
 }
 
 .cafe-text-field {
-	// color: $text;
-	color: var(--text-color);
-
-	font-family: var(--default-font);
-	font-size: 17px;
-	line-height: 21px;
-	-webkit-font-smoothing: antialiased;
-	padding: 12px 20px 13px;
-	box-sizing: border-box;
-	display: block;
-	outline: none;
-	border: none;
-	border-radius: 0;
-	resize: none;
-	-webkit-user-select: auto;
-	user-select: auto;
-	cursor: auto;
-	width: 100%;
+  color: var(--text-color);
+  font-family: var(--default-font);
+  font-size: 17px;
+  line-height: 21px;
+  -webkit-font-smoothing: antialiased;
+  padding: 12px 20px 13px;
+  box-sizing: border-box;
+  display: block;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  resize: none;
+  -webkit-user-select: auto;
+  user-select: auto;
+  cursor: auto;
+  width: 100%;
 }
 
 .cafe-text-field-hint {
-	font-family: var(--default-font);
-	font-size: 14px;
-	line-height: 18px;
-	-webkit-font-smoothing: antialiased;
-	padding: 10px 20px 24px;
-	color: grey;
+  font-family: var(--default-font);
+  font-size: 14px;
+  line-height: 18px;
+  -webkit-font-smoothing: antialiased;
+  padding: 10px 20px 24px;
+  color: grey;
 }
-.selectField {
-	width: 50%;
-}
+
 .comment_container {
-	background-color: $backgroundElements;
-
-	padding: 0.5rem;
-	margin: 10px;
-	border-radius: 5px;
-
-	.text_small {
-		padding: 0.5rem;
-		margin: 10px;
-	}
-}
-
-.testWindow {
-	padding-top: 30px;
-	margin-top: 30px;
+  background-color: $backgroundElements;
+  padding: 0.5rem;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 .testText {
-	border: solid 1px #396490;
-	padding: 0.5rem;
-	margin: 10px;
+  border: solid 1px #396490;
+  padding: 0.5rem;
+  margin: 10px;
 }
+
+// ________________________________________________________________
 
 .topping-circle {
-	width: 100px;
-	height: 100px;
-	background-color: white;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
-
-// .topping-circle.selected {
-//   border: 7px solid $yellow;
-// }
 
 .topping-circle.selected {
-	border: 7px solid orange;
-	position: relative;
+  border: 7px solid orange;
+  position: relative;
 }
 .topping-circle.selected::after {
-	content: " "+"✓";
-	white-space: pre;
-	font-weight: bold;
-	position: absolute;
-	top: 0;
-	color: #131415;
-	right: 0px;
-	width: 20px;
-	height: 20px;
-	border: 4px solid orange; /* Цвет галочки */
-	border-radius: 50%; /* Создаем круглую рамку вокруг галочки */
-	background-color: rgb(136, 235, 255); /* Задаем цвет голубого фона */
+  content: " "+"✓";
+  white-space: pre;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  color: #131415;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  border: 4px solid orange; /* Цвет галочки */
+  border-radius: 50%; /* Создаем круглую рамку вокруг галочки */
+  background-color: rgb(136, 235, 255); /* Задаем цвет голубого фона */
+}
+
+// ________________________________________________________________
+
+.extra-circle {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.extra-circle.selected {
+  border: 7px solid tomato;
+  position: relative;
+}
+.extra-circle.selected::after {
+  content: " "+"✓";
+  white-space: pre;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  color: #131415;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  border: 4px solid tomato; /* Цвет галочки */
+  border-radius: 50%; /* Создаем круглую рамку вокруг галочки */
+  background-color: rgb(136, 235, 255); /* Задаем цвет голубого фона */
 }

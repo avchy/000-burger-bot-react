@@ -1,9 +1,13 @@
 {
-	"Delivery": "משלוח",
+	"Choose your table": "בחר את השולחן שלך",
+	"choose": "בחר",
+
+	"Extras": "תוספות",
+	"Buy": "קנייה",
+ 	"Delivery": "משלוח",
 	"Call the waiter": "קריאה למלצר",
 	"Telephone": "טלפון",
 	"Order to Waiter": "הזמנה למלצר",
-
 	"Cancel": "בטל",
 	"Falafel_description": "פלאפל הוא כדור או פטישה טחונה שנעשית מקרח חומרים, פול חום, או שניים.",
 	"spicy_sauce": "רוטב חריף",

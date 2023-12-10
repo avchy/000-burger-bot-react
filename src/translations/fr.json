@@ -1,10 +1,14 @@
 {
-	"Delivery": "Livraison",
+	"Choose your table": "Choisissez votre table",
+	"choose": "choisir",
+
+	"Extras": "Suppléments",
+	"Buy": "Acheter",
+ 	"Delivery": "Livraison",
 	"Call the waiter": "Appeler le serveur",
 	"Telephone": "Téléphone",
 	"Order to Waiter": "Commander au serveur",
-	
-    "Cancel": "Annuler",
+	"Cancel": "Annuler",
 	"Falafel_description": "Le falafel est une boulette ou galette frite à base de pois chiches, de fèves, ou des deux.",
 	"spicy_sauce": "Sauce épicée",
 	"toppings": "Garnitures",
