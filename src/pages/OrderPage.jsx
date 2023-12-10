@@ -238,13 +238,13 @@ export function OrderPage() {
       </div>
 
       {env == "browser" && (
-        <BigButton onClick={onBack}>{`${t("Back")}  `}</BigButton>
-      )}
+        <FlexRowContainer>
+          <BigButton onClick={onBack}>{`${t("Back")}  `}</BigButton>
 
-      {env == "browser" && (
-        <BigButton onClick={onSubmit}>
-          {`${t("Buy")} ${totalPrice} ₪`}
-        </BigButton>
+          <BigButton onClick={onSubmit}>
+            {`${t("Buy")} ${totalPrice} ₪`}
+          </BigButton>
+        </FlexRowContainer>
       )}
     </>
   )

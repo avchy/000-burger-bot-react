@@ -61,6 +61,7 @@ export function CardRowSmall({ food }) {
                   {"("} <span> {key} :</span>
                   <span> {selectedExtrasNames[key]}</span> {")"}
                 </Box>
+                
               ))}
           </Typography>
         </Box>

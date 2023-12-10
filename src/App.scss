@@ -203,8 +203,9 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
-  margin: 13px 10px;
+  margin: 10px 0px 10px 10px;
   position: relative;
   overflow: hidden;
   white-space: pre-wrap;
