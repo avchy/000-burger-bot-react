@@ -31,16 +31,15 @@ export const Product = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { cartItems, setCartItems, typesList } = useContext(CartContext)
-
+  console.log("cartItems1111 :>> ", cartItems)
   const food = location?.state?.food
   const exist = cartItems.find((x) => x.id === food.id)
-  
+
   const query = queryString.parse(location.search)
   const dish_id = query.dish_id
-  
+
   // const food = cartItems.find((x) => x.id === dish_id.id)
   // const exist = cartItems.find((x) => x.id === dish_id.id)
-
 
   const [quantityItem, setQuantityItem] = useState(exist?.quantity || 1)
   const [selectedToppings, setSelectedToppings] = useState(
@@ -188,23 +187,6 @@ export const Product = () => {
 
   // Обработчики изменения выбранных опций для каждого типа
 
-  const handleTypeChange = (type) => (e) => {
-    const selectedExtraId = e.target.value
-    const selectedExtra = food.extras.find(
-      (extra) => String(extra.id) === String(selectedExtraId)
-    )
-
-    setSelectedExtras({
-      ...selectedExtras,
-      [type]: selectedExtraId,
-    })
-
-    setSelectedExtrasNames({
-      ...selectedExtrasNames,
-      [type]: selectedExtra?.title || "",
-    })
-  }
-
   const getTypeValue = (type) => {
     console.log("type2222 :>> ", type)
     console.log("selectedExtras type2222 :>> ", selectedExtras)
@@ -251,8 +233,61 @@ export const Product = () => {
     )
     // cartItems?.selectedExtrasNames?.length > 0 &&
     setSelectedExtrasNames(cartItems?.selectedExtrasNames)
-  }, [  ])
+  }, [])
 
+  // const handleExtrasChange = (type, title) => {
+  //   toggleExtras(title, type) // Вызов toggleExtras с передачей типа и названия опции
+  // }
+
+  const toggleExtras = (title, type) => {
+    const exist = cartItems.find((x) => x.id === food.id)
+
+    if (exist) {
+      const updatedExtras = exist.extras.map((extra) => {
+        if (extra.title === title && extra.type === type) {
+          return { ...extra, count: extra.count === 0 ? 1 : 0 }
+        }
+        return extra
+      })
+
+      // Обновление товара в корзине с обновленными дополнительными опциями
+      const updatedCartItems = cartItems.map((item) =>
+        item.id === exist.id ? { ...exist, extras: updatedExtras } : item
+      )
+
+      // Обновление состояния корзины
+      setCartItems(updatedCartItems)
+    }
+
+    console.log("titl3232e :>> ", title)
+ 
+
+    const selectedExtraId = title
+    const selectedExtra = food.extras.find(
+      (extra) => String(extra.id) === String(selectedExtraId)
+    )
+
+    console.log("selectedExtra?.title :>> ", selectedExtra?.title)
+    setSelectedExtrasNames({
+      ...selectedExtrasNames,
+      [type]: selectedExtra?.title || "",
+    })
+
+    setSelectedExtras({
+      ...selectedExtras,
+      [type]: title, // В противном случае, выбрать опцию
+    })
+    // }
+  }
+
+  
+  useEffect(() => {
+    // Получение начального значения selectedExtrasNames из cartItems
+    const exist = cartItems.find((x) => x.id === food.id);
+    if (exist && exist.selectedExtrasNames) {
+      setSelectedExtrasNames(exist.selectedExtrasNames);
+    }
+  }, [  ]);
   return (
     <>
       {!cartItems && <LoadingOverlay />}
@@ -280,6 +315,7 @@ export const Product = () => {
             <Box className="text1"> {t(food.description)} </Box>
           </Box>
         </Box>
+
         {/* extras __________________________________________ */}
         {console.log("groupedExtras :>> ", groupedExtras)}
         {groupedExtras && (
@@ -295,7 +331,7 @@ export const Product = () => {
             >
               {t("Extras")}
             </Typography>
-            {   Object.entries(groupedExtras).map(([type, typeExtras]) => (
+            {Object.entries(groupedExtras).map(([type, typeExtras]) => (
               <div key={type}>
                 <Typography
                   sx={{ p: 2, fontSize: "calc(0.5em + 2vw)", fontWeight: 700 }}
@@ -307,24 +343,49 @@ export const Product = () => {
                     <RadioGroup
                       name={type}
                       value={getTypeValue(type)}
-                      onChange={handleTypeChange(type)}
+                      // onChange={handleTypeChange(type)}
+
+                      onChange={(e) => toggleExtras(e.target.value, type)} // Вызов handleExtrasChange при изменении значения
+                      //  onChange={(e) => handleExtrasChange(type, e.target.value)} // Вызов handleExtrasChange при изменении значения
                     >
-                      
-                      { typeExtras.map((extra) => (
+                      {typeExtras.map((extra) => (
                         <>
-                          {console.log("selectedExtrasNames :>> ", selectedExtrasNames)}
-                          {console.log("cartItems :>> ", cartItems)}
-                          {console.log("extra :>> ", extra)}
+                          {console.log(
+                            "selectedExtrasNames :>> ",
+                            selectedExtrasNames
+                          )}
+                          {console.log("_product_cartItems :>> ", cartItems)}
+
+                          {console.log(
+                            "cartItems?.selectedExtrasNames :>> ",
+                            cartItems?.selectedExtrasNames
+                          )}
+                          {console.log("[type] :>> ", [type])}
+
+                          {console.log(" extra.title :>> ", extra.title)}
+                          {console.log(
+                            "   cartItems[0]?.selectedExtrasNames> ",
+                            cartItems[0]?.selectedExtrasNames
+                          )}
 
                           <FormControlLabel
                             key={extra.id}
                             value={String(extra.id)}
                             // control={<Radio />}
+
                             control={
                               <Radio
                                 checked={
-                                  selectedExtrasNames &&
-                                  selectedExtrasNames[type] == extra.title
+                                  selectedExtrasNames ?
+                                    selectedExtrasNames[type] ===
+                                      extra.title :
+                                  (cartItems[0]?.selectedExtrasNames &&
+                                    Object.entries(
+                                      cartItems[0]?.selectedExtrasNames
+                                    )
+                                      .flat()
+                                      .join(", ")
+                                      .includes(extra.title))
                                 }
                               />
                             }
@@ -339,6 +400,7 @@ export const Product = () => {
             ))}
           </>
         )}
+
         {/* Toppings __________________________________________ */}
         {food.toppings.length > 0 && (
           <>
@@ -397,6 +459,7 @@ export const Product = () => {
             </Box>
           </>
         )}
+
         {/* Buttons __________________________________________ */}
         <FlexRowContainer>
           <BigButton onClick={onCancel} backgroundColor={"grey"}>
