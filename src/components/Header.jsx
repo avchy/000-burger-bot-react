@@ -1,51 +1,51 @@
-import React, { useEffect, useState } from "react";
-import "App.scss";
-import axios from "axios";
-import { Button, Typography, MenuItem, Select, Box } from "@mui/material";
+import React, { useEffect, useState } from "react"
+import "App.scss"
+import axios from "axios"
+import { Button, Typography, MenuItem, Select, Box } from "@mui/material"
 
-import { useTelegram } from "hooks/useTelegram";
-import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents";
-import { useTranslation } from "react-i18next";
-import { baseURL } from "constants/api";
-import { tableData } from "constants/constants";
-import { languageButtons } from "../constants/languageButtons";
-import { useTheme } from "@mui/material/styles";
-import { StyledButton } from "components/StyledButton";
-import { useLocation } from "react-router-dom";
-import queryString from "query-string";
-import InputLabel from "@mui/material/InputLabel";
-import waiterImg from "images/waiter.png";
-import generatedGitInfo from "helpers/generatedGitInfo.json";
-import { BigButton } from "components/BigButton";
+import { useTelegram } from "hooks/useTelegram"
+import { FlexRowContainer, StyledSelect } from "components/AllHelpComponents"
+import { useTranslation } from "react-i18next"
+import { baseURL } from "constants/api"
+import { tableData } from "constants/constants"
+import { languageButtons } from "../constants/languageButtons"
+import { useTheme } from "@mui/material/styles"
+import { StyledButton } from "components/StyledButton"
+import { useLocation } from "react-router-dom"
+import queryString from "query-string"
+import InputLabel from "@mui/material/InputLabel"
+import waiterImg from "images/waiter.png"
+import generatedGitInfo from "helpers/generatedGitInfo.json"
+import { BigButton } from "components/BigButton"
 
 export const Header = () => {
-  const location = useLocation();
-  const query = queryString.parse(location.search);
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const location = useLocation()
+  const query = queryString.parse(location.search)
+  const [isButtonDisabled, setButtonDisabled] = useState(false)
   const { gitCommitHash, timeCommitPushed, timeUploadingToNetlify } =
-    generatedGitInfo;
-  const theme = useTheme();
-  const { user, queryId, onClose } = useTelegram();
-  const { t, i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState("en");
-  const [isTestTextVisible, setTestTextVisible] = useState(false);
-  const [tableNumber, setTableNumber] = useState("");
-  const [restaurant_id, setRestaurant_id] = useState("");
-  const [formOpenSendWaiter, setFormOpenSendWaiter] = useState(false);
+    generatedGitInfo
+  const theme = useTheme()
+  const { user, queryId, onClose } = useTelegram()
+  const { t, i18n } = useTranslation()
+  const [currentLanguage, setCurrentLanguage] = useState("en")
+  const [isTestTextVisible, setTestTextVisible] = useState(false)
+  const [tableNumber, setTableNumber] = useState("")
+  const [restaurant_id, setRestaurant_id] = useState("")
+  const [formOpenSendWaiter, setFormOpenSendWaiter] = useState(false)
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const restaurant_id = searchParams.get("restaurant_id");
-    setRestaurant_id(restaurant_id);
-  }, []);
+    const searchParams = new URLSearchParams(window.location.search)
+    const restaurant_id = searchParams.get("restaurant_id")
+    setRestaurant_id(restaurant_id)
+  }, [])
 
   const handleTableNumberChange = (event) => {
-    setTableNumber(event.target.value);
-  };
+    setTableNumber(event.target.value)
+  }
 
   const toggleTestText = () => {
-    setTestTextVisible(!isTestTextVisible);
-  };
+    setTestTextVisible(!isTestTextVisible)
+  }
 
   async function onSendWaiter() {
     const dataPay = {
@@ -60,40 +60,39 @@ export const Header = () => {
 
       user_id: user?.id || 0,
       user_name: user?.username || "",
-    };
+    }
 
     try {
-      setButtonDisabled(true); // Отключаем кнопку при отправке запроса
+      setButtonDisabled(true) // Отключаем кнопку при отправке запроса
       setTimeout(() => {
-        setButtonDisabled(false); // Включаем кнопку через 5 секунд
-      }, 5000);
+        setButtonDisabled(false) // Включаем кнопку через 5 секунд
+      }, 5000)
 
-      const response = await axios.post(baseURL + "/create_order_db", dataPay);
+      const response = await axios.post(baseURL + "/create_order_db", dataPay)
       // console.log('Запрос "onSendWaiter" успешно выполнен');
     } catch (error) {
-      console.error('Ошибка при выполнении запроса "onSendWaiter":', error);
-      return;
+      console.error('Ошибка при выполнении запроса "onSendWaiter":', error)
+      return
     } finally {
-      setFormOpenSendWaiter(false);
+      setFormOpenSendWaiter(false)
     }
   }
 
   const onOpenSendWaiter = () => {
-    setFormOpenSendWaiter(formOpenSendWaiter ? false : true);
-  };
+    setFormOpenSendWaiter(formOpenSendWaiter ? false : true)
+  }
 
   useEffect(() => {
-    // const language_code = user?.language_code
-    if (user?.language_code && currentLanguage !== user?.language_code) {
-      setCurrentLanguage(user?.language_code);
-      i18n.changeLanguage(user?.language_code);
+    if (user?.language_code !== currentLanguage) {
+      setCurrentLanguage(user?.language_code)
+      i18n.changeLanguage(user?.language_code)
     }
-  }, [user?.language_code]);
+  }, [user])
 
   const changeLanguage = (language) => {
-    setCurrentLanguage(language);
-    i18n.changeLanguage(language);
-  };
+    setCurrentLanguage(language)
+    i18n.changeLanguage(language)
+  }
   return (
     <>
       <FlexRowContainer>
@@ -104,7 +103,7 @@ export const Header = () => {
             border: "2px solid orange",
             backgroundColor: theme.blue,
             width: "150px",
-			height: "82px",
+            height: "82px",
             marginBottom: "10px",
           }}
         >
@@ -235,5 +234,5 @@ export const Header = () => {
         </>
       )}
     </>
-  );
-};
+  )
+}
