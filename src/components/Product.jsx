@@ -26,6 +26,7 @@ import { FlexRowContainer } from "components/AllHelpComponents"
 import { CartContext } from "App"
 import { LoadingOverlay } from "./LoadingOverlay"
 import queryString from "query-string"
+import changeSize from "helpers/changeSize"
 
 export const Product = () => {
   const { t } = useTranslation()
@@ -302,11 +303,14 @@ export const Product = () => {
           onRemove={onRemove}
           quantity={quantityItem}
         />
-        {/* {console.log("food.image", food.image)}{" "} */}
         <Box className="orderContainer">
           <Box className="imageContainer">
             <img
-              src={isPhotoUrl(food.image) ? food.image : default_dish_img}
+              src={
+                isPhotoUrl(food.image)
+                  ? changeSize(food.image)
+                  : default_dish_img
+              }
               alt={"productImageContainer"}
             />
           </Box>
@@ -359,10 +363,10 @@ export const Product = () => {
                                       alt={extra.title}
                                       src={
                                         isPhotoUrl(extra.image)
-                                          ? extra.image
+                                          ? changeSize(extra.image)
                                           : toppings_icon
                                       }
-                                      sx={{ width: 66, height: 66 }}
+                                      sx={{ width: "90%", height: "90%" }}
                                     />
                                   </Box>
                                 }
@@ -372,10 +376,10 @@ export const Product = () => {
                                       alt={extra.title}
                                       src={
                                         isPhotoUrl(extra.image)
-                                          ? extra.image
+                                          ? changeSize(extra.image)
                                           : toppings_icon
                                       }
-                                      sx={{ width: 66, height: 66 }}
+                                      sx={{ width: "90%", height: "90%" }}
                                     />
                                   </Box>
                                 }
@@ -448,11 +452,11 @@ export const Product = () => {
                       alt={topping.title}
                       src={
                         isPhotoUrl(topping.image)
-                          ? topping.image
+                          ? changeSize(topping.image)
                           : toppings_icon
                       }
-                      sx={{ width: 66, height: 66 }}
-                    />
+                      sx={{ width: "90%", height: "90%" }}
+                      />
                   </Box>
                   <Typography sx={{ m: 1 }}>
                     {t(topping.title)}

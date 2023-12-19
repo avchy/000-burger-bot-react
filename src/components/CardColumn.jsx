@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 // import { Skeleton, Stack } from "@mui/material"
 import "App.scss"
-import { Button } from "./Button"
-import { useTranslation } from "react-i18next" 
-import { useNavigate } from "react-router-dom" 
+import { Button } from "components/Button"
+import { useTranslation } from "react-i18next"
+import { useNavigate } from "react-router-dom"
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
-import isPhotoUrl from "helpers/isPhotoUrl"
 import { FlexRowContainer, StyledTextField } from "components/AllHelpComponents"
 import { Box } from "@mui/material"
+import isPhotoUrl from "helpers/isPhotoUrl"
+import changeSize from "helpers/changeSize"
 
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const navigate = useNavigate()
@@ -48,7 +49,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
         style={{ display: imageLoaded ? "block" : "none" }}
       >
         <img
-          src={isPhotoUrl(image) ? image : default_dish_img}
+          src={isPhotoUrl(image) ? changeSize(image) : default_dish_img}
           alt={title}
           onLoad={handleImageLoad}
           // style={{ display: imageLoaded ? "block" : "none" }}
