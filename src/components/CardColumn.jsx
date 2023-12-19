@@ -1,16 +1,13 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 // import { Skeleton, Stack } from "@mui/material"
 import "App.scss"
 import { Button } from "./Button"
-import { useTranslation } from "react-i18next"
-import i18n from "helpers/i18n"
-
-import { Link, useLocation, useNavigate } from "react-router-dom"
-// import * as React from 'react';
-// import { CartContext } from "App"
+import { useTranslation } from "react-i18next" 
+import { useNavigate } from "react-router-dom" 
 import default_dish_img from "images/svg_dishes/pot-dinner-svgrepo-com.svg"
 import isPhotoUrl from "helpers/isPhotoUrl"
 import { FlexRowContainer, StyledTextField } from "components/AllHelpComponents"
+import { Box } from "@mui/material"
 
 export function CardColumn({ food, onAdd, onRemove, quantity }) {
   const navigate = useNavigate()
@@ -40,12 +37,12 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
   }
 
   return (
-    <div className="CardColumn">
+    <Box className="CardColumn">
       <span className={`${count !== 0 ? "card_badge" : "card_badge--hidden"}`}>
         {count}
       </span>
 
-      <div
+      <Box
         className="image_container"
         // style={{ display: "block" }}
         style={{ display: imageLoaded ? "block" : "none" }}
@@ -75,7 +72,7 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
             style={{ display: "block" }}
           />
         )} */}
-      </div>
+      </Box>
 
       {/* <h4 className="card_title">{title}</h4> */}
       <h4 className="card_title">{t(title)}</h4>
@@ -95,6 +92,6 @@ export function CardColumn({ food, onAdd, onRemove, quantity }) {
           ""
         )}
       </FlexRowContainer>
-    </div>
+    </Box>
   )
 }

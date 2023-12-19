@@ -106,6 +106,7 @@ export const Header = () => {
             border: "2px solid orange",
             backgroundColor: theme.blue,
             width: "150px",
+            margin: 2
           }}
         >
           {languageButtons.map((button) => (
