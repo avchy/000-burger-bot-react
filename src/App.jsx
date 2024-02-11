@@ -109,7 +109,7 @@ export function App() {
     tele.isClosingConfirmationEnabled = false
 
     const query = queryString.parse(location.search)
-    const restaurant_id = query.restaurant_id
+    const restaurant_id = query.restaurant_id || 2
 
     getSettings(restaurant_id)
     getDishes(restaurant_id)
