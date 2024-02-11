@@ -277,7 +277,7 @@ export const Payments = () => {
       {/* {console.log("isSubmitting", isSubmitting)} */}
       {isSubmitting ? <LoadingOverlay /> : null}
 
-      {settings.showCreditCardButton ? (
+      {settings?.showCreditCardButton ? (
         <StyledButton onClick={onShowCreditCard} variant="contained">
           {t("Credit Card")}
         </StyledButton>
@@ -357,7 +357,7 @@ export const Payments = () => {
         </FlexColumnContainer>
       )}
 
-      {settings.showApplePayButton ? (
+      {settings?.showApplePayButton ? (
         <StyledButton onClick={onApplePay} variant="contained">
           {t("Buy with")}
           <img src={appleSVG} alt="applePay" /> Pay
@@ -366,7 +366,7 @@ export const Payments = () => {
         <></>
       )}
 
-      {settings.showGooglePayButton ? (
+      {settings?.showGooglePayButton ? (
         <StyledButton onClick={onGooglePay} variant="contained">
           {t("Buy with")} <img src={googleSVG} alt="googlePay" /> Pay
         </StyledButton>
@@ -374,7 +374,7 @@ export const Payments = () => {
         <></>
       )}
 
-      {settings.showOrderButton ? (
+      {settings?.showOrderButton ? (
         <StyledButton onClick={onOrderToWaiter} variant="contained">
           {t("Order to Waiter")}
         </StyledButton>
