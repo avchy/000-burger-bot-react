@@ -27,9 +27,12 @@ export const Payments = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formOpenCreditCard, setFormOpenCreditCard] = useState(false)
-  // const [dialogOpen, setDialogOpen] = useState(false)
+
+  const [dialogOpen, setDialogOpen] = useState(false)
   // const [tempErrors, setTempErrors] = useState({})
-  // const [dialogText, setDialogText] = useState("")
+  const [dialogText, setDialogText] = useState(t("Order successfully created!"))
+
+  const [orderCreated, setOrderCreated] = useState(false) // Добавленное состояние
 
   const { env } = useNavigator()
   const navigate = useNavigate()
@@ -43,11 +46,11 @@ export const Payments = () => {
     telephone,
     optionDelivery,
     user,
-    settings,
+    settings,setCartItems
   } = useContext(CartContext)
 
   const state = {
-    queryId,
+    queryId: queryId || "000",
     cartItems,
     comment,
     totalPrice,
@@ -62,9 +65,9 @@ export const Payments = () => {
 
   console.log("state_CreditCard", state)
 
-  // const handleCloseDialog = () => {
-  //   setDialogOpen(false)
-  // }
+  const handleCloseDialog = () => {
+    setDialogOpen(false)
+  }
 
   // const onBackButtonClicked = useCallback(() => {
   //   navigate(-1)
@@ -126,13 +129,9 @@ export const Payments = () => {
   async function payCreditCard(dataPay) {
     try {
       const response = await axios.post(baseURL + "/pay_credit_card", dataPay)
-      // Обработка успешного ответа
       console.log('Запрос "pay_credit_card" успешно выполнен')
-      // Дополнительный код для обработки ответа
     } catch (error) {
-      // Обработка ошибки
       console.error('Ошибка при выполнении запроса "pay_credit_card":', error)
-      // Не выполняем следующие запросы из-за ошибки
       return
     }
   }
@@ -140,15 +139,15 @@ export const Payments = () => {
   //========================================
 
   async function createOrderDB(dataPay) {
+    console.log("dataPay :>> ", dataPay)
     try {
       const response = await axios.post(baseURL + "/create_order_db", dataPay)
-      // Обработка успешного ответа
       console.log('Запрос "create_order_db" успешно выполнен')
-      // Дополнительный код для обработки ответа
+       setDialogOpen(true) // Устанавливаем состояние при успешном выполнении  
+       setCartItems([ ])
+
     } catch (error) {
-      // Обработка ошибки
       console.error('Ошибка при выполнении запроса "create_order_db":', error)
-      // Не выполняем следующие запросы из-за ошибки
       return
     }
   }
@@ -156,13 +155,9 @@ export const Payments = () => {
   async function sendSMSTele(dataPay) {
     try {
       const response = await axios.post(baseURL + "/send_sms_tele", dataPay)
-      // Обработка успешного ответа
       console.log('Запрос "send_sms_tele" успешно выполнен')
-      // Дополнительный код для обработки ответа
     } catch (error) {
-      // Обработка ошибки
       console.error('Ошибка при выполнении запроса "send_sms_tele":', error)
-      // Не выполняем следующие запросы из-за ошибки
       return
     }
   }
@@ -272,6 +267,8 @@ export const Payments = () => {
     setFormOpenCreditCard(formOpenCreditCard ? false : true)
   }
 
+ 
+
   return (
     <>
       {/* {console.log("isSubmitting", isSubmitting)} */}
@@ -347,13 +344,6 @@ export const Payments = () => {
               </StyledButton>
             )} */}
           </Box>
-
-          {/* <DialogComponent
-          text={dialogText}
-          buttonRight={t("ok")}
-          open={dialogOpen}
-          onClose={handleCloseDialog}
-        /> */}
         </FlexColumnContainer>
       )}
 
@@ -381,6 +371,13 @@ export const Payments = () => {
       ) : (
         <></>
       )}
+
+      <DialogComponent
+        text={dialogText}
+        buttonRight={t("ok")}
+        open={dialogOpen}
+        onClose={handleCloseDialog}
+      />
     </>
   )
 }
