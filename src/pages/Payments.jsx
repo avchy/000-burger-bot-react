@@ -50,7 +50,7 @@ export const Payments = () => {
   } = useContext(CartContext)
 
   const state = {
-    queryId: queryId || "000",
+    queryId ,
     cartItems,
     comment,
     totalPrice,
@@ -217,7 +217,7 @@ export const Payments = () => {
   }, [setValue])
 
   useEffect(() => {
-    console.log("errors444", errors)
+    console.log("errors444", JSON.stringify(errors, null, 2));
   }, [errors])
 
   useEffect(() => {

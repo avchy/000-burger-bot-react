@@ -32,7 +32,7 @@ export function App() {
   const location = useLocation()
   const [foods, setFoods] = useState([])
   const [loading, setLoading] = useState(true)
-  const [queryId, setQueryId] = useState(tele.initDataUnsafe?.query_id)
+  const [queryId, setQueryId] = useState(tele.initDataUnsafe?.query_id || "000")
   const [user, setUser] = useState(tele.initDataUnsafe?.user)
   const [cartItems, setCartItems] = useState([])
   const [totalPrice, setTotalPrice] = useState(0)
