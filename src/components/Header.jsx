@@ -120,7 +120,7 @@ export const Header = () => {
           ))}
         </Select>
 
-        <BigButton
+        <Button
           disabled={isButtonDisabled}
           onClick={onOpenSendWaiter}
           variant="contained"
@@ -137,7 +137,7 @@ export const Header = () => {
               />
             )}
           </div>
-        </BigButton>
+        </Button>
       </FlexRowContainer>
 
       {formOpenSendWaiter && (
