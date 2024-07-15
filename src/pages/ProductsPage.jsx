@@ -9,13 +9,15 @@ import { useTranslation } from "react-i18next"
 import i18n from "helpers/i18n"
 import { CartContext } from "App"
 import { Box } from "@mui/material"
+import { NavHighlightedMenu } from "components/NavHighlightedMenu"
+
 const tele = window.Telegram.WebApp
 
 export const ProductsPage = () => {
   const { t } = useTranslation()
   const { env } = useNavigator()
   const navigate = useNavigate()
-  const { cartItems, setCartItems, foods } = useContext(CartContext)
+  const { cartItems, setCartItems, foods, groupsList } = useContext(CartContext)
 
   const onAdd = (food) => {
     if (food.length === 0) {
@@ -91,26 +93,64 @@ export const ProductsPage = () => {
     justifyContent: "center",
   }
 
+  const groupsById = {};
+  groupsList.forEach(group => {
+    groupsById[group.id] = group;
+  })
+
+  const foodsMarkupByGroups = {};
+  foods.forEach(food => {
+    const group = food.group || '';
+
+    if (!foodsMarkupByGroups[group]) {
+      foodsMarkupByGroups[group] = [];
+    }
+
+    const foodWithQuantity = cartItems.find(
+      (item) => item.id === food.id
+    );
+
+    const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0;
+
+    foodsMarkupByGroups[group].push(
+      <CardColumn
+        food={food}
+        key={food.id}
+        onAdd={onAdd}
+        onRemove={onRemove}
+        quantity={quantity}
+      />
+    )
+  });
+
+  const markup = [];
+  const menuItems = [];
+  Object.keys(foodsMarkupByGroups).forEach(group => {
+    const title = groupsById[group]?.name || 'Other';
+    const anchor = group ? `section-${group}` : 'other';
+
+    markup.push(
+      <div key={group} style={{width: '100%'}} data-nav-section={anchor}>
+        <div className="anchor" id={anchor} />
+        <Box sx={flexStyle}><h3>{title}</h3></Box>
+        <Box sx={flexStyle}>{foodsMarkupByGroups[group]}</Box>
+      </div>
+    );
+
+    menuItems.push({anchor, content: title})
+  });
+
   return (
     <>
+      <div style={{position: 'sticky', top: '0', backgroundColor: '#131415', zIndex: '10'}}>
+        <NavHighlightedMenu items={menuItems} offset={60} />
+      </div>
+
+      <br/>
+
       <Box sx={flexStyle}>
-        <Box sx={flexStyle}>
-          {foods.map((food) => {
-            const foodWithQuantity = cartItems.find(
-              (item) => item.id === food.id
-            )
-            const quantity = foodWithQuantity ? foodWithQuantity.quantity : 0
-            return (
-              <CardColumn
-                food={food}
-                key={food.id}
-                onAdd={onAdd}
-                onRemove={onRemove}
-                quantity={quantity}
-              />
-            )
-          })}
-        </Box>
+        {markup}
+
         {cartItems.length !== 0 && env === "browser" && (
           <BigButton
             disable={cartItems.length === 0 ? true : false}

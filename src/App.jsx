@@ -43,6 +43,7 @@ export function App() {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [settings, setSettings] = useState({})
   const [typesList, setTypesList] = useState([])
+  const [groupsList, setGroupsList] = useState([])
 
   // i18n.changeLanguage(language)
   const navigate = useNavigate()
@@ -102,6 +103,16 @@ export function App() {
     }
   }
 
+  const getGroups = async (restaurant_id) => {
+    try {
+      const response = await axios.get(`${baseURL}/groups/` + restaurant_id)
+
+      setGroupsList(response.data)
+    } catch (error) {
+      console.error('Ошибка при выполнении запроса "getGroups":', error)
+    }
+  }
+
   useEffect(() => {
     // console.log("tele.initDataUnsafe--->", tele.initDataUnsafe)
 
@@ -114,6 +125,7 @@ export function App() {
     getSettings(restaurant_id)
     getDishes(restaurant_id)
     getTypes(restaurant_id)
+    getGroups(restaurant_id)
   }, [])
 
   return (
@@ -121,6 +133,8 @@ export function App() {
       value={{
         typesList,
         setTypesList,
+        groupsList,
+        setGroupsList,
         foods,
         setFoods,
         cartItems,
